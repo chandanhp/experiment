@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep — Buyer, Applied Materials</title>
+<style>
+  :root{
+    --ink:#0c1116;
+    --panel:#141b22;
+    --panel-2:#1b242d;
+    --line:#27333d;
+    --silver:#c5d0d9;
+    --mute:#8595a1;
+    --copper:#d98a4e;
+    --copper-soft:#3a2c20;
+    --cyan:#4dd2c4;
+    --cyan-soft:#16302e;
+    --paper:#eef2f4;
+    --warn:#e6b450;
+    --warn-soft:#33291259;
+    --green:#7fc99a;
+    --green-soft:#16291d;
+    --font-d:"Georgia","Times New Roman",serif;
+    --font-b:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-m:"SFMono-Regular",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(900px 500px at 85% -5%, #18242c 0%, transparent 60%),
+      radial-gradient(700px 600px at -10% 20%, #15201f 0%, transparent 55%),
+      var(--ink);
+    color:var(--silver);
+    font-family:var(--font-b);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:46px 0 30px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .wafer{
+    position:absolute;right:-70px;top:-40px;width:300px;height:300px;
+    border-radius:50%;opacity:.20;pointer-events:none;
+    background:
+      repeating-radial-gradient(circle at center, transparent 0 14px, var(--cyan) 14px 15px),
+      repeating-linear-gradient(0deg, transparent 0 26px, var(--copper) 26px 27px),
+      repeating-linear-gradient(90deg, transparent 0 26px, var(--copper) 26px 27px);
+    -webkit-mask:radial-gradient(circle at center, #000 60%, transparent 72%);
+            mask:radial-gradient(circle at center, #000 60%, transparent 72%);
+  }
+  .eyebrow{
+    font-family:var(--font-m);font-size:12px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--copper);margin-bottom:18px;
+  }
+  h1.title{
+    font-family:var(--font-d);font-weight:600;color:var(--paper);
+    font-size:clamp(30px,7vw,48px);line-height:1.05;letter-spacing:-.01em;
+  }
+  h1.title .role{color:var(--cyan);font-style:italic}
+  .sub{margin-top:14px;color:var(--mute);font-size:15px;max-width:580px}
+  .factbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .fact{
+    font-family:var(--font-m);font-size:12px;color:var(--silver);
+    background:var(--panel);border:1px solid var(--line);
+    padding:7px 12px;border-radius:6px;
+  }
+  .fact b{color:var(--cyan);font-weight:600}
+  .countdown{
+    margin-top:22px;font-family:var(--font-m);font-size:13px;color:var(--warn);
+    background:var(--warn-soft);border:1px solid #4a3a18;
+    display:inline-block;padding:8px 14px;border-radius:6px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:20;
+    background:rgba(12,17,22,.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+  nav.toc .wrap::-webkit-scrollbar{display:none}
+  nav.toc a{
+    flex:0 0 auto;font-family:var(--font-m);font-size:11.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mute);text-decoration:none;
+    padding:7px 12px;border-radius:6px;white-space:nowrap;transition:.18s;
+  }
+  nav.toc a:hover{color:var(--paper);background:var(--panel)}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:42px 0;border-bottom:1px solid var(--line)}
+  .sec-num{font-family:var(--font-m);font-size:12px;color:var(--copper);letter-spacing:.2em;margin-bottom:10px}
+  h2{
+    font-family:var(--font-d);font-weight:600;color:var(--paper);
+    font-size:clamp(22px,4.5vw,30px);line-height:1.15;margin-bottom:8px;letter-spacing:-.01em;
+  }
+  h2 .accent{color:var(--cyan)}
+  .lead{color:var(--mute);font-size:15px;margin-bottom:24px;max-width:660px}
+  h3{font-family:var(--font-b);font-weight:700;color:var(--paper);font-size:18px;margin:28px 0 10px}
+  h4{font-family:var(--font-m);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin:22px 0 8px}
+  p{margin-bottom:12px}
+  strong{color:var(--paper)}
+  em.hl{color:var(--cyan);font-style:normal;font-weight:600}
+
+  /* cards */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .card.copper{border-left:3px solid var(--copper)}
+  .card.cyan{border-left:3px solid var(--cyan)}
+  .card.warn{border-left:3px solid var(--warn);background:#1c1a14}
+  .card.green{border-left:3px solid var(--green);background:var(--green-soft)}
+
+  ul{margin:6px 0 12px;padding-left:20px}
+  li{margin-bottom:7px}
+  ol{margin:6px 0 12px;padding-left:22px}
+  ol li{margin-bottom:7px}
+  ul.tick{list-style:none;padding-left:0}
+  ul.tick li{position:relative;padding-left:26px}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border:2px solid var(--cyan);border-radius:3px}
+
+  /* Q&A */
+  details.qa{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden;transition:.2s}
+  details.qa[open]{border-color:var(--copper)}
+  details.qa summary{
+    list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
+    font-weight:600;color:var(--paper);font-size:15.5px;line-height:1.4;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  details.qa summary::after{content:"+";position:absolute;right:18px;top:13px;font-size:22px;color:var(--copper);font-family:var(--font-m);transition:.2s;line-height:1}
+  details.qa[open] summary::after{content:"–";color:var(--cyan)}
+  details.qa summary:hover{color:var(--cyan)}
+  .qa-body{padding:0 18px 18px;color:var(--silver);font-size:14.5px}
+  .qa-body .tag{font-family:var(--font-m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper);display:inline-block;margin-bottom:8px}
+  .say{border-left:2px solid var(--cyan);padding:6px 0 6px 14px;margin:10px 0;color:var(--paper);font-style:italic}
+  .why{
+    background:var(--copper-soft);border-radius:8px;padding:11px 14px;margin:12px 0 4px;
+    font-size:13.5px;color:#e9d4c2;
+  }
+  .why b{color:var(--copper);font-style:normal;font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+  .avoid{
+    background:#2a1717;border-radius:8px;padding:11px 14px;margin:10px 0 4px;font-size:13.5px;color:#e8b9b9;
+  }
+  .avoid b{color:#e08a8a;font-style:normal;font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+
+  /* tables */
+  .tcode,.map{width:100%;border-collapse:collapse;margin:8px 0 6px;font-size:14px}
+  .tcode th,.map th{text-align:left;font-family:var(--font-m);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:1px solid var(--line)}
+  .map th{color:var(--copper)}
+  .tcode td,.map td{padding:9px 10px;border-bottom:1px solid var(--panel-2);vertical-align:top}
+  .tcode td.code{font-family:var(--font-m);color:var(--cyan);font-weight:600;white-space:nowrap}
+  .map td:first-child{color:var(--mute);width:42%}
+  .map td:last-child{color:var(--paper)}
+  .tcode tr:last-child td,.map tr:last-child td{border-bottom:none}
+
+  /* salary ladder */
+  .ladder{margin:18px 0}
+  .rung{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--panel-2)}
+  .rung .amt{font-family:var(--font-m);font-weight:600;color:var(--cyan);font-size:15px;min-width:96px}
+  .rung .lbl{font-size:14px}
+  .rung .lbl b{color:var(--paper)}
+  .anchor-box{background:var(--cyan-soft);border:1px solid #1f4a45;border-radius:10px;padding:16px 18px;margin:14px 0}
+  .anchor-box .num{font-family:var(--font-d);font-size:26px;color:var(--cyan);font-weight:600}
+
+  /* star */
+  .star{display:grid;grid-template-columns:auto 1fr;gap:0 14px;margin:8px 0}
+  .star .k{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;color:var(--copper);padding-top:3px;text-transform:uppercase}
+  .star .v{margin-bottom:10px}
+
+  .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .pill{font-family:var(--font-m);font-size:12px;color:var(--silver);background:var(--panel-2);border:1px solid var(--line);padding:5px 11px;border-radius:20px}
+  .note{font-size:13px;color:var(--mute);font-style:italic;margin-top:8px}
+
+  .group-label{font-family:var(--font-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin:24px 0 6px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+
+  /* footer */
+  footer{padding:40px 0 10px;text-align:center;color:var(--mute);font-size:13px}
+  footer .you{color:var(--copper);font-family:var(--font-d);font-style:italic;font-size:17px;margin-bottom:8px}
+
+  @media (max-width:600px){
+    .map th,.map td,.tcode th,.tcode td{font-size:13px;padding:8px 6px}
+    .rung{flex-wrap:wrap;gap:6px}
+    .rung .amt{min-width:auto}
+    .star{grid-template-columns:1fr}
+    .star .k{padding-top:8px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wafer"></div>
+  <div class="wrap">
+    <div class="eyebrow">Interview Playbook · Prepared for Inchara</div>
+    <h1 class="title">The <span class="role">Buyer</span> Interview<br>at Applied Materials</h1>
+    <p class="sub">A complete prep system — your story, the SAP gap handled honestly, deep technical answers, scenario drills, 40+ questions with model answers <em>and</em> the reasoning behind them, the company, and the salary conversation.</p>
+    <div class="factbar">
+      <span class="fact"><b>Role</b> Buyer · Individual Contributor</span>
+      <span class="fact"><b>Location</b> ITPL, Bangalore · 5 days office</span>
+      <span class="fact"><b>Shift</b> 2:00 PM – 11:00 PM IST</span>
+    </div>
+    <div class="countdown">⏱ Interview: Friday, 12 June · 6:00 PM</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#start">Start Here</a>
+    <a href="#how">How to Use</a>
+    <a href="#story">Your Story</a>
+    <a href="#gap">Hard Questions</a>
+    <a href="#sap">SAP MM Deep Dive</a>
+    <a href="#tcodes">T-Codes</a>
+    <a href="#sapqa">SAP Q&A Bank</a>
+    <a href="#scenario">Scenarios</a>
+    <a href="#company">Company & Semicon</a>
+    <a href="#behavioral">Behavioral</a>
+    <a href="#hr">HR Q&A</a>
+    <a href="#salary">Salary</a>
+    <a href="#ask">Questions to Ask</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- ============ START HERE ============ -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-num">00 / ORIENTATION</div>
+    <h2>Read this first — <span class="accent">the one idea that wins this interview</span></h2>
+    <p class="lead">The job asks for SAP MM and 4–9 years. You have ~1.5 years and you work on Microsoft Dynamics 365 with SAP MM as training. They saw your resume and called you anyway. So they are not checking boxes — they want to know if your procurement fundamentals are real and whether you'll ramp fast.</p>
+
+    <div class="card cyan">
+      <p style="margin-bottom:0"><strong>Your core message, in one breath:</strong> <em class="hl">"I run the full Procure-to-Pay cycle every day on D365 — vendor sourcing, negotiation, PO, receipts, budget-vs-actual. The ERP screen changes, the procurement logic doesn't. I've trained on SAP MM and I'll be productive quickly."</em></p>
+    </div>
+
+    <p>Come back to that message whenever a question rattles you. Confidence about what you <em>do</em> know beats apology about what you don't. Three rules for the room:</p>
+    <ul class="tick">
+      <li><strong>Translate, don't apologize.</strong> Every "Have you done X in SAP?" becomes "Here's how I do exactly that in D365, and here's the SAP equivalent."</li>
+      <li><strong>Lead with numbers.</strong> Cost saved, inventory reduced, vendors managed. Specifics make a junior candidate sound senior.</li>
+      <li><strong>Stay honest about the gap.</strong> Never claim SAP production experience you don't have — they can test it in 30 seconds. Honesty + fundamentals + eagerness is a winning combination.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-num">01 / HOW TO USE THIS</div>
+    <h2>How to study this page</h2>
+    <p class="lead">Every question below has three parts. Read all three — the reasoning is what turns a memorised line into a real answer you can defend under follow-up.</p>
+    <div class="card">
+      <p style="margin-bottom:10px"><span class="tag" style="color:var(--cyan)">▸ The answer</span> — what to actually say, in your own voice. Don't memorise word-for-word; learn the shape.</p>
+      <div class="why"><b>Why this works</b> What the interviewer is really testing, and why the answer lands. <em>This is the part most people skip — don't.</em></div>
+      <div class="avoid"><b>Avoid</b> The trap that sinks weaker candidates on this exact question.</div>
+    </div>
+    <p class="note">Study order for two days: Day 1 — Your Story, Hard Questions, SAP Deep Dive + T-codes. Day 2 — SAP Q&A Bank, Scenarios, Behavioral, HR, Salary. Friday afternoon — the Checklist.</p>
+  </div>
+</section>
+
+<!-- ============ YOUR STORY ============ -->
+<section id="story">
+  <div class="wrap">
+    <div class="sec-num">02 / YOUR STORY</div>
+    <h2>"Tell me about yourself" — <span class="accent">your 60-second open</span></h2>
+    <p class="lead">This is almost always the first question, and it sets the tone for everything after. Have it tight and rehearsed. Don't recite the resume top-to-bottom; tell a forward-moving story: who you are now → what you've done → why this role.</p>
+
+    <div class="card copper">
+      <p style="margin-bottom:0"><em class="hl">"I'm a procurement professional with about a year and a half of hands-on buying experience. I'm currently an Engineer – Purchase at Alternicq, formerly Manjushree Technopack — India's largest rigid plastic packaging company — where I manage the full Procure-to-Pay cycle for packaging materials, masterbatch and raw materials. Day to day I do vendor identification and negotiation, price finalisation, budget-versus-actual cost analysis, and I've contributed to inventory-reduction initiatives, all on Microsoft Dynamics 365. My background is in Polymer Science and Technology, so I understand the materials I'm buying, not just the paperwork. I've also trained in SAP MM. I'm looking to take that foundation into a global semiconductor leader like Applied Materials where procurement is more complex and the scale is much bigger — that's exactly the growth I want."</em></p>
+    </div>
+    <div class="why"><b>Why this works</b> It is structured (present → proof → motivation), it front-loads the most relevant fact (full P2P ownership), it pre-empts the SAP question by mentioning training, and it ends pointing at <em>their</em> role — so the natural next question is about the job, not about gaps.</div>
+    <div class="avoid"><b>Avoid</b> Starting with "I was born in…" or listing every school. Avoid going over 90 seconds. Avoid sounding rehearsed and robotic — know the beats, vary the words.</div>
+
+    <h3>Why you're leaving Alternicq / why Applied Materials</h3>
+    <p>Keep it positive — never criticise the current employer. Frame it as moving <em>toward</em> something.</p>
+    <div class="card">
+      <p style="margin-bottom:0"><em class="hl">"I've learned a lot at Alternicq and I'm grateful for it, but I want exposure to global supply chains, SAP, and the complexity of semiconductor procurement. Applied Materials is the world leader in chip-making equipment — the materials and OEM commodities you buy are far more sophisticated than packaging, and that's the level I want to operate at and grow into."</em></p>
+    </div>
+    <div class="why"><b>Why this works</b> "Toward, not away" signals you're ambitious, not running from a problem. Naming SAP + global scope shows you read the JD and understand the step-up.</div>
+
+    <h3>Your honest strengths to lean on</h3>
+    <div class="pillrow">
+      <span class="pill">Full P2P ownership</span>
+      <span class="pill">Vendor negotiation</span>
+      <span class="pill">Budget vs Actual analysis</span>
+      <span class="pill">Inventory reduction</span>
+      <span class="pill">Polymer / materials knowledge</span>
+      <span class="pill">Cross-team coordination</span>
+      <span class="pill">5S discipline</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE GAP ============ -->
+<section id="gap">
+  <div class="wrap">
+    <div class="sec-num">03 / THE HARD QUESTIONS</div>
+    <h2>Handling the gaps — <span class="accent">SAP, experience, shift</span></h2>
+    <p class="lead">These <em>will</em> come up. Prepared answers turn each one from a weakness into proof you're self-aware and adaptable. These are the highest-stakes questions in the whole interview — over-prepare them.</p>
+
+    <details class="qa" open>
+      <summary>Your experience is on Dynamics 365, not SAP. How will you cope?</summary>
+      <div class="qa-body">
+        <span class="tag">Most likely question · nail this one</span>
+        <p class="say">"That's a fair point. My live experience is on D365, but procurement logic is ERP-agnostic — the flow is the same everywhere: purchase requisition → RFQ → purchase order → goods receipt → invoice verification → payment. I do all of that today. I've trained on SAP MM, so I know the equivalent transactions and master-data structure. Learning the SAP screens is a matter of weeks, not months, because I already understand what each step is doing and why."</p>
+        <div class="why"><b>Why this works</b> It reframes the question from "do you know SAP" to "do you understand procurement" — which you do. Naming the P2P flow proves the concepts are internalised, not memorised. "Weeks not months" projects confidence and reduces their perceived risk of hiring you.</div>
+        <div class="avoid"><b>Avoid</b> Two opposite traps: don't get defensive ("D365 is basically the same, no big deal"), and don't over-apologise ("I'm so sorry I don't really know SAP"). Both lose the room. Acknowledge → bridge → reassure.</div>
+        <p class="note">Then, if you can, name a t-code or two (T-Codes section) to prove the training was real.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>The role asks for 4–9 years. You have about 1.5. Why should we consider you?</summary>
+      <div class="qa-body">
+        <span class="tag">Reframe seniority as ownership</span>
+        <p class="say">"I won't pretend to have nine years — but in a year and a half I've owned the complete P2P cycle independently, not just a slice of it. I negotiate prices, finalise vendors, run budget-vs-actual analysis and drive inventory-reduction work. I learn fast and I take ownership, and I'm looking for exactly the kind of stretch this role offers. What I bring is strong fundamentals and high energy to grow into the scope quickly."</p>
+        <div class="why"><b>Why this works</b> It separates "years" from "depth." Many people with more years have done one narrow slice; you've owned the whole cycle. Honesty ("I won't pretend") buys credibility for the confident claim that follows.</div>
+        <div class="avoid"><b>Avoid</b> Inflating your experience or fudging dates — it unravels fast. Also avoid sounding apologetic about being junior; own it as a growth opportunity.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>The shift is 2 PM to 11 PM, five days from office at ITPL. Are you comfortable?</summary>
+      <div class="qa-body">
+        <span class="tag">Answer with confidence — no hesitation</span>
+        <p class="say">"Yes, absolutely. I understand it's a 2-to-11 shift, five days from the ITPL office, and I'm fully comfortable with it. I know a global role means overlapping with other time zones, and I've planned for it. It's not a concern at all."</p>
+        <div class="why"><b>Why this works</b> They flagged the shift twice (in the email and on the call), so it's a real screening criterion — likely candidates have dropped out over it. A clean, immediate yes removes their biggest doubt and signals reliability.</div>
+        <div class="avoid"><b>Avoid</b> Any hedging — "I think I can manage…", "as long as transport works out…", nervous laughter. Hesitation here can cost the offer even if everything else is perfect. Say it cleanly and move on.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>You're from a Polymer Science background — why procurement?</summary>
+      <div class="qa-body">
+        <span class="tag">Turn the degree into an edge</span>
+        <p class="say">"My polymer background is actually an advantage in procurement. When I buy masterbatch or packaging materials, I understand the material properties, the testing, and the quality trade-offs — not just the price. That helps me have smarter conversations with vendors and make better sourcing decisions. I found I enjoy the commercial and strategic side of materials more than the lab, and procurement lets me use both."</p>
+        <div class="why"><b>Why this works</b> It converts a perceived mismatch into a differentiator. A buyer who understands the engineering of what they buy is rare and valuable — especially at a precision-engineering company.</div>
+        <div class="avoid"><b>Avoid</b> "I couldn't find a job in polymers so I moved to procurement." Never frame it as a fallback.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What do you know about the company before applying / why this company specifically?</summary>
+      <div class="qa-body">
+        <span class="tag">Tests genuine interest</span>
+        <p class="say">"Applied Materials is the world's largest supplier of equipment and materials-engineering solutions used to make semiconductor chips and advanced displays — essentially you make the machines that fabs use to build chips. With AI and data-centre demand exploding, it's one of the most important and fast-growing industries in the world. For me as a buyer, procurement here is far more complex and mission-critical than packaging, and that's exactly where I want to grow."</p>
+        <div class="why"><b>Why this works</b> Shows you researched beyond the JD, and ties their business back to <em>your</em> role. "Make the machines that make chips" proves you actually understand what they do.</div>
+        <div class="avoid"><b>Avoid</b> Generic flattery ("it's a great company with good values"). Be specific about what they make and why it matters.</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SAP MM DEEP DIVE ============ -->
+<section id="sap">
+  <div class="wrap">
+    <div class="sec-num">04 / TECHNICAL CORE</div>
+    <h2>SAP MM, explained the way <span class="accent">they'll ask it</span></h2>
+    <p class="lead">Learn the concepts, not just definitions — you should be able to explain each in plain language and connect it to what you already do. This is the heart of the technical screen.</p>
+
+    <h3>What is SAP MM?</h3>
+    <div class="card">
+      <p style="margin-bottom:0">SAP MM (Materials Management) is the SAP module that handles procurement and inventory — material planning, purchasing, inventory management, vendor valuation and invoice verification. Its job is to make sure the right materials are available in the right quantity, at the right time and cost, without shortages or excess. It's the backbone of the logistics area and connects to other modules like PP (Production Planning), SD (Sales & Distribution) and FI (Finance).</p>
+    </div>
+
+    <h3>The Procure-to-Pay (P2P) cycle — know this cold</h3>
+    <p>This is the single most important thing to be fluent in. Walk through it as a sequence:</p>
+    <ol>
+      <li><strong>Determine requirement</strong> — a need for material is identified (manually or via MRP).</li>
+      <li><strong>Purchase Requisition (PR)</strong> — an <em>internal</em> document requesting the purchase.</li>
+      <li><strong>Source determination / RFQ</strong> — find suppliers; send Requests for Quotation, compare quotes.</li>
+      <li><strong>Vendor selection &amp; PO</strong> — choose the vendor; issue the <strong>Purchase Order</strong>, a binding external document.</li>
+      <li><strong>Goods Receipt (GR)</strong> — material arrives; you record receipt and stock updates.</li>
+      <li><strong>Invoice Verification (IR)</strong> — match invoice against PO and GR (the <em class="hl">3-way match</em>).</li>
+      <li><strong>Payment</strong> — finance releases payment to the vendor.</li>
+    </ol>
+    <p class="note">Tip: when you describe this, add "— and this is exactly what I do daily on D365," so it lands as experience, not theory.</p>
+
+    <h3>Master data — the three you must name</h3>
+    <table class="map">
+      <tr><th>Master record</th><th>What it holds</th></tr>
+      <tr><td>Material Master</td><td>All data about a material — description, unit of measure, valuation, plant/storage views. The central reference for every transaction.</td></tr>
+      <tr><td>Vendor Master</td><td>All data about a supplier — address, payment terms, banking, purchasing org data.</td></tr>
+      <tr><td>Purchasing Info Record</td><td>Links a specific material to a specific vendor — price, conditions, lead time. Drives faster, accurate POs.</td></tr>
+    </table>
+    <p class="note">Bonus: <strong>Source List</strong> (which vendors are allowed/preferred for a material) and <strong>Conditions/Pricing</strong> records often come up too.</p>
+
+    <h3>The org structure — how SAP is built</h3>
+    <p>A frequent intermediate question. Know the hierarchy top to bottom:</p>
+    <table class="map">
+      <tr><th>Level</th><th>Meaning</th></tr>
+      <tr><td>Client</td><td>Top level — the whole SAP system / corporate group.</td></tr>
+      <tr><td>Company Code</td><td>A legal entity for which you produce financial statements.</td></tr>
+      <tr><td>Plant</td><td>A manufacturing or operational site; where MRP and inventory live.</td></tr>
+      <tr><td>Storage Location</td><td>Where stock physically sits within a plant.</td></tr>
+      <tr><td>Purchasing Organisation</td><td>Unit responsible for procurement; negotiates terms with vendors.</td></tr>
+      <tr><td>Purchasing Group</td><td>A buyer or group of buyers responsible for certain materials.</td></tr>
+    </table>
+
+    <h3>Key concepts to have ready</h3>
+    <ul>
+      <li><strong>PR vs PO:</strong> PR is internal (a request); PO is external and legally binding (sent to the vendor).</li>
+      <li><strong>3-Way Match:</strong> Invoice verification matches <em>PO ↔ Goods Receipt ↔ Invoice</em> on quantity and price before payment — prevents overpayment and fraud.</li>
+      <li><strong>MRP vs CBP:</strong> MRP (Material Requirements Planning) is consumption- and demand-driven; CBP (Consumption-Based Planning) plans purely from past consumption / reorder points.</li>
+      <li><strong>Movement types:</strong> codes that classify stock movements — e.g. <em>101</em> goods receipt against PO, <em>102</em> reversal of GR, <em>201</em> goods issue to cost centre, <em>261</em> goods issue to order, <em>561</em> initial stock entry.</li>
+      <li><strong>Special procurement / stocks:</strong> <em>consignment</em> (vendor's stock at your site, paid on use), <em>subcontracting</em> (you send components, vendor returns finished goods), <em>stock transfer</em> (between plants).</li>
+      <li><strong>Release strategy:</strong> approval workflow — POs/PRs above certain values need authorised sign-off before release.</li>
+      <li><strong>Account determination:</strong> how MM automatically posts to the right GL accounts in FI when goods/invoices are received.</li>
+      <li><strong>Pricing procedure / conditions:</strong> how the net price on a PO is built up — gross price, discounts, freight, taxes — via condition types.</li>
+      <li><strong>Document types:</strong> standard PO (NB), stock transport order, contract, scheduling agreement.</li>
+    </ul>
+
+    <h3>Outline agreements — contracts vs scheduling agreements</h3>
+    <div class="card">
+      <p style="margin-bottom:0">An <strong>outline agreement</strong> is a longer-term arrangement with a vendor. A <strong>contract</strong> commits to a total quantity or value over time, released via individual POs. A <strong>scheduling agreement</strong> sets fixed delivery dates/quantities via a delivery schedule — common in production environments to keep a steady flow of material. Mentioning these signals you understand procurement beyond one-off POs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ T-CODES ============ -->
+<section id="tcodes">
+  <div class="wrap">
+    <div class="sec-num">05 / TRANSACTION CODES</div>
+    <h2>The t-codes worth <span class="accent">memorising</span></h2>
+    <p class="lead">Dropping two or three correct transaction codes proves your SAP training was real. You don't need all of them — know the starred ones solid, recognise the rest.</p>
+    <table class="tcode">
+      <tr><th>Code</th><th>What it does</th><th></th></tr>
+      <tr><td class="code">ME51N</td><td>Create Purchase Requisition</td><td>★</td></tr>
+      <tr><td class="code">ME21N</td><td>Create Purchase Order</td><td>★</td></tr>
+      <tr><td class="code">ME22N / ME23N</td><td>Change / Display Purchase Order</td><td>★</td></tr>
+      <tr><td class="code">MIGO</td><td>Goods Receipt (and other goods movements)</td><td>★</td></tr>
+      <tr><td class="code">MIRO</td><td>Invoice Verification (the 3-way match)</td><td>★</td></tr>
+      <tr><td class="code">MM01 / MM02 / MM03</td><td>Create / Change / Display Material Master</td><td>★</td></tr>
+      <tr><td class="code">XK01 / MK01</td><td>Create Vendor Master (central / purchasing)</td><td></td></tr>
+      <tr><td class="code">ME11</td><td>Create Purchasing Info Record</td><td></td></tr>
+      <tr><td class="code">ME41</td><td>Create RFQ (Request for Quotation)</td><td></td></tr>
+      <tr><td class="code">ME47 / ME49</td><td>Maintain quotation / Price comparison</td><td></td></tr>
+      <tr><td class="code">ME31K / ME31L</td><td>Create Contract / Scheduling Agreement</td><td></td></tr>
+      <tr><td class="code">ME2M / ME2L</td><td>PO list by material / by vendor</td><td></td></tr>
+      <tr><td class="code">MB52 / MMBE</td><td>Stock on hand / Stock overview</td><td></td></tr>
+      <tr><td class="code">MD04 / MD01</td><td>Stock-requirements list / Run MRP</td><td></td></tr>
+      <tr><td class="code">MELB</td><td>Purchasing documents by requirement tracking no.</td><td></td></tr>
+    </table>
+    <p class="note">Memory hook: <strong>ME</strong> = purchasing, <strong>MM</strong> = material master, <strong>MIGO/MIRO</strong> = goods-in / invoice-in, <strong>MB/MMBE</strong> = stock views, <strong>MD</strong> = MRP/planning.</p>
+  </div>
+</section>
+
+<!-- ============ SAP Q&A BANK ============ -->
+<section id="sapqa">
+  <div class="wrap">
+    <div class="sec-num">06 / SAP MM Q&A BANK</div>
+    <h2>Technical Q&A — <span class="accent">the questions interviewers actually ask</span></h2>
+    <p class="lead">Tap each to reveal a model answer. Where it's a pure-SAP question you may not have lived, the answer shows how to demonstrate concept knowledge honestly. Read the "why" notes — follow-ups usually probe exactly there.</p>
+
+    <div class="group-label">Fundamentals</div>
+
+    <details class="qa">
+      <summary>Walk me through the procurement cycle end to end.</summary>
+      <div class="qa-body">
+        <p class="say">"It starts with a requirement, raised as a purchase requisition — manually or auto-generated by MRP. We determine the source, send RFQs and compare quotations, then select a vendor and raise a purchase order. When the goods arrive we do a goods receipt, which updates stock. Then invoice verification does a three-way match between PO, goods receipt and invoice. Once that clears, finance releases payment. I run this exact cycle every day on D365."</p>
+        <div class="why"><b>Why this works</b> This is <em>the</em> foundational question. A clean, ordered walkthrough — with the closing line tying it to real experience — signals competence in 20 seconds.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What's the difference between a purchase requisition and a purchase order?</summary>
+      <div class="qa-body">
+        <p class="say">"A purchase requisition is an internal document — it's a request to buy something, raised within the company, that hasn't gone to a vendor yet. A purchase order is the external, legally binding document we send to the chosen vendor confirming what we're buying, the quantity, price, delivery date and terms. A PR typically becomes a PO once the source and price are finalised."</p>
+        <div class="why"><b>Why this works</b> Internal-vs-external is the crisp distinction they want. The "PR becomes a PO" link shows you understand the flow, not just two definitions.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What are the master data records in SAP MM?</summary>
+      <div class="qa-body">
+        <p class="say">"The three core ones are the material master, which holds everything about a material; the vendor master, which holds supplier details; and the purchasing info record, which links a specific material to a specific vendor with agreed price, lead time and conditions. There's also the source list, which controls which vendors are approved for a material, and condition records for pricing."</p>
+        <div class="why"><b>Why this works</b> Naming all three core records plus a bonus (source list) shows depth. The info record especially — many juniors forget it.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is a goods receipt, and what happens in the system when you post one?</summary>
+      <div class="qa-body">
+        <p class="say">"A goods receipt records that material delivered against a PO has physically arrived. When you post it — in SAP that's MIGO — stock quantity increases, a material document and an accounting document are created, the stock value updates, and it sets up the goods-receipt side of the three-way match for invoice verification. It also updates the PO history."</p>
+        <div class="why"><b>Why this works</b> Going beyond "it means goods arrived" to the <em>system effects</em> (material doc + accounting doc + stock update) is what separates a trained answer from a guess.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Explain the three-way match.</summary>
+      <div class="qa-body">
+        <p class="say">"It's the control in invoice verification where the system matches three documents before approving payment: the purchase order, the goods receipt, and the vendor's invoice — checking that quantity and price agree across all three. If they match, payment is released; if there's a discrepancy, it's blocked for review. It prevents overpayment, duplicate payment and fraud."</p>
+        <div class="why"><b>Why this works</b> Naming all three documents and the purpose (control / fraud prevention) is exactly the complete answer. This comes up very often.</div>
+      </div>
+    </details>
+
+    <div class="group-label">Intermediate</div>
+
+    <details class="qa">
+      <summary>What is the difference between MRP and consumption-based planning?</summary>
+      <div class="qa-body">
+        <p class="say">"MRP is demand-driven — it plans procurement based on actual and forecast requirements, like production orders and sales. Consumption-based planning is driven by historical consumption — it triggers procurement using reorder points or forecasts from past usage, without a direct link to specific demand. CBP suits low-value or steady-use materials; MRP suits materials tied directly to production."</p>
+        <div class="why"><b>Why this works</b> Most candidates can define MRP but stumble on CBP. The "when to use which" line shows applied understanding.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is a purchasing info record and why is it useful?</summary>
+      <div class="qa-body">
+        <p class="say">"It's master data that links a material to a vendor and stores the agreed price, conditions, lead time and other terms. It's useful because when you create a PO for that material-vendor combination, the system can pull the price and conditions automatically — it speeds up PO creation, improves accuracy, and gives you price history for negotiation."</p>
+        <div class="why"><b>Why this works</b> The "price history for negotiation" point connects a technical object to the buyer's real job — exactly the kind of link interviewers reward.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is consignment stock? Subcontracting?</summary>
+      <div class="qa-body">
+        <p class="say">"In consignment, the vendor's stock physically sits at our location but still belongs to the vendor — we only pay when we consume it. It reduces our inventory holding cost. Subcontracting is where we send components to a vendor who processes or assembles them and returns the finished item — we're paying for the service plus any added material. Both are special procurement types in SAP MM."</p>
+        <div class="why"><b>Why this works</b> These two are classic "special stock" interview favourites. Crisp definitions with the business benefit (consignment reduces holding cost) signal real understanding.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is a release strategy / release procedure?</summary>
+      <div class="qa-body">
+        <p class="say">"It's the approval workflow for purchasing documents. Based on criteria like value, document type or material group, a PR or PO needs sign-off from one or more authorised people before it can be released and processed. It enforces spending controls and segregation of duties — a buyer can't approve their own high-value PO."</p>
+        <div class="why"><b>Why this works</b> Mentioning "segregation of duties" and "spending control" shows you understand the <em>governance</em> reason, not just the mechanics — valuable at a large MNC with strict controls.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What are movement types? Give examples.</summary>
+      <div class="qa-body">
+        <p class="say">"Movement types are three-digit codes that classify every goods movement so the system knows how to update stock and accounting. Common ones: 101 is goods receipt against a PO, 102 reverses it, 201 is goods issue to a cost centre, 261 is goods issue to a production order, and 561 is initial stock upload. The movement type drives the account postings behind the scenes."</p>
+        <div class="why"><b>Why this works</b> Even two or three correct codes (101, 201, 561) prove hands-on familiarity. The "drives account postings" line shows you understand <em>why</em> they exist.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>How does SAP MM integrate with FI and PP?</summary>
+      <div class="qa-body">
+        <p class="say">"With FI (Finance): when we post a goods receipt or invoice, MM automatically creates accounting documents through account determination — so procurement updates the financials in real time. With PP (Production Planning): MRP in PP generates the material requirements that become purchase requisitions in MM, and the materials we procure feed production orders. MM sits between planning and finance."</p>
+        <div class="why"><b>Why this works</b> Integration questions test whether you see the bigger system. "MM sits between planning and finance" is a memorable, accurate summary.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is the difference between a contract and a scheduling agreement?</summary>
+      <div class="qa-body">
+        <p class="say">"Both are outline agreements — longer-term deals with a vendor. A contract commits to a total quantity or value over a period, and you release individual POs against it as needed. A scheduling agreement goes further by fixing delivery dates and quantities through a delivery schedule, so material flows in on a planned cadence — which is common in production supply."</p>
+        <div class="why"><b>Why this works</b> Knowing outline agreements puts you above basic-PO-only candidates and fits a production-purchasing role like this one.</div>
+      </div>
+    </details>
+
+    <div class="group-label">Honesty mode — when you don't know</div>
+    <div class="card warn">
+      <p style="margin:0">If you hit a deep-config question you genuinely don't know (e.g. "how do you configure a pricing procedure?"), don't bluff. Say: <em class="hl">"I haven't done that configuration myself — my SAP exposure is through training, and my live config work has been on D365. But conceptually I understand what a pricing procedure does: it builds the net price from condition types like base price, discounts, freight and tax. I'd be able to learn the SAP configuration quickly because I understand the logic."</em> Honesty + demonstrated concept knowledge beats a wrong bluff every time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENARIOS ============ -->
+<section id="scenario">
+  <div class="wrap">
+    <div class="sec-num">07 / SCENARIO QUESTIONS</div>
+    <h2>Situational questions — <span class="accent">show how you think</span></h2>
+    <p class="lead">The JD lists shortage management, expedite, vendor analysis and cost savings. Expect "what would you do if…" questions. Answer with a clear, logical process — they're testing judgement, not a single right answer.</p>
+
+    <details class="qa" open>
+      <summary>A critical vendor will miss a delivery and it threatens production. What do you do?</summary>
+      <div class="qa-body">
+        <span class="tag">Shortage / expedite — JD priority</span>
+        <ol>
+          <li>Confirm the exact shortfall and the revised date directly with the vendor.</li>
+          <li>Assess production impact with planning/stores — how many days of buffer stock exist?</li>
+          <li><strong>Expedite:</strong> push the vendor for partial/early shipment, faster freight, or a split delivery.</li>
+          <li>Check <strong>alternate/approved sources</strong> (source list) for emergency supply.</li>
+          <li>Communicate transparently to production, stores and finance so they can re-plan.</li>
+          <li>Update the system (PO dates, lead time) so data integrity holds.</li>
+          <li>After the fire's out, review why it happened — vendor reliability, lead-time accuracy — to prevent a repeat.</li>
+        </ol>
+        <div class="why"><b>Why this works</b> A structured "assess → act → communicate → prevent" answer shows mature judgement. The last step (root-cause review) is what senior buyers do and most juniors forget — it elevates the whole answer. The JD literally names "shortage management — expedite process" and "data integrity," so you're hitting their words.</div>
+        <div class="avoid"><b>Avoid</b> Jumping straight to "find another vendor." Show you assess impact and communicate first — panic-sourcing is a junior reflex.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>How do you approach a vendor negotiation to get a better price?</summary>
+      <div class="qa-body">
+        <span class="tag">Negotiation &amp; cost saving</span>
+        <ul>
+          <li>Do the homework: market price, past purchase price, cost breakup (raw material + conversion + freight).</li>
+          <li>Use <strong>volume leverage</strong> — commit to higher volume or a longer contract for a better rate.</li>
+          <li>Get <strong>multiple quotes</strong> (RFQ) to create competition and a benchmark.</li>
+          <li>Negotiate the <em>total</em> cost — payment terms, freight, packaging — not just unit price.</li>
+          <li>Protect quality and delivery reliability — cheapest isn't always lowest total cost.</li>
+          <li>Keep the relationship constructive — you'll need this vendor again.</li>
+        </ul>
+        <div class="why"><b>Why this works</b> "Total cost, not unit price" and "do the homework first" are the marks of a real negotiator. Mentioning the relationship shows maturity — you're not just squeezing.</div>
+        <div class="avoid"><b>Avoid</b> Implying negotiation = bullying the vendor down. Best buyers create value, not just pressure.</div>
+        <p class="note">Tie it to your real win — see your STAR stories in the Behavioral section.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>How do you do a vendor comparison / vendor analysis?</summary>
+      <div class="qa-body">
+        <span class="tag">Vendor analysis — JD priority</span>
+        <p>Explain you score vendors on more than price: <strong>price, quality, delivery reliability, lead time, payment terms, capacity, certifications and past performance.</strong> Build a comparison matrix, weight the criteria by what matters for that material, and pick on total value. Then track performance over time, not just at quoting.</p>
+        <div class="why"><b>Why this works</b> The weighted-matrix approach shows structured, defensible decision-making — exactly what "vendor analysis, making comparisons" in the JD is probing.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>How would you reduce procurement cost / inventory?</summary>
+      <div class="qa-body">
+        <span class="tag">You've actually done this</span>
+        <ul>
+          <li>Budget-vs-actual analysis to spot overspend (your real work).</li>
+          <li>Vendor consolidation and volume negotiation.</li>
+          <li>Right-sizing order quantities and reorder points to cut excess inventory.</li>
+          <li>Reducing dead/slow-moving stock through data analysis.</li>
+          <li>Improving lead-time accuracy so you hold less safety stock.</li>
+          <li>Better payment terms to improve working capital.</li>
+        </ul>
+        <div class="why"><b>Why this works</b> You've genuinely done budget-vs-actual and inventory reduction — lead with those as lived experience, then add the others as breadth. Real beats theoretical every time.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>What is "Built to Print" and OEM commodity purchasing? (from the JD)</summary>
+      <div class="qa-body">
+        <span class="tag">Know the term even if it's new</span>
+        <p><strong>Built-to-Print</strong> means buying parts made exactly to the customer's own drawings/specifications — the supplier manufactures to your print, so you manage the spec, tooling and quality tightly. <strong>OEM commodities</strong> are components sourced from original-equipment manufacturers. Be honest if it's new to you:</p>
+        <p class="say">"I haven't bought built-to-print parts directly — that's newer to me — but I understand the concept: purchasing to a fixed engineering spec where I own the drawing, tooling and quality conformance. My materials background means I'm comfortable working from technical specs, so I'd pick this up quickly."</p>
+        <div class="why"><b>Why this works</b> The JD specifically asks for "Built to Print and OEM commodities" experience. Showing you know what the term means — even without direct experience — proves you did your homework and can speak their language.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>A vendor's invoice doesn't match the PO. What do you do?</summary>
+      <div class="qa-body">
+        <span class="tag">Process judgement</span>
+        <p class="say">"First I'd identify whether the mismatch is in quantity or price, and check it against the goods receipt — the three-way match. If it's a genuine error, I'd hold the invoice, raise it with the vendor, and get a corrected invoice or credit note. If it's a legitimate change we agreed, I'd update the PO so the documents reconcile. I wouldn't release payment until all three documents agree, to protect against overpayment."</p>
+        <div class="why"><b>Why this works</b> Ties directly to the three-way match concept and shows financial discipline — exactly the "data integrity" the JD calls out.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>How do you ensure data integrity in procurement systems? (JD wording)</summary>
+      <div class="qa-body">
+        <span class="tag">Direct JD phrase — they will ask</span>
+        <p class="say">"By keeping master data accurate — correct lead times, prices and vendor details — because everything downstream relies on it. I validate POs against agreed terms before release, reconcile goods receipts and invoices carefully, and update the system promptly when dates or quantities change. Clean, current data is what lets planning and finance trust the numbers."</p>
+        <div class="why"><b>Why this works</b> The JD explicitly says "responsible for procurement business systems data input and integrity such as lead time and cost." Echoing that responsibility back, with concrete habits, shows you read and understood the role.</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ COMPANY & SEMICON ============ -->
+<section id="company">
+  <div class="wrap">
+    <div class="sec-num">08 / THE COMPANY</div>
+    <h2>Applied Materials & <span class="accent">semiconductors</span> — enough to sound informed</h2>
+    <p class="lead">You don't need to be an engineer. You need to show you researched them and understand why procurement matters in this industry. A few crisp talking points are plenty.</p>
+
+    <h3>Who they are</h3>
+    <div class="card cyan">
+      <p style="margin-bottom:0">Applied Materials is the world's largest supplier of <strong>equipment and materials-engineering solutions used to manufacture semiconductor chips and advanced displays</strong>. Their machines modify materials at the atomic scale so chipmakers can build the processors, memory and displays inside phones, computers, cars, and AI data centres. Tagline: <em class="hl">"Make Possible."</em> They're US-headquartered (Santa Clara, California) with a major presence in India.</p>
+    </div>
+
+    <h3>Semiconductor basics — the 90-second version</h3>
+    <ul>
+      <li>A <strong>semiconductor / chip</strong> is the "brain" of electronics — tiny circuits etched onto silicon wafers.</li>
+      <li>Chips are built on round <strong>silicon wafers</strong> through hundreds of process steps: deposition, etching, ion implantation, polishing.</li>
+      <li>Applied Materials doesn't make the chips — it makes the <strong>equipment</strong> that fabs (factories like TSMC, Intel, Samsung) use to make chips. They're a "picks and shovels" supplier to the whole industry.</li>
+      <li>Demand is booming because of <strong>AI, data centres, EVs and smartphones</strong> — more compute everywhere means more chips, means more equipment.</li>
+    </ul>
+
+    <h3>Words you can drop to sound fluent</h3>
+    <div class="pillrow">
+      <span class="pill">Wafer fab</span>
+      <span class="pill">Deposition / etch</span>
+      <span class="pill">Atomic-scale engineering</span>
+      <span class="pill">OEM commodities</span>
+      <span class="pill">Built-to-print</span>
+      <span class="pill">Global supply chain</span>
+      <span class="pill">Lead-time critical</span>
+    </div>
+
+    <h3>Why procurement matters here (your angle)</h3>
+    <p>Connect the industry back to your role so it doesn't feel like trivia:</p>
+    <div class="card copper">
+      <p style="margin-bottom:0"><em class="hl">"Because Applied Materials builds highly complex, precision equipment, procurement is mission-critical — a single delayed or off-spec component can hold up a multi-million-dollar tool. That's why the role emphasises lead-time and cost data integrity, shortage management and supplier reliability. That precision and accountability is exactly what excites me about moving here from packaging procurement."</em></p>
+    </div>
+    <p class="note">If asked "what do you know about us?" — give the "who they are" paragraph, then the procurement angle. That combination impresses.</p>
+  </div>
+</section>
+
+<!-- ============ BEHAVIORAL ============ -->
+<section id="behavioral">
+  <div class="wrap">
+    <div class="sec-num">09 / BEHAVIORAL</div>
+    <h2>Behavioral questions — <span class="accent">build these STAR stories now</span></h2>
+    <p class="lead">Use the <strong>STAR</strong> structure: Situation → Task → Action → Result. Prepare 3–4 real stories from Alternicq before Friday; you can reuse them across many questions. Fill in real numbers where you can — they're the difference between forgettable and convincing.</p>
+
+    <div class="card">
+      <p style="margin-bottom:6px"><strong>Story 1 — A cost saving (your strongest)</strong></p>
+      <div class="star">
+        <div class="k">S/T</div><div class="v">A material's cost was running over budget in your budget-vs-actual review.</div>
+        <div class="k">Action</div><div class="v">You analysed the spend, benchmarked alternate vendors, renegotiated price / consolidated volume.</div>
+        <div class="k">Result</div><div class="v"><em>"I reduced the cost by ___% / saved ₹___."</em> — put your real figure here.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom:6px"><strong>Story 2 — A tough negotiation</strong></p>
+      <div class="star">
+        <div class="k">S/T</div><div class="v">A key vendor wanted a price increase / was the sole source.</div>
+        <div class="k">Action</div><div class="v">You brought competing quotes, negotiated terms and freight, protected quality.</div>
+        <div class="k">Result</div><div class="v">Held or reduced price; kept supply secure.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom:6px"><strong>Story 3 — Cross-team coordination / problem solved</strong></p>
+      <div class="star">
+        <div class="k">S/T</div><div class="v">Production needed material urgently / stores flagged a shortage.</div>
+        <div class="k">Action</div><div class="v">You coordinated with production, stores and finance, expedited the vendor.</div>
+        <div class="k">Result</div><div class="v">Avoided a line stoppage / delivered on time.</div>
+      </div>
+    </div>
+
+    <div class="card green">
+      <p style="margin:0"><strong>One story, many questions.</strong> Your cost-saving story answers: "tell me about an achievement," "a time you saved money," "a time you used data," "your biggest contribution." Your shortage story answers: "a time under pressure," "a conflict," "a problem you solved," "a time you coordinated across teams." Prep 3 stories well and you cover ~15 questions.</p>
+    </div>
+
+    <h4>Behavioral questions to rehearse with your STAR stories</h4>
+    <details class="qa">
+      <summary>Tell me about a time you saved costs or improved a process.</summary>
+      <div class="qa-body"><p style="margin:0">→ Use <strong>Story 1</strong>. Lead with the number. Structure: the budget overrun (S/T), what you analysed and negotiated (A), the % or ₹ saved (R).</p></div>
+    </details>
+    <details class="qa">
+      <summary>Describe a time you worked under pressure or to a tight deadline.</summary>
+      <div class="qa-body"><p style="margin:0">→ Use <strong>Story 3</strong>. Emphasise staying calm, prioritising by production impact, and clear communication across teams.</p></div>
+    </details>
+    <details class="qa">
+      <summary>Tell me about a conflict or disagreement and how you handled it.</summary>
+      <div class="qa-body"><p style="margin:0">→ A vendor dispute or an internal disagreement (e.g. stores vs production on priority). Show you listened, used facts/data, and reached a workable outcome without damaging the relationship.</p></div>
+    </details>
+    <details class="qa">
+      <summary>Tell me about a mistake you made and what you learned.</summary>
+      <div class="qa-body">
+        <p style="margin:0 0 8px">Pick something real, low-stakes, and show the lesson. <em class="hl">"Early on I once relied on an outdated lead time and it nearly caused a delay. I caught it, expedited, and from then on I made checking and updating master data a habit before every order. It's why I'm careful about data integrity now."</em></p>
+        <div class="why"><b>Why this works</b> Ties the lesson straight to the JD's data-integrity requirement. Owning a mistake honestly reads as maturity.</div>
+        <div class="avoid"><b>Avoid</b> "I'm a perfectionist" or claiming you've never made a mistake. Both read as evasive.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>Tell me about a time you used data to make a decision.</summary>
+      <div class="qa-body"><p style="margin:0">→ Budget-vs-actual analysis or inventory reduction. Show the data you looked at, the insight, the action, the result.</p></div>
+    </details>
+    <details class="qa">
+      <summary>Give an example of working with a cross-functional team.</summary>
+      <div class="qa-body"><p style="margin:0">→ Your coordination with production, stores and finance. The JD values this ("coordinating with production, stores and finance teams") — name those teams explicitly.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ HR Q&A ============ -->
+<section id="hr">
+  <div class="wrap">
+    <div class="sec-num">10 / HR &amp; FIT</div>
+    <h2>HR questions — <span class="accent">a one-liner ready for each</span></h2>
+    <p class="lead">These feel easy, which is the trap — vague answers here cost more than they should. Have a crisp, specific line for every one.</p>
+
+    <details class="qa">
+      <summary>What are your strengths?</summary>
+      <div class="qa-body">
+        <p class="say">"Ownership of the full P2P cycle, strong negotiation, data-driven cost analysis, and materials knowledge from my polymer background. I learn fast and I'm reliable under deadline pressure."</p>
+        <div class="why"><b>Why this works</b> Three job-relevant strengths plus the rare differentiator (materials knowledge). Specific, not generic.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>What's your weakness?</summary>
+      <div class="qa-body">
+        <p class="say">"My live work has been on D365 rather than SAP, so I've been actively training in SAP MM to close that gap. I also tend to double-check my data for accuracy, which I'm learning to balance with moving faster."</p>
+        <div class="why"><b>Why this works</b> Pick a real, fixable weakness and show action on it. The SAP one is smart because it's already known — addressing it head-on is disarming.</div>
+        <div class="avoid"><b>Avoid</b> Fake weaknesses ("I work too hard") and anything that's a dealbreaker for the role.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>Where do you see yourself in 3–5 years?</summary>
+      <div class="qa-body">
+        <p class="say">"Growing into a senior buyer or category specialist with deep commodity and SAP expertise, owning larger and more strategic sourcing — ideally here, as the business and my responsibilities grow."</p>
+        <div class="why"><b>Why this works</b> Ambitious but realistic, and rooted in <em>this</em> company so they don't worry you'll leave in a year.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>Why should we hire you?</summary>
+      <div class="qa-body">
+        <p class="say">"Strong procurement fundamentals already proven in a real P2P role, a materials background that helps me make better sourcing calls, genuine eagerness to grow into semiconductor procurement, and full comfort with the role's shift and location. I'll ramp fast and take ownership."</p>
+        <div class="why"><b>Why this works</b> A tight summary of your whole case, and it slips in the shift reassurance again — which they care about.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>How do you handle pressure / tight deadlines?</summary>
+      <div class="qa-body"><p style="margin:0">"I prioritise by production impact, communicate early with all stakeholders, and stay calm and methodical. In procurement, deadline pressure is the norm — clear communication and good data keep it manageable."</p></div>
+    </details>
+    <details class="qa">
+      <summary>Are you interviewing elsewhere / do you have other offers?</summary>
+      <div class="qa-body">
+        <p class="say">"I'm exploring a few opportunities in procurement, but this role is the one that genuinely excites me because of the scale and the semiconductor industry. I'm focused on finding the right fit, not just any move."</p>
+        <div class="why"><b>Why this works</b> Honest, shows you're in demand without bluffing, and reaffirms genuine interest in <em>them</em>.</div>
+      </div>
+    </details>
+    <details class="qa">
+      <summary>How soon can you join / what's your notice period?</summary>
+      <div class="qa-body"><p style="margin:0">Answer factually with your actual notice period. If it's long, mention any flexibility (early release, buyout) you'd be open to. <em class="hl">"My notice period is ___ days; I'd work with both sides to make the transition as smooth as possible."</em></p></div>
+    </details>
+    <details class="qa">
+      <summary>Do you have any concerns about the role?</summary>
+      <div class="qa-body">
+        <p style="margin:0 0 8px">Don't raise the shift or SAP as concerns — you've already shown you're fine with both. Turn it into a question that shows engagement:</p>
+        <p class="say">"No real concerns — I'm comfortable with the shift and location. I'd just love to understand more about the commodities I'd be handling and how the team is structured, to picture how I'd add value fastest."</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SALARY ============ -->
+<section id="salary">
+  <div class="wrap">
+    <div class="sec-num">11 / THE MONEY TALK</div>
+    <h2>Salary — <span class="accent">how to ask for ~10 LPA without flinching</span></h2>
+    <p class="lead">Current CTC: 4.5 LPA. Target: ~10 LPA. That's a ~2.2x jump — ambitious but defensible for a switch into a global semiconductor MNC with a demanding shift. The key is to <em>anchor high, justify with value, and let them counter.</em></p>
+
+    <h3>Market reality (Bangalore, 2026)</h3>
+    <p>Buyer / procurement pay in Bangalore varies widely by company tier. Recent benchmarks:</p>
+    <div class="ladder">
+      <div class="rung"><span class="amt">₹3.9–8.2 L</span><span class="lbl">Typical procurement analyst range in Bangalore (25th–75th percentile)</span></div>
+      <div class="rung"><span class="amt">~₹10.4 L</span><span class="lbl">Top-decile (90th percentile) procurement analyst earners</span></div>
+      <div class="rung"><span class="amt">₹6–7 L</span><span class="lbl">Average for a senior buyer with procurement skills</span></div>
+      <div class="rung"><span class="amt">₹8.5 L+</span><span class="lbl">Where global-MNC buyer roles with niche skills tend to sit</span></div>
+    </div>
+    <p class="note">Reading: ~10 LPA is at the upper end for the experience level but realistic for a top-tier MNC role with a tough shift and specialised commodity scope. It's a strong <em>ask</em>, not an outlandish one. Big MNCs also add bonus, shift allowance and benefits on top of base.</p>
+
+    <h3>Your anchor number</h3>
+    <div class="anchor-box">
+      <div class="num">₹10–11 LPA</div>
+      <p style="margin:6px 0 0">State a slight <strong>range starting at or just above</strong> your target, so the negotiated landing still lands near 10. If pushed for a single number, say <strong>"around 10.5 LPA"</strong> and explain why.</p>
+    </div>
+
+    <h3>What to actually say</h3>
+    <details class="qa" open>
+      <summary>"What's your current CTC and expectation?"</summary>
+      <div class="qa-body">
+        <span class="tag">The script</span>
+        <p class="say">"My current CTC is 4.5 LPA. For this role I'm looking in the range of 10 to 11 LPA. I know that's a meaningful step up, and it reflects the bigger scope — a global semiconductor leader, a more demanding commodity portfolio, the 2-to-11 shift and five-day office commitment — plus the SAP and supply-chain growth I'll take on. I'm flexible for the right overall package and open to discussing it."</p>
+        <div class="why"><b>Why this works</b> It states the number confidently, then immediately justifies it with role-specific value (not personal need), and closes with flexibility so you don't seem rigid.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>"That's a big jump from 4.5. Why so high?"</summary>
+      <div class="qa-body">
+        <span class="tag">Justify on value, not need</span>
+        <p class="say">"I understand. My current package reflects a smaller-scale packaging role. This role is a bigger scope at a global MNC, with a late shift and full-office commitment, and procurement here is more complex and business-critical. I'm pricing against the market for this kind of role and the value I'll deliver, not just my current number — and I'm reasonable and open to a fair overall package."</p>
+        <div class="why"><b>Why this works</b> "Pricing against the market and value, not my current number" is the single most important reframe — it stops them anchoring your offer to your low current CTC.</div>
+        <div class="avoid"><b>Avoid</b> Justifying with personal expenses (rent, loans). Always justify with market value and role scope.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>"We can offer less than that." / They counter low</summary>
+      <div class="qa-body">
+        <span class="tag">Hold ground, stay warm</span>
+        <p>Don't accept on the spot. Options:</p>
+        <ul>
+          <li>Ask about the <strong>total package</strong> — bonus, shift allowance, benefits — the headline base isn't everything.</li>
+          <li><em class="hl">"I'm very interested in the role. Is there flexibility to get closer to my range? I'd be comfortable at ___."</em> (your real floor)</li>
+          <li>If the number is fixed, ask for a <strong>6-month review</strong> or sign-on, and take time to decide — never feel forced to answer immediately.</li>
+        </ul>
+        <div class="why"><b>Why this works</b> Staying warm while holding ground signals you value yourself without being difficult. Asking for the total package often recovers value the base number hides.</div>
+        <p class="note">Decide your <strong>walk-away floor</strong> before the interview (e.g. 8.5 LPA) so you negotiate from a clear position, not on the spot.</p>
+      </div>
+    </details>
+
+    <div class="card warn">
+      <p style="margin:0"><strong>Three rules for the money talk:</strong> never sound desperate or apologetic about the ask · never give a number below what you'd accept · always frame it as the role's value and the market, not your personal expenses. If asked first, it's fine to state your expectation; you don't have to hide it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUESTIONS TO ASK ============ -->
+<section id="ask">
+  <div class="wrap">
+    <div class="sec-num">12 / YOUR TURN</div>
+    <h2>Smart questions <span class="accent">to ask them</span></h2>
+    <p class="lead">Always have 3–4 ready. Asking good questions signals seriousness and that you're evaluating <em>them</em> too. Pick from these.</p>
+    <ul class="tick">
+      <li>What does success look like for this role in the first six months?</li>
+      <li>Which commodities or material categories would I be buying?</li>
+      <li>Which SAP version and modules does the team use day to day?</li>
+      <li>How is the procurement team structured, and who would I work most closely with?</li>
+      <li>What are the biggest supply-chain challenges the team is solving right now?</li>
+      <li>What growth or learning paths exist for buyers here?</li>
+      <li>How does the team handle onboarding for someone coming from a different ERP?</li>
+      <li>What are the next steps in the process?</li>
+    </ul>
+    <div class="why"><b>Why this matters</b> The "different ERP onboarding" question is clever — it acknowledges your gap while showing you're already thinking about ramping up. The "next steps" question closes strong and keeps momentum.</div>
+    <p class="note">Avoid leading with leave/holiday questions. Save detailed perks for after they show interest.</p>
+  </div>
+</section>
+
+<!-- ============ GLOSSARY ============ -->
+<section id="glossary">
+  <div class="wrap">
+    <div class="sec-num">13 / QUICK GLOSSARY</div>
+    <h2>Cheat-sheet glossary — <span class="accent">scan this last</span></h2>
+    <p class="lead">A 60-second refresher of every term you might need. If a word here is fuzzy, go back to the relevant section.</p>
+    <table class="map">
+      <tr><th>Term</th><th>One-line meaning</th></tr>
+      <tr><td>P2P</td><td>Procure-to-Pay: requirement → PR → PO → GR → invoice → payment.</td></tr>
+      <tr><td>PR</td><td>Purchase Requisition — internal request to buy.</td></tr>
+      <tr><td>PO</td><td>Purchase Order — binding order sent to a vendor.</td></tr>
+      <tr><td>RFQ</td><td>Request for Quotation — asking vendors to quote a price.</td></tr>
+      <tr><td>GR</td><td>Goods Receipt — recording that material arrived.</td></tr>
+      <tr><td>IR / IV</td><td>Invoice Receipt / Verification — checking the vendor invoice.</td></tr>
+      <tr><td>3-Way Match</td><td>PO ↔ GR ↔ Invoice agree before payment.</td></tr>
+      <tr><td>Material Master</td><td>Central record of all data about a material.</td></tr>
+      <tr><td>Vendor Master</td><td>Central record of all data about a supplier.</td></tr>
+      <tr><td>Info Record</td><td>Links a material to a vendor with price &amp; lead time.</td></tr>
+      <tr><td>Source List</td><td>Approved vendors for a material.</td></tr>
+      <tr><td>MRP</td><td>Material Requirements Planning — demand-driven procurement.</td></tr>
+      <tr><td>CBP</td><td>Consumption-Based Planning — reorder-point / past-usage driven.</td></tr>
+      <tr><td>Consignment</td><td>Vendor's stock at your site; pay when you use it.</td></tr>
+      <tr><td>Subcontracting</td><td>Send components to a vendor; get finished goods back.</td></tr>
+      <tr><td>Release Strategy</td><td>Approval workflow for PRs/POs by value.</td></tr>
+      <tr><td>Movement Type</td><td>Code classifying a stock movement (101, 201, 561…).</td></tr>
+      <tr><td>Outline Agreement</td><td>Long-term deal: contract or scheduling agreement.</td></tr>
+      <tr><td>Built-to-Print</td><td>Parts made exactly to your engineering drawings/spec.</td></tr>
+      <tr><td>OEM commodity</td><td>Component sourced from an original-equipment maker.</td></tr>
+      <tr><td>Lead time</td><td>Time from order to delivery — critical to plan stock.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section id="checklist" style="border-bottom:none">
+  <div class="wrap">
+    <div class="sec-num">14 / FRIDAY CHECKLIST</div>
+    <h2>Before 6 PM Friday</h2>
+    <p class="lead">A quick run-through the afternoon of the interview.</p>
+    <ul class="tick">
+      <li>Rehearse your 60-second intro out loud 3 times.</li>
+      <li>Lock in your 3 STAR stories with real numbers.</li>
+      <li>Say the P2P cycle out loud, start to finish, without notes.</li>
+      <li>Memorise 5 starred t-codes (ME51N, ME21N, MIGO, MIRO, MM01).</li>
+      <li>Re-read the SAP Q&A bank once — especially 3-way match, master data, MRP vs CBP.</li>
+      <li>Practise the SAP-gap answer and the shift answer until they're smooth.</li>
+      <li>Practise the salary script and fix your walk-away floor.</li>
+      <li>Read the company paragraph + semicon basics once more.</li>
+      <li>Scan the glossary one final time.</li>
+      <li>Keep your resume, the JD, and 3 questions-to-ask handy.</li>
+      <li>If it's a video call: test camera, mic, light, and a quiet space early.</li>
+      <li>Breathe. You do this work every day — you've got this.</li>
+    </ul>
+
+    <div class="card cyan" style="margin-top:24px">
+      <p style="margin:0"><strong>One last reminder:</strong> they called <em>you</em>. You're not there to apologise for a gap — you're there to show them a sharp, honest buyer who runs the full cycle today and will grow fast. Calm, specific, confident.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="you">All the best, Inchara — go get it.</div>
+    <div>Prep playbook · Buyer role · Applied Materials · Friday 12 June, 6 PM</div>
+  </div>
+</footer>
+
+</body>
+</html>
