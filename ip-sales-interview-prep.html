@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP Sales Interview Prep — Analog Bits / SphereLink</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#f9f8f6; --surface:#ffffff; --surface-2:#fcfbf9;
+  --border:#e2e0db; --border-soft:#eeece7;
+  --primary:#1a4fa0; --primary-dark:#143b78; --accent:#0e7d6e; --accent-warm:#b4571d;
+  --code-bg:#f4f3ef; --text-main:#1c1c1e; --text-muted:#5c5c66; --text-faint:#8a8a93;
+  --good-bg:#e8f5e9; --good-border:#2e7d32; --bad-bg:#fdecea; --bad-border:#c62828;
+  --hint-bg:#fff8e1; --hint-border:#e6a700; --tip-bg:#eaf2fb; --tip-border:#1a4fa0;
+  --quiz-right:#e8f5e9; --quiz-wrong:#fdecea;
+  --shadow:0 1px 3px rgba(20,30,50,.06),0 6px 24px rgba(20,30,50,.05);
+  --shadow-soft:0 1px 2px rgba(20,30,50,.05); --radius:12px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text-main);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--text-main);line-height:1.25;}
+code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--primary);text-decoration:none;} a:hover{text-decoration:underline;}
+
+/* ---------- Top bar + progress ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;height:54px;z-index:60;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 20px;}
+.topbar .menu-btn{display:none;font-size:21px;background:none;border:none;cursor:pointer;color:var(--primary);line-height:1;}
+.topbar .course-title{font-family:'IBM Plex Sans';font-weight:700;font-size:14.5px;color:var(--primary);letter-spacing:.2px;}
+.topbar .course-sub{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);}
+.topbar .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar .progress-label{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.1em;color:var(--text-muted);}
+.progress-track{width:160px;height:7px;background:var(--border-soft);border-radius:999px;overflow:hidden;}
+.progress-fill{height:100%;width:11%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;transition:width .35s ease;}
+
+/* ---------- Layout ---------- */
+.layout{display:flex;padding-top:54px;min-height:100vh;}
+.sidebar{width:262px;flex:0 0 262px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:54px;bottom:0;left:0;overflow-y:auto;padding:18px 14px 50px;}
+.nav-group-title{font-family:'JetBrains Mono';font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:16px 10px 6px;}
+.sidebar nav a{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Sans';font-size:14px;color:var(--text-muted);padding:9px 11px;border-radius:9px;margin-bottom:2px;cursor:pointer;transition:background .12s,color .12s;}
+.sidebar nav a .code{font-family:'JetBrains Mono';font-size:11px;color:var(--text-faint);flex:0 0 22px;}
+.sidebar nav a:hover{background:var(--surface-2);color:var(--text-main);}
+.sidebar nav a.active{background:var(--tip-bg);color:var(--primary);font-weight:600;}
+.sidebar nav a.active .code{color:var(--primary);}
+.sidebar nav a .tick{margin-left:auto;font-size:12px;color:var(--good-border);opacity:0;transition:opacity .2s;}
+.sidebar nav a.visited .tick{opacity:1;}
+
+/* ---------- Content / module cards ---------- */
+.content{flex:1 1 auto;margin-left:262px;width:calc(100% - 262px);display:flex;justify-content:center;padding:38px 40px 90px;}
+.content-inner{width:100%;max-width:820px;}
+section.module{display:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:40px 44px 36px;animation:fade .25s ease;}
+section.module.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.eyebrow{font-family:'JetBrains Mono';font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;}
+h1.module-title{font-size:32px;font-weight:700;margin:0 0 10px;letter-spacing:-.4px;line-height:1.1;}
+.lede{font-size:18.5px;color:var(--text-muted);margin:0 0 8px;max-width:70ch;}
+.objectives{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:10px;padding:14px 18px;margin:22px 0 6px;}
+.objectives .ttl{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:6px;}
+.objectives ul{margin:0;padding-left:20px;} .objectives li{margin-bottom:4px;font-size:15px;}
+
+h2{font-size:23px;font-weight:600;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border-soft);letter-spacing:-.2px;}
+h3{font-size:18.5px;font-weight:600;margin:26px 0 8px;color:var(--primary-dark);}
+h4{font-size:15px;font-weight:600;margin:18px 0 6px;}
+p{margin:0 0 14px;} ul,ol{margin:0 0 16px;padding-left:22px;} li{margin-bottom:7px;}
+strong{font-weight:600;} em{color:var(--text-muted);}
+.small{font-size:14px;} .muted{color:var(--text-muted);}
+
+/* cards & callouts */
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-soft);margin:18px 0;}
+.card.tight{padding:15px 17px;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;border-left:4px solid var(--tip-border);background:var(--tip-bg);font-size:15.5px;}
+.callout .ttl{font-family:'IBM Plex Sans';font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
+.callout.tip{border-color:var(--tip-border);background:var(--tip-bg);}
+.callout.good{border-color:var(--good-border);background:var(--good-bg);}
+.callout.bad{border-color:var(--bad-border);background:var(--bad-bg);}
+.callout.warn{border-color:var(--hint-border);background:var(--hint-bg);}
+.callout h4{margin:0 0 4px;}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--radius);}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--surface);}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+th{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);background:var(--surface-2);border-bottom:1px solid var(--border);}
+tr:last-child td{border-bottom:none;}
+
+/* code */
+code.inline{background:var(--code-bg);padding:1px 6px;border-radius:5px;font-size:13.5px;color:var(--accent-warm);}
+pre{background:var(--code-bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:13.5px;line-height:1.5;}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.chip{font-family:'JetBrains Mono';font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:999px;}
+.chip.p{background:var(--tip-bg);border-color:#cdddf3;color:var(--primary);}
+.chip.a{background:#e7f4f1;border-color:#bfe3db;color:var(--accent);}
+.chip.w{background:var(--hint-bg);border-color:#f0dca0;color:#8a6a00;}
+
+/* Q&A accordions */
+.qa{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);}
+.qa>button.q{width:100%;text-align:left;background:var(--surface);border:none;cursor:pointer;padding:15px 50px 15px 20px;font-family:'IBM Plex Sans';font-weight:600;font-size:15.5px;color:var(--text-main);position:relative;line-height:1.4;}
+.qa>button.q:hover{background:var(--surface-2);}
+.qa>button.q::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--primary);font-weight:400;}
+.qa.open>button.q::after{content:'\2013';}
+.qa .a{display:none;padding:4px 22px 20px;border-top:1px solid var(--border-soft);}
+.qa.open .a{display:block;}
+.qa .a .label{font-family:'JetBrains Mono';font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:14px 0 4px;}
+
+/* reveal (activities) */
+.reveal-btn{font-family:'IBM Plex Sans';font-size:13.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--primary);border:1px solid var(--primary);padding:8px 15px;border-radius:8px;margin:8px 8px 8px 0;transition:all .12s;}
+.reveal-btn:hover{background:var(--primary);color:#fff;}
+.reveal-box{display:none;margin:8px 0 4px;}
+.reveal-box.show{display:block;}
+
+/* quiz */
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0;box-shadow:var(--shadow-soft);}
+.quiz .qtext{font-family:'IBM Plex Sans';font-weight:600;font-size:15.5px;margin-bottom:12px;}
+.quiz .opts{display:flex;flex-direction:column;gap:8px;}
+.quiz .opts button{text-align:left;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);color:var(--text-main);padding:10px 14px;border-radius:8px;transition:all .12s;}
+.quiz .opts button:hover:not(:disabled){border-color:var(--primary);background:var(--tip-bg);}
+.quiz .opts button.correct{background:var(--quiz-right);border-color:var(--good-border);}
+.quiz .opts button.wrong{background:var(--quiz-wrong);border-color:var(--bad-border);}
+.quiz .opts button:disabled{cursor:default;}
+.quiz .fb{display:none;margin-top:12px;font-size:14.5px;padding:11px 14px;border-radius:8px;background:var(--surface-2);border-left:3px solid var(--primary);}
+.quiz .fb.show{display:block;}
+
+/* hero (intro module) */
+.hero{background:linear-gradient(135deg,#1a4fa0 0%,#0e7d6e 100%);color:#fff;border-radius:16px;padding:34px 34px 30px;margin:0 0 24px;}
+.hero h1{color:#fff;font-size:29px;margin:0 0 8px;letter-spacing:-.5px;}
+.hero p{color:rgba(255,255,255,.92);font-size:16.5px;margin:0;max-width:62ch;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;font-family:'IBM Plex Sans';font-size:13px;}
+.hero .meta div{background:rgba(255,255,255,.14);padding:8px 14px;border-radius:8px;}
+.hero .meta b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.82;font-weight:500;font-family:'JetBrains Mono';}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin:18px 0;}
+.tile{display:block;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft);cursor:pointer;transition:transform .12s,box-shadow .12s,border-color .12s;}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#cdddf3;}
+.tile .num{font-family:'JetBrains Mono';font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.06em;}
+.tile h3{margin:7px 0 6px;color:var(--text-main);font-size:16.5px;}
+.tile p{font-size:13.5px;color:var(--text-muted);margin:0;line-height:1.5;}
+
+/* misc */
+.divider{height:1px;background:var(--border);margin:32px 0;border:none;}
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0;}
+.kbox .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft);}
+.kbox .k .big{font-family:'IBM Plex Sans';font-weight:700;font-size:22px;color:var(--primary);}
+.kbox .k .lbl{font-size:12.5px;color:var(--text-muted);}
+.flow-fig{text-align:center;margin:20px 0;}
+.flow-fig svg{max-width:100%;height:auto;}
+.fig-cap{font-size:13px;color:var(--text-faint);font-family:'IBM Plex Sans';margin-top:6px;}
+ul.clean{list-style:none;padding-left:0;}
+ul.clean li{padding-left:24px;position:relative;}
+ul.clean li::before{content:'\2192';position:absolute;left:0;color:var(--accent);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+.scriptline{background:var(--surface-2);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:10px 0;font-size:15.5px;}
+.scriptline .who{font-family:'JetBrains Mono';font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);display:block;margin-bottom:3px;}
+
+/* prev/next */
+.pagenav{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:22px;border-top:1px solid var(--border);}
+.pagenav button{font-family:'IBM Plex Sans';font-size:14px;font-weight:500;padding:11px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;color:var(--text-main);transition:all .12s;}
+.pagenav button:hover:not(:disabled){border-color:var(--primary);background:var(--tip-bg);}
+.pagenav button:disabled{opacity:.4;cursor:default;}
+.pagenav .dir{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);font-family:'JetBrains Mono';margin-bottom:2px;}
+.pagenav .next{text-align:right;}
+
+/* responsive */
+@media(max-width:880px){
+  .topbar .menu-btn{display:block;}
+  .sidebar{transform:translateX(-100%);transition:transform .2s ease;z-index:55;box-shadow:4px 0 24px rgba(0,0,0,.12);}
+  .sidebar.open{transform:translateX(0);}
+  .content{margin-left:0;width:100%;padding:22px 14px 80px;}
+  section.module{padding:26px 20px 28px;}
+  h1.module-title{font-size:26px;}
+  .lede{font-size:16.5px;}
+  .progress-track{width:96px;}
+  .topbar .course-sub{display:none;}
+  .scrim{display:none;position:fixed;inset:0;top:54px;background:rgba(0,0,0,.35);z-index:50;}
+  .scrim.show{display:block;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open sections">☰</button>
+  <div>
+    <div class="course-title">IP Sales Interview Prep</div>
+    <div class="course-sub">Analog Bits × M31 · SphereLink</div>
+  </div>
+  <div class="progress-wrap">
+    <span class="progress-label" id="progLabel">0%</span>
+    <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+  </div>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav id="nav">
+      <div class="nav-group-title">Start here</div>
+      <a data-go="m0"><span class="code">00</span> Overview &amp; plan <span class="tick">✓</span></a>
+      <a data-go="m1"><span class="code">01</span> The role &amp; the offer <span class="tick">✓</span></a>
+      <a data-go="m2"><span class="code">02</span> The companies <span class="tick">✓</span></a>
+      <div class="nav-group-title">Know the domain</div>
+      <a data-go="m3"><span class="code">03</span> The chip business <span class="tick">✓</span></a>
+      <a data-go="m4"><span class="code">04</span> The products <span class="tick">✓</span></a>
+      <a data-go="m5"><span class="code">05</span> India market <span class="tick">✓</span></a>
+      <div class="nav-group-title">Win the interview</div>
+      <a data-go="m6"><span class="code">06</span> IP sales playbook <span class="tick">✓</span></a>
+      <a data-go="m7"><span class="code">07</span> Q&amp;A practice <span class="tick">✓</span></a>
+      <a data-go="m8"><span class="code">08</span> Your story &amp; salary <span class="tick">✓</span></a>
+      <a data-go="m9"><span class="code">09</span> Checklist &amp; glossary <span class="tick">✓</span></a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="content-inner" id="inner">
+<section class="module" id="m0">
+<div class="hero">
+  <svg class="traces" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#3f6da3" stroke-width="1.4">
+      <path d="M0,60 H120 V140 H260 V40 H420"/>
+      <path d="M900,300 H760 V210 H600 V320 H470"/>
+      <path d="M0,260 H90 V300 H220"/>
+      <path d="M900,80 H820 V150 H700"/>
+      <path d="M380,360 V300 H520 V250"/>
+    </g>
+    <g fill="#5fd3d3">
+      <rect x="116" y="136" width="8" height="8"/><rect x="256" y="36" width="8" height="8"/>
+      <rect x="756" y="206" width="8" height="8"/><rect x="596" y="316" width="8" height="8"/>
+      <rect x="86" y="296" width="8" height="8"/><rect x="816" y="146" width="8" height="8"/>
+      <rect x="516" y="246" width="8" height="8"/>
+    </g>
+  </svg>
+  <span class="dat doccode">PREP-DOC-00 · REV A · INTERVIEW JUL 01</span>
+  <h1>Everything you need for July 1st, in one place</h1>
+  <p>Walk into the Analog Bits / SphereLink IP sales interview fluent in the technology, sharp on the market, and ready to show Vinny and CEO Mahesh that you already think like an IP salesperson.</p>
+  <div class="meta">
+    <div><b>Role</b><span>Senior Sales Associate — Semiconductor IP</span></div>
+    <div><b>For</b><span>SphereLink IP · rep for Analog Bits + M31</span></div>
+    <div><b>Status</b><span>Strong first call done · interview set</span></div>
+  </div>
+</div>
+
+<p class="lede" style="margin-top:0">Nine focused sections. Read them in order the first time, then jump back to any one to revise. Each page ends with practice questions and a quick self-check.</p>
+
+<div class="callout tip">
+  <span class="ttl">How to use this</span>
+  Two passes. <strong>Pass 1 — depth:</strong> read sections 01–06 to build real understanding, not memorise. <strong>Pass 2 — performance:</strong> drill section 07 out loud, lock your story and salary answer in 08, and run the checklist in 09 the night before.
+</div>
+
+<h2>The nine sections</h2>
+<div class="tile-grid">
+  <a class="tile" data-go="m1"><span class="num">SEC-01</span><h3>The role &amp; the offer</h3><p>What SphereLink actually wants, what the JD is really asking, and how to read the offer Vinny floated.</p></a>
+  <a class="tile" data-go="m2"><span class="num">SEC-02</span><h3>The companies</h3><p>Analog Bits, M31, SphereLink and parent SemiFive — who they are, who runs them, why it matters.</p></a>
+  <a class="tile" data-go="m3"><span class="num">SEC-03</span><h3>How the chip business works</h3><p>Fabless, foundry, VCA, tape-out, IP licensing — the value chain explained from zero.</p></a>
+  <a class="tile" data-go="m4"><span class="num">SEC-04</span><h3>The products</h3><p>PLLs, sensors, I/O, SerDes, LDOs — what they do, in plain language, with the talking points that sell.</p></a>
+  <a class="tile" data-go="m5"><span class="num">SEC-05</span><h3>India market &amp; customers</h3><p>ISM, DLI scheme, the ~70 fabless startups, Netrasemi, IMEC, and where the deals come from.</p></a>
+  <a class="tile" data-go="m6"><span class="num">SEC-06</span><h3>IP sales playbook</h3><p>The sales cycle, the "IP is not a product, not a service" framing, margins, and the first customer meeting.</p></a>
+  <a class="tile" data-go="m7"><span class="num">SEC-07</span><h3>Q&amp;A practice</h3><p>Likely questions across technical, sales, company and behavioural — with strong model answers.</p></a>
+  <a class="tile" data-go="m8"><span class="num">SEC-08</span><h3>Your story &amp; HR / salary</h3><p>Your narrative, the vendor-management pivot, the conflict-of-interest question, and salary handling.</p></a>
+  <a class="tile" data-go="m9"><span class="num">SEC-09</span><h3>Checklist &amp; glossary</h3><p>Day-before checklist, smart questions to ask them, and a one-page glossary of every term.</p></a>
+</div>
+
+<h2>The one mindset that matters most</h2>
+<div class="card">
+  <p style="margin-bottom:8px"><strong>You are not interviewing to "learn IP sales." You are interviewing as someone who already does it.</strong></p>
+  <p class="muted" style="margin:0">You currently sell Silicon Creations and Menta IP at Interex. Silicon Creations is Analog Bits' single biggest competitor in PLLs worldwide. That means you already know the customers, the deal motion, and the competitor better than almost any candidate they could find. Your job on July 1st is to make that obvious — while being careful about confidentiality (see Section 08).</p>
+</div>
+
+<div class="callout warn">
+  <span class="ttl">One honest caution</span>
+  A few things from the first call need care, not blind repetition: the conflict of interest of moving from Silicon Creations' rep to Analog Bits' rep, the fact that this is a very small (one-person) operation, and the salary conversation. Each is handled head-on in Sections 01 and 08 — don't skip them.
+</div>
+
+
+<div class="pagenav"><button disabled><span class="dir">Start</span>You're at the beginning</button><button class="next" data-go="m1"><span class="dir">Next →</span>The role</button></div>
+</section>
+
+<section class="module" id="m1">
+<div class="eyebrow">SECTION 01 · ROLE & OFFER</div>
+<h1 class="module-title">The role & the offer</h1>
+<p class="lede">Before you prepare answers, get crystal clear on what is actually being offered, what the job demands day-to-day, and the three sensitive things from the first call you must handle with care.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Decode what the JD is really screening for</li><li>Read the offer Vinny floated — and what's still vague</li><li>Prepare for the 3 sensitive topics: conflict, salary, why-leaving</li></ul></div>
+<h2>What the job is, in one sentence</h2>
+<div class="card">
+<p style="margin:0">You would be the person on the ground in India who finds chip companies that need Analog Bits' and M31's silicon IP, builds relationships with their technical and procurement decision-makers, and carries each opportunity from first conversation all the way to a signed licensing deal.</p>
+</div>
+
+<h2>What the JD is really asking for</h2>
+<p>The written job description lists ten responsibilities. Underneath them are really four things SphereLink cares about. Read the JD through this lens:</p>
+
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>What they wrote</th><th>What they actually mean</th><th>Your evidence</th></tr></thead>
+<tbody>
+<tr><td>"Drive sales… build a pipeline of qualified prospects"</td><td>Can you find and qualify real chip-design customers, not just chase noise?</td><td>You already do this for Silicon Creations &amp; Menta at Interex.</td></tr>
+<tr><td>"Understand customer technical requirements and position the right IP"</td><td>Can you sit in a technical meeting, understand what the customer is building, and map it to the right product?</td><td>You read datasheets, understand the flow, and have a mechanical/mechatronics background you've extended into semis.</td></tr>
+<tr><td>"Manage the complete sales cycle… negotiations and contract closure"</td><td>Can you run a deal end-to-end, including NDAs, commercials and closing — not just generate leads?</td><td>Small-company experience at Pegasus where you touched selling, finance and the business side.</td></tr>
+<tr><td>"Established network within India's semiconductor ecosystem"</td><td>Do you already know people, or will you start from zero?</td><td>Two Semicon trade shows, active LinkedIn outreach, current customer conversations.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<span class="ttl">Reframe the "Required Qualifications" gap</span>
+The JD asks for an EE/Electronics degree and 3–6 years in semiconductor sales. You have a Mechanical degree and are earlier in your career. <strong>Do not apologise for this.</strong> Vinny already knows your background — he reached out to <em>you</em>. He explicitly said in the call that you don't need to be deeply technical in sales, that learning "is not a big task," and that he likes your personality and willingness to learn. Your move is to show you've already closed the gap faster than most: you're selling the direct competitor's IP <em>today</em>.
+</div>
+
+<h2>The offer Vinny floated (and how to read it)</h2>
+<p>From the first call, here is what was put on the table — and what is still vague. Knowing the difference protects you in the salary conversation.</p>
+
+<div class="two-col">
+<div class="card tight">
+<h4 style="color:var(--good-border)">What was said clearly</h4>
+<ul class="small" style="margin:0">
+<li>Pure IP sales — no vendor-management distraction (the exact thing frustrating you now).</li>
+<li>He'll match or slightly beat your current package ("your salary is not an issue for me").</li>
+<li>"Money is not a constraint" — high-margin business, room to pay well.</li>
+<li>Strong learning &amp; mentorship; he'll introduce his connections over time.</li>
+<li>Possible desk at SemiFive's Koramangala office (a real ~80–90 person office, not just a shared recruitment desk).</li>
+</ul>
+</div>
+<div class="card tight">
+<h4 style="color:var(--hint-border)">What is still vague — clarify on July 1st</h4>
+<ul class="small" style="margin:0">
+<li>Exact fixed vs. variable split, and how commission is calculated on a deal.</li>
+<li>Whether SphereLink or SemiFive is your legal employer, and what that means for stability.</li>
+<li>Team size and who supports you technically (he admitted it's "a one-man show" today).</li>
+<li>Any equity / ESOP, and whether it would be on paper this time.</li>
+<li>Travel expectations (JD mentions domestic + international travel).</li>
+</ul>
+</div>
+</div>
+
+<div class="callout warn">
+<span class="ttl">Reality check — this is a small operation</span>
+Vinny was honest: today it's essentially him alone, representing two IP companies in India, working partly from a shared office. That is a <strong>risk and an opportunity at once</strong>. Risk: less structure, no big-company safety net. Opportunity: he literally said you could become "the most sought-after IP salesperson in India" because the field is tiny and you'd be building it. Decide how you feel about that trade-off <em>before</em> the interview so you can speak to it genuinely — and so you can ask the right stability questions (Section 8).
+</div>
+
+<h2>The three sensitive topics you must not fumble</h2>
+
+<h3>1. The conflict-of-interest question</h3>
+<p>You currently represent <strong>Silicon Creations</strong> — Analog Bits' #1 PLL competitor. Vinny himself called it "a cat-and-mouse game." If you join SphereLink, you're switching to the other side. They <em>will</em> wonder: can she be trusted with our confidential roadmap, and is she bringing Silicon Creations' secrets (which would be just as untrustworthy)?</p>
+<div class="callout good">
+<span class="ttl">How to handle it</span>
+Get ahead of it. Signal that you understand IP is a trust business (Vinny said this himself), that you would honour any confidentiality obligations to Interex, and that what you bring is <em>market understanding and relationships</em> — not a competitor's trade secrets. This actually <em>builds</em> trust rather than raising the flag. Full script in Section 8.
+</div>
+
+<h3>2. The salary conversation</h3>
+<p>You disclosed your current package on the first call (≈₹8–8.5L CTC, ₹6L fixed, ₹2–3L variable, vague verbal share promise). He offered to match or beat it. The trap is anchoring too low because you anchored low at Interex.</p>
+<div class="callout tip">
+<span class="ttl">Quick principle</span>
+This is a <em>senior</em> title with full deal-cycle ownership at a high-margin business. The right anchor is the value of the role, not a carry-over of an entry rate you accepted to "get into a new industry." Section 8 gives you a number range and the exact words.
+</div>
+
+<h3>3. "Why are you leaving Interex?"</h3>
+<p>Your real reason — being pulled into vendor management and away from IP sales — is a <em>good</em> reason and you can use it almost verbatim. The danger is sounding like you're complaining. Frame it as choosing focus, not escaping a problem. Script in Section 8.</p>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">The JD asks for an Electronics degree and 3–6 years of semiconductor sales. What's the best way to handle the fact that you don't match this on paper?</div>
+<div class="opts">
+<button data-opt="a">Avoid the topic and hope they don't bring it up.</button>
+<button data-opt="b">Don't apologise — show you've already closed the gap by selling a direct competitor's IP today, and lean on your fast learning.</button>
+<button data-opt="c">Offer to take a lower salary to compensate.</button>
+<button data-opt="d">Claim your mechanical degree is basically the same as electronics.</button>
+</div>
+<div class="fb">Vinny approached <em>you</em> and already values your personality and learning speed. The strongest position is evidence that you're already doing the job's core task — selling competing IP — not apology or a discount.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m0"><span class="dir">← Prev</span>Overview</button><button class="next" data-go="m2"><span class="dir">Next →</span>The companies</button></div>
+</section>
+
+<section class="module" id="m2">
+<div class="eyebrow">SECTION 02 · THE COMPANIES</div>
+<h1 class="module-title">Analog Bits, M31 & SphereLink</h1>
+<p class="lede">You'll be selling for two IP companies, through a third entity, with a fourth as the parent. Know who each one is, who runs them, and the one-line story you'd tell a customer about each.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Know how the four entities fit together</li><li>Name the key people and the products each company makes</li><li>Have a one-line story ready for each</li></ul></div>
+<h2>The four names and how they fit together</h2>
+<div class="flow-fig">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;">
+  <defs><marker id="ar" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5c5c66"/></marker></defs>
+  <!-- SemiFive parent -->
+  <rect x="220" y="14" width="200" height="48" rx="8" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="320" y="34" text-anchor="middle" fill="#1a4fa0" font-weight="600">SemiFive (Korea)</text>
+  <text x="320" y="50" text-anchor="middle" fill="#5c5c66" font-size="11">Parent · AI-ASIC design house</text>
+  <!-- Analog Bits -->
+  <rect x="120" y="110" width="180" height="48" rx="8" fill="#e7f4f1" stroke="#0e7d6e" stroke-width="1.5"/>
+  <text x="210" y="130" text-anchor="middle" fill="#0e7d6e" font-weight="600">Analog Bits (USA)</text>
+  <text x="210" y="146" text-anchor="middle" fill="#5c5c66" font-size="11">Clocking / sensors / I/O IP</text>
+  <!-- M31 -->
+  <rect x="350" y="110" width="180" height="48" rx="8" fill="#fff8e1" stroke="#e6a700" stroke-width="1.5"/>
+  <text x="440" y="130" text-anchor="middle" fill="#8a6a00" font-weight="600">M31 (Taiwan)</text>
+  <text x="440" y="146" text-anchor="middle" fill="#5c5c66" font-size="11">Interface + foundation IP</text>
+  <!-- SphereLink -->
+  <rect x="200" y="220" width="240" height="56" rx="8" fill="#ffffff" stroke="#1a4fa0" stroke-width="2"/>
+  <text x="320" y="242" text-anchor="middle" fill="#1a4fa0" font-weight="600">SphereLink IP Solutions (India)</text>
+  <text x="320" y="259" text-anchor="middle" fill="#5c5c66" font-size="11">Authorised India rep · YOUR employer</text>
+  <!-- arrows -->
+  <line x1="280" y1="62" x2="220" y2="108" stroke="#5c5c66" stroke-width="1.4" marker-end="url(#ar)"/>
+  <text x="232" y="92" fill="#8a8a93" font-size="10">owns</text>
+  <line x1="210" y1="158" x2="280" y2="218" stroke="#5c5c66" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="440" y1="158" x2="360" y2="218" stroke="#5c5c66" stroke-width="1.4" marker-end="url(#ar)"/>
+  <text x="300" y="195" fill="#8a8a93" font-size="10">SphereLink sells both in India</text>
+</svg>
+<div class="fig-cap">How the entities relate. You are hired by SphereLink, selling Analog Bits and M31 IP, with SemiFive as Analog Bits' parent.</div>
+</div>
+
+<h2>Analog Bits — the main act</h2>
+<div class="card">
+<div class="chips">
+<span class="chip a">Founded 1995</span><span class="chip a">Sunnyvale, California</span><span class="chip a">Mixed-signal IP leader</span><span class="chip a">TSMC 2025 OIP Partner of the Year (Analog IP)</span>
+</div>
+<p>Analog Bits is one of the longest-established mixed-signal IP companies in the world. Their tagline is building an <strong>"Intelligent Power Architecture"</strong> — IP that makes power on a chip "safe, reliable, observable and efficient." They are silicon-proven from old 0.35-micron nodes all the way down to leading-edge 2nm, with billions of their IP cores shipped in customer chips.</p>
+<p style="margin-bottom:0"><strong>What they make:</strong> precision clocking (PLLs, oscillators), sensors (temperature, voltage droop, PVT), programmable I/O, some SerDes, and newer power-management blocks (LDOs, droop detectors). Detailed in Section 4.</p>
+</div>
+
+<h4>The two people you'll meet or hear about</h4>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Name</th><th>Role</th><th>Why it matters to you</th></tr></thead>
+<tbody>
+<tr><td><strong>Mahesh Tirupattur</strong></td><td>CEO of Analog Bits</td><td>Vinny wants you to talk to him. US-based ~40 years, Tamil, described as extremely sharp and fast. He's the public face — does the SemiWiki / EE Times interviews. Read one before the call.</td></tr>
+<tr><td><strong>Alan Rogers</strong> (Arthur Rogers)</td><td>President &amp; CTO</td><td>The technical founder figure. Gives the "Pinless Clocking and Sensing" talks. You won't need to impress him technically on day one, but knowing his name signals you did your homework.</td></tr>
+<tr><td><strong>"Vinny"</strong></td><td>SphereLink / India representative</td><td>Your hiring manager and the person who called you. Bonded closely with Mahesh; came to the US in Dec to run Analog Bits' US + India. Represents M31 in India too.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<span class="ttl">Differentiator to memorise</span>
+Analog Bits' signature innovation is <strong>"pinless" / core-powered</strong> IP — analog blocks (PLLs, sensors) that can be dropped anywhere on a chip without needing their own dedicated power-supply pins. The pitch: "you integrate our analog macro as easily as a digital gate." This is genuinely differentiated and a great thing to mention to show you understand <em>why</em> a customer picks them.
+</div>
+
+<h2>M31 Technology — the second portfolio</h2>
+<div class="card">
+<div class="chips">
+<span class="chip w">Founded 2011</span><span class="chip w">Hsinchu, Taiwan</span><span class="chip w">Publicly listed (6643-TW)</span><span class="chip w">TSMC OIP Specialty-IP Partner of the Year, 5 years running</span>
+</div>
+<p>M31 is a Taiwanese IP house with a <strong>broad, complementary</strong> portfolio. Where Analog Bits is deep in clocking/power, M31 is strong in <strong>high-speed interface IP</strong> and <strong>foundation IP</strong>.</p>
+<p style="margin-bottom:0"><strong>What they make:</strong> Interface IP — USB (up to USB4/40Gbps), PCIe, MIPI C/D-PHY, SerDes, LPDDR/DDR, DisplayPort, UFS. Foundation IP — standard-cell libraries, memory compilers, GPIO/ESD I/O libraries. Plus IP-integration services like processor-core hardening.</p>
+</div>
+
+<div class="callout good">
+<span class="ttl">Why two portfolios is a selling advantage</span>
+Vinny noted there's "not too much overlap" between Analog Bits and M31. That's the point — together they cover much more of a customer's chip. A fabless startup building an SoC might need a PLL + sensors (Analog Bits) <em>and</em> a USB or MIPI PHY + standard cells (M31). You can serve more of one customer's bill of materials, which means bigger combined deals and stickier relationships.
+</div>
+
+<h2>SphereLink IP Solutions — your employer</h2>
+<p>SphereLink is the India entity that is the <strong>authorised representative</strong> for Analog Bits and M31. Per the JD, it's based in Kasturi Nagar, Bengaluru (East of NGEF Layout). It does the marketing and sales of both companies' IP across India. In practice today, it's Vinny's operation — small, trust-based, and growing. You'd be an early, senior hire helping build it.</p>
+
+<h2>SemiFive — the parent worth Googling</h2>
+<div class="card">
+<div class="chips"><span class="chip p">Founded 2019</span><span class="chip p">Seoul, Korea</span><span class="chip p">~400+ employees</span><span class="chip p">Pursuing KOSDAQ listing</span></div>
+<p>SemiFive is a Korean <strong>custom AI-ASIC design house</strong> — they help companies design and produce custom chips end-to-end using a reusable SoC platform. Crucially, <strong>SemiFive integrates Analog Bits' IP</strong> (clocking, sensors, SerDes) into its platform, and SemiFive is the <strong>parent company of Analog Bits</strong>. They have a real India presence (the Koramangala office Vinny mentioned) and global hubs in the US, China, Japan, Vietnam, India and Czechia.</p>
+<p style="margin-bottom:0">Why you care: it means there's a much larger organisation behind the small SphereLink front — relevant to the "is this stable?" question, and it gives you a credible office and ecosystem to plug into.</p>
+</div>
+
+<h2>One-line stories to have ready</h2>
+<ul class="clean">
+<li><strong>Analog Bits:</strong> "The 30-year mixed-signal IP leader — pinless PLLs and on-chip power sensors, silicon-proven down to 2nm, just named TSMC's Analog IP Partner of the Year."</li>
+<li><strong>M31:</strong> "A listed Taiwanese IP house with deep interface IP — USB, PCIe, MIPI, SerDes — plus foundation IP, five-time TSMC specialty-IP partner of the year."</li>
+<li><strong>SphereLink:</strong> "The authorised India representative bringing both portfolios to India's fast-growing fabless ecosystem."</li>
+<li><strong>SemiFive:</strong> "The Korean AI-ASIC design house behind Analog Bits, building custom silicon on a reusable platform."</li>
+</ul>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">A customer asks why they should work with SphereLink rather than going straight to a big EDA vendor. Which answer best uses the two-portfolio advantage?</div>
+<div class="opts">
+<button data-opt="a">"We're cheaper than Synopsys and Cadence."</button>
+<button data-opt="b">"We only do PLLs, so we're more focused."</button>
+<button data-opt="c">"Between Analog Bits and M31 we cover a lot of your chip — clocking and power plus interfaces and foundation IP — with silicon-proven, partner-of-the-year IP and hands-on local support."</button>
+<button data-opt="d">"Because we know Mahesh personally."</button>
+</div>
+<div class="fb">The combined, complementary portfolios plus local support is the real differentiator. Price-only ("cheaper") is weak in a trust business, and "only PLLs" understates what you can offer.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m1"><span class="dir">← Prev</span>The role</button><button class="next" data-go="m3"><span class="dir">Next →</span>The chip business</button></div>
+</section>
+
+<section class="module" id="m3">
+<div class="eyebrow">SECTION 03 · VALUE CHAIN</div>
+<h1 class="module-title">How the chip business works</h1>
+<p class="lede">If you can confidently draw the chip value chain on a whiteboard and explain exactly where IP sits in it, you'll sound like an insider. This is the single most useful page to internalise. It also explains the exact example Vinny walked you through on the call.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Draw the chip value chain and place IP within it</li><li>Define fabless, foundry, VCA, tape-out, IP, SoC, node</li><li>Retell Vinny's Netrasemi → IMEC → TSMC example</li><li>Explain how IP vendors actually make money</li></ul></div>
+<h2>The big picture: nobody does it all</h2>
+<p>Designing and manufacturing a chip is so hard and so expensive that the industry split into specialists. Each plays one role and hands off to the next. Here's the whole chain:</p>
+
+<div class="flow-fig">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;">
+  <defs><marker id="a3" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#5c5c66"/></marker></defs>
+
+  <!-- IP vendor -->
+  <rect x="40" y="20" width="220" height="60" rx="9" fill="#e7f4f1" stroke="#0e7d6e" stroke-width="2"/>
+  <text x="150" y="44" text-anchor="middle" fill="#0e7d6e" font-weight="600">1 · IP Vendors</text>
+  <text x="150" y="62" text-anchor="middle" fill="#5c5c66" font-size="11">Analog Bits, M31, Synopsys, Cadence…</text>
+  <text x="150" y="74" text-anchor="middle" fill="#0e7d6e" font-size="10.5">← YOU SELL HERE</text>
+
+  <!-- Fabless -->
+  <rect x="40" y="120" width="220" height="58" rx="9" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="150" y="143" text-anchor="middle" fill="#1a4fa0" font-weight="600">2 · Fabless chip company</text>
+  <text x="150" y="161" text-anchor="middle" fill="#5c5c66" font-size="11">Netrasemi, Qualcomm… designs the chip</text>
+
+  <!-- EDA -->
+  <rect x="300" y="120" width="200" height="58" rx="9" fill="#ffffff" stroke="#5c5c66" stroke-width="1.3" stroke-dasharray="4,3"/>
+  <text x="400" y="143" text-anchor="middle" fill="#5c5c66" font-weight="600">EDA tools</text>
+  <text x="400" y="161" text-anchor="middle" fill="#8a8a93" font-size="11">Synopsys/Cadence software to design</text>
+
+  <!-- VCA -->
+  <rect x="40" y="218" width="220" height="58" rx="9" fill="#fff8e1" stroke="#e6a700" stroke-width="1.5"/>
+  <text x="150" y="241" text-anchor="middle" fill="#8a6a00" font-weight="600">3 · VCA (aggregator)</text>
+  <text x="150" y="259" text-anchor="middle" fill="#5c5c66" font-size="11">IMEC India — bridges small co. → foundry</text>
+
+  <!-- Foundry -->
+  <rect x="40" y="316" width="220" height="58" rx="9" fill="#f4f3ef" stroke="#1c1c1e" stroke-width="1.5"/>
+  <text x="150" y="339" text-anchor="middle" fill="#1c1c1e" font-weight="600">4 · Foundry (fab)</text>
+  <text x="150" y="357" text-anchor="middle" fill="#5c5c66" font-size="11">TSMC, Samsung — manufactures wafers</text>
+
+  <!-- OSAT -->
+  <rect x="40" y="414" width="220" height="44" rx="9" fill="#ffffff" stroke="#5c5c66" stroke-width="1.3"/>
+  <text x="150" y="441" text-anchor="middle" fill="#5c5c66" font-weight="600">5 · OSAT — assembly &amp; test → finished chip</text>
+
+  <!-- arrows down left column -->
+  <line x1="150" y1="80"  x2="150" y2="118" stroke="#5c5c66" stroke-width="1.5" marker-end="url(#a3)"/>
+  <line x1="150" y1="178" x2="150" y2="216" stroke="#5c5c66" stroke-width="1.5" marker-end="url(#a3)"/>
+  <line x1="150" y1="276" x2="150" y2="314" stroke="#5c5c66" stroke-width="1.5" marker-end="url(#a3)"/>
+  <line x1="150" y1="374" x2="150" y2="412" stroke="#5c5c66" stroke-width="1.5" marker-end="url(#a3)"/>
+  <!-- EDA dashed link -->
+  <line x1="300" y1="149" x2="262" y2="149" stroke="#8a8a93" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a3)"/>
+
+  <!-- labels on arrows -->
+  <text x="160" y="103" fill="#0e7d6e" font-size="10.5">licenses IP (license fee + royalty)</text>
+  <text x="160" y="201" fill="#8a6a00" font-size="10.5">integrates IP, then needs to manufacture</text>
+  <text x="160" y="299" fill="#1c1c1e" font-size="10.5">tape-out → wafers</text>
+  <text x="160" y="397" fill="#5c5c66" font-size="10.5">packaged &amp; tested</text>
+
+  <!-- side note -->
+  <rect x="300" y="240" width="340" height="120" rx="9" fill="#fcfbf9" stroke="#e2e0db"/>
+  <text x="318" y="263" fill="#1a4fa0" font-weight="600" font-size="12.5">Why the VCA exists</text>
+  <text x="318" y="285" fill="#5c5c66" font-size="11.5">TSMC's wafer capacity is limited and it</text>
+  <text x="318" y="301" fill="#5c5c66" font-size="11.5">prioritises huge customers (Apple, Nvidia…).</text>
+  <text x="318" y="317" fill="#5c5c66" font-size="11.5">A small Indian fabless startup is too small to</text>
+  <text x="318" y="333" fill="#5c5c66" font-size="11.5">deal with TSMC directly — so a VCA aggregates</text>
+  <text x="318" y="349" fill="#5c5c66" font-size="11.5">many small customers and handles the foundry.</text>
+</svg>
+<div class="fig-cap">The semiconductor value chain. IP vendors (where you sell) are the very first link.</div>
+</div>
+
+<h2>The key terms, defined from zero</h2>
+
+<h3>Fabless</h3>
+<p>A "fabless" company designs chips but owns <strong>no factory</strong> ("fab"). It focuses on the design and outsources manufacturing. Examples: Qualcomm, Nvidia — and in India, startups like Netrasemi. This is the model India's government is pushing hard (see Section 5). <em>Analogy: a fashion label that designs clothes but hires factories to sew them.</em></p>
+
+<h3>Foundry</h3>
+<p>A foundry is the <strong>factory</strong> that actually manufactures the chips on silicon wafers. TSMC (Taiwan) is by far the largest; Samsung, GlobalFoundries, Intel Foundry and UMC are others. Analog Bits works with all of them. The foundry doesn't design chips — it manufactures other people's designs.</p>
+
+<h3>IP (Intellectual Property / "IP cores")</h3>
+<p>A pre-designed, pre-verified building block of a chip that a design company <strong>licenses</strong> instead of building from scratch. A PLL, a USB interface, a memory block — these are complex to design correctly, so companies buy proven ones. <em>This is what you sell.</em> <strong>Analogy: pre-built, tested Lego sub-assemblies a builder drops into their model rather than moulding every brick themselves.</strong></p>
+
+<h3>SoC (System on Chip)</h3>
+<p>A single chip that integrates many functions — processor, memory interfaces, I/O, clocking, sensors — into one piece of silicon. A modern SoC stitches together <strong>dozens of IP blocks</strong> from multiple vendors. More IP blocks per SoC = more opportunities for you.</p>
+
+<h3>Tape-out</h3>
+<p>The moment a finished chip design is sent to the foundry to be manufactured. Historically the design was written to magnetic tape — hence "tape-out." It's a milestone: after tape-out, changes are extremely expensive, which is exactly why customers want <strong>silicon-proven IP</strong> they can trust.</p>
+
+<h3>VCA — Value Chain Aggregator</h3>
+<p>A TSMC partner that <strong>aggregates many smaller customers</strong> so they can access the foundry. A small startup can't get TSMC's attention directly, so it goes through a VCA, which handles tape-out, wafer production, and supply-chain logistics. <strong>IMEC</strong> is TSMC's VCA in India (based in Bangalore). <em>This is the "IMEC" Vinny mentioned — its India head sends him leads.</em></p>
+
+<h3>EDA (Electronic Design Automation)</h3>
+<p>The software used to design and verify chips. The giants are <strong>Synopsys</strong> and <strong>Cadence</strong> — who also sell IP, which is why Vinny mentioned competing with them. EDA tools are the "CAD software" of chip design.</p>
+
+<h3>Process node (e.g. 5nm, 3nm, 2nm)</h3>
+<p>A measure of how advanced/miniaturised the manufacturing is. Smaller number = newer, denser, lower-power, more expensive. Analog Bits being "silicon-proven at 2nm" means their IP works on the most cutting-edge process — a strong selling point for high-end customers.</p>
+
+<div class="callout tip">
+<span class="ttl">Replay of Vinny's exact example — make sure you can retell it</span>
+"Netrasemi is designing a chip in India. They need IPs, so they come to <strong>Analog Bits</strong> (us) and license, say, a PLL — they pay a license fee. They integrate it into their design. Now they need to <em>manufacture</em>. But TSMC won't deal with someone that small, so Netrasemi goes through <strong>IMEC, the VCA</strong>. IMEC handles tape-out → TSMC → finished chips. And because IMEC sees every fabless startup first, its India head sends us leads — so a lot of our business is <strong>inbound</strong>." If you can retell this cleanly, you've shown you understand the whole chain.
+</div>
+
+<h2>How IP vendors actually make money</h2>
+<div class="two-col">
+<div class="card tight">
+<h4>License fee (NRE)</h4>
+<p class="small" style="margin:0">An upfront fee the customer pays to license the IP for their design. The bigger, more advanced, more customised the IP, the higher the fee. This is the headline deal size.</p>
+</div>
+<div class="card tight">
+<h4>Royalty</h4>
+<p class="small" style="margin:0">A per-chip fee paid as the customer ships volume. If their product sells in millions of units, royalties can dwarf the license fee over time. (Not every deal has royalties; some are license-only.)</p>
+</div>
+</div>
+<p>This is why Vinny stressed <strong>60–70% gross margins</strong> versus 20–25% for services. IP is built once and licensed many times — there's no per-unit labour like there is in a services/consulting model. It's why he keeps saying "the deal sizes are pretty large" and "the sky's the limit."</p>
+
+<h2>Hard vs. soft IP (a term that will impress)</h2>
+<p>Worth knowing because M31 emphasises it: IP comes in different forms. <strong>Soft IP</strong> is delivered as design code (flexible, the customer implements it). <strong>Hard IP</strong> is a fully laid-out, process-validated physical block ready to drop into silicon — higher reliability, ideal for analog and high-speed blocks. Analog Bits' analog macros and M31's PHYs are essentially hard IP: "silicon-proven, first-time-working." That phrase — <em>first-time-working</em> — is the entire value proposition of paying for proven IP.</p>
+
+<h2>Activity: explain the chain in your own words</h2>
+<div class="card">
+<p class="small"><strong>Try this out loud:</strong> A friend who knows nothing about chips asks, "What will you be selling?" Give a 30-second answer that names where IP sits and why customers buy it.</p>
+<button class="reveal-btn" data-show="Show a model answer" data-hide="Hide">Show a model answer</button>
+<div class="reveal-box">
+<div class="callout good" style="margin-top:6px">
+"Chips are built from dozens of pre-made building blocks. Designing each one perfectly is really hard, so chip companies <em>license</em> proven blocks instead of building their own. I sell those building blocks — specifically clocking and power blocks from Analog Bits and interface blocks from M31 — to the Indian companies designing new chips. They pay a licence fee, drop our block into their design, and ship it to a factory to manufacture. Because the block is built once and licensed many times, the margins are high."
+</div>
+</div>
+</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Why does a small Indian fabless startup go through IMEC instead of straight to TSMC?</div>
+<div class="opts">
+<button data-opt="a">IMEC manufactures chips itself.</button>
+<button data-opt="b">TSMC's capacity is limited and prioritised for huge customers, so a VCA like IMEC aggregates smaller customers and handles the foundry relationship.</button>
+<button data-opt="c">TSMC doesn't operate outside Taiwan.</button>
+<button data-opt="d">IMEC is cheaper than designing the chip.</button>
+</div>
+<div class="fb">IMEC is a Value Chain Aggregator — it doesn't manufacture; it bundles many small customers so they can access TSMC, handling tape-out and wafer logistics. This is also why IMEC is a great lead source for you.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m2"><span class="dir">← Prev</span>The companies</button><button class="next" data-go="m4"><span class="dir">Next →</span>The products</button></div>
+</section>
+
+<section class="module" id="m4">
+<div class="eyebrow">SECTION 04 · PRODUCTS</div>
+<h1 class="module-title">The products, explained</h1>
+<p class="lede">You don't need to be an engineer. You need to explain, in plain language, what each block does, why a chip needs it, and the one differentiator that makes Analog Bits or M31 the right choice. That's exactly what Vinny said: gather what the customer wants and map it to the right product.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Give a one-liner + analogy + sales angle for each product</li><li>Lead with PLLs and sensors; route interfaces to M31</li><li>Match a customer's needs to the right blocks</li></ul></div>
+<div class="callout tip">
+<span class="ttl">The depth you actually need</span>
+For each product below: (1) a one-line "what it does," (2) a kitchen-table analogy, (3) the sales angle. Memorise the one-liners and analogies. The deeper notes are there so you're not caught flat-footed if a customer goes one level down.
+</div>
+
+<h2>Where these blocks live on a chip</h2>
+<div class="flow-fig">
+<svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Sans',sans-serif;font-size:11.5px;">
+  <rect x="60" y="20" width="500" height="280" rx="14" fill="#fcfbf9" stroke="#1c1c1e" stroke-width="2"/>
+  <text x="310" y="42" text-anchor="middle" fill="#1c1c1e" font-weight="600" font-size="13">A System-on-Chip (SoC)</text>
+  <!-- core -->
+  <rect x="240" y="120" width="140" height="90" rx="8" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="310" y="160" text-anchor="middle" fill="#1a4fa0" font-weight="600">CPU / AI core</text>
+  <text x="310" y="178" text-anchor="middle" fill="#5c5c66">(the customer's logic)</text>
+  <!-- PLL -->
+  <rect x="90" y="70" width="120" height="44" rx="7" fill="#e7f4f1" stroke="#0e7d6e" stroke-width="1.4"/>
+  <text x="150" y="89" text-anchor="middle" fill="#0e7d6e" font-weight="600">PLL / Clocking</text>
+  <text x="150" y="104" text-anchor="middle" fill="#5c5c66" font-size="10">heartbeat</text>
+  <!-- sensors -->
+  <rect x="90" y="135" width="120" height="44" rx="7" fill="#e7f4f1" stroke="#0e7d6e" stroke-width="1.4"/>
+  <text x="150" y="154" text-anchor="middle" fill="#0e7d6e" font-weight="600">PVT Sensors</text>
+  <text x="150" y="169" text-anchor="middle" fill="#5c5c66" font-size="10">health monitor</text>
+  <!-- LDO -->
+  <rect x="90" y="200" width="120" height="44" rx="7" fill="#e7f4f1" stroke="#0e7d6e" stroke-width="1.4"/>
+  <text x="150" y="219" text-anchor="middle" fill="#0e7d6e" font-weight="600">LDO / Power</text>
+  <text x="150" y="234" text-anchor="middle" fill="#5c5c66" font-size="10">clean power</text>
+  <!-- I/O -->
+  <rect x="410" y="70" width="120" height="44" rx="7" fill="#fff8e1" stroke="#e6a700" stroke-width="1.4"/>
+  <text x="470" y="89" text-anchor="middle" fill="#8a6a00" font-weight="600">I/O</text>
+  <text x="470" y="104" text-anchor="middle" fill="#5c5c66" font-size="10">chip's pins</text>
+  <!-- SerDes -->
+  <rect x="410" y="135" width="120" height="44" rx="7" fill="#fff8e1" stroke="#e6a700" stroke-width="1.4"/>
+  <text x="470" y="154" text-anchor="middle" fill="#8a6a00" font-weight="600">SerDes / PHY</text>
+  <text x="470" y="169" text-anchor="middle" fill="#5c5c66" font-size="10">high-speed lanes</text>
+  <!-- Interface -->
+  <rect x="410" y="200" width="120" height="44" rx="7" fill="#fff8e1" stroke="#e6a700" stroke-width="1.4"/>
+  <text x="470" y="219" text-anchor="middle" fill="#8a6a00" font-weight="600">USB / PCIe / MIPI</text>
+  <text x="470" y="234" text-anchor="middle" fill="#5c5c66" font-size="10">connectivity</text>
+  <!-- connectors -->
+  <line x1="210" y1="92"  x2="240" y2="135" stroke="#9aa" stroke-width="1.2"/>
+  <line x1="210" y1="157" x2="240" y2="157" stroke="#9aa" stroke-width="1.2"/>
+  <line x1="210" y1="222" x2="240" y2="185" stroke="#9aa" stroke-width="1.2"/>
+  <line x1="380" y1="92"  x2="410" y2="92"  stroke="#9aa" stroke-width="1.2"/>
+  <line x1="380" y1="157" x2="410" y2="157" stroke="#9aa" stroke-width="1.2"/>
+  <line x1="380" y1="222" x2="410" y2="222" stroke="#9aa" stroke-width="1.2"/>
+  <text x="150" y="288" text-anchor="middle" fill="#0e7d6e" font-size="10.5" font-weight="600">← Analog Bits territory</text>
+  <text x="470" y="288" text-anchor="middle" fill="#8a6a00" font-size="10.5" font-weight="600">M31 + some Analog Bits →</text>
+</svg>
+<div class="fig-cap">Green blocks are Analog Bits' core strength; amber are largely M31's interface/foundation domain. Every SoC needs blocks from both sides.</div>
+</div>
+
+<h2>Analog Bits — the core portfolio</h2>
+
+<h3>PLL (Phase-Locked Loop) — the flagship</h3>
+<div class="card">
+<p><strong>What it does:</strong> generates and stabilises the clock signal — the rhythmic pulse that synchronises everything on the chip.</p>
+<p><strong>Analogy:</strong> the <em>conductor of an orchestra</em>. Every musician (circuit block) must play in time. The PLL keeps the beat steady and can speed it up or slow it down precisely.</p>
+<p style="margin-bottom:0"><strong>Sales angle:</strong> <em>Every single chip needs a PLL.</em> Vinny said it directly — "every chip needs a PLL for clocking." That makes it the most universal product you sell. Analog Bits' edge: ultra-low jitter (very clean timing), ultra-low power, wide-range, and the "pinless" core-powered design. Realistically only <strong>two</strong> companies are serious about advanced PLL IP worldwide: Analog Bits and Silicon Creations. That's the "cat-and-mouse" market.</p>
+</div>
+<button class="reveal-btn" data-show="One level deeper on PLLs (optional)" data-hide="Hide">One level deeper on PLLs (optional)</button>
+<div class="reveal-box">
+<p class="small"><strong>Jitter</strong> = tiny timing wobble in the clock. Lower jitter = the chip can run faster and more reliably, which matters enormously for high-speed data and AI chips. <strong>Integer vs. fractional</strong> PLLs differ in how finely they can dial frequencies. <strong>LC PLL</strong> (used in Analog Bits' newest "embedded clock LC PLLs") uses an on-chip inductor-capacitor circuit for very low jitter at high frequency — relevant to AI/HPC chips. You don't need to design one; knowing "lower jitter, lower power, wide range, pinless" is enough to sell it.</p>
+</div>
+
+<h3>PVT Sensors (Process, Voltage, Temperature)</h3>
+<div class="card">
+<p><strong>What it does:</strong> tiny on-chip sensors that continuously monitor temperature, supply voltage, and manufacturing variation across the chip — and detect dangerous voltage "droops" (sudden dips).</p>
+<p><strong>Analogy:</strong> the <em>fitness tracker / health monitor</em> embedded in the chip — heart rate, temperature, blood pressure — warning the system before something overheats or browns out.</p>
+<p style="margin-bottom:0"><strong>Sales angle:</strong> modern AI chips run hot and draw huge, spiky power. Sensors let the system protect itself and optimise power in real time. This is central to Analog Bits' "Intelligent Power Architecture" story and their newest 2nm demos (real-time on-chip power sensing). A strong door-opener for AI/HPC customers.</p>
+</div>
+
+<h3>LDO &amp; droop detectors (power management)</h3>
+<div class="card">
+<p><strong>What it does:</strong> an <strong>LDO (Low-Dropout Regulator)</strong> delivers clean, stable voltage right next to where it's needed on the chip; <strong>droop detectors</strong> catch sudden voltage dips.</p>
+<p><strong>Analogy:</strong> a <em>local water-pressure regulator</em> placed at each tap, so every part of the house gets steady pressure instead of relying on one distant pump.</p>
+<p style="margin-bottom:0"><strong>Sales angle:</strong> Analog Bits' newest growth area. Mahesh's line: "like PLLs maintain clocking stability, we now maintain power integrity in real time." Scalable LDO macros placed next to CPU/AI cores let customers balance power dynamically. This is what's new and exciting in their 2025–2026 announcements — mention it to sound current.</p>
+</div>
+
+<h3>I/O (Input/Output)</h3>
+<div class="card">
+<p><strong>What it does:</strong> the interface between the chip's internal logic (low voltage) and the outside world (the board, other chips).</p>
+<p><strong>Analogy:</strong> the <em>doors and loading docks</em> of the chip — how signals get in and out cleanly.</p>
+<p style="margin-bottom:0"><strong>Sales angle:</strong> high-performance programmable I/O and chip-to-chip (C2C) connectivity. Increasingly important for <strong>chiplets</strong> (see below). Analog Bits is presenting on "chiplet scalability" in 2026.</p>
+</div>
+
+<h3>SerDes — present but de-emphasised</h3>
+<div class="callout warn">
+<span class="ttl">Important nuance Vinny flagged</span>
+On the call you started listing SerDes products from the website. Vinny corrected you: <strong>"SerDes is not our forte."</strong> Analog Bits has some SerDes available off-the-shelf and will sell it if it fits, but they are <em>not investing further</em> in it. Their claim to fame is <strong>clocking (PLLs)</strong>, then <strong>sensors</strong> and <strong>I/O</strong>. Lead with PLLs and sensors, not SerDes. (M31 is the better SerDes story — see below.) Knowing this distinction will impress them, because it shows you listened.
+</div>
+<button class="reveal-btn" data-show="What is SerDes anyway?" data-hide="Hide">What is SerDes anyway?</button>
+<div class="reveal-box">
+<p class="small"><strong>SerDes = Serializer/Deserializer.</strong> It converts wide, slow internal data into a fast, narrow stream to send across a few wires, then converts it back at the other end — how chips move huge data over PCIe, between chiplets, or across a board. A <strong>PHY</strong> is the physical-layer circuit that actually drives those high-speed lanes.</p>
+</div>
+
+<h2>M31 — the complementary portfolio</h2>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Product</th><th>What it does (plain)</th><th>Where customers use it</th></tr></thead>
+<tbody>
+<tr><td><strong>USB PHY</strong> (to USB4, 40Gbps)</td><td>The circuit behind a USB port</td><td>Almost every consumer/IoT device</td></tr>
+<tr><td><strong>PCIe PHY</strong> (Gen5+)</td><td>High-speed link to CPUs, GPUs, SSDs</td><td>Servers, AI accelerators, storage</td></tr>
+<tr><td><strong>MIPI C/D-PHY</strong></td><td>Camera &amp; display interface</td><td>Phones, cameras, sensors</td></tr>
+<tr><td><strong>LPDDR/DDR PHY</strong></td><td>The link to memory chips</td><td>Every SoC with external memory</td></tr>
+<tr><td><strong>UFS / DisplayPort</strong></td><td>Storage / display connectivity</td><td>Mobile, multimedia devices</td></tr>
+<tr><td><strong>Foundation IP</strong></td><td>Standard-cell libraries, memory compilers, GPIO/ESD I/O — the basic Lego bricks every chip needs</td><td>Literally every chip design</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout good">
+<span class="ttl">The combined pitch</span>
+"Analog Bits gives you the clocking, sensing and power backbone; M31 gives you the high-speed interfaces and the foundational libraries. Between us, you can source a large share of your SoC's IP from two silicon-proven, award-winning partners with local Indian support." That's your one-paragraph product story.
+</div>
+
+<h2>Two bonus terms worth knowing in 2026</h2>
+<div class="two-col">
+<div class="card tight">
+<h4>Chiplets</h4>
+<p class="small" style="margin:0">Instead of one giant chip, designers now build several smaller "chiplets" and connect them in one package. This needs lots of high-speed chip-to-chip I/O and clocking — directly relevant to Analog Bits' I/O and to M31's interfaces. Analog Bits is presenting on chiplet scalability in 2026.</p>
+</div>
+<div class="card tight">
+<h4>Mixed-signal</h4>
+<p class="small" style="margin:0">"Mixed-signal" = combining analog (continuous, real-world: voltage, clocks) with digital (1s and 0s) on one chip. Analog Bits is a <em>mixed-signal IP</em> company — their hard part is the analog, which is notoriously difficult and why proven analog IP commands a premium.</p>
+</div>
+</div>
+
+<h2>Activity: match the customer need to the product</h2>
+<div class="card">
+<p class="small"><strong>Scenario:</strong> A startup building an edge-AI camera SoC tells you their chip runs hot, needs a rock-steady high-speed clock, must talk to a camera module, and they're worried about power dips crashing the AI core. Which products do you propose, and from whom?</p>
+<button class="reveal-btn" data-show="Show the answer" data-hide="Hide">Show the answer</button>
+<div class="reveal-box">
+<div class="callout good" style="margin-top:6px">
+<ul style="margin:0">
+<li><strong>Low-jitter PLL</strong> (Analog Bits) — the rock-steady clock.</li>
+<li><strong>PVT sensors + droop detectors</strong> (Analog Bits) — monitor heat and catch the power dips crashing the core.</li>
+<li><strong>LDO power management</strong> (Analog Bits) — deliver clean, stable power at the core.</li>
+<li><strong>MIPI C/D-PHY</strong> (M31) — to talk to the camera module.</li>
+</ul>
+<p style="margin:8px 0 0" class="small">Notice you naturally pulled from <em>both</em> portfolios — that's the combined-deal advantage in action, and you led with PLLs/sensors, not SerDes.</p>
+</div>
+</div>
+</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">A customer asks about your SerDes. What's the most credible response?</div>
+<div class="opts">
+<button data-opt="a">"SerDes is our strongest product — let's focus there."</button>
+<button data-opt="b">"We don't do SerDes at all."</button>
+<button data-opt="c">"We have some off-the-shelf SerDes that may fit, but our real strength is clocking and sensors; for advanced interface IP, M31's PHY portfolio is the better fit — and I can bring both to the table."</button>
+<button data-opt="d">"Let me get back to you on that."</button>
+</div>
+<div class="fb">Analog Bits has SerDes off-the-shelf but isn't investing in it; their forte is clocking/sensors. Being honest and routing interface needs to M31 shows product knowledge and the combined-portfolio advantage.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m3"><span class="dir">← Prev</span>The chip business</button><button class="next" data-go="m5"><span class="dir">Next →</span>India market</button></div>
+</section>
+
+<section class="module" id="m5">
+<div class="eyebrow">SECTION 05 · INDIA MARKET</div>
+<h1 class="module-title">India market & customers</h1>
+<p class="lede">Your edge over an outside candidate is that you already live in this market. Sharpen it. Know the government push, the names of the players, and where the leads actually come from — so you sound like someone who reads the ecosystem every morning.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>State the macro story for India semiconductors</li><li>Use ISM, DLI, MeitY, GeM correctly</li><li>Know the customer types and where leads come from</li><li>Place the competitors, including Silicon Creations</li></ul></div>
+<h2>Why India, why now — the one-paragraph macro story</h2>
+<div class="card">
+<p style="margin:0">India is making a serious, well-funded push to become a global semiconductor hub. It already trains a huge share of the world's chip-design engineers, and the government is now paying companies to design chips on Indian soil. The manufacturing side (fabs) is being built in Gujarat, Assam and elsewhere, but the <strong>fastest-moving, highest-value opportunity is chip <em>design</em></strong> — the fabless startups. Every one of them needs IP. That's your market, and it's expanding from a small base. As Vinny put it: "in India, the sky's the limit today."</p>
+</div>
+
+<h2>The government schemes — know the acronyms cold</h2>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Term</th><th>What it is</th><th>Why it matters to you</th></tr></thead>
+<tbody>
+<tr><td><strong>ISM</strong><br><span class="muted small">India Semiconductor Mission</span></td><td>The government body (under MeitY) running India's whole ~US$10bn semiconductor programme, launched Dec 2021.</td><td>The umbrella behind everything. Name-drop it correctly.</td></tr>
+<tr><td><strong>DLI</strong><br><span class="muted small">Design Linked Incentive</span></td><td>Reimburses up to 50% of design cost and gives startups access to EDA tools, IP libraries and tape-out support. Run by C-DAC.</td><td><strong>This funds your customers.</strong> DLI money helps a startup afford IP — i.e., afford <em>you</em>. As of early 2026 it supports ~24 design startups, several with completed tape-outs.</td></tr>
+<tr><td><strong>MeitY</strong><br><span class="muted small">Ministry of Electronics &amp; IT</span></td><td>The ministry that owns ISM and DLI.</td><td>The policy parent; Minister Ashwini Vaishnaw is its public face.</td></tr>
+<tr><td><strong>C-DAC</strong></td><td>Government agency; the nodal body implementing DLI.</td><td>Gatekeeper for DLI startups — a useful ecosystem contact.</td></tr>
+<tr><td><strong>GeM</strong><br><span class="muted small">Government e-Marketplace</span></td><td>The portal for selling to government entities.</td><td>Vinny said SphereLink is already <em>on GeM</em> — meaning he can sell to government bodies (ISRO, DRDO, C-DAC, etc.). A real differentiator.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<span class="ttl">Small correction to carry confidently</span>
+On the call the schemes came up a little jumbled ("DLI… METI… ISMOs"). The clean version: the mission is <strong>ISM</strong>, the design subsidy is <strong>DLI</strong>, the ministry is <strong>MeitY</strong> (not "METI" — that's Japan's ministry). Getting these exactly right is an easy way to sound more credible than the average candidate.
+</div>
+
+<h2>Who buys — the customer landscape</h2>
+<p>Vinny mentioned "70+ fabless semiconductor companies in India today." They fall into a few buckets:</p>
+<div class="two-col">
+<div class="card tight">
+<h4>Fabless startups (the growth engine)</h4>
+<p class="small" style="margin:0">DLI-backed and VC-backed design houses building their own chips. Hungry, fast, and IP-dependent. <strong>Netrasemi</strong> is the poster child — a Trivandrum startup that just brought up "NETRA A2000," an edge-AI SoC on TSMC 12nm, backed by Zoho and others. Vinny named Netrasemi as <em>his customer</em> going to Analog Bits for IP.</p>
+</div>
+<div class="card tight">
+<h4>Government &amp; strategic bodies</h4>
+<p class="small" style="margin:0">Vinny mentioned supplying <strong>C-DAC, ISRO, DRDO</strong> and similar (he referenced "SIDAC" — likely C-DAC). These buy through GeM, value trusted/indigenous IP, and run defence, space and strategic chips. Long sales cycles, but high trust and strategic stickiness.</p>
+</div>
+</div>
+<div class="card tight">
+<h4>Captive design centres of MNCs</h4>
+<p class="small" style="margin:0">AMD, Nvidia, Qualcomm, NXP, Intel and others run large design centres in India (Bengaluru, Hyderabad). These can also consume IP, though purchasing may route through global HQ. Bigger, slower, but large potential.</p>
+</div>
+
+<h2>Where the leads come from</h2>
+<p>This is a crucial insight Vinny shared, and it changes how you'd describe the job:</p>
+<div class="callout good">
+<span class="ttl">It's mostly inbound — for now</span>
+"People will call and tell me, I need Analog Bits IP." Because <strong>IMEC (the VCA)</strong> sees nearly every Indian fabless startup first, and its India head is a friend of Vinny's, leads flow inward. So the role is less cold-calling and more: respond fast, qualify well, run a great technical first meeting, and close. Your job is to <em>convert and grow</em> warm relationships — and then add outbound on top (the JD does mention building a pipeline and LinkedIn outreach, which you already do).
+</div>
+
+<h2>The competitive landscape</h2>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Competitor</th><th>Position</th><th>Your read</th></tr></thead>
+<tbody>
+<tr><td><strong>Silicon Creations</strong></td><td>The other serious PLL/clocking IP house. Analog Bits' direct rival.</td><td>You sell their IP today (via Interex). You know their strengths first-hand — Vinny admitted some of their IPs are superior. Handle this with care (Section 8) but it's a genuine edge.</td></tr>
+<tr><td><strong>Synopsys</strong></td><td>Giant EDA + huge IP portfolio.</td><td>The "big company" option. Customers may default to them for breadth, but pay more and get less hand-holding. You compete on focus, price-performance and local attentiveness.</td></tr>
+<tr><td><strong>Cadence</strong></td><td>The other EDA giant with broad IP.</td><td>Same as Synopsys.</td></tr>
+<tr><td><strong>Menta / others</strong></td><td>Smaller specialist IP (Menta = eFPGA IP — embedded programmable logic). You sell Menta today too.</td><td>Specialist niches; useful to know the landscape is fragmented, which is why a trusted local rep matters.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<span class="ttl">The competitive narrative to internalise</span>
+The market for advanced PLL IP is essentially <strong>two players</strong> (Analog Bits and Silicon Creations) plus the EDA giants' general-purpose offerings. That's a tiny, high-trust, relationship-driven niche. In a niche this small, the salesperson <em>is</em> the differentiator — which is exactly why Vinny said you could become "the most sought-after IP salesperson in India."
+</div>
+
+<h2>Geography (a small but real talking point)</h2>
+<p>The work is Bengaluru-centred. SphereLink's registered office is in Kasturi Nagar; the SemiFive office Vinny may move you into is in Koramangala (~35–40 min from your home near Banashankari). Most chip-design activity clusters in Bengaluru and Hyderabad, with Netrasemi in Trivandrum. The JD also flags domestic and international travel (trade shows, customer meetings) — be ready to say you're open to it.</p>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">A customer mentions they're DLI-funded. Why is that good news for you as a salesperson?</div>
+<div class="opts">
+<button data-opt="a">It means they can't buy third-party IP.</button>
+<button data-opt="b">DLI reimburses much of their design cost and gives IP/tool access, so they have budget and incentive to license proven IP — making them a qualified, fundable buyer.</button>
+<button data-opt="c">It means the government, not the company, makes all decisions.</button>
+<button data-opt="d">It has no effect on the sale.</button>
+</div>
+<div class="fb">DLI support (up to ~50% of design cost, plus IP-library and tape-out access) means the startup has both the funding and the mandate to use proven IP — a strong buying signal.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m4"><span class="dir">← Prev</span>The products</button><button class="next" data-go="m6"><span class="dir">Next →</span>Sales playbook</button></div>
+</section>
+
+<section class="module" id="m6">
+<div class="eyebrow">SECTION 06 · SALES PLAYBOOK</div>
+<h1 class="module-title">The IP sales playbook</h1>
+<p class="lede">This is where you prove you think like an IP salesperson, not a generalist. The centrepiece is a framing Vinny tested you on directly: IP is neither a quick product sale nor a body-shop service. Nail this and you've matched his mental model.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Nail the 'IP is not a product, not a service' framing</li><li>Explain why trust is the whole game</li><li>Walk the sales cycle and run a first meeting</li><li>Handle the 'we'll build in-house' objection</li></ul></div>
+<h2>The mental model Vinny is screening for</h2>
+<div class="card">
+<p>On the call, Vinny pushed back on candidates with a "services mindset" and on the idea that "IP is like selling a product." He used the analogy that selling a product is like "come get a facial and go" — a quick transaction. IP is neither. Here's the clean three-way distinction to have ready:</p>
+</div>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th></th><th>Product sale</th><th>Services sale</th><th>IP sale ✓</th></tr></thead>
+<tbody>
+<tr><td><strong>Nature</strong></td><td>Buy it, take it, done</td><td>Place people on projects, bill hours</td><td>License a proven, reusable design asset</td></tr>
+<tr><td><strong>Cycle</strong></td><td>Short, transactional</td><td>Ongoing staffing</td><td>Long, technical, trust-based — months</td></tr>
+<tr><td><strong>Margin</strong></td><td>Varies</td><td>20–25% (often less)</td><td><strong>60–70% gross</strong></td></tr>
+<tr><td><strong>What you sell on</strong></td><td>Features / price</td><td>Bodies / availability</td><td>Trust, proven silicon, fit, risk-reduction</td></tr>
+<tr><td><strong>Relationship</strong></td><td>Light</td><td>Transactional</td><td>Deep, long-term, repeat</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout good">
+<span class="ttl">Your one-liner if he tests this</span>
+"IP isn't a product you grab off a shelf, and it's not a services model where I'm billing bodies. I'm licensing a proven design asset into a customer's chip — a decision they live with for years and can't easily reverse after tape-out. So the sale is consultative and built on trust: understand what they're building, prove our IP works in silicon, de-risk their integration, and earn a long-term relationship. The high margins exist precisely because we built it once and the value to them is huge."
+</div>
+
+<h2>Why "trust" is the whole game</h2>
+<p>Vinny said it three times: "IP business goes on trust. Nothing else." Understand <em>why</em>, so you can speak to it convincingly:</p>
+<ul class="clean">
+<li>The customer is putting <strong>your</strong> block permanently into <strong>their</strong> chip. If it fails, their tape-out fails — millions lost.</li>
+<li>They share confidential roadmaps with you to get the right IP. They must trust you won't leak it (this is also why your Silicon Creations history needs careful handling — Section 8).</li>
+<li>"First-time-working / silicon-proven" is a trust claim: <em>this has worked in real chips before, so it'll work in yours.</em></li>
+<li>In a two-player niche, reputation travels fast. One betrayed confidence ends a career; one great delivery brings referrals for years.</li>
+</ul>
+
+<h2>The IP sales cycle, stage by stage</h2>
+<div class="flow-fig">
+<svg viewBox="0 0 660 130" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;">
+  <defs><marker id="a6" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5c5c66"/></marker></defs>
+  <g>
+  <rect x="8"   y="40" width="92" height="50" rx="7" fill="#e8f0fe" stroke="#1a4fa0"/><text x="54" y="60" text-anchor="middle" fill="#1a4fa0" font-weight="600">Lead</text><text x="54" y="76" text-anchor="middle" fill="#5c5c66" font-size="9.5">mostly inbound</text>
+  <rect x="118" y="40" width="92" height="50" rx="7" fill="#fff" stroke="#1a4fa0"/><text x="164" y="60" text-anchor="middle" fill="#1c1c1e" font-weight="600">Qualify</text><text x="164" y="76" text-anchor="middle" fill="#5c5c66" font-size="9.5">need? node? budget?</text>
+  <rect x="228" y="40" width="92" height="50" rx="7" fill="#fff" stroke="#1a4fa0"/><text x="274" y="58" text-anchor="middle" fill="#1c1c1e" font-weight="600">Technical</text><text x="274" y="72" text-anchor="middle" fill="#1c1c1e" font-weight="600">fit</text><text x="274" y="84" text-anchor="middle" fill="#5c5c66" font-size="9">+ NDA</text>
+  <rect x="338" y="40" width="92" height="50" rx="7" fill="#fff" stroke="#1a4fa0"/><text x="384" y="60" text-anchor="middle" fill="#1c1c1e" font-weight="600">Proposal</text><text x="384" y="76" text-anchor="middle" fill="#5c5c66" font-size="9.5">quote + terms</text>
+  <rect x="448" y="40" width="92" height="50" rx="7" fill="#fff" stroke="#1a4fa0"/><text x="494" y="60" text-anchor="middle" fill="#1c1c1e" font-weight="600">Negotiate</text><text x="494" y="76" text-anchor="middle" fill="#5c5c66" font-size="9.5">license + royalty</text>
+  <rect x="558" y="40" width="94" height="50" rx="7" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/><text x="605" y="60" text-anchor="middle" fill="#2e7d32" font-weight="600">Close</text><text x="605" y="76" text-anchor="middle" fill="#5c5c66" font-size="9.5">+ support, repeat</text>
+  <line x1="100" y1="65" x2="116" y2="65" stroke="#5c5c66" marker-end="url(#a6)"/>
+  <line x1="210" y1="65" x2="226" y2="65" stroke="#5c5c66" marker-end="url(#a6)"/>
+  <line x1="320" y1="65" x2="336" y2="65" stroke="#5c5c66" marker-end="url(#a6)"/>
+  <line x1="430" y1="65" x2="446" y2="65" stroke="#5c5c66" marker-end="url(#a6)"/>
+  <line x1="540" y1="65" x2="556" y2="65" stroke="#5c5c66" marker-end="url(#a6)"/>
+  </g>
+</svg>
+<div class="fig-cap">The deal motion. Note the NDA before sharing detailed technical/roadmap info — standard in IP.</div>
+</div>
+
+<h3>What each stage really involves</h3>
+<ul>
+<li><strong>Lead:</strong> inbound from IMEC, referrals, trade shows (VLSI / Semicon), LinkedIn outreach. Respond fast — speed signals reliability.</li>
+<li><strong>Qualify:</strong> What are they building? Which <em>process node</em> (5nm? 12nm?)? What's their timeline to tape-out? Are they funded (DLI/VC)? Who decides? This filters real deals from tyre-kickers.</li>
+<li><strong>Technical fit:</strong> the first real meeting. Gather requirements, loop in the IP company's technical/AE support, position the right block. An <strong>NDA</strong> is usually signed here so the customer can share specifics.</li>
+<li><strong>Proposal:</strong> license fee, any royalty, delivery, support terms. You coordinate with Analog Bits / M31 on pricing.</li>
+<li><strong>Negotiate:</strong> commercial terms, sometimes customisation. This is where "senior" matters.</li>
+<li><strong>Close &amp; support:</strong> contract signed; then you stay close through integration. Happy integration → next chip → referrals. IP is a <em>repeat</em> business.</li>
+</ul>
+
+<h2>Running a great first customer meeting</h2>
+<p>Vinny told you exactly what he looks for: in the first meeting with a prospect, <strong>gather what they want and what application they're targeting.</strong> You don't need to be deeply technical — you need to <em>listen well and ask the right questions.</em> Have these ready:</p>
+<div class="card">
+<ul class="clean" style="margin:0">
+<li>"What are you building, and what's the end application?" (AI? automotive? IoT? — drives which IP and which performance matters)</li>
+<li>"Which process node and foundry are you targeting?" (tells you what's silicon-proven and available)</li>
+<li>"What's your timeline to tape-out?" (urgency + deal stage)</li>
+<li>"Which blocks are you sourcing externally vs. building in-house?" (finds the opening)</li>
+<li>"What's most critical — power, performance, area, or time-to-market?" (lets you position the right differentiator)</li>
+</ul>
+</div>
+
+<h2>Handling the "we'll build it in-house" objection</h2>
+<p>You flagged this yourself on the call — customers say "we have engineers, why come to you?" Have a crisp answer:</p>
+<div class="callout good">
+<span class="ttl">Model response</span>
+"You absolutely could build it — but analog IP like a low-jitter PLL is notoriously hard to get first-time-working, and a re-spin after tape-out costs months and crores. Our block is already silicon-proven on your target node, so you de-risk the schedule and free your engineers to focus on <em>your</em> differentiator — the thing that actually makes your chip special — instead of re-solving a clocking problem two companies in the world specialise in."
+</div>
+<p class="small muted">This reframes IP from "a cost" to "risk reduction + focus" — the real reason fabless companies license IP.</p>
+
+<h2>The numbers, so you can talk margin credibly</h2>
+<div class="kbox">
+<div class="k"><div class="big">60–70%</div><div class="lbl">IP gross margin</div></div>
+<div class="k"><div class="big">20–25%</div><div class="lbl">Services margin (for contrast)</div></div>
+<div class="k"><div class="big">2</div><div class="lbl">serious advanced-PLL IP players worldwide</div></div>
+<div class="k"><div class="big">~70+</div><div class="lbl">fabless companies in India to sell to</div></div>
+</div>
+
+<h2>Activity: the framing question, role-played</h2>
+<div class="card">
+<p class="small"><strong>Vinny (likely):</strong> "So tell me — how is selling IP different from selling a product or a service?"</p>
+<button class="reveal-btn" data-show="Show how to structure your answer" data-hide="Hide">Show how to structure your answer</button>
+<div class="reveal-box">
+<div class="callout good" style="margin-top:6px">
+<p style="margin:0 0 8px"><strong>Structure: distinguish → explain why → land on trust + margin.</strong></p>
+<p class="small" style="margin:0">"A product sale is transactional — pick it, buy it, done. A services sale is about placing people and billing time, which caps your margin. IP is different on both counts: I'm licensing a proven design that goes <em>permanently</em> into the customer's chip, so the decision is high-stakes and irreversible after tape-out. That makes it a long, consultative, trust-driven sale — understand what they're building, prove our silicon works, de-risk their integration. And because the IP is built once and licensed many times, the margins are 60–70%, not 20%. That's exactly why the relationship matters more than the transaction."</p>
+</div>
+</div>
+</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="a">
+<div class="qtext">Why is an NDA typically signed during the technical-fit stage?</div>
+<div class="opts">
+<button data-opt="a">So the customer can safely share confidential design details and roadmap, which you need to position the right IP — IP is a trust business.</button>
+<button data-opt="b">To lock the customer into buying.</button>
+<button data-opt="c">It's a legal formality with no real purpose.</button>
+<button data-opt="d">To set the final price.</button>
+</div>
+<div class="fb">The NDA enables the confidential exchange of technical and roadmap information that lets you map the right product to their need — central to the trust-based nature of IP sales.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m5"><span class="dir">← Prev</span>India market</button><button class="next" data-go="m7"><span class="dir">Next →</span>Q&A practice</button></div>
+</section>
+
+<section class="module" id="m7">
+<div class="eyebrow">SECTION 07 · Q&A PRACTICE</div>
+<h1 class="module-title">Q&A practice</h1>
+<p class="lede">Tap each question to reveal a model answer and the thinking behind it. Don't memorise word-for-word — read, then close it and say your own version out loud. Practising aloud is what makes it land on July 1st.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Drill technical, sales, company and behavioural questions</li><li>Practise out loud until answers are fluent, not memorised</li></ul></div>
+<div class="callout tip">
+<span class="ttl">How to drill this page</span>
+First pass: read all answers. Second pass: cover the answer, read only the question, and speak your version. Third pass: have your friend ask you 5 at random. The goal is fluency, not recitation.
+</div>
+
+<h2>Technical &amp; product</h2>
+
+<div class="qa"><button class="q">Walk me through what happens from a chip company needing IP to a finished chip.</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"A fabless company designs the chip but owns no factory. They license proven IP blocks — say a PLL from us — pay a license fee, and integrate it into their design. Then they need to manufacture, but a small company can't access TSMC directly, so they go through a VCA like IMEC, which handles tape-out and wafer production at the foundry. After fabrication, the chips are packaged and tested, and ship as finished products. IP vendors like us sit at the very start of that chain — and because IMEC sees every startup first, a lot of our leads come inbound through them."</p>
+<div class="label">Why it works</div>
+<p class="muted small">It's the exact value chain from Section 3 and mirrors Vinny's own Netrasemi example — showing you absorbed the first call.</p>
+</div></div>
+
+<div class="qa"><button class="q">What does a PLL do, and why does every chip need one?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"A PLL generates and stabilises the chip's clock — the steady pulse that keeps every block working in sync, like a conductor keeping an orchestra in time. Every chip needs clocking, so every chip needs a PLL. Analog Bits' edge is ultra-low jitter and ultra-low power, plus their pinless, core-powered design that lets you drop the PLL anywhere without dedicated supply pins. Realistically only two companies in the world specialise in advanced PLL IP — Analog Bits and Silicon Creations."</p>
+<div class="label">Why it works</div>
+<p class="muted small">One-liner + analogy + differentiator + market context. Confident without over-claiming technical depth.</p>
+</div></div>
+
+<div class="qa"><button class="q">Tell me about Analog Bits' sensor and power-management IP.</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"Their PVT sensors are like an on-chip health monitor — continuously tracking temperature, voltage and process variation, and catching sudden voltage droops before they crash the chip. Their newer LDO regulators deliver clean, stable power right next to the CPU or AI cores. Mahesh frames it well: just as PLLs maintain clocking stability, these blocks maintain power integrity in real time. It's the heart of their 'Intelligent Power Architecture,' and it's what they're demoing on TSMC's 2nm process right now — really relevant for power-hungry AI chips."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Shows you read their current 2025–26 messaging, not a stale website.</p>
+</div></div>
+
+<div class="qa"><button class="q">How do Analog Bits and M31 fit together — isn't there overlap?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"There's very little overlap, which is the strength. Analog Bits is the clocking, sensing and power backbone — PLLs, PVT sensors, LDOs, I/O. M31 covers the high-speed interfaces and foundation IP — USB, PCIe, MIPI, SerDes, plus standard-cell libraries and memory compilers. Together they cover a large share of a customer's SoC, so I can serve more of one customer's bill of materials and build bigger, stickier deals."</p>
+</div></div>
+
+<div class="qa"><button class="q">What's your view on Analog Bits' SerDes?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"SerDes isn't their forte and they're not investing further in it — they'll sell off-the-shelf SerDes if it fits a customer, but their claim to fame is clocking and sensors. For serious interface IP I'd lean on M31's PHY portfolio. So I lead with PLLs and sensors for Analog Bits and route high-speed interface needs to M31."</p>
+<div class="label">Why it works</div>
+<p class="muted small">This directly echoes Vinny's correction on the call — a quiet signal you listen and retain.</p>
+</div></div>
+
+<h2>Sales &amp; commercial</h2>
+
+<div class="qa"><button class="q">How is selling IP different from selling a product or a service?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"A product sale is transactional — buy it and you're done. A services sale is placing people and billing hours, which caps margins around 20%. IP is neither: I'm licensing a proven design that goes permanently into a customer's chip, an irreversible, high-stakes decision after tape-out. So it's a long, consultative, trust-based sale, and because the IP is built once and licensed many times, margins are 60–70%. The relationship matters far more than the transaction."</p>
+<div class="label">Why it works</div>
+<p class="muted small">This is the framing Vinny explicitly tested. Getting it right is probably the single highest-value answer on this page.</p>
+</div></div>
+
+<div class="qa"><button class="q">A customer says 'we have engineers, we'll build it in-house.' What do you say?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"You could build it — but analog IP like a low-jitter PLL is famously hard to get first-time-working, and a re-spin after tape-out costs months and crores. Our block is already silicon-proven on your target node, so you de-risk your schedule and free your engineers to focus on <em>your</em> differentiator instead of re-solving a clocking problem only two companies in the world specialise in."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Reframes IP as risk-reduction and focus — the real buying reason. You raised this objection yourself, so they'll likely test it.</p>
+</div></div>
+
+<div class="qa"><button class="q">How would you run a first meeting with a prospective customer?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"My first job is to listen and qualify, not pitch. I'd ask what they're building and the end application, which process node and foundry they're targeting, their timeline to tape-out, which blocks they're sourcing externally, and what matters most — power, performance, area or time-to-market. That tells me which IP fits and which differentiator to lead with. Then I'd loop in the technical/AE support to go deeper, with an NDA in place so they can share specifics."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Vinny said this is exactly what he looks for — gathering what they want and the target application.</p>
+</div></div>
+
+<div class="qa"><button class="q">How would you build a pipeline in India given the market is small?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"Three channels. One, convert the warm inbound — IMEC and referrals see almost every startup first, so fast, high-quality follow-up is the priority. Two, ecosystem presence — Semicon and VLSI trade shows, where I've already been, plus the DLI/C-DAC startup community. Three, targeted outbound on LinkedIn to design leads at the 70-odd fabless companies and the MNC design centres, which I already do today. In a niche this small, depth of relationship beats volume — so I'd rather nurture 30 real accounts well than spray 300."</p>
+</div></div>
+
+<div class="qa"><button class="q">How do you handle a long sales cycle without losing momentum?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"IP cycles run months and hinge on the customer's tape-out timeline, so I map the deal to <em>their</em> schedule and stay useful between milestones — sharing relevant silicon data, connecting them to technical support, checking in around their design reviews. The goal is to be the trusted, low-friction option when they're ready to commit, not the person who went quiet and reappeared at quote time."</p>
+</div></div>
+
+<h2>Company &amp; motivation</h2>
+
+<div class="qa"><button class="q">Why do you want to work with Analog Bits / SphereLink?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"Two reasons. First, focus — I want to go deep in pure IP sales, and this role is exactly that, with two strong, complementary portfolios behind it. Second, the opportunity — advanced IP in India is a tiny, high-trust niche that's growing fast, I already understand the customers and the technology, and I'd be helping build the India business from an early, senior seat. That combination of focus and upside is rare."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Ties your genuine motivation (focus on IP) to the company's actual opportunity. Echoes what you already told Vinny, which keeps you consistent.</p>
+</div></div>
+
+<div class="qa"><button class="q">What do you know about Mahesh / the company's leadership?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"Mahesh Tirupattur is the CEO — he's the public voice of the company, does the SemiWiki and EE Times interviews, and has been driving the Intelligent Power Architecture story. Alan Rogers is President and CTO, the technical founder figure behind the pinless clocking and sensing work. The company just won TSMC's 2025 OIP Partner of the Year in the Analog IP category, which says a lot about their standing with the most important foundry in the world."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Names + a current accolade = visible homework. Read one Mahesh interview before the call so you can reference a specific point.</p>
+</div></div>
+
+<div class="qa"><button class="q">This is a very small operation — basically one person today. Does that concern you?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"I see it clearly as a trade-off, and it's one I want. Less structure, yes — but it means real ownership, direct access to the principals, and the chance to shape how the India business is built rather than inheriting someone else's playbook. I also know there's a much larger organisation behind it — Analog Bits with 30 years of history, and SemiFive as the parent with a real India office. So I'd be building something small with serious backing, which is exactly the kind of early, high-agency role I'm looking for. I'd want to understand the support structure and how we'd grow the team, which I'd love to discuss."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Honest about the risk, frames it as desirable, and shows you understand the SemiFive backing. Ends by opening the stability conversation on your terms.</p>
+</div></div>
+
+<h2>Behavioural</h2>
+
+<div class="qa"><button class="q">Tell me about yourself.</button>
+<div class="a">
+<div class="label">Model answer (60–75 seconds)</div>
+<p>"I'm a mechanical engineer by training who found my place at the intersection of technology and business. I started in techno-managerial roles — Mercedes R&amp;D, then ITC where I did quantity surveying and business development, then a small aerospace company where, because we were tiny, I touched the selling, the finance and the technical side all at once. That's where I realised I liked owning the full picture. I was drawn to semiconductors because of India's boom, joined Interex in IP sales, and have spent the last several months selling Silicon Creations and Menta IP — learning the products, the customers and the deal motion fast. Now I want to go all-in on IP sales, which is why this conversation excites me."</p>
+<div class="label">Why it works</div>
+<p class="muted small">A clean arc: technical roots → liking ownership → deliberate move into semis → ready to specialise. Full version on page 8.</p>
+</div></div>
+
+<div class="qa"><button class="q">Why are you leaving Interex?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"It's been a great place to learn IP sales, and I'm grateful for it. The honest reason is focus: over the last couple of months I've been pulled increasingly into vendor management — coordinating profiles, scheduling, follow-ups. It's a real discipline, but it's not where I add the most value, and it's pulling me away from the IP sales work I'm best at and most excited by. I'd rather go deep on one thing and become genuinely excellent at it than split across two. So this isn't running from a problem — it's choosing focus."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Uses your true reason (which you already told Vinny), stays positive about Interex, and lands on "choosing focus" rather than complaining. Avoid any bitterness.</p>
+</div></div>
+
+<div class="qa"><button class="q">Tell me about a time you had to learn something difficult quickly.</button>
+<div class="a">
+<div class="label">Model answer (STAR)</div>
+<p><strong>Situation:</strong> "When I joined Interex I had a mechanical background and no formal electronics training, but I had to sell semiconductor IP credibly." <strong>Task:</strong> "I needed to understand PLLs, the IP landscape and the customers fast enough to hold my own in technical conversations." <strong>Action:</strong> "I read datasheets, went into the product flows, taught myself the terminology, and leaned on engineers and AI tools to fill gaps — and I tested my understanding by explaining it back to people." <strong>Result:</strong> "Within a few months I was running customer conversations and contributing to live IP engagements. That self-driven ramp is exactly what I'd bring here."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Directly answers Vinny's main concern — can she learn the technology? — with concrete proof you already have.</p>
+</div></div>
+
+<div class="qa"><button class="q">Where do you see yourself in a few years?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"Honestly, becoming the go-to IP salesperson in India — which is the goal you and I both talked about. I want to own major accounts end-to-end, build a real pipeline across the fabless ecosystem, and eventually help build and mentor a small team as the India business grows. The niche is small enough that doing it exceptionally well is genuinely achievable, and that's what I'm aiming for."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Mirrors back the exact ambition Vinny voiced ("most sought-after IP salesperson in India"), which signals alignment.</p>
+</div></div>
+
+<h2>The hard one (don't skip)</h2>
+<div class="qa"><button class="q">You currently represent Silicon Creations — our direct competitor. How do we know we can trust you, and what about confidentiality?</button>
+<div class="a">
+<div class="label">Model answer</div>
+<p>"It's a fair question, and the fact that you're asking it tells me you take the trust side of this business as seriously as I do. Two things. First, I'll honour every confidentiality obligation I have to Interex — I won't bring their confidential roadmaps or pricing here, and that same discipline is exactly what protects <em>your</em> confidential information once I'm representing you. Second, what I do bring is legitimate and valuable: a real understanding of how this market buys, the customer relationships and the competitive landscape — including an honest read on where Analog Bits is stronger and where it has to compete harder. That's market knowledge, not anyone's trade secrets. In a two-player niche, a salesperson who's trustworthy on <em>both</em> sides of a confidence is the only kind worth having."</p>
+<div class="label">Why it works</div>
+<p class="muted small">Turns the risk into a trust <em>credential</em>: the discipline that protects Interex is the same discipline that will protect Analog Bits. Full treatment on page 8.</p>
+</div></div>
+
+<h2>Quick self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">What's the safest, strongest way to answer "why are you leaving Interex?"</div>
+<div class="opts">
+<button data-opt="a">Explain in detail how badly vendor management is run there.</button>
+<button data-opt="b">Say you're leaving purely for more money.</button>
+<button data-opt="c">Frame it as choosing focus — you want to go all-in on IP sales rather than being split into vendor management — while staying positive about Interex.</button>
+<button data-opt="d">Say you're not sure, you're just exploring.</button>
+</div>
+<div class="fb">Use your genuine reason (focus), stay gracious about Interex, and avoid any complaint or money-only framing. "Choosing focus, not escaping a problem" is the tone.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m6"><span class="dir">← Prev</span>Sales playbook</button><button class="next" data-go="m8"><span class="dir">Next →</span>Your story</button></div>
+</section>
+
+<section class="module" id="m8">
+<div class="eyebrow">SECTION 08 · YOUR STORY</div>
+<h1 class="module-title">Your story & HR / salary</h1>
+<p class="lede">The technical prep gets you taken seriously. This page is what actually wins the offer on good terms: a clean personal narrative, a confident handling of the competitor question, and a salary conversation you don't undersell.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Tell your narrative with a clear through-line</li><li>Handle the conflict-of-interest question gracefully</li><li>Anchor the salary conversation on the role's value</li></ul></div>
+<h2>Your narrative — the through-line</h2>
+<p>Your CV looks varied (mechanical → Mercedes → ITC → Pegasus → IP sales). Varied is fine <em>if</em> you give it a spine. Your spine is: <strong>"a technical person who kept gravitating to the business side, and deliberately chose semiconductors."</strong></p>
+<div class="card">
+<p style="margin:0 0 8px"><strong>The 60-second version (say it out loud until it's natural):</strong></p>
+<p class="small" style="margin:0">"I trained as a mechanical engineer, but in every role I drifted toward where technology meets business. At Mercedes R&amp;D I did core engineering. At ITC I moved into quantity surveying and business development. At Pegasus — a small aerospace team — I touched selling, finance and the technical work all at once, and realised I liked owning the whole picture. When my father's health brought me home from my Master's plans, I treated it as a chance to commit to something here, and I chose semiconductors deliberately because of where India is heading. I joined Interex in IP sales, ramped fast on Silicon Creations and Menta, and now I want to go all-in on pure IP sales — which is exactly this role."</p>
+</div>
+
+<div class="callout tip">
+<span class="ttl">On the personal details from the first call</span>
+You shared a lot personally (father's surgery, being the only daughter, the Master's you deferred). That built genuine rapport with Vinny — keep that warmth. But in the interview, mention the personal context <em>briefly</em> and pivot quickly to the professional point: it explains a decision, it doesn't define you. One sentence on "family circumstances brought me home and I chose to commit here," then move on.
+</div>
+
+<h2>Reframing each "gap" as a strength</h2>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>The worry</th><th>The reframe</th></tr></thead>
+<tbody>
+<tr><td>Mechanical degree, not electronics</td><td>"I came in without the electronics background and ramped to running IP conversations within months — that proves I learn technical material fast, which is the real requirement in sales."</td></tr>
+<tr><td>Several roles in a few years</td><td>"Each move was toward the same thing — the business side of technology — and they gave me an unusually broad view: engineering, costing, BD, and now IP sales."</td></tr>
+<tr><td>Relatively early in career for a 'Senior' title</td><td>"I'm already doing the core of this job — selling competing IP into these exact customers. The title reflects the ownership, and I'm ready for it."</td></tr>
+<tr><td>Deferred Master's / time abroad</td><td>"I can pursue a Master's anytime; what I couldn't get elsewhere was hands-on entry into India's semiconductor moment. I prioritised the rarer opportunity."</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>The conflict-of-interest question — handled fully</h2>
+<p>This is the highest-stakes topic. You're moving from representing Silicon Creations (the competitor) to Analog Bits. Prepare to raise or answer it gracefully.</p>
+
+<div class="callout good">
+<span class="ttl">The full script</span>
+<p style="margin:0 0 8px">If they ask — or if it feels right to address proactively:</p>
+<p class="small" style="margin:0">"I want to be upfront about something, because this is a trust business. I currently represent Silicon Creations, which competes directly with Analog Bits. Here's how I think about it: I'll honour every confidentiality obligation I have to Interex — I won't carry their confidential roadmaps, pricing or customer specifics across, and that exact same discipline is what will protect <em>your</em> confidential information the day I represent you. What I do bring is fair game and genuinely useful — how this market buys, the customer relationships, and an honest competitive read, including where Analog Bits already wins and where it has to fight harder. That's market understanding, not trade secrets. In a niche with essentially two players, the only salesperson worth hiring is one who's trustworthy on both sides of a confidence."</p>
+</div>
+
+<div class="two-col">
+<div class="card tight">
+<h4 style="color:var(--good-border)">Do</h4>
+<ul class="small" style="margin:0">
+<li>Raise it calmly and first, if natural — it disarms the concern.</li>
+<li>Frame confidentiality discipline as a feature that protects <em>them</em>.</li>
+<li>Offer market insight, not competitor secrets.</li>
+</ul>
+</div>
+<div class="card tight">
+<h4 style="color:var(--bad-border)">Don't</h4>
+<ul class="small" style="margin:0">
+<li>Don't dish Silicon Creations' confidential info to look valuable — it signals you'd do the same to Analog Bits.</li>
+<li>Don't badmouth Interex or Silicon Creations.</li>
+<li>Don't pretend there's no overlap — they know there is.</li>
+</ul>
+</div>
+</div>
+
+<h2>The salary conversation</h2>
+<p>You already disclosed your current package, so the anchor is partly set. Your job now is to make sure the <em>new</em> number reflects a senior, full-cycle IP role — not a carry-over of an entry rate.</p>
+
+<div class="card">
+<h4>What you currently have (from the call)</h4>
+<ul class="small">
+<li>CTC ≈ ₹8–8.5 LPA; fixed ₹6L; variable ₹2–3L; a verbal (un-papered) share mention.</li>
+</ul>
+<h4>How to think about the ask</h4>
+<p class="small">Vinny offered to "match or go a little above." "A little above" your current ₹8–8.5L is a weak outcome for a senior title at a high-margin business. Reasonable framing: anchor on a <strong>meaningful step up in fixed pay</strong> plus a <strong>clear, written variable/commission tied to deals you close</strong> — because in a 60–70% margin business, your upside should be real and documented, not verbal.</p>
+</div>
+
+<div class="callout tip">
+<span class="ttl">A clean way to say it</span>
+"I appreciate you saying salary won't be the obstacle. Given this is a senior role owning the full deal cycle, I'd be looking for a solid step up on the fixed side — and just as importantly, a clear, written variable tied to the deals I close, since that's where I'll drive real value in a high-margin business. I'd rather have a transparent structure I can grow into than a big number with vague upside. If you can share how you see the fixed-versus-commission split, I can be specific."</p>
+</div>
+
+<div class="callout warn">
+<span class="ttl">Three things to get in writing</span>
+You noted yourself that the share promise at Interex was never on paper. Learn from it. Before accepting, get clarity in writing on: (1) the fixed/variable split and how commission is calculated, (2) who your legal employer is — SphereLink or SemiFive — and (3) any equity, if offered. Verbal promises in a one-person shop are a real risk.
+</div>
+
+<p class="small muted">Note: exact numbers depend on your market and leverage — treat the framing here as a structure to negotiate within, not financial advice. The principle is: anchor on the role's value and insist on a documented, deal-linked variable.</p>
+
+<h2>Smart, non-salary terms to clarify</h2>
+<ul class="clean">
+<li><strong>Stability:</strong> "How is the India entity structured, and how does SemiFive's backing support it?"</li>
+<li><strong>Support:</strong> "Who provides technical / AE support to me on customer calls today, and how does that scale?"</li>
+<li><strong>Team:</strong> "What's the plan for building the India team — would I help hire?"</li>
+<li><strong>Targets:</strong> "What would success look like in my first 6–12 months?"</li>
+<li><strong>Office:</strong> "Would I be based out of the SemiFive Koramangala office?"</li>
+</ul>
+
+<h2>Two things to do before July 1st (Vinny's action items)</h2>
+<div class="card">
+<ol style="margin:0">
+<li><strong>Go through the Analog Bits product pages</strong> (analogbits.com → Products: Clocking, Sensors, I/O, SERDES) and the recent news. You already started this on the call — finish it, and prepare one or two specific, intelligent questions about a product (shows engagement).</li>
+<li><strong>Google SemiFive</strong> and read one Mahesh Tirupattur interview (SemiWiki "2026 Outlook" or the EE Times piece). Reference a specific point from it in the interview — it's the clearest possible signal you did the work.</li>
+</ol>
+</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">During salary talk, what's the most important thing to secure given your Interex experience?</div>
+<div class="opts">
+<button data-opt="a">The highest possible fixed number, regardless of structure.</button>
+<button data-opt="b">A clear, written variable/commission tied to deals you close, plus written clarity on employer and any equity — don't rely on verbal promises.</button>
+<button data-opt="c">Agree to whatever is offered to seem easy to work with.</button>
+<button data-opt="d">Ask for equity only and skip salary.</button>
+</div>
+<div class="fb">You learned at Interex that verbal share promises don't materialise. In a small shop, getting the variable structure, employer, and any equity in writing matters as much as the headline number.</div>
+</div>
+
+
+<div class="pagenav"><button data-go="m7"><span class="dir">← Prev</span>Q&A practice</button><button class="next" data-go="m9"><span class="dir">Next →</span>Checklist</button></div>
+</section>
+
+<section class="module" id="m9">
+<div class="eyebrow">SECTION 09 · CHECKLIST</div>
+<h1 class="module-title">Final checklist & glossary</h1>
+<p class="lede">The night-before page. Run the checklist, lock in the questions you'll ask them, and use the glossary to silence any last-minute panic about a term.</p>
+<div class="objectives"><div class="ttl">In this section</div><ul><li>Run the night-before readiness checklist</li><li>Prepare strong questions to ask them</li><li>Use the glossary to silence any last-minute doubt</li></ul></div>
+<h2>The night before — readiness checklist</h2>
+<div class="card">
+<h4>You should be able to, from memory:</h4>
+<ul class="clean">
+<li>Draw the chip value chain and say where IP sits (Section 3).</li>
+<li>Retell Vinny's Netrasemi → Analog Bits → IMEC → TSMC example.</li>
+<li>Give the one-liner + analogy for PLL, PVT sensors, LDO (Section 4).</li>
+<li>Explain how IP differs from a product and a service, landing on trust + 60–70% margin.</li>
+<li>Name Mahesh (CEO), Alan Rogers (President/CTO), and the TSMC 2025 OIP Partner-of-the-Year award.</li>
+<li>State why Analog Bits + M31 don't overlap and why that's an advantage.</li>
+<li>Say ISM, DLI, MeitY, GeM correctly.</li>
+<li>Deliver your 60-second story and your "why leaving Interex" answer smoothly.</li>
+<li>Handle the Silicon Creations conflict question calmly.</li>
+<li>State your salary framing and the three things to get in writing.</li>
+</ul>
+</div>
+
+<div class="card">
+<h4>Practical:</h4>
+<ul class="clean">
+<li>Finished reading Analog Bits' product pages + one Mahesh interview.</li>
+<li>Prepared 1–2 specific product questions to show engagement.</li>
+<li>Have 4–5 thoughtful questions ready to ask them (below).</li>
+<li>Resume copies / notepad ready; tech tested if it's a video call.</li>
+<li>Know the logistics — time, format, who's attending (Vinny? Mahesh too?).</li>
+</ul>
+</div>
+
+<h2>Questions to ask them (pick 4–5)</h2>
+<p>Asking good questions is half the impression. These signal seriousness and double as your due diligence.</p>
+<div class="two-col">
+<div class="card tight">
+<h4>About the role &amp; success</h4>
+<ul class="small" style="margin:0">
+<li>"What would a successful first 6–12 months look like for this role?"</li>
+<li>"Is the pipeline mostly inbound today, and where do you want me to add outbound?"</li>
+<li>"Which customers or segments are the biggest near-term opportunity?"</li>
+</ul>
+</div>
+<div class="card tight">
+<h4>About support &amp; growth</h4>
+<ul class="small" style="margin:0">
+<li>"Who supports me technically on customer calls, and how does that scale?"</li>
+<li>"How do you see the India team growing — would I help build it?"</li>
+<li>"How does SemiFive's backing support the India business day-to-day?"</li>
+</ul>
+</div>
+</div>
+<div class="card tight">
+<h4>About strategy (shows you think big)</h4>
+<ul class="small" style="margin:0">
+<li>"With chiplets and AI driving demand, where do you see the strongest pull for Analog Bits IP in India over the next two years?"</li>
+<li>"How do you want to position against Silicon Creations here specifically?"</li>
+</ul>
+</div>
+
+<div class="callout tip">
+<span class="ttl">Tone for the day</span>
+Vinny already likes you — he said so plainly. So you're not starting cold; you're confirming a strong impression. Be warm, curious and concrete. Show you did the homework, listen as much as you talk, and let your genuine interest in the technology come through. Confidence here is earned — you've done the work.
+</div>
+
+<hr class="divider">
+
+<h2>Glossary — every term in one place</h2>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Term</th><th>Plain-language meaning</th></tr></thead>
+<tbody>
+<tr><td><strong>IP / IP core</strong></td><td>A pre-designed, pre-verified chip building block that companies license instead of building. What you sell.</td></tr>
+<tr><td><strong>Fabless</strong></td><td>A company that designs chips but owns no factory; outsources manufacturing.</td></tr>
+<tr><td><strong>Foundry / fab</strong></td><td>The factory that manufactures chips on silicon wafers (TSMC, Samsung, etc.).</td></tr>
+<tr><td><strong>SoC</strong></td><td>System on Chip — one chip integrating many functions from dozens of IP blocks.</td></tr>
+<tr><td><strong>Tape-out</strong></td><td>Sending a finished design to the foundry to be manufactured. A point of no easy return.</td></tr>
+<tr><td><strong>VCA</strong></td><td>Value Chain Aggregator — a TSMC partner (e.g. IMEC in India) that bundles small customers to access the foundry.</td></tr>
+<tr><td><strong>IMEC</strong></td><td>TSMC's VCA in India (Bangalore); a major source of inbound leads for Vinny.</td></tr>
+<tr><td><strong>EDA</strong></td><td>Electronic Design Automation — the software to design/verify chips (Synopsys, Cadence).</td></tr>
+<tr><td><strong>Process node</strong></td><td>How advanced the manufacturing is (5nm, 3nm, 2nm). Smaller = newer, denser, lower-power.</td></tr>
+<tr><td><strong>PLL</strong></td><td>Phase-Locked Loop — generates/stabilises the chip's clock. Every chip needs one. Analog Bits' flagship.</td></tr>
+<tr><td><strong>Jitter</strong></td><td>Tiny timing wobble in a clock. Lower jitter = faster, more reliable chip.</td></tr>
+<tr><td><strong>PVT sensor</strong></td><td>On-chip monitor for Process, Voltage, Temperature — the chip's health tracker.</td></tr>
+<tr><td><strong>Droop detector</strong></td><td>Catches sudden voltage dips that could crash the chip.</td></tr>
+<tr><td><strong>LDO</strong></td><td>Low-Dropout Regulator — delivers clean, stable voltage right where it's needed. Analog Bits' newest growth area.</td></tr>
+<tr><td><strong>I/O</strong></td><td>Input/Output — how signals get in and out of the chip.</td></tr>
+<tr><td><strong>SerDes</strong></td><td>Serializer/Deserializer — moves data fast over few wires. Not Analog Bits' forte; M31's strength.</td></tr>
+<tr><td><strong>PHY</strong></td><td>The physical-layer circuit driving a high-speed interface (USB, PCIe, MIPI).</td></tr>
+<tr><td><strong>USB / PCIe / MIPI / DDR / UFS</strong></td><td>Standard interfaces — connectivity, high-speed links, camera/display, memory, storage. M31's interface IP.</td></tr>
+<tr><td><strong>Foundation IP</strong></td><td>The basic bricks — standard-cell libraries, memory compilers, GPIO/ESD I/O. M31 provides these.</td></tr>
+<tr><td><strong>Hard / soft IP</strong></td><td>Hard = fully laid-out, process-validated, drop-in. Soft = flexible design code. Analog/PHY blocks are usually hard.</td></tr>
+<tr><td><strong>Mixed-signal</strong></td><td>Combining analog (clocks, voltage) and digital (1s/0s) on one chip. Analog Bits' domain.</td></tr>
+<tr><td><strong>Pinless / core-powered</strong></td><td>Analog Bits' signature — analog blocks placeable anywhere without dedicated supply pins.</td></tr>
+<tr><td><strong>Chiplet</strong></td><td>Several smaller chips connected in one package instead of one huge chip. Drives demand for I/O + interfaces.</td></tr>
+<tr><td><strong>License fee (NRE)</strong></td><td>Upfront fee to license IP for a design.</td></tr>
+<tr><td><strong>Royalty</strong></td><td>Per-chip fee paid as the customer ships volume.</td></tr>
+<tr><td><strong>NDA</strong></td><td>Non-Disclosure Agreement — signed so the customer can share confidential design info.</td></tr>
+<tr><td><strong>ISM</strong></td><td>India Semiconductor Mission — the government's ~US$10bn semiconductor programme.</td></tr>
+<tr><td><strong>DLI</strong></td><td>Design Linked Incentive — reimburses up to 50% of design cost; funds your customers.</td></tr>
+<tr><td><strong>MeitY</strong></td><td>Ministry of Electronics &amp; IT — owns ISM and DLI. (Not "METI" — that's Japan.)</td></tr>
+<tr><td><strong>C-DAC</strong></td><td>Government agency implementing the DLI scheme.</td></tr>
+<tr><td><strong>GeM</strong></td><td>Government e-Marketplace — portal for selling to government bodies; SphereLink is on it.</td></tr>
+<tr><td><strong>OIP</strong></td><td>TSMC's Open Innovation Platform — its partner ecosystem. Analog Bits won its 2025 Analog IP Partner of the Year.</td></tr>
+<tr><td><strong>Netrasemi</strong></td><td>Trivandrum fabless startup; built NETRA A2000 edge-AI SoC on TSMC 12nm. An Analog Bits customer.</td></tr>
+<tr><td><strong>Silicon Creations</strong></td><td>Analog Bits' main PLL/clocking competitor. You currently represent them via Interex.</td></tr>
+<tr><td><strong>SemiFive</strong></td><td>Korean AI-ASIC design house; Analog Bits' parent; has an India office (Koramangala).</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout good">
+<span class="ttl">Last word</span>
+You walk in with a real, rare advantage: you already sell competing IP into these exact customers, and you've now done deeper homework on Analog Bits, M31, the market and the people than almost anyone could. Be warm, be specific, listen well — and let it show that this is the focused work you actually want to do. Good luck on July 1st.
+</div>
+
+
+<div class="pagenav"><button data-go="m8"><span class="dir">← Prev</span>Your story</button><button class="next" disabled><span class="dir">Done</span>End of prep</button></div>
+</section>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var order=['m0','m1','m2','m3','m4','m5','m6','m7','m8','m9'];
+  var visited={};
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sidebar=document.getElementById('sidebar'), scrim=document.getElementById('scrim');
+
+  function show(id){
+    order.forEach(function(m){
+      var sec=document.getElementById(m);
+      if(sec) sec.classList.toggle('active', m===id);
+    });
+    navLinks.forEach(function(a){ a.classList.toggle('active', a.dataset.go===id); });
+    visited[id]=true;
+    navLinks.forEach(function(a){ if(visited[a.dataset.go]) a.classList.add('visited'); });
+    var pct=Math.round(Object.keys(visited).length/order.length*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progLabel').textContent=pct+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    document.querySelector('.content').scrollTop=0;
+    sidebar.classList.remove('open'); scrim.classList.remove('show');
+  }
+  // nav clicks
+  navLinks.forEach(function(a){ a.addEventListener('click',function(){ show(a.dataset.go); }); });
+  // tile + prev/next clicks (delegated)
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-go]');
+    if(t && !t.matches('#nav a')){ show(t.dataset.go); }
+  });
+  // mobile menu
+  document.getElementById('menuBtn').addEventListener('click',function(){ sidebar.classList.toggle('open'); scrim.classList.toggle('show'); });
+  scrim.addEventListener('click',function(){ sidebar.classList.remove('open'); scrim.classList.remove('show'); });
+
+  // Q&A accordions
+  document.querySelectorAll('.qa>button.q').forEach(function(b){ b.addEventListener('click',function(){ b.parentElement.classList.toggle('open'); }); });
+  // reveal buttons
+  document.querySelectorAll('.reveal-btn').forEach(function(b){ b.addEventListener('click',function(){ var box=b.nextElementSibling; if(box&&box.classList.contains('reveal-box')){ box.classList.toggle('show'); b.textContent=box.classList.contains('show')?(b.dataset.hide||'Hide'):(b.dataset.show||b.textContent); } }); });
+  // quizzes
+  document.querySelectorAll('.quiz').forEach(function(q){ var correct=q.dataset.correct,fb=q.querySelector('.fb');
+    q.querySelectorAll('.opts button').forEach(function(btn){ btn.addEventListener('click',function(){ if(q.dataset.done)return; q.dataset.done='1'; var pick=btn.dataset.opt; q.querySelectorAll('.opts button').forEach(function(o){o.disabled=true;}); if(pick===correct){btn.classList.add('correct');}else{btn.classList.add('wrong'); var r=q.querySelector('.opts button[data-opt="'+correct+'"]'); if(r)r.classList.add('correct');} if(fb)fb.classList.add('show'); }); });
+  });
+
+  show('m0');
+})();
+</script>
+</body>
+</html>
