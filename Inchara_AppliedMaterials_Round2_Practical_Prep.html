@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 2 — Buyer R2613141 · Applied Materials</title>
+<style>
+  :root{
+    --paper:#f4f5f1;
+    --card:#ffffff;
+    --ink:#18241f;
+    --mute:#5e6e65;
+    --line:#d8ddd6;
+    --green:#155e46;
+    --green-deep:#0d3f2e;
+    --green-soft:#e2efe7;
+    --orange:#cf4f1a;
+    --orange-soft:#fbeadf;
+    --mark:#f7edb5;
+    --font-d:"Palatino Linotype",Palatino,"Book Antiqua","Iowan Old Style",Georgia,serif;
+    --font-b:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-m:"SFMono-Regular",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-b);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:70px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:48px 0 34px;
+    border-bottom:3px solid var(--green-deep);
+    position:relative;
+    background:
+      linear-gradient(180deg, #eef1ec 0%, var(--paper) 100%);
+  }
+  .eyebrow{
+    font-family:var(--font-m);font-size:11.5px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--green);margin-bottom:16px;
+  }
+  h1.title{
+    font-family:var(--font-d);font-weight:700;color:var(--green-deep);
+    font-size:clamp(30px,7vw,50px);line-height:1.04;letter-spacing:-.015em;
+  }
+  h1.title .thin{color:var(--ink);font-weight:400;font-style:italic}
+  .sub{margin-top:14px;color:var(--mute);font-size:15px;max-width:600px}
+  .stamp{
+    display:inline-block;margin-top:22px;
+    font-family:var(--font-m);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--green-deep);border:2px dashed var(--green);
+    padding:8px 16px;border-radius:4px;transform:rotate(-2deg);
+    background:rgba(255,255,255,.6);
+  }
+  .factbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+  .fact{
+    font-family:var(--font-m);font-size:12px;color:var(--ink);
+    background:var(--card);border:1px solid var(--line);
+    padding:7px 12px;border-radius:5px;
+  }
+  .fact b{color:var(--green);font-weight:600}
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:20;
+    background:rgba(244,245,241,.93);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+  nav.toc .wrap::-webkit-scrollbar{display:none}
+  nav.toc a{
+    flex:0 0 auto;font-family:var(--font-m);font-size:11.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--mute);text-decoration:none;
+    padding:7px 12px;border-radius:5px;white-space:nowrap;transition:.15s;
+  }
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--green-deep);background:var(--green-soft);outline:none}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  .file-tab{
+    display:inline-block;font-family:var(--font-m);font-size:11.5px;
+    letter-spacing:.2em;text-transform:uppercase;color:#fff;
+    background:var(--green-deep);padding:5px 12px;border-radius:3px;margin-bottom:14px;
+  }
+  h2{
+    font-family:var(--font-d);font-weight:700;color:var(--green-deep);
+    font-size:clamp(23px,4.6vw,32px);line-height:1.12;margin-bottom:8px;letter-spacing:-.01em;
+  }
+  h2 .thin{color:var(--ink);font-weight:400;font-style:italic}
+  .lead{color:var(--mute);font-size:15px;margin-bottom:24px;max-width:660px}
+  h3{font-family:var(--font-b);font-weight:700;color:var(--ink);font-size:17.5px;margin:28px 0 10px}
+  p{margin-bottom:12px}
+  strong{color:var(--green-deep)}
+  mark{
+    background:linear-gradient(180deg, transparent 8%, var(--mark) 8%, var(--mark) 88%, transparent 88%);
+    color:var(--ink);padding:0 2px;font-weight:600;
+  }
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:14px 0;box-shadow:0 1px 2px rgba(24,36,31,.04)}
+  .card.green{border-left:4px solid var(--green)}
+  .card.orange{border-left:4px solid var(--orange);background:#fffaf6}
+
+  ul{margin:6px 0 12px;padding-left:20px}
+  li{margin-bottom:7px}
+  ul.tick{list-style:none;padding-left:0}
+  ul.tick li{position:relative;padding-left:26px}
+  ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:11px;height:11px;border:2px solid var(--green);border-radius:3px}
+
+  /* tables */
+  table.grid{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  table.grid th{
+    text-align:left;font-family:var(--font-m);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#fff;background:var(--green-deep);padding:9px 12px;
+  }
+  table.grid td{padding:10px 12px;border-bottom:1px solid #eceee9;vertical-align:top}
+  table.grid tr:last-child td{border-bottom:none}
+  table.grid td:first-child{color:var(--green-deep);font-weight:600;width:34%}
+
+  /* Q&A accordions */
+  details.qa{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden}
+  details.qa[open]{border-color:var(--green)}
+  details.qa summary{
+    list-style:none;cursor:pointer;padding:15px 46px 15px 18px;position:relative;
+    font-weight:600;color:var(--ink);font-size:15.5px;line-height:1.42;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  details.qa summary::after{
+    content:"+";position:absolute;right:16px;top:12px;font-size:21px;
+    color:var(--green);font-family:var(--font-m);line-height:1;
+  }
+  details.qa[open] summary::after{content:"–"}
+  details.qa summary:hover{color:var(--green-deep)}
+  details.qa summary:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+  .qa-body{padding:0 18px 18px;font-size:14.5px}
+
+  .chip{
+    font-family:var(--font-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    display:inline-block;margin:0 6px 8px 0;padding:4px 9px;border-radius:3px;
+  }
+  .chip.testing{background:var(--green-soft);color:var(--green-deep)}
+  .chip.trap{background:var(--orange-soft);color:var(--orange)}
+
+  .trapbox{
+    background:var(--orange-soft);border-left:3px solid var(--orange);
+    border-radius:0 8px 8px 0;padding:11px 14px;margin:10px 0;font-size:13.5px;color:#7c3a17;
+  }
+  .trapbox b{color:var(--orange);font-family:var(--font-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  .say{
+    background:var(--green-soft);border-left:3px solid var(--green);
+    border-radius:0 8px 8px 0;padding:11px 14px;margin:12px 0;font-size:14px;color:var(--green-deep);
+    font-style:italic;
+  }
+  .say b{font-family:var(--font-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:4px;font-style:normal}
+
+  /* answer ladder */
+  .ladder{list-style:none;padding:0;margin:14px 0 8px;counter-reset:step}
+  .ladder li{
+    counter-increment:step;position:relative;padding:0 0 18px 44px;margin:0;
+  }
+  .ladder li::before{
+    content:counter(step);position:absolute;left:0;top:0;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--green-deep);color:#fff;
+    font-family:var(--font-m);font-size:13px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ladder li::after{
+    content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1.5px;
+    background:var(--line);
+  }
+  .ladder li:last-child::after{display:none}
+  .ladder li b{color:var(--green-deep)}
+
+  .note{font-size:13px;color:var(--mute);font-style:italic;margin-top:8px}
+  .group-label{
+    font-family:var(--font-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mute);margin:26px 0 6px;padding-bottom:6px;border-bottom:1px dashed var(--line);
+  }
+
+  footer{padding:42px 0 10px;text-align:center;color:var(--mute);font-size:13px}
+  footer .you{color:var(--green-deep);font-family:var(--font-d);font-style:italic;font-size:18px;margin-bottom:8px}
+
+  @media (max-width:600px){
+    table.grid td:first-child{width:auto}
+    table.grid th,table.grid td{font-size:13px;padding:8px}
+  }
+  @media print{
+    nav.toc{display:none}
+    details.qa{border:1px solid #bbb}
+    details.qa summary::after{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Buyer · Job ID R2613141 · Applied Materials · Bangalore</div>
+    <h1 class="title">Round Two.<br><span class="thin">The practical round.</span></h1>
+    <p class="sub">Round 1 showed their style: real buyer situations, and follow-ups that knock out textbook answers. This file gives you the company cold, the JD decoded, the MRP language they use, and an answer ladder for every scenario they're likely to throw.</p>
+    <div class="stamp">Interview · Tomorrow · Be Ready</div>
+    <div class="factbar">
+      <span class="fact"><b>Exp asked</b> 2–5 yrs (you: ~2)</span>
+      <span class="fact"><b>Shifts</b> 2–11 PM &amp; 3 PM–12 AM</span>
+      <span class="fact"><b>Key line</b> "Stability is one of the most important criteria"</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#debrief">Debrief</a>
+    <a href="#company">Company File</a>
+    <a href="#jd">JD Decoded</a>
+    <a href="#mrp">MRP Crash Course</a>
+    <a href="#scenarios">Scenario Bank</a>
+    <a href="#fit">Stability & Fit</a>
+    <a href="#ask">Ask Them</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- ================= DEBRIEF ================= -->
+<section id="debrief">
+  <div class="wrap">
+    <span class="file-tab">File 00 · Round-1 Debrief</span>
+    <h2>What round 1 taught us <span class="thin">— and the mindset shift for round 2</span></h2>
+    <p class="lead">They asked what you knew about the company and its products, then hit you with a live scenario: you committed an order on an estimate, the need disappeared — and when you said "I'll use the material elsewhere," they blocked it: <em>"I don't want it anywhere. Now what?"</em></p>
+
+    <div class="card orange">
+      <p style="margin-bottom:8px"><strong>Why they blocked your answer:</strong> "use it elsewhere" is a <em>planning</em> answer. They were testing whether you know the <mark>buyer's commercial toolkit</mark> — the levers you pull when material genuinely cannot be consumed: reschedule, cancellation terms, liability negotiation, settlement.</p>
+      <p style="margin-bottom:0">The interviewer wasn't being difficult. In semiconductor equipment, demand swings hard and orders get cancelled with vendors mid-production. Handling that <em>commercially</em> is a daily part of this exact job — the JD even names the tools: <mark>pull-ins, pushouts, planner orders</mark>.</p>
+    </div>
+
+    <h3>The mindset for tomorrow</h3>
+    <ul class="tick">
+      <li><strong>Answer in ladders, not one-liners.</strong> For every scenario: verify the situation → check the paperwork → try the cheapest lever first → escalate the levers → document and prevent. Interviewers keep pushing until your ladder runs out — so bring a tall ladder.</li>
+      <li><strong>When they block a step, climb to the next one calmly.</strong> "If that's not possible, then my next step is…" That composure under pushback IS the test.</li>
+      <li><strong>Use their vocabulary.</strong> Pushout, pull-in, cancellation liability, exception messages, line-down. It signals you're already one of them.</li>
+      <li><strong>It's okay to end a ladder with escalation.</strong> The JD says negotiation "under supervision" — saying "at that point I'd bring my manager in with a clear summary of options and costs" is a correct final rung, not a weakness.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= COMPANY FILE ================= -->
+<section id="company">
+  <div class="wrap">
+    <span class="file-tab">File 01 · Company Command File</span>
+    <h2>Everything you need to know <span class="thin">about Applied Materials</span></h2>
+    <p class="lead">They already asked "what do you know about us and our products" in round 1 — expect it again, deeper. This file gives you the facts, the products in plain language, the India story, and a ready 90-second script.</p>
+
+    <h3>Snapshot — the hard facts</h3>
+    <table class="grid">
+      <tr><th>Fact</th><th>Detail</th></tr>
+      <tr><td>What it is</td><td>World's #1 supplier of semiconductor and display manufacturing equipment ("materials engineering solutions")</td></tr>
+      <tr><td>Founded / HQ</td><td>1967 · Santa Clara, California · NASDAQ: AMAT</td></tr>
+      <tr><td>CEO</td><td>Gary Dickerson — President since 2012, CEO since 2013</td></tr>
+      <tr><td>Scale</td><td>Revenue ~$28.5B in FY2025 — its sixth consecutive year of growth; ~35,000 people; operations in 24 countries</td></tr>
+      <tr><td>Tagline</td><td>"Make Possible®"</td></tr>
+      <tr><td>Customers</td><td>The world's chipmakers — TSMC, Samsung, Intel, Micron, SK hynix — plus display makers</td></tr>
+      <tr><td>Main competitors</td><td>Lam Research, Tokyo Electron, KLA. (ASML dominates lithography — a step Applied doesn't play in.)</td></tr>
+    </table>
+
+    <h3>What they actually make — in plain language</h3>
+    <p>Applied doesn't make chips. It makes the <mark>machines that make chips</mark>. A chip is built on a silicon wafer through hundreds of steps, and Applied's tools perform most of them:</p>
+    <table class="grid">
+      <tr><th>Process step</th><th>What it does · Applied's flagship platforms</th></tr>
+      <tr><td>Deposition (CVD / PVD / ALD / epitaxy)</td><td>Lays down ultra-thin films of material on the wafer — atoms-thick layers. Platforms: <strong>Endura</strong>, <strong>Centura</strong>, <strong>Producer</strong>.</td></tr>
+      <tr><td>Etch</td><td>Selectively removes material to carve the circuit patterns. Platform: <strong>Sym3</strong>.</td></tr>
+      <tr><td>Ion implantation</td><td>Fires ions into silicon to change its electrical properties (from the Varian acquisition, 2011).</td></tr>
+      <tr><td>CMP — chemical mechanical planarization</td><td>Polishes each layer perfectly flat before the next one. Platform: <strong>Reflexion</strong>.</td></tr>
+      <tr><td>Metrology &amp; inspection</td><td>Measures and finds defects at nanometre scale. Platform: <strong>SEMVision</strong> e-beam.</td></tr>
+      <tr><td>Advanced packaging</td><td>Stacks and connects finished chips (key for AI memory like HBM).</td></tr>
+      <tr><td>Display</td><td>Equipment for making large OLED/LCD screens.</td></tr>
+    </table>
+    <p class="note">One honest line if pushed deep: "I'm not an equipment engineer — but I know Applied's tools cover deposition, etch, implant, CMP and inspection, and that each tool is a precision machine built from thousands of engineered parts. That's exactly why the buyer's job here matters."</p>
+
+    <h3>The three business segments</h3>
+    <ul>
+      <li><strong>Semiconductor Systems</strong> (~3/4 of revenue) — the chip-making equipment itself.</li>
+      <li><strong>Applied Global Services (AGS)</strong> — service, spares and upgrades for the installed base of tools running in fabs worldwide.</li>
+      <li><strong>Display</strong> — equipment for screens.</li>
+    </ul>
+
+    <h3>The AI growth story — why now is a big moment</h3>
+    <div class="card green">
+      <p style="margin-bottom:8px">AI is driving huge demand for advanced chips, and advanced chips need new architectures — <mark>gate-all-around transistors, backside power delivery, and advanced packaging / high-bandwidth memory</mark> — all of which need more of Applied's kind of materials engineering. FY2025 was their sixth straight growth year, and management has said they're preparing operations and suppliers for <mark>higher demand from the second half of 2026</mark>.</p>
+      <p style="margin-bottom:0"><strong>Use that last point:</strong> a company preparing its supply chain for a demand ramp is hiring buyers exactly for that. You can say it — it shows you follow their business.</p>
+    </div>
+
+    <h3>The India story — know this cold, you're interviewing in Bangalore</h3>
+    <ul>
+      <li>Applied has been in India for <strong>20+ years</strong>, operating across <strong>six sites</strong>, with Bangalore as the hub — one of its largest operations outside the US, spanning R&amp;D, product development, IT and operations.</li>
+      <li>In 2023 it announced a <strong>$400 million collaborative engineering center in Bangalore</strong> (over four years) to develop semiconductor equipment sub-systems and components with suppliers and academia — expected to support over $2B of investment and create 500+ advanced engineering jobs.</li>
+      <li>It runs a <strong>validation center in Bengaluru capable of 300-mm wafer processing</strong> — a first for private industry in India — and partners with IISc Bangalore and IIT Bombay.</li>
+      <li>It's a key player in the <strong>India Semiconductor Mission</strong> ecosystem. Country President: Srinivas Satya.</li>
+    </ul>
+    <p class="note">Why this matters for your role: a growing engineering + supplier ecosystem in India means growing local procurement. You're joining a site that's expanding, not just supporting HQ.</p>
+
+    <h3>Your 90-second script — "What do you know about Applied Materials?"</h3>
+    <div class="say"><b>Say this</b>"Applied Materials is the world's largest semiconductor and display equipment company — you make the machines that chipmakers like TSMC, Samsung and Intel use to build chips. Founded in 1967, headquartered in Santa Clara, led by Gary Dickerson, with revenue around 28 billion dollars in fiscal 2025 — the sixth straight year of growth. The tools cover most steps of chip-making: deposition, etch, ion implant, CMP polishing, and inspection — platforms like Endura and Producer — plus the AGS services business and display equipment. What excites me is the AI inflection: gate-all-around transistors and advanced packaging are driving demand, and Applied has said it's preparing its operations and supply chain for a bigger ramp from late 2026. And India is central to that — 20-plus years here, six sites, and a 400-million-dollar engineering center coming up in Bangalore to co-develop equipment components with suppliers. For a buyer, that's the exciting part: every tool is thousands of precision parts, so procurement here directly decides whether tools ship on time."</div>
+
+    <h3>The bridge they love — products → your job</h3>
+    <p>If they ask "why does what we make matter to you as a buyer," this is the answer:</p>
+    <div class="say"><b>Say this</b>"Each of your tools is a precision machine assembled from thousands of built-to-print and OEM parts — chambers, robotics, RF components, electronics — many with long lead times and exacting specs. One late or off-spec part can hold a multi-million-dollar tool from shipping. So the buyer's discipline — accurate MRP data, realistic lead times, tight supplier follow-up, clean pull-ins and pushouts — isn't back-office work here; it's directly tied to revenue."</div>
+  </div>
+</section>
+
+<!-- ================= JD DECODED ================= -->
+<section id="jd">
+  <div class="wrap">
+    <span class="file-tab">File 02 · JD Decoded</span>
+    <h2>The JD, line by line <span class="thin">— what each ask really means, and your proof</span></h2>
+    <p class="lead">This JD is more operational than the last round's description — it's an MRP-driven tactical buyer role. That's good news: it maps closely to what you already do. Here's every requirement translated, with the evidence line you give.</p>
+
+    <table class="grid">
+      <tr><th>JD asks for</th><th>What it means → your proof</th></tr>
+      <tr><td>RFQs, evaluate proposals, negotiate pricing &amp; terms</td><td>Classic sourcing loop. <em>Proof:</em> "I float RFQs, build comparison sheets, and negotiate price and payment terms for packaging and raw materials — I've finalised vendors end-to-end."</td></tr>
+      <tr><td>Manage <strong>non-strategic suppliers</strong>, POs end-to-end</td><td>Non-strategic = the tactical/transactional supplier base a buyer owns directly (strategic suppliers sit with commodity managers). <em>Proof:</em> "I independently own my vendor base — sourcing, POs, follow-up, delivery, closure."</td></tr>
+      <tr><td>Strong MRP knowledge; <strong>pull-ins, pushouts, planner orders</strong></td><td>The heart of the role — see the MRP crash course below. <em>Proof:</em> "On D365 I work from system-generated requirements daily and adjust orders when demand shifts — the pull-in/pushout logic is the same."</td></tr>
+      <tr><td>Negotiation <strong>under supervision</strong></td><td>They expect a junior-mid buyer who escalates big calls. Perfect for your level — say you negotiate day-to-day terms yourself and bring leadership in for high-value or high-liability calls.</td></tr>
+      <tr><td>Inventory coordination with Mfg, Engineering, Accounting, Receiving</td><td><em>Proof:</em> "I coordinate daily with production, stores and finance — resolving receipt discrepancies and keeping stock aligned to plan. I'm also a 5S auditor, so process discipline is a habit."</td></tr>
+      <tr><td>Create, adjust, track, <strong>close</strong> POs</td><td>Note "close" — they care about clean PO hygiene, not just placing orders. Mention you close out delivered POs and keep the open-order book clean.</td></tr>
+      <tr><td>Communication, follow-ups, <strong>escalate delays</strong></td><td><em>Proof:</em> your expedite stories. Emphasise you escalate early with facts, never sit on bad news.</td></tr>
+      <tr><td>Documentation &amp; compliance</td><td>Procurement policy, records, controls. Mention 3-way match discipline and that you never bypass approval workflows even under urgency.</td></tr>
+      <tr><td><strong>"Stability in jobs is one of the most important criteria"</strong></td><td>A direct signal — they will probe why you're moving and whether you'll stay. Full answer in File 05.</td></tr>
+      <tr><td>2–5 years experience</td><td>You're at ~2 years (Nov 2024 → now). Say <mark>"coming up on two years of hands-on buying"</mark> — you're inside the band, at its start. Don't apologise for it.</td></tr>
+      <tr><td>Shifts: 2–11 PM <strong>and</strong> 3 PM–12 AM</td><td>Two windows now, not one — likely rotation. Confirm comfort with <em>both</em> explicitly (File 05).</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= MRP CRASH COURSE ================= -->
+<section id="mrp">
+  <div class="wrap">
+    <span class="file-tab">File 03 · MRP Crash Course</span>
+    <h2>Speak MRP <span class="thin">— the vocabulary this JD is written in</span></h2>
+    <p class="lead">The JD says: "review MRP regularly and execute pull-ins, pushouts and planner orders." Learn these five terms and the daily loop, and you'll sound like you've done this job before.</p>
+
+    <h3>The five terms</h3>
+    <table class="grid">
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td>MRP</td><td>Material Requirements Planning — the system engine that compares demand (what production needs, and when) against supply (stock + open POs) and tells the buyer what action to take.</td></tr>
+      <tr><td>Planned / planner order</td><td>A system-generated proposal to buy: "you'll be short of part X on date Y — order Z quantity." The buyer converts it into a requisition/PO after sanity-checking quantity, date and source.</td></tr>
+      <tr><td>Pull-in</td><td>Demand moved <em>earlier</em> → ask the supplier to deliver an existing order sooner than the PO date. Tools: check vendor's build status, partial shipments, premium freight.</td></tr>
+      <tr><td>Pushout</td><td>Demand moved <em>later</em> → reschedule the delivery to a later date. The cheapest way to avoid excess inventory — always preferred over cancelling.</td></tr>
+      <tr><td>Cancel</td><td>Demand disappeared → cancel the order, subject to the PO's cancellation terms and negotiation of any <mark>cancellation liability</mark> (see Scenario 1).</td></tr>
+    </table>
+
+    <h3>The buyer's daily MRP loop — describe this as your workflow</h3>
+    <ol class="ladder">
+      <li><b>Run/review MRP exceptions.</b> The system flags action messages on your parts: expedite (pull-in), postpone (pushout), cancel, or new planned orders.</li>
+      <li><b>Sanity-check before acting.</b> Is the demand change real and stable, or noise? Check with planning before disturbing a supplier — flip-flopping dates destroys supplier trust.</li>
+      <li><b>Execute the actions.</b> Convert planned orders to POs; send reschedule requests; confirm new dates with suppliers in writing.</li>
+      <li><b>Keep the data honest.</b> Update PO dates, lead times and costs in the system so the next MRP run reflects reality — the JD calls this data integrity.</li>
+      <li><b>Follow up and close.</b> Track confirmations, chase deliveries at risk, close completed POs.</li>
+    </ol>
+
+    <h3>Supporting vocabulary — one line each</h3>
+    <ul>
+      <li><strong>Lead time</strong> — order-to-delivery time; the single most important number to keep accurate in the system.</li>
+      <li><strong>Safety stock</strong> — buffer held against variability; more buffer = fewer fires but more cash tied up.</li>
+      <li><strong>MOQ / SPQ</strong> — minimum order quantity / standard pack quantity a supplier will accept; often forces buying more than MRP asks.</li>
+      <li><strong>Line-down</strong> — production stopped for want of a part; the emergency that outranks everything.</li>
+      <li><strong>Cancellation liability</strong> — what you owe a supplier for work already done when you cancel; depends on how far they've progressed (raw material → work-in-progress → finished goods) and whether the part is custom or standard.</li>
+      <li><strong>Open order book</strong> — all your live POs; a clean, accurate book is the mark of a disciplined buyer.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SCENARIO BANK ================= -->
+<section id="scenarios">
+  <div class="wrap">
+    <span class="file-tab">File 04 · The Scenario Bank</span>
+    <h2>Practical questions <span class="thin">— with the answer ladder for each</span></h2>
+    <p class="lead">This is the round. Each scenario shows what they're testing, the trap that catches weaker candidates, and the step-by-step ladder to climb — so when they block one step, you calmly take the next.</p>
+
+    <div class="group-label">The round-1 question — done right this time</div>
+
+    <details class="qa" open>
+      <summary>1 · "You ordered against an estimate. The requirement is gone. You can't use the material anywhere else. Now what?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: cancellation liability &amp; commercial levers</span>
+        <div class="trapbox"><b>The trap</b>Operational answers — "use it elsewhere," "keep it in stock," "return it" — they'll block each one. They want the commercial ladder.</div>
+        <ol class="ladder">
+          <li><b>Verify the demand change first.</b> Is it cancelled or just delayed? Confirm with planning before touching the supplier — because the answer decides everything.</li>
+          <li><b>If delayed → negotiate a pushout, not a cancellation.</b> Reschedule delivery to when demand returns. Cheapest lever; supplier keeps the order, we avoid dead stock.</li>
+          <li><b>Check the PO / contract terms.</b> What do our cancellation clauses say? What notice window? Is the item standard-catalog or custom / built-to-print? That sets my negotiating position.</li>
+          <li><b>Freeze further work.</b> Ask the supplier to stop immediately — every day they keep building increases the liability.</li>
+          <li><b>Negotiate liability by stage of completion.</b> Raw material only? Ask them to return it to their supplier or divert to other customers — minimal cost. Work-in-progress? Negotiate actual costs incurred, not full price. Finished goods, standard part? They can resell — small or no liability. Finished, custom part? That's the worst case — negotiate a settlement on cost, not price, with no margin on cancelled work.</li>
+          <li><b>Offer creative settlements before cash.</b> Partial acceptance now, balance cancelled; supplier holds stock for a defined window in case demand returns; a credit note adjusted against future orders; a reduced restocking fee. Vendors prefer future business over a fight.</li>
+          <li><b>Escalate and document honestly.</b> Summarise the options and costs for my manager, book the agreed liability transparently with finance, and keep records clean — no hiding a bad outcome.</li>
+          <li><b>Prevent the repeat.</b> Review why the estimate missed; order in smaller lots against a blanket agreement; add reschedule windows and liability caps to PO terms; agree liability matrices with regular suppliers up front.</li>
+        </ol>
+        <div class="say"><b>The closing line</b>"So my sequence is: verify, prefer a pushout, stop work, then negotiate the liability down based on how far they've built and what the terms say — and settle creatively, protecting the relationship. And afterwards, fix the process so the exposure is smaller next time."</div>
+      </div>
+    </details>
+
+    <div class="group-label">MRP &amp; delivery scenarios</div>
+
+    <details class="qa">
+      <summary>2 · "Production suddenly needs the material three weeks earlier than the PO date. What do you do?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: pull-in / expedite execution</span>
+        <ol class="ladder">
+          <li><b>Confirm the real need-date and quantity</b> with planning — expedites are expensive; make sure it's real.</li>
+          <li><b>Call the supplier and check build status.</b> Where is my order — raw material, in production, finished? That tells me what's physically possible.</li>
+          <li><b>Ask for a partial pull-in.</b> Ship whatever is ready now, balance on the original date — often enough to keep the line running.</li>
+          <li><b>Trade for speed.</b> Overtime, priority slotting, premium/air freight — and weigh that cost against the cost of a line-down, with my manager for approval.</li>
+          <li><b>Bridge from alternates if needed</b> — an approved second source or nearby stock for a small bridge quantity.</li>
+          <li><b>Update the system and communicate</b> — new dates in the PO, honest ETA to production, daily tracking until it lands.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>3 · "MRP shows the requirement moved out by two months, but the vendor is about to ship. Handle it."</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: pushout discipline</span>
+        <div class="trapbox"><b>The trap</b>Saying "cancel it." A pushout almost always beats a cancellation — and jumping to cancel signals you don't know the cost difference.</div>
+        <ol class="ladder">
+          <li><b>Check the signal is stable</b> — one MRP run can be noise; confirm with planning before disturbing the supplier.</li>
+          <li><b>Request the reschedule before it ships</b> — once it's on a truck, options shrink. Ask to hold and deliver at the new date.</li>
+          <li><b>Negotiate holding terms if they push back</b> — brief storage at their end, or split delivery (small qty now, rest later) to share the burden.</li>
+          <li><b>Watch the payment terms</b> — if payment triggers on the original date, align it to the new delivery.</li>
+          <li><b>Update PO dates immediately</b> so the next MRP run is honest, and note the change history.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>4 · "A supplier confirmed delivery, then went quiet. The line goes down in ten days. Walk me through it."</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: escalation &amp; shortage management</span>
+        <ol class="ladder">
+          <li><b>Get the truth today</b> — call, not email; get exact status and a firm recovery date; ask what's blocking them.</li>
+          <li><b>Escalate inside the supplier</b> — if my contact stalls, go to their sales manager / plant head; a confirmed-then-missed commitment justifies it.</li>
+          <li><b>Open parallel options immediately</b> — partial shipment, premium freight, approved alternate source for a bridge quantity. Don't wait for the vendor to fail twice.</li>
+          <li><b>Tell production early with honest dates</b> — they can resequence builds around the gap. Bad news early is manageable; bad news late is a crisis.</li>
+          <li><b>Escalate internally with facts</b> — impact date, options, costs — so my manager can back the recovery plan.</li>
+          <li><b>Afterwards: score it</b> — record the miss in the supplier's delivery performance, hold a corrective-action conversation.</li>
+        </ol>
+        <div class="say"><b>Key line</b>"My rule is: production never gets surprised. The moment a date is at risk, they know, with my recovery plan attached."</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>5 · "Your vendor delivered excess / you discover excess inventory on your parts. What now?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: inventory ownership</span>
+        <ol class="ladder">
+          <li><b>Find the root cause first</b> — over-ordering, demand drop, duplicate PO, MOQ forcing big lots? The cause decides the fix.</li>
+          <li><b>Stop the inflow</b> — push out or cancel remaining open POs on that part (cheapest lever, costs nothing).</li>
+          <li><b>Work the stock down</b> — align with planning to consume it first before any new buys.</li>
+          <li><b>Negotiate with the supplier</b> — return with a restocking fee, or buy-back credit against future orders.</li>
+          <li><b>Fix the setting</b> — correct the MOQ/lot size/safety stock parameter that caused it, so it doesn't rebuild.</li>
+        </ol>
+      </div>
+    </details>
+
+    <div class="group-label">Negotiation &amp; supplier scenarios</div>
+
+    <details class="qa">
+      <summary>6 · "A supplier demands a 15% price increase citing raw material costs. Respond."</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: negotiation method</span>
+        <ol class="ladder">
+          <li><b>Never accept on the call.</b> Acknowledge, ask for the request in writing with a cost breakdown.</li>
+          <li><b>Validate the claim</b> — which cost element rose, by how much? Check commodity indices; raw material is usually only part of their cost, so a 15% input rise doesn't justify 15% on price.</li>
+          <li><b>Counter proportionally</b> — offer the validated portion only, phased in, with a review date to roll it back if inputs fall.</li>
+          <li><b>Trade, don't just resist</b> — longer commitment or better payment terms in exchange for a smaller increase.</li>
+          <li><b>Benchmark quietly</b> — refresh RFQs with alternates so I negotiate from knowledge, not hope.</li>
+          <li><b>Escalate per policy</b> — significant increases go to my manager with my analysis and recommendation.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>7 · "Incoming inspection rejects a delivered lot. What's your process?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: quality + P2P discipline</span>
+        <ol class="ladder">
+          <li><b>Quarantine the lot</b> and gather the evidence — inspection report, photos, spec deviation.</li>
+          <li><b>Notify the supplier formally</b> the same day with the data; raise the rejection/return in the system.</li>
+          <li><b>Solve supply first</b> — replacement on expedite, or sorting/rework if faster and acceptable to quality.</li>
+          <li><b>Protect the money</b> — hold payment on the rejected quantity (the 3-way match protects us), raise a debit/credit note per process.</li>
+          <li><b>Close the loop</b> — corrective action from the supplier, and log it in their quality score.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>8 · "You're dependent on a single source and they know it. How do you manage that?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: risk thinking</span>
+        <ol class="ladder">
+          <li><b>Short term — protect supply, not ego.</b> Keep the relationship professional, forecast openly with them, hold a little more safety stock on their parts.</li>
+          <li><b>Contract the risk down</b> — lock pricing and lead times in an agreement while goodwill exists.</li>
+          <li><b>Medium term — build the alternative</b> — work with engineering to qualify a second source, even for partial volume; the credible existence of an alternate changes negotiations.</li>
+          <li><b>Split volume when qualified</b> — e.g. 70/30 — to keep both suppliers honest.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>9 · "Engineering insists on one specific brand; a cheaper equivalent exists. What do you do?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: cross-functional maturity</span>
+        <ol class="ladder">
+          <li><b>Understand before pushing</b> — ask engineering what's technically critical; sometimes the brand lock is real (qualification, reliability), sometimes habit.</li>
+          <li><b>Bring data, not opinion</b> — cost delta, availability, lead-time comparison of the alternative.</li>
+          <li><b>Propose a controlled evaluation</b> — sample qualification of the alternate with engineering owning the technical verdict.</li>
+          <li><b>Accept the outcome</b> — if it fails qualification, the premium is justified; if it passes, we've saved money with engineering on-side. I never override a technical owner unilaterally.</li>
+        </ol>
+      </div>
+    </details>
+
+    <div class="group-label">Judgement, compliance &amp; prioritisation</div>
+
+    <details class="qa">
+      <summary>10 · "It's urgent, but the PO approval is stuck. Do you tell the vendor to start anyway?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: compliance under pressure — a trap question</span>
+        <div class="trapbox"><b>The trap</b>Saying yes to look action-oriented. At a US-listed MNC with strict controls, verbally committing spend without an approved PO is exactly what they screen against.</div>
+        <div class="say"><b>Say this</b>"No — I don't commit company spend without an approved PO; that's a control for good reason. What I do is attack the approval: flag the urgency to the approvers directly, get my manager to fast-track it, and use the company's emergency-purchase process if one exists. I'll prepare everything so the order releases the minute it's approved — but the sequence stays: approval first, commitment after."</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>11 · "A vendor offers you a personal gift / favour during a negotiation. What do you do?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: ethics — instant-fail if fumbled</span>
+        <div class="say"><b>Say this</b>"I politely decline and disclose it to my manager per the company's gift and ethics policy. Anything beyond a token courtesy compromises my objectivity as a buyer — and my credibility is the one thing I can't buy back. I'd keep the negotiation strictly on merit."</div>
+        <p class="note">Short, immediate, no hedging. This one is pass/fail.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>12 · "You have 60 open POs and ten are slipping. How do you prioritise your day?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: workload judgement</span>
+        <ol class="ladder">
+          <li><b>Rank by production impact, not noise</b> — which slips actually threaten a build or a line-down, and when is the true need-date?</li>
+          <li><b>Work the critical few hard</b> — direct calls, recovery plans, escalation on the ones that stop production.</li>
+          <li><b>Batch the rest</b> — standard follow-ups and reschedules in a disciplined daily/weekly rhythm driven by MRP exception messages.</li>
+          <li><b>Keep the book clean</b> — close completed POs, correct dates, so tomorrow's exception list is truth, not clutter.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>13 · "How do you decide how much to order?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: planning fundamentals</span>
+        <p>Start from the <strong>MRP requirement</strong> (demand net of stock and open orders), then adjust for reality: <strong>lead time</strong> (order early enough), <strong>safety stock</strong> policy, supplier <strong>MOQ/SPQ and lot sizes</strong>, and <strong>price breaks vs inventory cost</strong> — a quantity discount is only a saving if the extra stock doesn't sit for a year. If my judgement says the system quantity looks wrong, I check with planning rather than blindly ordering.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>14 · "A supplier ships early / ships more than ordered. Do you accept it?"</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: PO discipline detail</span>
+        <p>Check the company's <strong>receiving tolerance policy</strong> first — many allow a small % over-shipment or a few days early. Within tolerance: accept, note it. Outside tolerance: it ties up cash and space and can distort MRP — so return or hold, per policy, and correct the behaviour with the supplier. Early/over shipping is often a supplier pushing their inventory onto us; a good buyer notices the pattern.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>15 · "Tell me about a real expedite or shortage you handled at your current job."</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: is your experience real</span>
+        <p>Have ONE true story sharp and ready in STAR form — a real material, a real deadline, what you personally did (calls, partial shipment, escalation, alternate), and the outcome (line kept running / delivery recovered). Then bridge:</p>
+        <div class="say"><b>Bridge line</b>"That was on packaging materials at Alternicq — the same discipline this JD calls shortage management and expediting, applied to more complex parts here."</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= STABILITY & FIT ================= -->
+<section id="fit">
+  <div class="wrap">
+    <span class="file-tab">File 05 · Stability &amp; Fit</span>
+    <h2>The stability question <span class="thin">— and the other fit answers</span></h2>
+    <p class="lead">The JD says it in bold: "Stability in jobs is one of the most important criteria for us." You're moving from your first job at ~2 years — they WILL probe this. It's answerable, and answered well it becomes a strength.</p>
+
+    <details class="qa" open>
+      <summary>"You've been at your first job under two years and you're already moving. We value stability. Convince us."</summary>
+      <div class="qa-body">
+        <span class="chip testing">Testing: will you stay 3–5+ years</span>
+        <div class="say"><b>Say this</b>"That's fair, and honestly it's what I want too. Alternicq is my first job — I've been there coming up on two years, I'm still there, and I've never hopped. This isn't restlessness; it's one deliberate move into the industry where I want to build a long career. I've thought through everything about this role — the shift, five days at ITPL, the learning curve on your systems — and I'm choosing it with eyes open. What I'm looking for is exactly what you're offering: a place worth staying and growing in for years. Moving again quickly would waste my own investment in learning this industry — stability is in my interest even more than yours."</div>
+        <div class="trapbox"><b>Avoid</b>Defensiveness, or over-promising ("I'll never leave"). The credible pitch is: one considered move, strong reasons, long horizon.</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>"The shifts are 2–11 PM and 3 PM–12 midnight. Comfortable with both, including rotation?</summary>
+      <div class="qa-body">
+        <div class="say"><b>Say this</b>"Yes — fully. I've noted it's both windows, 2-to-11 and 3-to-midnight, likely on rotation, five days from the office. I've planned my logistics for it and it's not a concern. I understand a global supply chain role means overlapping with US and other time zones — that's part of the job I'm signing up for."</div>
+        <p class="note">Round 1 covered only 2–11. Naming <em>both</em> windows unprompted shows you read the JD carefully — a quiet point in your favour.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>"Why Applied Materials for the long term — and where do you see yourself here?"</summary>
+      <div class="qa-body">
+        <div class="say"><b>Say this</b>"Semiconductors is a decades-long growth industry, and Applied is its equipment leader — with India becoming more central to your supply chain, especially with the Bangalore engineering center investment. I want to grow from a tactical buyer into deeper commodity ownership over the next few years — learning your systems, your suppliers, your parts. That path exists here, in one company. That's my definition of stability: growing in place."</div>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Salary — quick recap if it resurfaces</summary>
+      <div class="qa-body">
+        <p style="margin-bottom:8px">Hold the round-1 position: <mark>anchor 10–11 LPA</mark>, justified by role scope, the shift commitment and market rates for a global MNC buyer — never by your current 4.5 CTC or personal needs. If pressed: "I'm flexible for the right overall package" — and know your walk-away floor before you dial in.</p>
+        <p class="note">If they've already noted your expectation from round 1, don't reopen it yourself — only respond if they raise it.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>"What's your notice period? When can you join?"</summary>
+      <div class="qa-body">
+        <p style="margin:0">Answer factually with your actual notice period, and add: <em>"I'll manage the transition professionally on both sides — I don't leave my current team stuck, and that's the same reliability I'll bring here."</em> That line quietly reinforces the stability message.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= ASK THEM ================= -->
+<section id="ask">
+  <div class="wrap">
+    <span class="file-tab">File 06 · Your Questions</span>
+    <h2>Round-2 level questions <span class="thin">to ask them</span></h2>
+    <p class="lead">Round-2 questions should be sharper than round 1's — about the actual work. Pick three.</p>
+    <ul class="tick">
+      <li>"Which commodity families would my desk cover — mechanical, electrical, consumables — and roughly how many suppliers?"</li>
+      <li>"What does the MRP cadence look like here — daily exception reviews, weekly buyer meetings?"</li>
+      <li>"Which ERP will I be working in day to day, and how is onboarding structured for a buyer coming from a different system?"</li>
+      <li>"How do buyers coordinate with the global planning teams across time zones — is that what shapes the shift?"</li>
+      <li>"With the demand ramp expected from late 2026, how is the team preparing supplier capacity?" <em>(shows you follow their business)</em></li>
+      <li>"What separates a good buyer from a great one on this team, one year in?"</li>
+      <li>"What are the next steps after this round?"</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section id="checklist" style="border-bottom:none">
+  <div class="wrap">
+    <span class="file-tab">File 07 · Tonight &amp; Tomorrow</span>
+    <h2>Final checklist</h2>
+    <ul class="tick">
+      <li>Read the Scenario Bank twice — say Scenario 1's ladder <em>out loud</em> until the sequence is automatic: verify → pushout → stop work → liability by stage → creative settlement → escalate → prevent.</li>
+      <li>Rehearse the 90-second company script and the stability answer out loud.</li>
+      <li>Memorise the five MRP terms: planner order, pull-in, pushout, cancel, cancellation liability.</li>
+      <li>Prepare ONE true expedite/shortage story from Alternicq with a real outcome.</li>
+      <li>Practise saying "coming up on two years" naturally when experience comes up.</li>
+      <li>Confirm-both-shifts answer ready — name both windows unprompted.</li>
+      <li>Recall your salary anchor (10–11 LPA) and your floor — only if they raise it.</li>
+      <li>Keep handy: this page, the JD (R2613141), your resume, three questions to ask.</li>
+      <li>Video call? Test camera, mic, lighting and quiet space 30 minutes early.</li>
+      <li>In the room: when they block an answer — smile, and take the next rung. That composure is the whole test.</li>
+    </ul>
+
+    <div class="card green" style="margin-top:24px">
+      <p style="margin:0"><strong>Remember:</strong> a second round means round 1 worked. They're no longer asking <em>whether</em> you know procurement — they're checking how you think when it gets messy, and whether you'll stay. You have ladders for the mess and a true answer for the staying. Go climb.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="you">Round two, Inchara — finish it.</div>
+    <div>Buyer · R2613141 · Applied Materials · Bangalore</div>
+  </div>
+</footer>
+
+</body>
+</html>
