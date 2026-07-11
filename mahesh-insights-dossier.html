@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahesh: In His Own Words — Insight Dossier</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============ Executive-briefing theme: deep navy + gold on warm ivory ============ */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#fbfaf7;
+  --border:#e3dfd6; --border-soft:#edeae2;
+  --navy:#122a4a; --navy-2:#1d3d68; --gold:#a87b2d; --gold-soft:#f3ead8;
+  --teal:#0e6b5e;
+  --text-main:#1d1d20; --text-muted:#5d5c58; --text-faint:#918f88;
+  --good-bg:#e9f3ea; --good:#2e6b34; --bad-bg:#fbebe8; --bad:#a83226;
+  --warn-bg:#faf3df; --warn:#8a6a10; --tip-bg:#ecf1f8; --tip:#1d3d68;
+  --shadow:0 1px 3px rgba(18,42,74,.07),0 8px 28px rgba(18,42,74,.06);
+  --shadow-soft:0 1px 2px rgba(18,42,74,.05); --radius:12px;
+}
+*{box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text-main);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--navy);line-height:1.22;}
+code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--navy-2);}
+
+/* topbar + progress */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:60;background:var(--navy);display:flex;align-items:center;gap:14px;padding:0 20px;box-shadow:0 2px 12px rgba(18,42,74,.25);}
+.topbar .menu-btn{display:none;font-size:21px;background:none;border:none;cursor:pointer;color:#e8d9b8;line-height:1;}
+.topbar .t1{font-family:'IBM Plex Sans';font-weight:700;font-size:14.5px;color:#fff;letter-spacing:.2px;}
+.topbar .t2{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c9a45c;}
+.topbar .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar .plabel{font-family:'JetBrains Mono';font-size:10.5px;color:#b9c6d8;}
+.ptrack{width:150px;height:6px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;}
+.pfill{height:100%;width:0;background:linear-gradient(90deg,#c9a45c,#e8d9b8);border-radius:99px;transition:width .35s ease;}
+
+/* layout */
+.layout{display:flex;padding-top:56px;min-height:100vh;}
+.sidebar{width:268px;flex:0 0 268px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:56px;bottom:0;left:0;overflow-y:auto;padding:16px 13px 50px;}
+.ngt{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:16px 10px 6px;}
+.sidebar nav a{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Sans';font-size:13.8px;color:var(--text-muted);padding:9px 11px;border-radius:9px;margin-bottom:2px;cursor:pointer;transition:all .12s;}
+.sidebar nav a .code{font-family:'JetBrains Mono';font-size:10.5px;color:var(--gold);flex:0 0 20px;font-weight:600;}
+.sidebar nav a:hover{background:var(--surface-2);color:var(--navy);}
+.sidebar nav a.active{background:var(--gold-soft);color:var(--navy);font-weight:600;}
+.sidebar nav a .tick{margin-left:auto;font-size:12px;color:var(--good);opacity:0;transition:opacity .2s;}
+.sidebar nav a.visited .tick{opacity:1;}
+
+.content{flex:1 1 auto;margin-left:268px;width:calc(100% - 268px);display:flex;justify-content:center;padding:36px 40px 90px;}
+.inner{width:100%;max-width:830px;}
+section.module{display:none;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:38px 44px 34px;animation:fade .25s ease;}
+section.module.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.eyebrow{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+h1.mt{font-size:31px;font-weight:700;margin:0 0 10px;letter-spacing:-.4px;}
+.lede{font-size:18px;color:var(--text-muted);margin:0 0 8px;max-width:70ch;}
+.whybox{background:var(--gold-soft);border:1px solid #e6d2a8;border-radius:10px;padding:13px 17px;margin:20px 0 4px;font-size:15px;}
+.whybox .ttl{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+
+h2{font-size:22px;font-weight:600;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border-soft);letter-spacing:-.2px;}
+h3{font-size:18px;font-weight:600;margin:26px 0 8px;color:var(--navy-2);}
+h4{font-size:14.5px;font-weight:600;margin:16px 0 6px;}
+p{margin:0 0 14px;} ul,ol{margin:0 0 16px;padding-left:22px;} li{margin-bottom:7px;}
+strong{font-weight:600;color:var(--navy);} em{color:var(--text-muted);}
+.small{font-size:14px;} .muted{color:var(--text-muted);}
+
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-soft);margin:18px 0;}
+.card.tight{padding:15px 17px;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;border-left:4px solid var(--tip);background:var(--tip-bg);font-size:15.5px;}
+.callout .ttl{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
+.callout.tip{border-color:var(--tip);background:var(--tip-bg);} .callout.tip .ttl{color:var(--tip);}
+.callout.good{border-color:var(--good);background:var(--good-bg);} .callout.good .ttl{color:var(--good);}
+.callout.bad{border-color:var(--bad);background:var(--bad-bg);} .callout.bad .ttl{color:var(--bad);}
+.callout.warn{border-color:var(--warn);background:var(--warn-bg);} .callout.warn .ttl{color:var(--warn);}
+.callout.gold{border-color:var(--gold);background:var(--gold-soft);} .callout.gold .ttl{color:var(--gold);}
+
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--radius);}
+table{border-collapse:collapse;width:100%;font-size:14.3px;background:var(--surface);}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+th{font-family:'IBM Plex Sans';font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:#e8d9b8;background:var(--navy);}
+tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even) td{background:var(--surface-2);}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.chip{font-family:'JetBrains Mono';font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:999px;}
+.chip.g{background:var(--gold-soft);border-color:#e6d2a8;color:var(--gold);}
+.chip.n{background:var(--tip-bg);border-color:#c8d6e8;color:var(--navy-2);}
+.chip.t{background:#e5f1ef;border-color:#bfdcd6;color:var(--teal);}
+
+.qa{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);}
+.qa>button.q{width:100%;text-align:left;background:var(--surface);border:none;cursor:pointer;padding:15px 50px 15px 20px;font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;color:var(--navy);position:relative;line-height:1.4;}
+.qa>button.q:hover{background:var(--surface-2);}
+.qa>button.q::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);font-weight:400;}
+.qa.open>button.q::after{content:'\2013';}
+.qa .a{display:none;padding:4px 22px 20px;border-top:1px solid var(--border-soft);}
+.qa.open .a{display:block;}
+.qa .a .label{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin:14px 0 4px;}
+
+.reveal-btn{font-family:'IBM Plex Sans';font-size:13.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--navy-2);border:1px solid var(--navy-2);padding:8px 15px;border-radius:8px;margin:8px 8px 8px 0;transition:all .12s;}
+.reveal-btn:hover{background:var(--navy-2);color:#fff;}
+.reveal-box{display:none;margin:8px 0 4px;}
+.reveal-box.show{display:block;}
+
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0;box-shadow:var(--shadow-soft);}
+.quiz .qtext{font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;margin-bottom:12px;color:var(--navy);}
+.quiz .opts{display:flex;flex-direction:column;gap:8px;}
+.quiz .opts button{text-align:left;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);color:var(--text-main);padding:10px 14px;border-radius:8px;transition:all .12s;}
+.quiz .opts button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.quiz .opts button.correct{background:var(--good-bg);border-color:var(--good);}
+.quiz .opts button.wrong{background:var(--bad-bg);border-color:var(--bad);}
+.quiz .opts button:disabled{cursor:default;}
+.quiz .fb{display:none;margin-top:12px;font-size:14.5px;padding:11px 14px;border-radius:8px;background:var(--surface-2);border-left:3px solid var(--navy-2);}
+.quiz .fb.show{display:block;}
+
+.hero{background:linear-gradient(140deg,var(--navy) 0%,var(--navy-2) 55%,#274d7d 100%);color:#fff;border-radius:14px;padding:34px 34px 30px;margin:0 0 24px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;top:0;right:0;bottom:0;width:5px;background:linear-gradient(180deg,#c9a45c,#e8d9b8);}
+.hero .eb{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#c9a45c;margin-bottom:10px;}
+.hero h1{color:#fff;font-size:28px;margin:0 0 8px;letter-spacing:-.4px;}
+.hero p{color:rgba(255,255,255,.88);font-size:16.5px;margin:0;max-width:64ch;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;font-family:'IBM Plex Sans';font-size:12.8px;}
+.hero .meta div{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);}
+.hero .meta b{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:#c9a45c;font-weight:600;font-family:'JetBrains Mono';margin-bottom:2px;}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;margin:18px 0;}
+.tile{display:block;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow-soft);cursor:pointer;transition:all .13s;}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d8c9a5;}
+.tile .num{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.08em;}
+.tile h3{margin:7px 0 6px;color:var(--navy);font-size:16px;}
+.tile p{font-size:13.3px;color:var(--text-muted);margin:0;line-height:1.5;}
+
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:12px;margin:18px 0;}
+.kbox .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft);border-top:2px solid var(--gold);}
+.kbox .k .big{font-family:'IBM Plex Sans';font-weight:700;font-size:21px;color:var(--navy);}
+.kbox .k .lbl{font-size:12.3px;color:var(--text-muted);}
+
+ul.clean{list-style:none;padding-left:0;}
+ul.clean li{padding-left:24px;position:relative;}
+ul.clean li::before{content:'\2192';position:absolute;left:0;color:var(--gold);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+.script{background:var(--surface-2);border-left:3px solid var(--teal);padding:13px 17px;border-radius:0 8px 8px 0;margin:12px 0;font-size:15.5px;}
+.script .who{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);display:block;margin-bottom:4px;}
+
+.pagenav{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:22px;border-top:1px solid var(--border);}
+.pagenav button{font-family:'IBM Plex Sans';font-size:14px;font-weight:500;padding:11px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;color:var(--text-main);transition:all .12s;}
+.pagenav button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.pagenav button:disabled{opacity:.4;cursor:default;}
+.pagenav .dir{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);font-family:'JetBrains Mono';margin-bottom:2px;}
+.pagenav .next{text-align:right;}
+
+@media(max-width:880px){
+  .topbar .menu-btn{display:block;}
+  .sidebar{transform:translateX(-100%);transition:transform .2s ease;z-index:55;box-shadow:4px 0 24px rgba(0,0,0,.15);}
+  .sidebar.open{transform:translateX(0);}
+  .content{margin-left:0;width:100%;padding:20px 13px 80px;}
+  section.module{padding:25px 19px 27px;}
+  h1.mt{font-size:25px;} .lede{font-size:16.5px;}
+  .ptrack{width:90px;} .topbar .t2{display:none;}
+  .scrim{display:none;position:fixed;inset:0;top:56px;background:rgba(18,42,74,.4);z-index:50;}
+  .scrim.show{display:block;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <div>
+    <div class="t1">Mahesh · In His Own Words</div>
+    <div class="t2">Insight Dossier · From His Interviews &amp; Keynotes</div>
+  </div>
+  <div class="progress-wrap"><span class="plabel" id="progLabel">0%</span><div class="ptrack"><div class="pfill" id="progFill"></div></div></div>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+<nav id="nav">
+  <div class="ngt">Start</div>
+  <a data-go="m0"><span class="code">00</span> Reading him right <span class="tick">✓</span></a>
+  <div class="ngt">The man</div>
+  <a data-go="m1"><span class="code">01</span> The journey <span class="tick">✓</span></a>
+  <a data-go="m2"><span class="code">02</span> His philosophy <span class="tick">✓</span></a>
+  <div class="ngt">The mind</div>
+  <a data-go="m3"><span class="code">03</span> Markets &amp; strategy <span class="tick">✓</span></a>
+  <a data-go="m4"><span class="code">04</span> Technology worldview <span class="tick">✓</span></a>
+  <div class="ngt">Use it</div>
+  <a data-go="m5"><span class="code">05</span> The quote bank <span class="tick">✓</span></a>
+  <a data-go="m6"><span class="code">06</span> Interview implications <span class="tick">✓</span></a>
+  <a data-go="m7"><span class="code">07</span> Flash review <span class="tick">✓</span></a>
+</nav>
+</aside>
+
+<main class="content"><div class="inner" id="inner">
+<section class="module" id="m0">
+<div class="hero">
+<span class="eb">INSIGHT DOSSIER · IN HIS OWN WORDS</span>
+<h1>Mahesh, decoded from his own interviews</h1>
+<p>Four conversations — spanning a decade — where Mahesh explains himself: his life, his sales philosophy, his market playbook, and his power-first view of technology. This file distils what he actually said into what you should understand, echo, and never fake.</p>
+<div class="meta">
+<div><b>Sources</b>IP-SoC 2026 keynote interview · Intel Foundry Direct Connect · TSMC OIP Forum 2014 · Silicon Grapevine podcast</div>
+<div><b>Companion to</b>The CEO-round brief (Sections 01 &amp; 12 especially)</div>
+<div><b>Golden rule</b>Mirror his ideas, never parrot his lines</div>
+</div>
+</div>
+
+<h2>Why this dossier exists</h2>
+<p>You already have the facts (the CEO-round brief). This is the layer beneath the facts: <strong>how Mahesh thinks</strong>. When you understand that he sees power as the root problem, trust as the whole business, and "thoughtfully first" as the winning strategy — your answers start landing in his frame instead of yours. That's what makes ten minutes feel like ten years of belonging.</p>
+
+<div class="whybox"><span class="ttl">How to use the four sources</span>
+The <strong>Silicon Grapevine podcast</strong> is the man — childhood, Sun Microsystems, wine, his three rules of sales. The <strong>Intel Foundry Direct Connect</strong> and <strong>IP-SoC 2026</strong> interviews are the current strategy — power architecture, 2nm proof, "thoughtfully first." The <strong>TSMC OIP 2014</strong> interview is the pattern — proof that he's been running the same first-to-the-node playbook for over a decade. Together they tell you exactly who is on the other side of the camera.</div>
+
+<h2>The five insights, if you remember nothing else</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>#</th><th>Insight</th><th>His words (essence)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Power is the root problem, not performance</td><td>"It's power driving the performance, not the other way around"</td></tr>
+<tr><td>2</td><td>Sales is character, sequenced</td><td>Be liked → earn trust → never break either — "and you better deliver what you promised"</td></tr>
+<tr><td>3</td><td>Be first, but <em>thoughtfully</em> first</td><td>"Early bird catches the worm… you don't make all your money in the first three, four customers — maybe the seventh and eighth"</td></tr>
+<tr><td>4</td><td>He built this bootstrapped, on customers</td><td>"VC means valuable customer" — no venture money, ever</td></tr>
+<tr><td>5</td><td>Resilience is his religion</td><td>"Fail fast and recover quick… it took me three startups to get here"</td></tr>
+</tbody>
+</table></div>
+
+<h2>Jump in</h2>
+<div class="tile-grid">
+<a class="tile" data-go="m1"><span class="num">01</span><h3>The journey</h3><p>Coimbatore factory floors to Silicon Valley CEO — the whole arc, with the details that build rapport.</p></a>
+<a class="tile" data-go="m2"><span class="num">02</span><h3>His philosophy</h3><p>The three rules of sales, "VC = valuable customer," fail fast — his operating system.</p></a>
+<a class="tile" data-go="m3"><span class="num">03</span><h3>Markets &amp; strategy</h3><p>Thoughtfully first, the 7th-customer economics, and the node-wave playbook.</p></a>
+<a class="tile" data-go="m4"><span class="num">04</span><h3>Technology worldview</h3><p>Power first, the gap the EDA giants leave, and the 2nm proof discipline.</p></a>
+<a class="tile" data-go="m5"><span class="num">05</span><h3>The quote bank</h3><p>His signature phrases, what each reveals, and how to echo without parroting.</p></a>
+<a class="tile" data-go="m6"><span class="num">06</span><h3>Interview implications</h3><p>He grades like a sales leader — map his rubric to your behaviour on the call.</p></a>
+</div>
+
+<div class="pagenav"><button disabled><span class="dir">Start</span>You're at the beginning</button><button class="next" data-go="m1"><span class="dir">Next →</span>01 · The journey</button></div>
+</section>
+
+<section class="module" id="m1">
+<div class="eyebrow">SECTION 01 · THE MAN</div>
+<h1 class="mt">The journey: factory floors to the corner office</h1>
+<p class="lede">From the Silicon Grapevine podcast — his own telling. This is the story that formed the man you're meeting. Know it well enough to connect with it; never recite it at him.</p>
+
+<h2>The timeline, in his own telling</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Chapter</th><th>What happened</th><th>What it formed</th></tr></thead>
+<tbody>
+<tr><td><strong>Childhood, Coimbatore</strong></td><td>Grandfather founded an electric-motor manufacturing company; his father ran the factory operations. From age five he spent summers on the factory floor — even his grandmother knew what a stator was; dinner conversation was motors and pumps. The family still runs the business.</td><td>The entrepreneurship dream — "that sort of set the path." He later took <em>his</em> sons to TSMC trade shows the way his dad took him to the factory.</td></tr>
+<tr><td><strong>Engineering</strong></td><td>Electrical engineering at PSG Tech, Coimbatore; then grad school at Arizona — in high-voltage &amp; power engineering. The early-'90s job market for power "sucked," so he pivoted to VLSI: "from hundreds of volts to a few millivolts."</td><td>Note the poetry: the man who started in <em>power engineering</em> now runs a company whose thesis is <em>on-chip power</em>. Full circle.</td></tr>
+<tr><td><strong>Sun Microsystems, 1992</strong></td><td>Designed on the Viking microprocessor (the SPARCstation 10's home-built CPU). Day one, the chip wasn't working; the boss walked in: "either you guys fix it or I'm going to fire every one of you." Met <strong>Alan Rogers — his circuit-design mentor</strong>. Sun's lean, can-do culture; one of the earliest fabless-style companies.</td><td>The Alan partnership begins here — 30+ years of friendship before the CEO handoff. "Lean and mean team, get products out quickly."</td></tr>
+<tr><td><strong>EPIC Design, mid-'90s</strong></td><td>Wanted a customer-facing role; joined a just-public company of ~55–60 people. Mentor "Bernie" practised <em>management by walking around</em> — no email, knew everything, two rounds of the office a day.</td><td>"People matter a lot in your business. Great people build great companies."</td></tr>
+<tr><td><strong>Virtual Silicon, 1997–2003</strong></td><td>Hired for marketing; ended up running all sales. Standard-cell libraries and memory compilers for UMC; raised ~$95M of venture money and learned how VCs think; ran the Japan business (Sony, Fujitsu, Oki, NEC, the Nintendo design team) and fell in love with Japan. On a walk, he and Alan sketched the "PLL compiler" idea — "PLLs for the digital boys, so they never worry about the analog."</td><td>The idea that became Analog Bits' product philosophy: hide the analog pain. Also where he learned the free-library/royalty era and "get the product out — Christmas is not moving."</td></tr>
+<tr><td><strong>Analog Bits, 2003</strong></td><td>Alan had been recruiting him for years; his previous company even distributed Analog Bits IP. He joined to grow it together — "my middle child." Entered the PLL market <em>last</em> of six or seven vendors and still took leadership. Bootstrapped throughout: "VC means valuable customer."</td><td>21+ years and counting. Proof that focus beats first-mover — a lesson he'll respect in sales strategy too.</td></tr>
+<tr><td><strong>The acquisition, 2022</strong></td><td>"Chapter two." Ownership by a few individuals made offshore expansion slow, so they chose an exit to a larger footprint. SemiFive "allowed us to operate the company independently… that's given us a lot of freedom." Only real change: more diligent financial reporting. One clarification he makes himself: SemiFive ≠ SiFive (the RISC-V company) — a loose board-level association exists, but Analog Bits is "purely an independent company."</td><td>He is not an empire-seller; he's a mission-continuer. And that SemiFive/SiFive distinction is a trap you now won't fall into.</td></tr>
+</tbody>
+</table></div>
+
+<h2>The personal side — handle with warmth, not tactics</h2>
+<div class="two-col">
+<div class="card tight"><h4>What he's proudest of</h4><p class="small" style="margin:0">His two sons. He raised them as a single parent while building the company — "I've learned a lot from my own sons… it's also helped me be patient and empathetic." He treats employees as family; "analog bits is my family."</p></div>
+<div class="card tight"><h4>The wine story</h4><p class="small" style="margin:0">It began with being a foodie — a childhood gift for smell. During COVID he studied seriously: Level-3 sommelier, Italian and French wine scholar, then sake ("I missed Japan so much"). Known as "Mr. Wineman" — connection first, business after. <em>Don't fake wine knowledge; if it comes up, curiosity beats pretence.</em></p></div>
+</div>
+<ul class="clean">
+<li>Loves travel (Africa photos in his office), his Tesla (tells a story of it auto-avoiding an accident in a flood), and SpaceX — an unapologetic admirer of Elon Musk's "intellectual nature."</li>
+<li>"I don't see my retirement on the horizon because I just love what I do… semiconductors are in my blood."</li>
+</ul>
+
+<div class="callout gold"><span class="ttl">The rapport bridges that are genuinely yours</span>
+South-Indian engineering-college roots (his PSG Tech, Coimbatore ↔ your BMS, Bengaluru). A family where work was dinner-table conversation. A career that pivoted when the market said no (his power-engineering → VLSI ↔ your mechanical → semiconductors). Small-team, wear-every-hat energy (his Sun/EPIC years ↔ your Pegasus). These are real overlaps — let them surface naturally, one at most.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Which detail of his journey is most useful to genuinely connect on — without pretending?</div>
+<div class="opts">
+<button data-opt="a">Claim you're also a Level-3 sommelier.</button>
+<button data-opt="b">Tell him you also worked at Sun Microsystems.</button>
+<button data-opt="c">The shared arc: a South-Indian engineering education, a family where work was life, and a deliberate pivot when the first path closed — his power-to-VLSI, your mechanical-to-semis.</button>
+<button data-opt="d">Recite his grandfather's factory story back to him.</button>
+</div>
+<div class="fb">Authentic parallels build rapport; borrowed details destroy it instantly with a man whose entire philosophy is trust. The pivot parallel is real, relevant, and quietly powerful.</div>
+</div>
+
+<div class="pagenav"><button data-go="m0"><span class="dir">← Prev</span>00 · Reading him right</button><button class="next" data-go="m2"><span class="dir">Next →</span>02 · His philosophy</button></div>
+</section>
+
+<section class="module" id="m2">
+<div class="eyebrow">SECTION 02 · THE MAN</div>
+<h1 class="mt">His philosophy: the operating system</h1>
+<p class="lede">He has articulated his rules repeatedly, and they're remarkably consistent across a decade of interviews. These aren't platitudes — they're the rubric he will grade you with.</p>
+
+<h2>The three rules of sales — his hiring rubric in disguise</h2>
+<div class="card">
+<p>Asked by his 12-year-old son what makes a successful salesperson, he answered with three things he says he still lives by:</p>
+<ol>
+<li><strong>Make sure they like you.</strong> "Be humble, be jolly, be nice." Don't be the person with an attitude.</li>
+<li><strong>Learn to earn their trust.</strong> Liking isn't trusting — "it's got to come over a period of time."</li>
+<li><strong>Don't mess up one and two.</strong> "If they're going to do business with you, it's going to be a lot of trust and commitment — and you better deliver to what you promised."</li>
+</ol>
+<p style="margin-bottom:0" class="muted small">Read that again as an interview rubric: warmth in the first minutes (like), precision plus honesty about what you don't know (trust), and follow-through on anything you commit to — before, during, and after the call (deliver). He will be scoring exactly this, consciously or not.</p>
+</div>
+
+<h2>The rest of the operating system</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Principle</th><th>His words / behaviour</th><th>What it means for you</th></tr></thead>
+<tbody>
+<tr><td><strong>Bootstrap pride</strong></td><td>No venture money, ever. "VC means valuable customer." They kept control "to take care of our customers" and built products from "what the market needs and what the customer problems are."</td><td>Frame everything customer-back. Never pitch growth for growth's sake — pitch customers served.</td></tr>
+<tr><td><strong>Dream big, don't give up</strong></td><td>"We had big dreams — we still continue to have big dreams… dream big and don't give up."</td><td>Ambition is welcome here. "Most sought-after IP salesperson in India" is exactly his register.</td></tr>
+<tr><td><strong>Fail fast, recover quick</strong></td><td>"It took me three startups to get here… failures are not a reason you should not try again." And: prepare for worst cases, recover quickly, ask experienced people for help.</td><td>Own your detours (the Masters, the pivots) without apology. He respects recovery more than perfection.</td></tr>
+<tr><td><strong>Ship it</strong></td><td>From Virtual Silicon: a product doesn't need "100% of all the specs my lovely engineers would love — Christmas is not moving."</td><td>Answer with the 80% now rather than the 100% never. Headline first, refine on pull.</td></tr>
+<tr><td><strong>People first</strong></td><td>Bernie's management-by-walking-around; "great people build great companies"; employees as family; empathy learned from single parenthood.</td><td>Speak about customers and colleagues as people, not pipeline entries.</td></tr>
+<tr><td><strong>Fun, then firm</strong></td><td>"There is a nice way of doing it" — jolly connection first (Mr. Wineman), but "I've been in tough negotiation meetings… I had to draw a hard line."</td><td>Warmth is not softness. Match his warmth; keep your commercial spine.</td></tr>
+<tr><td><strong>Integrity as the shared code</strong></td><td>He and Alan are "two in a box… starkly different personalities" united by "integrity, passion for products, passion for excellence."</td><td>The confidentiality discipline you rehearsed isn't a defensive move here — it's a membership card.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout good"><span class="ttl">The question that lets him tell his favourite story</span>
+If the conversation warms, you can hand him his own greatest hit: <em>"You've built relationships across foundries and customers for three decades — what do you tell young salespeople actually matters?"</em> There's a fair chance you get the three-rules story firsthand. Letting a CEO teach is the most underrated interview move there is.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Halfway through the interview you realise an earlier answer of yours was slightly wrong. What does his philosophy say you should do?</div>
+<div class="opts">
+<button data-opt="a">Let it go — correcting yourself looks weak.</button>
+<button data-opt="b">Correct it briefly and without drama: "One correction to what I said earlier —" then move on. Fail fast, recover quick, protect the trust.</button>
+<button data-opt="c">Wait and send a correction email a week later.</button>
+<button data-opt="d">Only correct it if he notices.</button>
+</div>
+<div class="fb">Rule 3 is "don't lose their trust," and his personal credo is fail-fast-recover-quick. A composed self-correction is not a weakness in this room — it's a demonstration of exactly the character he hires.</div>
+</div>
+
+<div class="pagenav"><button data-go="m1"><span class="dir">← Prev</span>01 · The journey</button><button class="next" data-go="m3"><span class="dir">Next →</span>03 · Markets &amp; strategy</button></div>
+</section>
+
+<section class="module" id="m3">
+<div class="eyebrow">SECTION 03 · THE MIND</div>
+<h1 class="mt">How he thinks about markets &amp; strategy</h1>
+<p class="lede">From the IP-SoC 2026 keynote interview and the 2014 OIP interview — twelve years apart, the same playbook. Understand it and you can talk strategy in his native frame.</p>
+
+<h2>The playbook: "thoughtfully first"</h2>
+<div class="card">
+<p><strong>"As they say, early bird catches the worm. But you also have to be <em>thoughtfully</em> first — you cannot be first in something people don't need."</strong></p>
+<p style="margin-bottom:0">His model of a product's life: what's high-end today (2nm) becomes <strong>mainstream in three to five years</strong> and <strong>low-cost in five to seven</strong>. So Analog Bits plants its flag at the leading edge — not because that's where the money is <em>now</em>, but because that's where the wave starts.</p>
+</div>
+
+<h2>The economics he actually runs on</h2>
+<ul class="clean">
+<li><strong>"You don't make all your money in the first three, four customers — maybe in the seventh and eighth."</strong> Leading-edge customers buy credibility and track record; the follow-through customers buy the profits. Patience economics.</li>
+<li><strong>Proof discipline:</strong> multiple test chips, qualified in multiple customer designs, design wins stacked. The second 2nm chip carries ~15 Analog Bits IPs, silicon-proven — and though they're an IP company, they had it manufactured, packaged and tested "as if it's going to be used in a customer environment." An IP vendor productising like a chip company — that's the trust machine.</li>
+<li><strong>The pattern repeats:</strong> "We were doing FinFET ten, twelve years ago — we were first in FinFET. Now the late market is all moving there." In 2014 he was saying 16nm FinFET design was "5 to 8× more complex than 28nm… no guts, no glory" — and their blind-packaged silicon passed every corner. The 2nm story today is the same movie, new node.</li>
+<li><strong>Focus over size:</strong> entered the PLL market last of six or seven vendors and won leadership anyway — "grow fast but not get killed at the market by the big guys; stay our line of focus and course."</li>
+<li><strong>Foundry pluralism:</strong> "We need strong foundries to succeed — so there are choices for customers and for IP suppliers like us." Working TSMC <em>and</em> Intel (18A, RibbonFET era) — deliberately multi-foundry.</li>
+</ul>
+
+<div class="callout tip"><span class="ttl">He saw chiplets coming in 2014</span>
+Talking about IoT a decade ago, he noted die sizes shrinking to "a very tiny chiplet, almost" and IoT customers jumping from old nodes to modern ones needing high-speed connectivity. The man pattern-matches early — which is why his current chiplet-scalability and power-architecture bets deserve to be discussed as <em>pattern</em>, not fashion.</div>
+
+<h2>How this maps to India — your bridge</h2>
+<div class="script"><span class="who">A line that speaks his language</span>"Your own model — leading-edge today, mainstream in three to five years — is exactly the India story. Qualcomm just taped out 2nm designed entirely in India while the fabless cohort designs at 40 to 12 nanometres. The wave you're first on globally is precisely the wave India's design ecosystem is about to ride — and I'd be selling at the point where they meet."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Why does Analog Bits invest in being first at 2nm when few customers buy 2nm IP today?</div>
+<div class="opts">
+<button data-opt="a">Because 2nm licenses carry the highest prices.</button>
+<button data-opt="b">Because they have no competition there.</button>
+<button data-opt="c">Because leading-edge presence buys credibility and design wins now, while today's high end becomes the mainstream market in 3–5 years — and the real money arrives with the seventh and eighth customers on the follow-through.</button>
+<button data-opt="d">Because TSMC requires it.</button>
+</div>
+<div class="fb">"Thoughtfully first" + lifecycle economics + patience: plant the flag where the wave starts, monetise as it breaks. That's his strategy in one sentence.</div>
+</div>
+
+<div class="pagenav"><button data-go="m2"><span class="dir">← Prev</span>02 · His philosophy</button><button class="next" data-go="m4"><span class="dir">Next →</span>04 · Technology worldview</button></div>
+</section>
+
+
+<section class="module" id="m4">
+<div class="eyebrow">SECTION 04 · THE MIND</div>
+<h1 class="mt">His technology worldview: power first</h1>
+<p class="lede">From the Intel Foundry Direct Connect interview and the IP-SoC 2026 keynote. This is the argument he makes to the whole industry — and the frame your product answers should live inside.</p>
+
+<h2>The core thesis</h2>
+<div class="card">
+<p><strong>"Everyone's worried about performance — but in order to optimize for performance, one needs to manage power first, because it's power driving the performance and not the other way around."</strong></p>
+<p style="margin-bottom:0">That inversion is the whole company in one sentence. Performance is the prize; power is the lever. Every Analog Bits product — PLLs, sensors, droop detectors, LDOs — exists to work that lever.</p>
+</div>
+
+<h2>The problem, as he describes it</h2>
+<ul class="clean">
+<li><strong>Chips at the limits:</strong> designs are "pushing reticle size limits beyond limits" — and drawing not hundreds but <strong>"thousands of amps"</strong> through the package bumps. "To many customers, the problems are popping out as something they've never encountered before."</li>
+<li><strong>Granular regulation:</strong> "Every block within the chip has to have regulated power" — down toward SRAM retention voltages — because granular, per-block regulation is "the only way people are going to optimize power."</li>
+<li><strong>Backside power isn't salvation:</strong> it "solves a lot of the signal-integrity and power-distribution problems, but the problem does not go away — it's somewhat mitigated." Even fed from the backside, "everything has to be carefully regulated."</li>
+<li><strong>The loop:</strong> "One has to <em>sense</em> where the power is being consumed, <em>observe</em> it, and give customers the ability to <em>rectify and change course</em>." Sense → observe → correct: the Intelligent Power Architecture in one breath.</li>
+<li><strong>Co-development:</strong> new problems (beyond known glitches and spikes) are emerging as chips grow — "technology has to be developed in conjunction with customers, working with them as partners."</li>
+</ul>
+
+<h2>The competitive gap he claims — memorise this one</h2>
+<div class="callout gold"><span class="ttl">His own positioning against the giants</span>
+"The big ecosystem suppliers like Synopsys and Cadence are all focused on CPU architecture, interconnect architecture, standard libraries — <strong>but no one talked about power architecture</strong>. How are they going to solve the power problems? That's really where Analog Bits will come in." When you sell against the EDA bundles, this is the ground you stand on — in his exact frame.</div>
+
+<h2>The proof he carries</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Proof point</th><th>Detail from his interviews</th></tr></thead>
+<tbody>
+<tr><td><strong>Two 2nm chips</strong></td><td>Working silicon announced on the first; a second 2nm test chip taped out — the newer one carries <strong>~15 Analog Bits IPs, all silicon-proven</strong>, with a live demo board at their booth</td></tr>
+<tr><td><strong>Productised like a chip company</strong></td><td>"Even though we are an IP company, we designed it, had it manufactured, packaged, tested — as if it's going to be used in a customer environment, ready for consumption"</td></tr>
+<tr><td><strong>Multi-foundry at the edge</strong></td><td>FinFETs today, Intel's RibbonFET (gate-all-around) next — "we continue to work with both the foundries"; TSMC and Intel in parallel</td></tr>
+<tr><td><strong>Pinless as the breakthrough</strong></td><td>"The pinless technology eliminates all the analog pins — another big breakthrough for us working with advanced foundries"</td></tr>
+<tr><td><strong>History of hard nodes</strong></td><td>2014: 16nm FinFET mixed-signal design "5 to 8× more complex than 28nm"; their early FinFET parts were blind-packaged and "all of them passed all the functional corners"</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><span class="ttl">A subtle current signal</span>
+At the Intel event he noted the CEO opening the conference by "acknowledging the ecosystem first and then the technology — quite an eye-opener… a change in perspective." He watches how leaders treat ecosystems. SphereLink — a trusted local channel — <em>is</em> ecosystem thinking. You are, structurally, the kind of bet he already believes in.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh asks how you'd position Analog Bits when a customer says "our EDA vendor throws in the analog IP for free." Which answer lives in his frame?</div>
+<div class="opts">
+<button data-opt="a">"We can probably match their discount."</button>
+<button data-opt="b">"The bundles cover CPU, interconnect and libraries — nobody in that stack owns your power architecture. When your chip is pulling thousands of amps and every block needs granular regulation, free generic analog is the most expensive line in the BOM. We sense, observe, and let you correct power in real time — that's not in anyone's bundle."</button>
+<button data-opt="c">"Synopsys IP is low quality."</button>
+<button data-opt="d">"Let me check with headquarters and get back to you."</button>
+</div>
+<div class="fb">It's his own argument — the power-architecture gap — applied to the objection, without badmouthing anyone. Price-matching and vendor-bashing both fail his rules; the reframe to power wins in his native frame.</div>
+</div>
+
+<div class="pagenav"><button data-go="m3"><span class="dir">← Prev</span>03 · Markets &amp; strategy</button><button class="next" data-go="m5"><span class="dir">Next →</span>05 · The quote bank</button></div>
+</section>
+
+<section class="module" id="m5">
+<div class="eyebrow">SECTION 05 · USE IT</div>
+<h1 class="mt">The quote bank</h1>
+<p class="lede">His signature phrases, where each comes from, and what each reveals. The rule stands: <strong>echo the idea, never the sentence.</strong> If he says one of these in the call, recognise it and build on it — that's fluency; reciting it first is flattery.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>His phrase</th><th>Source</th><th>What it reveals / how to echo the idea</th></tr></thead>
+<tbody>
+<tr><td>"It's power driving the performance, not the other way around"</td><td>Intel Direct Connect</td><td>The company thesis. Echo: frame every product conversation power-first.</td></tr>
+<tr><td>"Thoughtfully first" / "early bird catches the worm"</td><td>IP-SoC 2026</td><td>Strategy = be first where demand is <em>coming</em>. Echo: your India timing argument.</td></tr>
+<tr><td>"Maybe in the seventh and eighth customers"</td><td>IP-SoC 2026</td><td>Patience economics; lighthouse customers first, profit on follow-through. Echo: land-and-expand, reference-selling.</td></tr>
+<tr><td>"VC means valuable customer"</td><td>Silicon Grapevine</td><td>Bootstrap pride; customer-back thinking. Echo: talk customers served, not funding raised.</td></tr>
+<tr><td>"Dream big and don't give up"</td><td>Silicon Grapevine</td><td>Ambition is welcome. Echo: your "own the category in India" thesis.</td></tr>
+<tr><td>"Fail fast and recover quick"</td><td>Silicon Grapevine</td><td>Resilience creed — three startups to get here. Echo: own your pivots without apology.</td></tr>
+<tr><td>"No guts, no glory"</td><td>TSMC OIP 2014</td><td>Appetite for hard problems. Echo: choosing the harder, higher-ceiling path (your career move).</td></tr>
+<tr><td>"Christmas is not moving"</td><td>Silicon Grapevine</td><td>Ship beats perfect. Echo: headline-first answers; commit to dates.</td></tr>
+<tr><td>"Like → trust → don't mess it up"</td><td>Silicon Grapevine</td><td>The three rules — his rubric. Echo: <em>be</em> it in the call rather than say it.</td></tr>
+<tr><td>"My middle child" (Analog Bits)</td><td>Silicon Grapevine</td><td>This company is family. Echo: treat the role as stewardship, not a stepping stone.</td></tr>
+<tr><td>"Chapter two" (the acquisition)</td><td>Silicon Grapevine</td><td>Mission-continuity framing. Echo: India as "the next chapter" language lands well.</td></tr>
+<tr><td>"We are young and we see far away"</td><td>IP-SoC 2026</td><td>30 years old and still forward-leaning. Echo: long-term view of the India build.</td></tr>
+<tr><td>"Strong foundries… so there are choices"</td><td>Intel Direct Connect</td><td>Multi-foundry pluralism (TSMC + Intel + more). Echo: node/foundry breadth as a customer-choice story.</td></tr>
+<tr><td>"Sense, observe, rectify"</td><td>IP-SoC 2026</td><td>The Intelligent Power Architecture as a verb chain. Echo: use the loop when explaining sensors/LDOs.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout warn"><span class="ttl">The parroting trap</span>
+He has given these interviews for years; he knows his own lines. If you deliver "power drives performance, not the other way around" as if you coined it, he'll clock it instantly — charming if acknowledged ("I heard you say something at the Intel event that stuck with me…"), hollow if claimed. Attribution turns research into respect. One attributed reference per call, maximum.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">You want to use his "power driving performance" thesis in an answer. The best delivery is:</div>
+<div class="opts">
+<button data-opt="a">State it word-for-word as your own insight.</button>
+<button data-opt="b">Avoid it entirely — too risky.</button>
+<button data-opt="c">Use the idea in your own words when relevant — or attribute it once: "You made this point at Intel's event — that power drives performance, not the reverse — and it matches exactly what I hear from design teams here."</button>
+<button data-opt="d">Open the interview by listing all his quotes you've studied.</button>
+</div>
+<div class="fb">Ideas in your own words show fluency; one attributed reference shows diligence; verbatim claiming shows neither. He wrote the trust rules — play by them.</div>
+</div>
+
+<div class="pagenav"><button data-go="m4"><span class="dir">← Prev</span>04 · Technology worldview</button><button class="next" data-go="m6"><span class="dir">Next →</span>06 · Interview implications</button></div>
+</section>
+
+<section class="module" id="m6">
+<div class="eyebrow">SECTION 06 · USE IT</div>
+<h1 class="mt">What all this means for your interview</h1>
+<p class="lede">The decisive fact most candidates will miss: before he was a CEO, Mahesh ran sales — all of it, at Virtual Silicon, then two decades of business at Analog Bits. You are being interviewed by a career salesperson. He will grade you the way a sales leader grades a rep.</p>
+
+<h2>His rubric, mapped to your behaviour on the call</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>His rule</th><th>What he's watching for</th><th>Your concrete behaviour</th></tr></thead>
+<tbody>
+<tr><td><strong>1 · Be liked</strong></td><td>Warmth, humility, energy in the first two minutes; "humble, jolly, nice"</td><td>Smile early; thank him for the time once; let genuine enthusiasm for the industry show — his own stated love of semiconductors responds to the same in others</td></tr>
+<tr><td><strong>2 · Earn trust</strong></td><td>Precision, honesty boundaries, no bluffing; how you handle what you don't know</td><td>"I don't know, here's how I'd find out"; the Interex confidentiality line delivered calmly; one composed self-correction if needed</td></tr>
+<tr><td><strong>3 · Deliver</strong></td><td>Whether your commitments are real</td><td>Commit to something small and specific in the call ("I'll send you my account-tiering view of the India market by Friday") — then actually do it. Post-interview follow-through is the hidden third round</td></tr>
+</tbody>
+</table></div>
+
+<h2>What he rewards — and what he punishes</h2>
+<div class="two-col">
+<div class="card tight"><h4 style="color:var(--good)">Rewards</h4>
+<ul class="small" style="margin:0">
+<li>Passion for the industry ("in my blood" energy)</li>
+<li>Customer-problem framing — every answer anchored in what a buyer needs</li>
+<li>Resilience told without self-pity — pivots as chapters, not detours</li>
+<li>Focus: knowing where you <em>won't</em> spend time</li>
+<li>Shipping: crisp answers now over perfect answers never</li>
+<li>Ambition stated plainly — dream big is house style</li>
+</ul></div>
+<div class="card tight"><h4 style="color:var(--bad)">Punishes</h4>
+<ul class="small" style="margin:0">
+<li>Bluffing — the fail-fast man forgives error, not pretence</li>
+<li>Badmouthing Silicon Creations or Interex — trust rules apply to how you treat the other side</li>
+<li>Spec-perfection paralysis — rambling toward completeness</li>
+<li>Funding-and-title talk over customer talk</li>
+<li>Borrowed knowledge worn as your own (wine included)</li>
+</ul></div>
+</div>
+
+<h2>Three moves this dossier makes possible</h2>
+<ul class="clean">
+<li><strong>The attributed reference:</strong> one moment of "I watched your Intel Direct Connect conversation — the point about thousands of amps through the bumps reframed how I explain sensors to customers." Diligence, shown once, lands hard.</li>
+<li><strong>The teaching question:</strong> hand him a story he loves telling — "what do you tell young salespeople actually matters?" — and listen like it's the answer to everything. Because in this room, it is.</li>
+<li><strong>The pattern compliment that's actually analysis:</strong> "You were first in FinFET twelve years before the late market arrived; you're running the same play at 2nm and gate-all-around. My read is India's design wave is three years behind your product wave — which makes now exactly the right time to build the channel." That's not flattery; that's strategy in his own playbook's language.</li>
+</ul>
+
+<div class="callout gold"><span class="ttl">The single sentence to carry into the room</span>
+He built a bootstrapped company on three rules — be liked, be trusted, deliver — and a single thesis: power first, thoughtfully first. Show him those rules in your behaviour and that thesis in your answers, and you're no longer a candidate; you're a colleague he hasn't hired yet.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Given that Mahesh personally ran sales for years, the biggest silent test of the interview is:</div>
+<div class="opts">
+<button data-opt="a">Whether you can define every product spec from memory.</button>
+<button data-opt="b">Whether the way you sell yourself in this call — warmth, trust, crispness, follow-through — is the way he'd want you selling to his customers next month.</button>
+<button data-opt="c">Whether you know more wine facts than he does.</button>
+<button data-opt="d">Whether you agree with everything he says.</button>
+</div>
+<div class="fb">The interview IS the sales demo. A career salesperson watches the meta-level: how you open, how you handle the unknown, how you close, whether you follow through. Every answer is content; the call itself is the audition.</div>
+</div>
+
+<div class="pagenav"><button data-go="m5"><span class="dir">← Prev</span>05 · The quote bank</button><button class="next" data-go="m7"><span class="dir">Next →</span>07 · Flash review</button></div>
+</section>
+
+<section class="module" id="m7">
+<div class="eyebrow">SECTION 07 · USE IT</div>
+<h1 class="mt">Flash review</h1>
+<p class="lede">Five fast checks. If you clear these cold, you've internalised the man — close the file and go rehearse out loud.</p>
+
+<div class="quiz" data-correct="a">
+<div class="qtext">1 · Complete his thesis: "It's ______ driving the ______, not the other way around."</div>
+<div class="opts">
+<button data-opt="a">Power driving the performance</button>
+<button data-opt="b">Performance driving the power</button>
+<button data-opt="c">Price driving the demand</button>
+<button data-opt="d">Software driving the silicon</button>
+</div>
+<div class="fb">Power first. Manage power to unlock performance — the inversion that defines the entire product strategy.</div>
+</div>
+
+<div class="quiz" data-correct="c">
+<div class="qtext">2 · Where does he say the real money arrives?</div>
+<div class="opts">
+<button data-opt="a">The first customer, always</button>
+<button data-opt="b">Government contracts only</button>
+<button data-opt="c">"Maybe in the seventh and eighth customers" — early ones buy credibility, later ones buy profit</button>
+<button data-opt="d">Royalties from day one</button>
+</div>
+<div class="fb">Patience economics: leading-edge customers establish the track record; the follow-through monetises it.</div>
+</div>
+
+<div class="quiz" data-correct="b">
+<div class="qtext">3 · What does "VC" mean inside Analog Bits?</div>
+<div class="opts">
+<button data-opt="a">Venture capital — their main funding source</button>
+<button data-opt="b">"Valuable customer" — his joke, because they bootstrapped and never took venture money</button>
+<button data-opt="c">Voltage controller</button>
+<button data-opt="d">Vice chairman</button>
+</div>
+<div class="fb">Bootstrap pride is core identity: control kept "to take care of our customers." Speak customer-back, always.</div>
+</div>
+
+<div class="quiz" data-correct="d">
+<div class="qtext">4 · The gap he says the EDA giants leave open is:</div>
+<div class="opts">
+<button data-opt="a">Cheaper standard-cell libraries</button>
+<button data-opt="b">Faster CPUs</button>
+<button data-opt="c">Better documentation</button>
+<button data-opt="d">Power architecture — they cover CPU, interconnect and libraries, but "no one talked about power architecture"</button>
+</div>
+<div class="fb">That claimed gap is Analog Bits' entire positioning against Synopsys/Cadence bundles — and your answer to the "free bundled IP" objection.</div>
+</div>
+
+<div class="quiz" data-correct="c">
+<div class="qtext">5 · His three rules of sales, in order:</div>
+<div class="opts">
+<button data-opt="a">Discount, deliver, repeat</button>
+<button data-opt="b">Pitch, close, follow up</button>
+<button data-opt="c">Make sure they like you → earn their trust → don't mess up one and two (deliver what you promised)</button>
+<button data-opt="d">Network, negotiate, notarise</button>
+</div>
+<div class="fb">Told to his 12-year-old son, lived for three decades — and the exact rubric he'll grade you with on the call. Be it; don't recite it.</div>
+</div>
+
+<div class="callout gold"><span class="ttl">Done</span>
+You now know his story, his rules, his playbook, his thesis, and his phrases — likely better than anyone he has interviewed for this role. Rehearse your intro out loud, queue up SemiWiki EP322 one more time, print the glance card from the CEO-round brief, and go show him the three rules in action.</div>
+
+<div class="pagenav"><button data-go="m6"><span class="dir">← Prev</span>06 · Interview implications</button><button class="next" disabled><span class="dir">Done</span>End of dossier — go win it</button></div>
+</section>
+
+</div></main>
+</div>
+
+<script>
+(function(){
+  var order=['m0','m1','m2','m3','m4','m5','m6','m7'];
+  var visited={};
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sidebar=document.getElementById('sidebar'),scrim=document.getElementById('scrim');
+  function show(id){
+    order.forEach(function(m){var s=document.getElementById(m);if(s)s.classList.toggle('active',m===id);});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.dataset.go===id);});
+    visited[id]=true;
+    navLinks.forEach(function(a){if(visited[a.dataset.go])a.classList.add('visited');});
+    var pct=Math.round(Object.keys(visited).length/order.length*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progLabel').textContent=pct+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    sidebar.classList.remove('open');scrim.classList.remove('show');
+  }
+  navLinks.forEach(function(a){a.addEventListener('click',function(){show(a.dataset.go);});});
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(t&&!t.matches('#nav a')){show(t.dataset.go);}});
+  document.getElementById('menuBtn').addEventListener('click',function(){sidebar.classList.toggle('open');scrim.classList.toggle('show');});
+  scrim.addEventListener('click',function(){sidebar.classList.remove('open');scrim.classList.remove('show');});
+  document.querySelectorAll('.qa>button.q').forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
+  document.querySelectorAll('.reveal-btn').forEach(function(b){b.addEventListener('click',function(){var box=b.nextElementSibling;if(box&&box.classList.contains('reveal-box')){box.classList.toggle('show');b.textContent=box.classList.contains('show')?(b.dataset.hide||'Hide'):(b.dataset.show||b.textContent);}});});
+  document.querySelectorAll('.quiz').forEach(function(q){var c=q.dataset.correct,fb=q.querySelector('.fb');
+    q.querySelectorAll('.opts button').forEach(function(btn){btn.addEventListener('click',function(){if(q.dataset.done)return;q.dataset.done='1';var p=btn.dataset.opt;q.querySelectorAll('.opts button').forEach(function(o){o.disabled=true;});if(p===c){btn.classList.add('correct');}else{btn.classList.add('wrong');var r=q.querySelector('.opts button[data-opt="'+c+'"]');if(r)r.classList.add('correct');}if(fb)fb.classList.add('show');});});
+  });
+  show('m0');
+})();
+</script>
+</body>
+</html>
