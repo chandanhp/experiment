@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEO Round — Mahesh Tirupattur · Interview Dossier</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============ Executive-briefing theme: deep navy + gold on warm ivory ============ */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#fbfaf7;
+  --border:#e3dfd6; --border-soft:#edeae2;
+  --navy:#122a4a; --navy-2:#1d3d68; --gold:#a87b2d; --gold-soft:#f3ead8;
+  --teal:#0e6b5e;
+  --text-main:#1d1d20; --text-muted:#5d5c58; --text-faint:#918f88;
+  --good-bg:#e9f3ea; --good:#2e6b34; --bad-bg:#fbebe8; --bad:#a83226;
+  --warn-bg:#faf3df; --warn:#8a6a10; --tip-bg:#ecf1f8; --tip:#1d3d68;
+  --shadow:0 1px 3px rgba(18,42,74,.07),0 8px 28px rgba(18,42,74,.06);
+  --shadow-soft:0 1px 2px rgba(18,42,74,.05); --radius:12px;
+}
+*{box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text-main);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--navy);line-height:1.22;}
+code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--navy-2);}
+
+/* topbar + progress */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:60;background:var(--navy);display:flex;align-items:center;gap:14px;padding:0 20px;box-shadow:0 2px 12px rgba(18,42,74,.25);}
+.topbar .menu-btn{display:none;font-size:21px;background:none;border:none;cursor:pointer;color:#e8d9b8;line-height:1;}
+.topbar .t1{font-family:'IBM Plex Sans';font-weight:700;font-size:14.5px;color:#fff;letter-spacing:.2px;}
+.topbar .t2{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c9a45c;}
+.topbar .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar .plabel{font-family:'JetBrains Mono';font-size:10.5px;color:#b9c6d8;}
+.ptrack{width:150px;height:6px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;}
+.pfill{height:100%;width:0;background:linear-gradient(90deg,#c9a45c,#e8d9b8);border-radius:99px;transition:width .35s ease;}
+
+/* layout */
+.layout{display:flex;padding-top:56px;min-height:100vh;}
+.sidebar{width:268px;flex:0 0 268px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:56px;bottom:0;left:0;overflow-y:auto;padding:16px 13px 50px;}
+.ngt{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:16px 10px 6px;}
+.sidebar nav a{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Sans';font-size:13.8px;color:var(--text-muted);padding:9px 11px;border-radius:9px;margin-bottom:2px;cursor:pointer;transition:all .12s;}
+.sidebar nav a .code{font-family:'JetBrains Mono';font-size:10.5px;color:var(--gold);flex:0 0 20px;font-weight:600;}
+.sidebar nav a:hover{background:var(--surface-2);color:var(--navy);}
+.sidebar nav a.active{background:var(--gold-soft);color:var(--navy);font-weight:600;}
+.sidebar nav a .tick{margin-left:auto;font-size:12px;color:var(--good);opacity:0;transition:opacity .2s;}
+.sidebar nav a.visited .tick{opacity:1;}
+
+.content{flex:1 1 auto;margin-left:268px;width:calc(100% - 268px);display:flex;justify-content:center;padding:36px 40px 90px;}
+.inner{width:100%;max-width:830px;}
+section.module{display:none;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:38px 44px 34px;animation:fade .25s ease;}
+section.module.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.eyebrow{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+h1.mt{font-size:31px;font-weight:700;margin:0 0 10px;letter-spacing:-.4px;}
+.lede{font-size:18px;color:var(--text-muted);margin:0 0 8px;max-width:70ch;}
+.whybox{background:var(--gold-soft);border:1px solid #e6d2a8;border-radius:10px;padding:13px 17px;margin:20px 0 4px;font-size:15px;}
+.whybox .ttl{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+
+h2{font-size:22px;font-weight:600;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border-soft);letter-spacing:-.2px;}
+h3{font-size:18px;font-weight:600;margin:26px 0 8px;color:var(--navy-2);}
+h4{font-size:14.5px;font-weight:600;margin:16px 0 6px;}
+p{margin:0 0 14px;} ul,ol{margin:0 0 16px;padding-left:22px;} li{margin-bottom:7px;}
+strong{font-weight:600;color:var(--navy);} em{color:var(--text-muted);}
+.small{font-size:14px;} .muted{color:var(--text-muted);}
+
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-soft);margin:18px 0;}
+.card.tight{padding:15px 17px;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;border-left:4px solid var(--tip);background:var(--tip-bg);font-size:15.5px;}
+.callout .ttl{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
+.callout.tip{border-color:var(--tip);background:var(--tip-bg);} .callout.tip .ttl{color:var(--tip);}
+.callout.good{border-color:var(--good);background:var(--good-bg);} .callout.good .ttl{color:var(--good);}
+.callout.bad{border-color:var(--bad);background:var(--bad-bg);} .callout.bad .ttl{color:var(--bad);}
+.callout.warn{border-color:var(--warn);background:var(--warn-bg);} .callout.warn .ttl{color:var(--warn);}
+.callout.gold{border-color:var(--gold);background:var(--gold-soft);} .callout.gold .ttl{color:var(--gold);}
+
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--radius);}
+table{border-collapse:collapse;width:100%;font-size:14.3px;background:var(--surface);}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+th{font-family:'IBM Plex Sans';font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:#e8d9b8;background:var(--navy);}
+tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even) td{background:var(--surface-2);}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.chip{font-family:'JetBrains Mono';font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:999px;}
+.chip.g{background:var(--gold-soft);border-color:#e6d2a8;color:var(--gold);}
+.chip.n{background:var(--tip-bg);border-color:#c8d6e8;color:var(--navy-2);}
+.chip.t{background:#e5f1ef;border-color:#bfdcd6;color:var(--teal);}
+
+.qa{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);}
+.qa>button.q{width:100%;text-align:left;background:var(--surface);border:none;cursor:pointer;padding:15px 50px 15px 20px;font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;color:var(--navy);position:relative;line-height:1.4;}
+.qa>button.q:hover{background:var(--surface-2);}
+.qa>button.q::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);font-weight:400;}
+.qa.open>button.q::after{content:'\2013';}
+.qa .a{display:none;padding:4px 22px 20px;border-top:1px solid var(--border-soft);}
+.qa.open .a{display:block;}
+.qa .a .label{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin:14px 0 4px;}
+
+.reveal-btn{font-family:'IBM Plex Sans';font-size:13.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--navy-2);border:1px solid var(--navy-2);padding:8px 15px;border-radius:8px;margin:8px 8px 8px 0;transition:all .12s;}
+.reveal-btn:hover{background:var(--navy-2);color:#fff;}
+.reveal-box{display:none;margin:8px 0 4px;}
+.reveal-box.show{display:block;}
+
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0;box-shadow:var(--shadow-soft);}
+.quiz .qtext{font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;margin-bottom:12px;color:var(--navy);}
+.quiz .opts{display:flex;flex-direction:column;gap:8px;}
+.quiz .opts button{text-align:left;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);color:var(--text-main);padding:10px 14px;border-radius:8px;transition:all .12s;}
+.quiz .opts button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.quiz .opts button.correct{background:var(--good-bg);border-color:var(--good);}
+.quiz .opts button.wrong{background:var(--bad-bg);border-color:var(--bad);}
+.quiz .opts button:disabled{cursor:default;}
+.quiz .fb{display:none;margin-top:12px;font-size:14.5px;padding:11px 14px;border-radius:8px;background:var(--surface-2);border-left:3px solid var(--navy-2);}
+.quiz .fb.show{display:block;}
+
+.hero{background:linear-gradient(140deg,var(--navy) 0%,var(--navy-2) 55%,#274d7d 100%);color:#fff;border-radius:14px;padding:34px 34px 30px;margin:0 0 24px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;top:0;right:0;bottom:0;width:5px;background:linear-gradient(180deg,#c9a45c,#e8d9b8);}
+.hero .eb{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#c9a45c;margin-bottom:10px;}
+.hero h1{color:#fff;font-size:28px;margin:0 0 8px;letter-spacing:-.4px;}
+.hero p{color:rgba(255,255,255,.88);font-size:16.5px;margin:0;max-width:64ch;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;font-family:'IBM Plex Sans';font-size:12.8px;}
+.hero .meta div{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);}
+.hero .meta b{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:#c9a45c;font-weight:600;font-family:'JetBrains Mono';margin-bottom:2px;}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;margin:18px 0;}
+.tile{display:block;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow-soft);cursor:pointer;transition:all .13s;}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d8c9a5;}
+.tile .num{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.08em;}
+.tile h3{margin:7px 0 6px;color:var(--navy);font-size:16px;}
+.tile p{font-size:13.3px;color:var(--text-muted);margin:0;line-height:1.5;}
+
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:12px;margin:18px 0;}
+.kbox .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft);border-top:2px solid var(--gold);}
+.kbox .k .big{font-family:'IBM Plex Sans';font-weight:700;font-size:21px;color:var(--navy);}
+.kbox .k .lbl{font-size:12.3px;color:var(--text-muted);}
+
+ul.clean{list-style:none;padding-left:0;}
+ul.clean li{padding-left:24px;position:relative;}
+ul.clean li::before{content:'\2192';position:absolute;left:0;color:var(--gold);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+.script{background:var(--surface-2);border-left:3px solid var(--teal);padding:13px 17px;border-radius:0 8px 8px 0;margin:12px 0;font-size:15.5px;}
+.script .who{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);display:block;margin-bottom:4px;}
+
+.pagenav{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:22px;border-top:1px solid var(--border);}
+.pagenav button{font-family:'IBM Plex Sans';font-size:14px;font-weight:500;padding:11px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;color:var(--text-main);transition:all .12s;}
+.pagenav button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.pagenav button:disabled{opacity:.4;cursor:default;}
+.pagenav .dir{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);font-family:'JetBrains Mono';margin-bottom:2px;}
+.pagenav .next{text-align:right;}
+
+@media(max-width:880px){
+  .topbar .menu-btn{display:block;}
+  .sidebar{transform:translateX(-100%);transition:transform .2s ease;z-index:55;box-shadow:4px 0 24px rgba(0,0,0,.15);}
+  .sidebar.open{transform:translateX(0);}
+  .content{margin-left:0;width:100%;padding:20px 13px 80px;}
+  section.module{padding:25px 19px 27px;}
+  h1.mt{font-size:25px;} .lede{font-size:16.5px;}
+  .ptrack{width:90px;} .topbar .t2{display:none;}
+  .scrim{display:none;position:fixed;inset:0;top:56px;background:rgba(18,42,74,.4);z-index:50;}
+  .scrim.show{display:block;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <div>
+    <div class="t1">CEO Round · Mahesh Tirupattur</div>
+    <div class="t2">Interview Dossier · Analog Bits</div>
+  </div>
+  <div class="progress-wrap"><span class="plabel" id="progLabel">0%</span><div class="ptrack"><div class="pfill" id="progFill"></div></div></div>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+<nav id="nav">
+  <div class="ngt">Brief</div>
+  <a data-go="m0"><span class="code">00</span> The Mahesh round <span class="tick">✓</span></a>
+  <a data-go="m1"><span class="code">01</span> Your introduction <span class="tick">✓</span></a>
+  <a data-go="m2"><span class="code">02</span> Resume defence <span class="tick">✓</span></a>
+  <div class="ngt">Market intelligence</div>
+  <a data-go="m3"><span class="code">03</span> Global IP &amp; semicon market <span class="tick">✓</span></a>
+  <a data-go="m4"><span class="code">04</span> India: tech &amp; business now <span class="tick">✓</span></a>
+  <a data-go="m5"><span class="code">05</span> Nodes &amp; IP landscape <span class="tick">✓</span></a>
+  <a data-go="m6"><span class="code">06</span> Conferences that matter <span class="tick">✓</span></a>
+  <div class="ngt">Portfolio &amp; customers</div>
+  <a data-go="m14"><span class="code">07</span> Analog Bits deep dive <span class="tick">✓</span></a>
+  <a data-go="m7"><span class="code">08</span> Silicon Creations products <span class="tick">✓</span></a>
+  <a data-go="m8"><span class="code">09</span> Customer asks till now <span class="tick">✓</span></a>
+  <div class="ngt">Strategy &amp; fluency</div>
+  <a data-go="m9"><span class="code">10</span> Sales &amp; business approach <span class="tick">✓</span></a>
+  <a data-go="m10"><span class="code">11</span> India market strategy <span class="tick">✓</span></a>
+  <a data-go="m11"><span class="code">12</span> Podcast fluency &amp; key words <span class="tick">✓</span></a>
+  <div class="ngt">Close the deal</div>
+  <a data-go="m12"><span class="code">13</span> Questions to ask Mahesh <span class="tick">✓</span></a>
+  <a data-go="m13"><span class="code">14</span> Video-call day plan <span class="tick">✓</span></a>
+</nav>
+</aside>
+
+<main class="content"><div class="inner" id="inner">
+<section class="module" id="m0">
+<div class="hero">
+  <div class="eb">CEO ROUND · DOSSIER</div>
+  <h1>The conversation with Mahesh</h1>
+  <p>This round is different. Vinny screened for fit and willingness. Mahesh — CEO, 40 years in the US, described as an extremely fast thinker — will test whether you understand the <em>business</em>: the market, the money, the customers, and whether you can hold an intelligent commercial conversation. This dossier prepares exactly that, built around Vinny's own inputs.</p>
+  <div class="meta">
+    <div><b>Interviewer</b>Mahesh Tirupattur · CEO, Analog Bits</div>
+    <div><b>Style</b>Fast, sharp, business-first</div>
+    <div><b>Your goal</b>Sound like a commercial partner, not a trainee</div>
+  </div>
+</div>
+
+<h2>Vinny's brief, decoded</h2>
+<p>Vinny told you what to prepare. Each item maps to a section of this dossier:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Vinny said</th><th>What Mahesh is really testing</th><th>Section</th></tr></thead>
+<tbody>
+<tr><td>"My introduction — professional and personal"</td><td>Can you present yourself crisply to a CEO?</td><td>01</td></tr>
+<tr><td>"Prep on my resume"</td><td>Can you defend every line and connect it to this job?</td><td>02</td></tr>
+<tr><td>"Market tech business around IPs and semicon globally… with actual real examples"</td><td>Do you understand the industry you claim to sell in?</td><td>03</td></tr>
+<tr><td>"Current tech and business in India"</td><td>Do you know the ground reality of <em>his</em> target market?</td><td>04</td></tr>
+<tr><td>"Nodes, IPs"</td><td>Can you talk process nodes and IP types credibly?</td><td>05</td></tr>
+<tr><td>"Conferences"</td><td>Do you know where this industry actually meets?</td><td>06</td></tr>
+<tr><td>"Everything about Analog Bits" (your own addition)</td><td>Do you know the company whose card you'll carry — history, catalogue, ownership?</td><td>07</td></tr>
+<tr><td>"Product list of SiCr" (Silicon Creations)</td><td>Do you truly know what you sell <em>today</em>? (Integrity + depth test)</td><td>08</td></tr>
+<tr><td>"Customers — what they have asked till now"</td><td>Are you actually in the market, hearing real demand?</td><td>09</td></tr>
+<tr><td>"More on business and sales approach"</td><td>How will you make <em>him</em> money?</td><td>10</td></tr>
+<tr><td>"Ask him questions"</td><td>Are you curious, prepared, and thinking like a partner?</td><td>13</td></tr>
+<tr><td>"Strategic planning and analysis on the Indian market"</td><td>Can you turn facts into a where-to-play / how-to-win plan?</td><td>11</td></tr>
+<tr><td>"Refer to Indian semicon podcasts, remember key words"</td><td>Do you speak the ecosystem's language fluently?</td><td>12</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><span class="ttl">How to handle a fast thinker</span>
+Vinny described Mahesh as extremely intelligent and a very fast thinker. With people like that: <strong>answer the question asked, front-load your point, then stop.</strong> Lead with the headline, offer depth only if he pulls. Never pad. If you don't know something, say "I don't know, but here's how I'd find out" — a fast thinker respects that far more than waffle. And ask him real questions: CEOs of small companies love candidates who engage with the business.</div>
+
+<h2>Study the sections</h2>
+<div class="tile-grid">
+<a class="tile" data-go="m1"><span class="num">01</span><h3>Your introduction</h3><p>A 60-second professional + personal intro built for a CEO's attention span.</p></a>
+<a class="tile" data-go="m2"><span class="num">02</span><h3>Resume defence</h3><p>Every line of your CV, the question it invites, and your answer.</p></a>
+<a class="tile" data-go="m3"><span class="num">03</span><h3>Global IP market</h3><p>Market size, who's who, AI/chiplet/RISC-V trends — with real numbers.</p></a>
+<a class="tile" data-go="m4"><span class="num">04</span><h3>India: tech &amp; business</h3><p>ISM 2.0, DLI, fabs, real startups, real money — the 2026 ground reality.</p></a>
+<a class="tile" data-go="m5"><span class="num">05</span><h3>Nodes &amp; IP</h3><p>Process nodes explained, what runs where, and the IP taxonomy.</p></a>
+<a class="tile" data-go="m6"><span class="num">06</span><h3>Conferences</h3><p>SEMICON India, VLSI-D, TSMC OIP, DAC — dates, why each matters.</p></a>
+<a class="tile" data-go="m14"><span class="num">07</span><h3>Analog Bits deep dive</h3><p>History, full catalogue, the SemiFive story, Cerebras proof — the company itself.</p></a>
+<a class="tile" data-go="m7"><span class="num">08</span><h3>Silicon Creations products</h3><p>Your current portfolio, cold — because he will probe it.</p></a>
+<a class="tile" data-go="m8"><span class="num">09</span><h3>Customer asks</h3><p>Framing what customers have actually asked you — honestly and safely.</p></a>
+<a class="tile" data-go="m9"><span class="num">10</span><h3>Sales &amp; business approach</h3><p>Your 30/60/90, pipeline math, and how you'd grow his India business.</p></a>
+<a class="tile" data-go="m10"><span class="num">11</span><h3>India market strategy</h3><p>Where to play, how to win: segments, SWOT, and the 3-year thesis.</p></a>
+<a class="tile" data-go="m11"><span class="num">12</span><h3>Podcast fluency &amp; key words</h3><p>The listening list — including Mahesh's own podcast — and the vocabulary.</p></a>
+<a class="tile" data-go="m12"><span class="num">13</span><h3>Questions for Mahesh</h3><p>Sharp questions on strategy, product, and India that impress a CEO.</p></a>
+<a class="tile" data-go="m13"><span class="num">14</span><h3>Video-call day plan</h3><p>Timezone, tech, presence rules, and the printable glance card.</p></a>
+</div>
+
+<div class="pagenav"><button disabled><span class="dir">Start</span>You're at the beginning</button><button class="next" data-go="m1"><span class="dir">Next →</span>01 · Your introduction</button></div>
+</section>
+
+<section class="module" id="m1">
+<div class="eyebrow">SECTION 01 · FIRST IMPRESSION</div>
+<h1 class="mt">Your introduction</h1>
+<p class="lede">Mahesh will almost certainly open with some version of "tell me about yourself." You get about 60–75 seconds of his full attention. Structure: professional arc → why semiconductors → one personal note → why this conversation.</p>
+<div class="whybox"><span class="ttl">Why this matters to Mahesh</span>A CEO reads an intro as a sample of how you'd present to a customer. Crisp, structured, confident = you can be put in front of a CTO. Rambling = risk.</div>
+
+<h2>The 60-second professional intro</h2>
+<div class="script"><span class="who">Say it roughly like this — then make it your own</span>
+"Good to meet you, Mahesh. I'm Ananya, based in Bengaluru. I'm a mechanical engineer from BMS College who kept gravitating to where technology meets business — I started in engineering at Mercedes R&amp;D, moved through business development and cost engineering at ITC, and then at Pegasus Aerospace, a small team, I got to touch design, selling, and the commercial side all at once. That's where I learned I like owning the full picture.<br><br>
+I chose semiconductors deliberately — India's moment in this industry is real, and I wanted in early. For the past several months at Interex I've been doing IP sales and business development for Silicon Creations and Menta across India: qualifying customers, coordinating proposals and NDAs, running outreach, supporting deals to closure. So I already live in the exact market you're building in — I know the customers, the motion, and honestly, I know your main competitor's portfolio from the inside.<br><br>
+Vinny and I connected at the VLSI event, and the more I've studied Analog Bits — the pinless architecture, the move into power management, the TSMC award — the more convinced I am this is where I want to go deep. I'd love for you to tell me how you see India, and I'm happy to go anywhere you'd like from here."
+</div>
+
+<h3>The personal note (keep it to 2–3 sentences, only if he asks)</h3>
+<div class="script"><span class="who">Personal version</span>
+"Personally — I'm from Bengaluru, grew up in Basavanagudi, the whole family is still here. I had planned a Master's in the US, but when my father had a heart surgery I chose to stay close to family and build my career here instead — a decision I'm genuinely glad about, because it put me into India's semiconductor story at exactly the right time. Outside work I've always been a builder-organiser type — I ran my college's racing team and technical fests."
+</div>
+
+<div class="callout warn"><span class="ttl">Calibration</span>
+Notice what the intro does <em>not</em> do: it doesn't apologise for the mechanical degree, doesn't over-explain the job changes, doesn't tell the full family medical story. One clean line each. If Mahesh wants more, he'll ask — and Section 02 has your answers ready.</div>
+
+<h2>Practice check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh interrupts your intro after 20 seconds with a question. What do you do?</div>
+<div class="opts">
+<button data-opt="a">Politely ask to finish your introduction first.</button>
+<button data-opt="b">Drop the script instantly and answer his question directly — the intro's job is done.</button>
+<button data-opt="c">Speed up and compress the rest of the intro.</button>
+<button data-opt="d">Start the introduction again from the beginning.</button>
+</div>
+<div class="fb">With a fast thinker, an interruption means he's engaged — that's a win. Follow his thread. The intro is a doorway, not a performance.</div>
+</div>
+
+<div class="pagenav"><button data-go="m0"><span class="dir">← Prev</span>The Mahesh round</button><button class="next" data-go="m2"><span class="dir">Next →</span>02 · Resume defence</button></div>
+</section>
+
+<section class="module" id="m2">
+<div class="eyebrow">SECTION 02 · KNOW YOUR OWN STORY</div>
+<h1 class="mt">Resume defence</h1>
+<p class="lede">Assume Mahesh has your resume in front of him and will pick any line and pull. For each block below: the question it invites, and your answer. Practise these out loud.</p>
+
+<h2>Line-by-line: the questions hiding in your CV</h2>
+
+<div class="qa"><button class="q">"Mechanical engineering — so why are you in semiconductors?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"Deliberate choice. I watched India's semiconductor push take off and decided the opportunity outweighed the comfort of staying in my lane. Sales is the right entry point — you don't need to design a PLL to sell one, you need to understand what it does, who needs it, and why ours is better. I proved to myself at Interex that I can ramp on the technology fast: within months I was reading datasheets, holding technical qualification conversations, and supporting real IP deals. The mechanical degree actually helps — I think in systems and I'm not intimidated by engineering conversations."</p>
+</div></div>
+
+<div class="qa"><button class="q">"Four roles in three years — Mercedes, ITC, Pegasus, Interex. Why so many moves?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"Fair question. Mercedes was my student internship — core engineering. ITC recruited me from campus; I did cost engineering and business development there, and it taught me commercial discipline. Pegasus was a deliberate move to a small team where I could touch everything — design, selling, finance. And Interex was my deliberate entry into semiconductors. Each move was toward the same destination: the business side of deep technology. Now I've found the field I want to go deep in — that's exactly why I'm sitting here rather than drifting again. I'm looking for the place to build a long run."</p>
+<div class="label">Why this works</div>
+<p class="muted small">It converts "job hopper" into "converging trajectory," and ends by making this role the answer to the concern.</p>
+</div></div>
+
+<div class="qa"><button class="q">"You went to the US for a Master's and came back. What happened?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"I'd prepared for a year and had flown out, but my father had a heart attack right around then — he needed bypass surgery. I'm the only child, my mother also works, so I came back. He's fully recovered now. I could pursue a Master's anytime; what I couldn't get back was being with family when it mattered — and, as it turned out, the timing put me into India's semiconductor moment early. I don't regret it at all."</p>
+<div class="label">Note</div>
+<p class="muted small">Brief, composed, ends forward-looking. Don't dwell — Mahesh already heard the outline from Vinny most likely.</p>
+</div></div>
+
+<div class="qa"><button class="q">"What did you actually DO at Interex? Walk me through a deal."</button><div class="a">
+<div class="label">Your answer (structure: role → motion → one concrete example)</div>
+<p>"I run business development for the Silicon Creations and Menta portfolios in India. Day to day that means identifying and qualifying prospects — mostly fabless startups and design houses — running first conversations to map requirements, coordinating NDAs and technical alignment with the principals' engineers, preparing proposals, and following commercial threads through to closure. I also run outbound: LinkedIn campaigns, trade-show presence, targeted account development, including with government-sector entities."</p>
+<p>"For a concrete example: [<em>Ananya — insert one real engagement you can speak about WITHOUT confidential details: e.g., 'a Bengaluru fabless company evaluating a fractional-N PLL for an IoT SoC — I ran qualification, got the NDA executed, coordinated the technical Q&amp;A with the Silicon Creations team, and supported the proposal.'</em>] I can't share names or commercial terms — and honestly, that discretion is exactly what you'd want from me on your side."</p>
+<div class="label">Critical prep task</div>
+<p class="muted small">Before the interview, choose 1–2 real engagements you can narrate at this level of anonymised detail. Rehearse them. This is the single most likely deep-dive.</p>
+</div></div>
+
+<div class="qa"><button class="q">"What results can you point to? Any closures?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"I've contributed to the closure of IP engagements at Interex — my resume references that, and I'm careful about claiming sole credit because IP deals are team closures between the rep, the principal, and the customer. What I can own outright: the pipeline I've built through outreach, the qualification quality — Vinny can tell you our conversations have been substantive from day one — and the speed at which I became useful in a domain I entered cold. In eight months I've gone from zero semiconductor background to running customer conversations independently. Give me your portfolio and your introductions, and that curve continues."</p>
+<div class="label">Why this works</div>
+<p class="muted small">Honest about the limits of an 8-month track record while converting it into evidence of slope, not position. CEOs of small companies hire slope.</p>
+</div></div>
+
+<div class="qa"><button class="q">"Your title says 'support' a lot — supporting licensing, supporting proposals. Can you actually close?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"At Interex, deal authority sits with the principals — that's the structure of rep businesses, and it's the same structure you have. Within that, I've run the parts a closer runs: qualification, requirement mapping, objection handling, proposal coordination, commercial follow-through. What I haven't yet had is full ownership of a deal end-to-end — and that's precisely the growth this role offers, with your mentorship and Vinny's. I'd rather earn closing authority inside a portfolio I believe in than overstate what I've done."</p>
+</div></div>
+
+<div class="qa"><button class="q">"Why should I hire someone with 8 months of IP experience for a SENIOR role?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"Because the alternative profiles mostly don't exist. India has very few people doing pure semiconductor IP sales — the experienced ones are comfortable inside Synopsys or Cadence, as Vinny says. What you need is someone who already knows the Indian customer landscape, already speaks the technical language, already runs the sales motion — and is hungry enough to build. That's me, minus years of habits from a big-company playbook that wouldn't fit a two-person India operation anyway. And on the one dimension that matters most in this business — trust — my track record is clean: I handle a competitor's confidential information today, and I've never leaked a word of it."</p>
+</div></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mahesh asks for a customer name from your Interex pipeline. Best response?</div>
+<div class="opts">
+<button data-opt="a">Share the name — it shows you have real customers.</button>
+<button data-opt="b">Refuse flatly: "I can't discuss my work."</button>
+<button data-opt="c">Decline the name gracefully, describe the engagement anonymised, and point out that this discretion is what protects HIS information tomorrow.</button>
+<button data-opt="d">Say you don't remember.</button>
+</div>
+<div class="fb">This may even be a deliberate integrity test. Declining with grace while offering anonymised substance turns the question into your best moment.</div>
+</div>
+
+<div class="pagenav"><button data-go="m1"><span class="dir">← Prev</span>01 · Your introduction</button><button class="next" data-go="m3"><span class="dir">Next →</span>03 · Global IP market</button></div>
+</section>
+
+
+<section class="module" id="m3">
+<div class="eyebrow">SECTION 03 · MARKET INTELLIGENCE</div>
+<h1 class="mt">The global IP &amp; semiconductor market</h1>
+<p class="lede">Vinny's instruction: "market, tech, business around IPs and semicon globally… with actual real examples." Here are the numbers and stories to carry in. Use one or two — precisely — rather than reciting all of them.</p>
+
+<h2>The numbers to know cold</h2>
+<div class="kbox">
+<div class="k"><div class="big">~$8.4B</div><div class="lbl">Global silicon IP market 2026 (licence + royalty + services)</div></div>
+<div class="k"><div class="big">~$11.3B</div><div class="lbl">Projected by 2031 (~6–7% CAGR; some analysts see ~10%)</div></div>
+<div class="k"><div class="big">~$600B+</div><div class="lbl">Total semiconductor market the IP layer feeds</div></div>
+<div class="k"><div class="big">80–150</div><div class="lbl">IP blocks in a modern SoC — and rising</div></div>
+</div>
+<p class="small muted">Analyst figures differ by scope (some count only design IP, others add services); "roughly an $8-billion market growing toward $11–17B over the decade" is the safe, credible range to quote.</p>
+
+<h2>Who's who — the market structure</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Tier</th><th>Players</th><th>What they own</th></tr></thead>
+<tbody>
+<tr><td><strong>The giant</strong></td><td>Arm</td><td>~40%+ of the market — processor architecture royalty machine (Cortex, Neoverse). Royalties are ~55–70% of industry revenue.</td></tr>
+<tr><td><strong>EDA + IP giants</strong></td><td>Synopsys, Cadence</td><td>Broad interface/foundation/analog IP attached to their EDA dominance. The default "safe choice."</td></tr>
+<tr><td><strong>Specialists</strong></td><td>Rambus, Alphawave, CEVA, Imagination, SiFive…</td><td>Deep niches: memory interfaces, high-speed SerDes, DSP/AI, GPU, RISC-V.</td></tr>
+<tr><td><strong>Boutique analog/mixed-signal</strong></td><td><strong>Analog Bits, Silicon Creations, M31</strong></td><td>The precision analog layer the giants don't do best: clocking, sensing, power, specialty interface. <em>Your world.</em></td></tr>
+</tbody>
+</table></div>
+
+<h2>The four forces driving the market — with real examples</h2>
+<div class="card">
+<h4>1 · AI is reshaping silicon demand</h4>
+<p class="small">Hyperscalers and AI startups are building custom silicon, and every one of those chips needs clocking, power and interface IP. <strong>Real example to cite:</strong> Analog Bits co-published with <strong>Cerebras</strong> — the wafer-scale AI company — on on-die power management for SoCs and chiplets. That's the AI thesis in one sentence: monster AI chips need real-time power sensing and delivery, which is exactly the portfolio Analog Bits has built.</p>
+<h4>2 · Chiplets change what IP gets bought</h4>
+<p class="small">Instead of one giant die, designs are splitting into chiplets connected by die-to-die links (the UCIe standard). This multiplies demand for interface IP, I/O, and per-die clocking/sensing. <strong>Real example:</strong> UCIe adoption is growing fast, and Analog Bits presents on chiplet scalability; its Cerebras paper is literally titled for "SoCs and Chiplets."</p>
+<h4>3 · RISC-V and silicon sovereignty</h4>
+<p class="small">Countries and companies want architectural independence; RISC-V (the open processor architecture) is the vehicle. <strong>Real example:</strong> a large share of India's DLI startups build on RISC-V — and India's 1-TOPS student program aims at full RISC-V SoC tape-outs. Every RISC-V SoC still needs third-party analog IP: the processor may be open, the PLL never is.</p>
+<h4>4 · Royalty economics</h4>
+<p class="small">The IP business model = licence fee upfront + royalty per chip shipped. Royalties are the majority of industry revenue (~55–70%), which is why IP companies compound: win the socket once, earn for the life of the product. This is the "60–70% gross margin" business Vinny described.</p>
+</div>
+
+<div class="callout tip"><span class="ttl">The 30-second global-market answer, assembled</span>
+"Silicon IP is roughly an eight-billion-dollar market growing high-single-digits, feeding a $600-billion chip industry. Arm dominates processor IP, Synopsys and Cadence bundle broad IP with their EDA, and then there's the specialist layer where we play — precision analog and mixed-signal that the giants don't do best. The growth drivers right now are AI silicon, chiplets, and sovereignty programs like India's — and all three pull demand toward exactly what Analog Bits sells: clocking, sensing, and power for big, hot, modular chips. Cerebras co-publishing with Analog Bits on on-die power management is the perfect example."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh asks: "Why do royalties matter so much in this industry?" Best answer?</div>
+<div class="opts">
+<button data-opt="a">They don't — licence fees are the real money.</button>
+<button data-opt="b">Royalties scale with the customer's shipped volume, so one design win compounds for years — it's why the majority of IP industry revenue is royalty and why margins are so high.</button>
+<button data-opt="c">Royalties are a legal formality.</button>
+<button data-opt="d">Only Arm charges royalties.</button>
+</div>
+<div class="fb">Win the socket once, earn per chip for the product's life. That compounding is the economic heart of the IP business.</div>
+</div>
+
+<div class="pagenav"><button data-go="m2"><span class="dir">← Prev</span>02 · Resume defence</button><button class="next" data-go="m4"><span class="dir">Next →</span>04 · India now</button></div>
+</section>
+
+<section class="module" id="m4">
+<div class="eyebrow">SECTION 04 · THE HOME MARKET</div>
+<h1 class="mt">India: tech &amp; business right now</h1>
+<p class="lede">This is Mahesh's target market and your claimed home advantage. These are the 2026 facts — recent, specific, and checkable. Deploy two or three with precision and you'll sound like someone who reads this market every morning.</p>
+
+<h2>The headline numbers (2026)</h2>
+<div class="kbox">
+<div class="k"><div class="big">~$10.8B</div><div class="lbl">India Semiconductor Mission funding (ISM 2.0 era)</div></div>
+<div class="k"><div class="big">24 → 50</div><div class="lbl">DLI design startups today → government's next-phase target</div></div>
+<div class="k"><div class="big">₹430 cr</div><div class="lbl">VC raised by DLI startups; 14 of 24 VC-funded</div></div>
+<div class="k"><div class="big">$92M</div><div class="lbl">Raised by Indian semicon startups in just Jan–May 2026 (vs ~$25M all last year)</div></div>
+<div class="k"><div class="big">16</div><div class="lbl">Startup tape-outs completed; 6 chips fabbed at nodes down to 12nm</div></div>
+<div class="k"><div class="big">~20%</div><div class="lbl">Of the world's chip-design engineers are in India</div></div>
+</div>
+
+<h2>The manufacturing layer — what's real on the ground</h2>
+<ul class="clean">
+<li><strong>Micron's ATMP plant (Sanand, Gujarat)</strong> — inaugurated Feb 28, 2026; India's first operational facility of this cycle, ~$2.75B, packaging DRAM/NAND at massive scale.</li>
+<li><strong>Tata Electronics + PSMC fab (Dholera, Gujarat)</strong> — the flagship: 50,000 wafer starts/month at <strong>28nm–110nm</strong>. Tata also signed with <strong>ASML</strong> (May 2026) for India's first front-end 300mm fab equipment.</li>
+<li><strong>SCL Mohali</strong> — the existing public fab at 180nm, getting a ₹4,500 cr modernisation; it's where DLI academic chips get fabbed today.</li>
+<li><strong>13 approved projects across 7 states</strong>; ~10 under construction, 4 expected to start production this year. OSAT/packaging is scaling (RRP Electronics in Maharashtra, Suchi Semicon, CG Power, Kaynes).</li>
+</ul>
+<div class="callout warn"><span class="ttl">The sharp insight Mahesh will appreciate</span>
+Notice the gap: India's fabs will serve <strong>28nm and above</strong>, but India's ambitious fabless startups are designing at <strong>12nm, 7nm, and below at TSMC</strong>. Advanced designs will go to Taiwan for years. That gap is precisely why the VCA channel (IMEC) and foundry-proven IP portfolios matter so much in India — and why Analog Bits' advanced-node proof (down to 2nm) is a genuine edge here.</div>
+
+<h2>The design layer — real companies to name</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Company</th><th>What they do</th><th>Why they matter to you</th></tr></thead>
+<tbody>
+<tr><td><strong>Netrasemi</strong> (Trivandrum)</td><td>Edge-AI SoC "NETRA A2000" on TSMC 12nm; Zoho-backed</td><td>Already an Analog Bits customer via Vinny — the model deal</td></tr>
+<tr><td><strong>Mindgrove</strong> (Chennai)</td><td>RISC-V SoCs; heading to commercial production this year</td><td>DLI poster child; exactly the profile that needs licensed analog IP</td></tr>
+<tr><td><strong>Agrani Labs</strong></td><td>AI inference chips; founded by ex-Intel/AMD executives</td><td>AI silicon = clocking + power + sensing demand</td></tr>
+<tr><td><strong>C2i Semiconductors</strong></td><td>Power management for AI data centres; TI veterans; raised $10M+</td><td>Adjacent to Analog Bits' power story; ecosystem ally/customer</td></tr>
+<tr><td><strong>InCore, VerveSemi, BigEndian, Constelli, HrdWyr, Calligo, Saankhya (Tejas)</strong></td><td>RISC-V cores, mixed-signal, defence/telecom SoCs, satcom</td><td>The breadth of the 70+ fabless base — your account list</td></tr>
+<tr><td><strong>Qualcomm India</strong></td><td>Executed a <strong>2nm tape-out designed entirely at its India centres</strong></td><td>Proof India design talent operates at the leading edge</td></tr>
+</tbody>
+</table></div>
+
+<h2>Policy vocabulary — say these correctly</h2>
+<p><strong>ISM</strong> (India Semiconductor Mission, under <strong>MeitY</strong>) runs the show; <strong>DLI</strong> (Design Linked Incentive, administered by C-DAC) reimburses up to 50% of design cost and provides EDA tools, IP libraries and tape-out support — DLI 2.0 adds ~$500M for design ventures; <strong>SPECS</strong> covers components; <strong>GeM</strong> is the government purchase portal (SphereLink is on it). The 2026–27 budget allocated ₹8,000 crore — the largest single-year semiconductor outlay yet. Minister <strong>Ashwini Vaishnaw</strong> is the political face; at the January 2026 DLI event he set the "at least 50 fabless companies" target.</p>
+
+<div class="callout tip"><span class="ttl">The 30-second India answer, assembled</span>
+"India's design ecosystem has crossed from policy to production. Twenty-four DLI startups, fourteen VC-funded, sixteen tape-outs done, chips fabbed down to 12nm — and $92 million raised in just the first five months of 2026, nearly four times all of last year. Manufacturing is following: Micron's Sanand plant is operational, Tata-PSMC's Dholera fab targets 28 to 110 nanometre. The interesting gap is that Indian fabs stop at 28nm while Indian designers are already at 12, 7, even 2 nanometre through TSMC — which is exactly why foundry-proven IP and the VCA channel are the backbone of selling here. And the government just set a target of fifty fabless companies in the next phase. This market is small but compounding — and almost nobody is covering it properly for analog IP."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">What's the "node gap" insight about India, and why does it matter for IP sales?</div>
+<div class="opts">
+<button data-opt="a">India has no chip designers, only fabs.</button>
+<button data-opt="b">Indian fabs are more advanced than Indian designs.</button>
+<button data-opt="c">Indian fabs will serve 28nm+, but Indian fabless designs target 12nm and below at TSMC — so advanced designs need foundry-proven IP and VCA access abroad, which is exactly the sale you make.</button>
+<button data-opt="d">The gap means no IP is needed in India.</button>
+</div>
+<div class="fb">Dholera = 28–110nm; Netrasemi is at TSMC 12nm and Qualcomm India taped out at 2nm. The gap routes advanced work through TSMC — where silicon-proven IP and the IMEC channel live.</div>
+</div>
+
+<div class="pagenav"><button data-go="m3"><span class="dir">← Prev</span>03 · Global market</button><button class="next" data-go="m5"><span class="dir">Next →</span>05 · Nodes &amp; IP</button></div>
+</section>
+
+<section class="module" id="m5">
+<div class="eyebrow">SECTION 05 · TECHNICAL FLUENCY</div>
+<h1 class="mt">Nodes &amp; the IP landscape</h1>
+<p class="lede">"Nodes, IPs" was on Vinny's list. You need conversational fluency: what a node is, which nodes matter for which customers, and how the IP world is categorised.</p>
+
+<h2>Process nodes in one map</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Node band</th><th>Examples</th><th>Typical use</th><th>India relevance</th></tr></thead>
+<tbody>
+<tr><td><strong>Leading edge</strong></td><td>2nm (N2/N2P), 3nm</td><td>Flagship AI, mobile, HPC</td><td>Qualcomm India 2nm tape-out; Analog Bits demos on N2P — your premium story</td></tr>
+<tr><td><strong>Advanced</strong></td><td>5nm, 7nm (FinFET)</td><td>High-end SoCs, automotive compute</td><td>Where ambitious Indian startups aim next; M31's advanced PHYs live here</td></tr>
+<tr><td><strong>Mainstream</strong></td><td>12nm, 16nm, 22nm, 28nm</td><td>Edge AI, IoT, industrial, auto MCUs</td><td><strong>The heart of the Indian market</strong> — Netrasemi at 12nm; Dholera fab tops out at 28nm</td></tr>
+<tr><td><strong>Mature</strong></td><td>40nm–180nm</td><td>Power, analog, sensors, MCUs</td><td>SCL Mohali at 180nm; huge volume, long-tail demand</td></tr>
+</tbody>
+</table></div>
+<p class="small">Two vocabulary upgrades that signal fluency: below ~16nm transistors are <strong>FinFET</strong> (3D fins) and at 2nm the industry moves to <strong>GAA</strong> (gate-all-around); and node names are marketing labels more than literal dimensions — what matters commercially is <em>which node your customer is taping out on, and whether your IP is silicon-proven there.</em></p>
+
+<div class="callout tip"><span class="ttl">The killer question you should always ask a customer</span>
+"Which node and which foundry?" — because IP is not portable free-of-charge. A PLL proven on TSMC 28nm must be ported and re-proven for Samsung 14nm. This is why portfolio breadth across nodes/foundries (Analog Bits: 0.35µm→2nm, all major foundries) is a real moat, and why the question instantly marks you as someone who knows the business.</div>
+
+<h2>The IP taxonomy — how the industry categorises what you sell</h2>
+<div class="two-col">
+<div class="card tight"><h4>By function</h4>
+<ul class="small" style="margin:0">
+<li><strong>Processor IP</strong> — CPU/GPU/NPU cores (Arm, RISC-V). ~40% of licensing.</li>
+<li><strong>Interface IP</strong> — USB, PCIe, MIPI, DDR, SerDes (M31's world). ~25%.</li>
+<li><strong>Analog/mixed-signal IP</strong> — PLLs, sensors, LDOs, ADCs (Analog Bits' and Silicon Creations' world).</li>
+<li><strong>Foundation IP</strong> — standard cells, memory compilers, GPIO (M31).</li>
+<li><strong>Memory &amp; Security IP</strong> — controllers, root-of-trust.</li>
+</ul></div>
+<div class="card tight"><h4>By delivery</h4>
+<ul class="small" style="margin:0">
+<li><strong>Soft IP</strong> — RTL code; flexible, customer implements; portable across nodes.</li>
+<li><strong>Hard IP</strong> — finished physical layout, proven on a specific node/foundry; what analog and PHY blocks must be.</li>
+<li><strong>Key consequence:</strong> hard analog IP is node-locked → porting is real work → silicon-proven-on-your-node is the whole sales argument.</li>
+</ul></div>
+</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="a">
+<div class="qtext">A customer says they're taping out on Samsung 14nm. Your Silicon Creations experience is mostly TSMC. What's the FIRST thing you check?</div>
+<div class="opts">
+<button data-opt="a">Whether the IP they need is already silicon-proven (or portable) on Samsung 14nm — hard analog IP is node- and foundry-specific.</button>
+<button data-opt="b">Whether they can switch to TSMC.</button>
+<button data-opt="c">The price list.</button>
+<button data-opt="d">Nothing — IP works everywhere.</button>
+</div>
+<div class="fb">Hard IP is locked to node+foundry. Availability on the customer's target process is question zero — everything else follows.</div>
+</div>
+
+<div class="pagenav"><button data-go="m4"><span class="dir">← Prev</span>04 · India now</button><button class="next" data-go="m6"><span class="dir">Next →</span>06 · Conferences</button></div>
+</section>
+
+<section class="module" id="m6">
+<div class="eyebrow">SECTION 06 · WHERE THE INDUSTRY MEETS</div>
+<h1 class="mt">Conferences that matter</h1>
+<p class="lede">Trade shows are where IP deals start — you met Vinny at one. Know the calendar like a salesperson plans territory: which events, when, and what you'd do at each.</p>
+
+<h2>India — your beat</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Event</th><th>When / where</th><th>Why it matters · what you'd do</th></tr></thead>
+<tbody>
+<tr><td><strong>SEMICON India</strong></td><td><strong>Sept 17–19, 2026 · Yashobhoomi, New Delhi</strong></td><td>The flagship — ISM/MeitY + SEMI; theme "Building Trusted and Resilient Semiconductor Ecosystems." Every fab announcement, minister, and fabless CEO in one hall. <em>Your play: pre-book 15+ meetings, walk the startup pavilion, be present at the Analog Bits/SphereLink presence if any.</em></td></tr>
+<tr><td><strong>VLSI Design Conference (VLSID)</strong></td><td>Annually, early Jan · 2026 was Pune</td><td>India's premier design/technical conference — 23 keynotes, 64 papers this year; theme was product-led chip strategy, domestic IP, patient capital. <em>Where you met Vinny (VLSI event) — say so; it shows you were already working the circuit.</em></td></tr>
+<tr><td><strong>electronica India / India Semiconductor Conclave</strong></td><td>Sept (Bengaluru/Delhi, varies)</td><td>Electronics manufacturing + semicon conclave; good for the systems-company side of the funnel.</td></tr>
+<tr><td><strong>DLI / C-DAC &amp; ISM ecosystem events</strong></td><td>Through the year</td><td>Where the 24 DLI startups gather (e.g., the Jan 2026 minister interaction where the 50-fabless target was set). Small rooms, decision-makers, warm intros.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Global — where your principals live</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Event</th><th>When / where</th><th>Relevance</th></tr></thead>
+<tbody>
+<tr><td><strong>TSMC OIP Ecosystem Forum</strong></td><td>Sept 23, 2026 · Santa Clara (+ world tour)</td><td>THE event for foundry-ecosystem IP vendors. Analog Bits demos N2P/N3P power IP here and won 2025 OIP Partner of the Year (Analog IP); M31 has won specialty-IP partner six years running. Know this one deeply — it's Mahesh's home turf.</td></tr>
+<tr><td><strong>DAC (Design Automation Conference)</strong></td><td>Mid-year · USA</td><td>The historic EDA/IP industry gathering; where IP vendors and design teams meet.</td></tr>
+<tr><td><strong>Chiplet Summit</strong></td><td>Early year · USA</td><td>The chiplet/UCIe wave — directly relevant to Analog Bits' chiplet story.</td></tr>
+<tr><td><strong>ISSCC / IEDM / Hot Chips</strong></td><td>Feb / Dec / Aug</td><td>Deep technical circuit &amp; device conferences — know the names; engineers you sell to publish and attend here.</td></tr>
+<tr><td><strong>SEMICON West / Taiwan / Korea, Computex</strong></td><td>Various</td><td>The global SEMI circuit and Taiwan ecosystem — where supply-chain news breaks.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><span class="ttl">If Mahesh asks "which conferences would you work, and how?"</span>
+"In India: SEMICON India in Delhi this September is the anchor — I'd pre-book meetings with the DLI startups and the design-centre leads weeks ahead; VLSID in January is the technical crowd; plus the C-DAC/DLI ecosystem events, which are small rooms with exactly our buyers. Globally, TSMC's OIP Forum matters most to us because that's Analog Bits' ecosystem — the 2025 award came from there — and I'd want our India customers to know about it. I already attend these — VLSI is where Vinny and I met; I've done two Semicon-circuit shows so far."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Why is TSMC's OIP Forum especially important to Analog Bits and M31, versus a general electronics show?</div>
+<div class="opts">
+<button data-opt="a">It's the biggest show in the world.</button>
+<button data-opt="b">OIP is TSMC's partner ecosystem — both companies win their credibility awards there and demo IP proven on TSMC's newest processes, which is exactly what foundry-driven customers buy on.</button>
+<button data-opt="c">It's the only conference in the USA.</button>
+<button data-opt="d">Because it's free to attend.</button>
+</div>
+<div class="fb">OIP = the foundry ecosystem stage. Analog Bits' 2025 Analog-IP award and its N2P/N3P demos, and M31's six consecutive specialty-IP awards, all live there.</div>
+</div>
+
+<div class="pagenav"><button data-go="m5"><span class="dir">← Prev</span>05 · Nodes &amp; IP</button><button class="next" data-go="m14"><span class="dir">Next →</span>07 · Analog Bits deep dive</button></div>
+</section>
+
+
+<section class="module" id="m14">
+<div class="eyebrow">SECTION 07 · PORTFOLIO &amp; CUSTOMERS</div>
+<h1 class="mt">Analog Bits: the deep dive</h1>
+<p class="lede">This is the company whose card you'll carry. Know it better than any candidate Mahesh has ever interviewed — its history, its full catalogue, its ownership story, and the proof points that make customers sign.</p>
+
+<div class="whybox"><span class="ttl">Why this depth matters with Mahesh specifically</span>
+He has spent 20+ years building this company. Candidates who know only the homepage blur together; the one who knows the 2003 pivot, the foundry-neutrality logic, and the Cerebras story signals something rarer — genuine interest in <em>his</em> life's work. That is rapport no small talk can buy.</div>
+
+<h2>The company in numbers</h2>
+<div class="kbox">
+<div class="k"><div class="big">1995</div><div class="lbl">Founded in Silicon Valley · HQ: 945 Stewart Drive, Sunnyvale, CA</div></div>
+<div class="k"><div class="big">1,000+</div><div class="lbl">Products developed on 75+ distinct process technologies</div></div>
+<div class="k"><div class="big">400+</div><div class="lbl">Customers served, including marquee global technology companies</div></div>
+<div class="k"><div class="big">0.35µm→2nm</div><div class="lbl">Silicon-proven range · billions of IP cores shipped in customer silicon</div></div>
+</div>
+
+<p><strong>The identity in one sentence (their own):</strong> the established supplier of an industry-leading portfolio of <em>mixed-signal IP for intelligent energy and power management</em>, with a reputation for easy, reliable integration into advanced SoCs through all the major foundries — and a heritage of first-time-working IP that lowers customer risk.</p>
+
+<h2>The history — a story worth knowing</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Year</th><th>What happened</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td><strong>1995</strong></td><td>Founded by a group of engineers — as a <em>consulting</em> company</td><td>Thirty years of analog craft; it didn't start as an IP vendor</td></tr>
+<tr><td><strong>2003</strong></td><td>Pivoted from consulting to an IP company, in concert with the foundries</td><td>The foundry-partnership DNA dates from here — two decades of ecosystem trust</td></tr>
+<tr><td><strong>2000s–2010s</strong></td><td>Among the first partners of Intel's foundry programme; developed IP for GlobalFoundries; deep TSMC relationship</td><td>Foundry breadth few analog IP houses match: TSMC, Samsung, Intel, GF, UMC</td></tr>
+<tr><td><strong>Mar 22, 2022</strong></td><td>Acquired by SemiFive of Korea — SemiFive's first overseas acquisition (terms undisclosed)</td><td>Resources and scale behind a specialist; see the ownership box below</td></tr>
+<tr><td><strong>2024–25</strong></td><td>Leadership split by mutual decision: Mahesh Tirupattur becomes CEO (business, partnerships, licensing); Alan Rogers stays Founder, President &amp; CTO (technology)</td><td>The man interviewing you now runs the company — this hire is <em>his</em> bet</td></tr>
+<tr><td><strong>2025</strong></td><td>TSMC OIP Partner of the Year — <strong>Analog IP</strong> category; working 2nm/3nm demos at DAC</td><td>The industry's most important foundry publicly endorsing them at the leading edge</td></tr>
+<tr><td><strong>2026</strong></td><td>Real-time on-chip power sensing &amp; delivery demos on TSMC N2P; Mahesh + Alan present at EE Times "Road to Chiplet Scalability" (June 24)</td><td>The Intelligent Power Architecture is shipping-adjacent, not slideware</td></tr>
+</tbody>
+</table></div>
+
+<h2>Ownership: the SemiFive story — and a subtle point that will impress</h2>
+<div class="card">
+<p><strong>SemiFive</strong> (Gyeonggi-do, Korea) — founded 2019 by <strong>Brandon Cho</strong> (Seoul National University EE; MIT master's and PhD in computer architecture). A platform-based custom-silicon design house: pre-validated SoC platforms that cut chip development cost and schedule. 2024 revenue crossed <strong>₩111.8 billion, up ~57% year-on-year</strong>; it has filed for pre-IPO review on KOSDAQ. 350+ people post-acquisition, offices in Korea, the US, <strong>India</strong>, and Vietnam. AI-fabless customers include FuriosaAI, Rebellions, HyperAccel and Mobilint.</p>
+<p style="margin-bottom:0"><strong>The subtle point:</strong> SemiFive is a close <em>Samsung Foundry</em> partner, while Analog Bits' deepest relationship is with <em>TSMC</em>. To protect that, <strong>Analog Bits operates separately and stays foundry-neutral</strong> — the acquisition deliberately preserved its independence so no foundry relationship was compromised. Mentioning that you understand this arrangement — parent's resources, operational independence, foundry neutrality — is exactly the kind of structural insight CEOs don't expect from a sales candidate.</p>
+</div>
+<p class="small muted">Why the ownership matters to <em>you</em>: stability behind a small brand, the SemiFive India office (the Koramangala desk Vinny mentioned), and a second demand channel — every SemiFive platform SoC can carry Analog Bits content by design.</p>
+
+<h2>The complete product catalogue</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Family</th><th>Products</th><th>Status in the portfolio</th></tr></thead>
+<tbody>
+<tr><td><strong>Precision clocking</strong> <span class="muted">(the flagship)</span></td><td>Pinless PLLs · low-jitter PLLs · LC PLLs — including microwatt-class and high-performance LC PLLs proven on TSMC N2P · XTAL and RC oscillators · PCIe reference clocks</td><td>Claim to fame. Every chip needs a PLL; lead every conversation here</td></tr>
+<tr><td><strong>Sensing</strong></td><td>High-accuracy PVT sensors · pinless <em>remote</em> PVT sensors · temperature sensors · voltage droop / spike / glitch detectors · system power-integrity monitors — with integrated or standalone bandgaps and ADCs</td><td>The eyes of the Intelligent Power Architecture; the AI-era door-opener</td></tr>
+<tr><td><strong>Power delivery</strong></td><td>Integrated LDOs · regulators — clean power at the point of use, next to CPU/AI cores</td><td>The newest growth engine; "as PLLs keep clocks stable, these keep power stable in real time"</td></tr>
+<tr><td><strong>Programmable interconnect</strong></td><td>Multi-rate SerDes — including automotive-grade PCIe SerDes on TSMC N5A · programmable I/O</td><td>Supporting cast. Off-the-shelf where it fits; <em>not</em> the investment focus — route serious interface needs to M31</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout gold"><span class="ttl">The two signature technologies — one breath each</span>
+<strong>Pinless / core-powered (patented):</strong> the macro cleans and regulates the noisy core supply internally, so it needs no dedicated analog power pins — place it anywhere, "integrate an analog macro like a digital gate." <strong>Intelligent Power Architecture:</strong> the closed loop of sensing (PVT + droop detectors) and delivery (LDOs) that lets a chip run at the lowest safe voltage instead of a wasteful margin — precisely what power-hungry AI silicon needs.</div>
+
+<h2>Proof points customers actually sign on</h2>
+<ul class="clean">
+<li><strong>Cerebras</strong> — the wafer-scale AI engine, the most extreme chip on earth, uses Analog Bits clocking and power-management IP; there's a joint paper, "On-Die Power Management for SoCs and Chiplets." If it works at wafer scale, your edge-AI SoC is safe.</li>
+<li><strong>Socionext</strong> — co-authored "Pinless PLL, PVT Sensor and Power Supply Spike Detectors for Datacenter, AI and Automotive Applications."</li>
+<li><strong>TSMC's public endorsement</strong> — OIP 2025 Analog IP Partner of the Year, plus working N2P demos at the 2026 Technology Symposium and 2nm/3nm demos at DAC 2025.</li>
+<li><strong>Foundry breadth</strong> — TSMC, Samsung, Intel (early foundry-programme partner), GlobalFoundries, UMC; 75+ process technologies over three decades.</li>
+<li><strong>In India</strong> — Netrasemi licenses Analog Bits IP for its edge-AI SoC; government entities are supplied via GeM through the SphereLink channel you'd be joining.</li>
+</ul>
+
+<h2>What you don't know — and shouldn't pretend to</h2>
+<div class="callout warn"><span class="ttl">Honesty boundaries</span>
+Analog Bits doesn't publish headcount or revenue; the acquisition price was undisclosed; the exact India pipeline lives with Vinny and Mahesh. If asked anything in that zone, the strong answer is: "That's not public and I won't guess — but here's what the public record does show," then use the facts above. Precision about what you <em>don't</em> know is part of what makes the rest credible.</div>
+
+<h2>Two lines to use in the room</h2>
+<div class="script"><span class="who">On the company</span>"What struck me researching you is the arc — a consulting shop in '95, the pivot to IP with the foundries in 2003, and now TSMC's Analog IP Partner of the Year demoing power delivery on N2P. Thirty years of compounding trust, which is the only currency this business runs on."</div>
+<div class="script"><span class="who">On the portfolio</span>"I'd sell you as the power-integrity company that happens to own the best-integrated clocking, not a PLL vendor with extras — because Cerebras-class proof and pinless integration is a story neither the bundles nor Silicon Creations can tell."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Why does Analog Bits operate separately from its parent SemiFive rather than being fully merged?</div>
+<div class="opts">
+<button data-opt="a">Korean law requires subsidiaries to stay separate.</button>
+<button data-opt="b">Foundry neutrality — SemiFive is Samsung-close while Analog Bits is TSMC-close, so independence protects the foundry relationships on both sides.</button>
+<button data-opt="c">The acquisition was never actually completed.</button>
+<button data-opt="d">They serve completely different industries.</button>
+</div>
+<div class="fb">SemiFive is a leading Samsung Foundry design partner; Analog Bits' deepest ecosystem ties are with TSMC (and it works across Intel, GF, UMC too). Operational separation keeps every foundry comfortable — knowing this structural nuance is a genuine differentiator in the interview.</div>
+</div>
+
+<div class="pagenav"><button data-go="m6"><span class="dir">← Prev</span>06 · Conferences</button><button class="next" data-go="m7"><span class="dir">Next →</span>08 · Silicon Creations products</button></div>
+</section>
+
+
+<section class="module" id="m7">
+<div class="eyebrow">SECTION 08 · PORTFOLIO &amp; CUSTOMERS</div>
+<h1 class="mt">Silicon Creations: your current book, cold</h1>
+<p class="lede">Vinny flagged it directly: "Product list of SiCr." Mahesh will probe whether you truly know what you sell today — it's a depth test and an integrity test at once. Know the public portfolio perfectly; guard the confidential rest gracefully.</p>
+
+<div class="whybox"><span class="ttl">Why Mahesh asks this</span>
+Three reasons. (1) If you can't describe your <em>current</em> products crisply, you won't describe his any better. (2) He competes with Silicon Creations every week — he wants to hear how a person inside that channel talks about them. (3) It's a trust probe: does she spill confidential things when prompted? Your discipline here is the audition for handling <em>his</em> secrets tomorrow.</div>
+
+<h2>The company in four facts</h2>
+<div class="kbox">
+<div class="k"><div class="big">2006</div><div class="lbl">Founded · self-funded, no VC · Atlanta HQ + Kraków design centre</div></div>
+<div class="k"><div class="big">2nm–180nm</div><div class="lbl">Production silicon across TSMC, Samsung, Intel, GlobalFoundries, UMC</div></div>
+<div class="k"><div class="big">1,000+</div><div class="lbl">Production licenses of the flagship Fractional-N PLL</div></div>
+<div class="k"><div class="big">2024</div><div class="lbl">TSMC OIP Partner of the Year — Mixed-Signal IP</div></div>
+</div>
+
+<h2>The product list</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Product line</th><th>What it is</th><th>The pitch customers hear</th></tr></thead>
+<tbody>
+<tr><td><strong>Fractional-N PLL</strong> (flagship)</td><td>Highly programmable, wide-range PLL; their highest-volume IP</td><td>"One versatile PLL covers most clocking jobs on your chip" — consolidation: replace several PLLs with one, cut integration effort</td></tr>
+<tr><td><strong>General-purpose ring PLLs</strong></td><td>Compact, low-power clocking for everyday sockets</td><td>Small, cheap, everywhere</td></tr>
+<tr><td><strong>Ultra-low-jitter LC PLLs</strong></td><td>Premium clocking for SerDes/high-speed lanes</td><td>Clean enough to clock multi-gigabit links</td></tr>
+<tr><td><strong>SerDes PMAs</strong></td><td>Physical-layer transceivers, roughly 100 Mbps to 33 Gbps</td><td>A genuine SerDes line — broader than Analog Bits' off-the-shelf offering</td></tr>
+<tr><td><strong>LVDS &amp; video interfaces</strong></td><td>Lower-speed differential I/O for displays/industrial</td><td>Proven workhorse interfaces</td></tr>
+<tr><td><strong>Temperature sensor</strong></td><td>Newer addition to the portfolio</td><td>Their answer to on-chip sensing demand</td></tr>
+<tr><td><strong>Next-gen clocking + sensing on TSMC A14</strong></td><td>Announced development on TSMC's most advanced platform</td><td>"We're already on the newest node"</td></tr>
+</tbody>
+</table></div>
+
+<p class="small muted">Proof points they lead with: Arm has used their Fractional-N PLL to clock prototype chips for over a decade; the PLL family ships inside Microchip's PolarFire FPGAs including the space-qualified RT line; the portfolio carries ISO 26262 functional-safety documentation for automotive.</p>
+
+<div class="callout tip"><span class="ttl">And the second name in your book</span>
+You also represent <strong>Menta</strong> — French eFPGA IP: a patch of reconfigurable FPGA fabric a customer embeds inside their SoC so parts of the chip can be reprogrammed after manufacturing. One line is enough if asked; don't volunteer a deep dive.</div>
+
+<h2>How to compare SiCr vs Analog Bits — the honest matrix</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Silicon Creations wins on</th><th>Analog Bits wins on</th></tr></thead>
+<tbody>
+<tr><td><strong>Clocking</strong></td><td>Versatility &amp; volume — the "one Frac-N PLL for everything" consolidation play, 1,000+ licenses</td><td>Pinless / core-powered integration — drop an analog macro anywhere, like a digital gate; low-jitter, low-power</td></tr>
+<tr><td><strong>Beyond clocking</strong></td><td>A real SerDes PMA line (100M–33G), LVDS/video, automotive safety docs</td><td>The power play: LDOs, droop detectors, high-accuracy PVT sensors — the "Intelligent Power Architecture" AI chips need</td></tr>
+<tr><td><strong>Credibility badge</strong></td><td>TSMC OIP 2024 (Mixed-Signal IP)</td><td>TSMC OIP 2025 (Analog IP) + 30-year first-time-working heritage, billions of cores</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout good"><span class="ttl">The line that will land with Mahesh</span>
+"I sell against you every week, so I'll be honest: Silicon Creations' Frac-N is a genuinely versatile product and customers like the consolidation story. Where you win is integration — pinless changes the conversation — and the power architecture, because nobody asks Silicon Creations to manage voltage droop on an AI core. My job in India would be to make every clocking conversation become a power-architecture conversation."</div>
+
+<h2>The confidentiality trap — rehearse this</h2>
+<div class="qa"><button class="q">"What does Silicon Creations charge for a Frac-N license in India?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"That's confidential to Interex and its principal, so I won't share it — the same way your pricing will be safe with me from day one. What I can say from public positioning is how they sell: consolidation and versatility, license-led with the usual structures. And I can tell you how customers <em>react</em> to pricing conversations in India generally: startups push for staged payments aligned to DLI reimbursement cycles."</p>
+<div class="label">Why this works</div>
+<p class="muted small">You decline the secret, demonstrate the discipline he needs, and still deliver market insight — the legal, valuable kind.</p>
+</div></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh asks: "Is their Fractional-N better than our PLLs?" Best answer?</div>
+<div class="opts">
+<button data-opt="a">"No, Analog Bits is better at everything."</button>
+<button data-opt="b">"It's a strong, versatile product — that's the truth. But the game has moved: integration ease and power management are where designs are struggling, and that's your ground. I'd rather fight where you're strongest than pretend they're weak."</button>
+<button data-opt="c">"Yes, honestly their PLL is superior."</button>
+<button data-opt="d">"I'm not technical enough to say."</button>
+</div>
+<div class="fb">CEOs smell flattery and defeatism equally fast. Respect the competitor, then reframe the battlefield to Analog Bits' strengths — that's how a real salesperson thinks.</div>
+</div>
+
+<div class="pagenav"><button data-go="m14"><span class="dir">← Prev</span>07 · Analog Bits deep dive</button><button class="next" data-go="m8"><span class="dir">Next →</span>09 · Customer asks</button></div>
+</section>
+
+<section class="module" id="m8">
+<div class="eyebrow">SECTION 09 · PORTFOLIO &amp; CUSTOMERS</div>
+<h1 class="mt">"What have customers asked you till now?"</h1>
+<p class="lede">Vinny's phrasing, almost verbatim. Mahesh wants evidence that you're genuinely in the market — hearing real demand, not reciting brochures. Prepare three anonymised stories and know the six asks every Indian IP customer makes.</p>
+
+<div class="whybox"><span class="ttl">The rule before the content</span>
+Real stories, anonymised. "A Bengaluru edge-AI startup on TSMC 12nm…" is perfect. Naming an Interex customer or their unreleased chip is a breach — and Mahesh will notice the breach more than the story.</div>
+
+<h2>The six asks you'll recognise instantly</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>#</th><th>The ask</th><th>What it sounds like</th><th>What it really tests</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Node &amp; foundry availability</strong></td><td>"Do you have this silicon-proven on TSMC 22ULP / 12FFC? Which PDK version?"</td><td>Whether the IP exists where <em>their</em> chip lives — the first qualifying question both ways</td></tr>
+<tr><td>2</td><td><strong>Deliverables package</strong></td><td>"What do we get — GDSII, LEF, .lib timing models, Verilog behavioural models, DRC/LVS reports, integration guide?"</td><td>Integration readiness; hard-IP buyers live on this list</td></tr>
+<tr><td>3</td><td><strong>Commercial structure</strong></td><td>"Can we stage the license fee? NRE vs royalty split? Does it fit a DLI-reimbursement cycle?"</td><td>Startup cash reality — DLI refunds arrive on milestones, so payment timing matters as much as price</td></tr>
+<tr><td>4</td><td><strong>Spec deltas / customisation</strong></td><td>"We need a slightly wider frequency range / tighter jitter / lower standby power — can you tweak it?"</td><td>Whether the vendor flexes; also where deals slow down</td></tr>
+<tr><td>5</td><td><strong>Evaluation &amp; support</strong></td><td>"Can we evaluate before licensing? Who supports us at 2 a.m. the week before tape-out?"</td><td>Trust and service depth — often the actual differentiator vs big vendors</td></tr>
+<tr><td>6</td><td><strong>The build-vs-buy / bundle challenge</strong></td><td>"We have analog designers — why not build it? Or take it bundled from Synopsys with our EDA seats?"</td><td>Your ability to sell risk-reduction and focus, not blocks</td></tr>
+</tbody>
+</table></div>
+
+<h2>Your three stories — fill this in before the call</h2>
+<div class="card">
+<p class="small" style="margin-bottom:8px">For each of three real engagements, prepare one minute using this shape. Write it down tonight; say it aloud tomorrow.</p>
+<ul class="small">
+<li><strong>Who (anonymised):</strong> customer type + city + segment. <em>"A defence-adjacent PSU in Bengaluru…", "an edge-AI fabless startup in the south…"</em></li>
+<li><strong>Building what, on what:</strong> application + node/foundry if known.</li>
+<li><strong>What they asked:</strong> which of the six asks — quote their actual concern.</li>
+<li><strong>What you did:</strong> your role — mapped requirements, coordinated the principal, handled the objection.</li>
+<li><strong>Status + lesson:</strong> where it stands and what it taught you about Indian buyers.</li>
+</ul>
+</div>
+
+<div class="callout good"><span class="ttl">A model story, shape only</span>
+"One engagement I can describe without names: an edge-AI startup targeting a mature TSMC node asked us three things in the first meeting — is the PLL silicon-proven on their exact node, can payments stage against their DLI milestones, and why they shouldn't just build it in-house since they'd hired two analog designers. We won the technical argument on re-spin risk — one failed tape-out costs more than the license — and the commercial one by aligning the payment schedule to their reimbursement cycle. What it taught me: in India the technical yes comes first, but the deal closes on payment timing."</div>
+
+<h2>Patterns worth naming to a CEO</h2>
+<ul class="clean">
+<li><strong>DLI shapes cash conversations.</strong> Funded startups have budget but lumpy cash — staging beats discounting.</li>
+<li><strong>Node questions skew mature-plus.</strong> Indian fabless design today clusters around 40/28/22/16/12nm with a thin leading edge — but the design ambition is climbing fast (Qualcomm just taped out 2nm designed entirely in India).</li>
+<li><strong>Support anxiety is real.</strong> Small teams fear being customer #200 at a giant vendor; attentive local support wins ties.</li>
+<li><strong>The in-house objection is universal</strong> — and answerable: silicon-proven IP is schedule insurance, and engineers should build the differentiator, not re-solve clocking.</li>
+</ul>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mahesh asks what customers have been requesting. Your strongest opening move?</div>
+<div class="opts">
+<button data-opt="a">List every customer name in your pipeline to show scale.</button>
+<button data-opt="b">Say customer information is confidential and stop there.</button>
+<button data-opt="c">Give the pattern first — "three asks dominate: node availability, DLI-aligned payment staging, and the build-vs-buy challenge" — then offer one anonymised story in depth.</button>
+<button data-opt="d">Say customers mostly ask about price.</button>
+</div>
+<div class="fb">Pattern first (proves market fluency), story second (proves reality), names never (proves trustworthiness). That sequence is exactly what a CEO wants to hear.</div>
+</div>
+
+<div class="pagenav"><button data-go="m7"><span class="dir">← Prev</span>08 · Silicon Creations</button><button class="next" data-go="m9"><span class="dir">Next →</span>10 · Sales &amp; business approach</button></div>
+</section>
+
+<section class="module" id="m9">
+<div class="eyebrow">SECTION 10 · STRATEGY</div>
+<h1 class="mt">Your sales &amp; business approach</h1>
+<p class="lede">Vinny: "More on business and sales approach." This is where Mahesh decides whether you're a salesperson or a coordinator. Talk pipeline, numbers, and ownership — the way someone who will carry a revenue target talks.</p>
+
+<h2>Your approach in four moves</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Move</th><th>What you'll do</th><th>Why it works here</th></tr></thead>
+<tbody>
+<tr><td><strong>1 · Convert inbound fast</strong></td><td>Same-day response to every IMEC/referral lead; qualify by node, foundry, tape-out date, funding; first technical call within a week</td><td>The channel already produces warm leads — speed is the cheapest trust signal in a trust business</td></tr>
+<tr><td><strong>2 · Named-account depth</strong></td><td>Tier the market (70+ fabless, gov labs, GCCs) into A/B/C; personally own 20–30 accounts with account plans, not a spray list</td><td>In a niche this small, depth beats reach; every serious buyer can be known by name</td></tr>
+<tr><td><strong>3 · Ecosystem presence</strong></td><td>SEMICON India (Sep 17–19, Delhi), VLSID in January, DLI/C-DAC startup community, deliberate LinkedIn motion</td><td>You met Vinny at a VLSI show — this channel demonstrably works</td></tr>
+<tr><td><strong>4 · Land and expand</strong></td><td>Enter on the PLL (every chip needs one), expand to sensors → LDO/droop → M31 interfaces; then the customer's next chip</td><td>Two complementary portfolios mean one relationship, many sockets — that's how small teams grow big numbers</td></tr>
+</tbody>
+</table></div>
+
+<h2>Pipeline math — say numbers, even illustrative ones</h2>
+<div class="kbox">
+<div class="k"><div class="big">25–30</div><div class="lbl">Active named accounts worked deeply</div></div>
+<div class="k"><div class="big">10–12</div><div class="lbl">Qualified opportunities (real chip, real budget, real date)</div></div>
+<div class="k"><div class="big">4–6</div><div class="lbl">Serious technical evaluations at any time</div></div>
+<div class="k"><div class="big">2–3</div><div class="lbl">Closes in year one, compounding via land-and-expand</div></div>
+</div>
+<p class="small muted">Cycles run roughly 3–9 months depending on segment (startups faster, government slower). Present these as a working model you'll calibrate with him and Vinny — a CEO respects a candidate who thinks in funnel ratios, even rough ones.</p>
+
+<h2>Your 30 / 60 / 90</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Days</th><th>Focus</th><th>Exit criteria</th></tr></thead>
+<tbody>
+<tr><td><strong>0–30</strong></td><td>Product depth (Analog Bits + M31 datasheets, node coverage); shadow Vinny on every live deal; build the tiered account map</td><td>Can run a first-meeting qualification solo; account map reviewed with Vinny</td></tr>
+<tr><td><strong>31–60</strong></td><td>Co-own live opportunities; first solo customer meetings; re-activate her existing relationships appropriately</td><td>Owns 8–10 accounts end-to-end; first new opportunities sourced</td></tr>
+<tr><td><strong>61–90</strong></td><td>Independent pipeline; proposals moving with principal support; SEMICON India plan locked (it lands ~day 75 if she starts July)</td><td>A reviewed pipeline with 3+ qualified deals progressing and a clear path to first close</td></tr>
+</tbody>
+</table></div>
+
+<h2>The CEO questions — rehearse these out loud</h2>
+
+<div class="qa"><button class="q">"How would you grow my India revenue three-fold in two years?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"Three levers, in order. First, coverage — today inbound leads convert when someone responds; a dedicated person converts more of what already arrives. Second, expansion — most accounts buy one block; the portfolio supports four or five sockets per chip, so attach rate is the cheapest growth we have: PLL in, then sensors, then power, then M31 interfaces. Third, new demand — the DLI cohort is producing new fabless companies every quarter and ISM 2.0 is funding more; being first into each new design team compounds. I'd put rough numbers on each lever in my first 30 days and review them with you."</p>
+</div></div>
+
+<div class="qa"><button class="q">"How do you compete when Synopsys bundles IP nearly free with EDA seats?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"On the sockets where the bundle is good enough, I don't fight — I qualify out fast and save my time. But bundles are generic: when the design is power-constrained, jitter-critical, or on a node the bundle doesn't cover well, 'good enough' fails tape-outs. That's where pinless integration, the power architecture, and a support engineer who answers at midnight win. And startups here tell us they fear being customer #200 at a giant — attentive local support is a real differentiator, not a slogan."</p>
+</div></div>
+
+<div class="qa"><button class="q">"You've never carried a quota. Why should I trust you with a territory?"</button><div class="a">
+<div class="label">Your answer</div>
+<p>"Fair. What I've done is run every stage of the motion except signing — qualification, technical mapping, objection handling, proposal coordination — inside this exact niche, against your exact competitor. The quota is the missing line on my CV, not the missing skill. Give me a number; I want to be measured. That's precisely why I'm leaving a role that was drifting into vendor coordination."</p>
+</div></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Which framing of your approach will impress a CEO most?</div>
+<div class="opts">
+<button data-opt="a">"I'll work very hard and learn everything."</button>
+<button data-opt="b">"Convert the inbound faster, deepen 25–30 named accounts, be present where the ecosystem meets, and expand every account from one socket to many — here's the rough funnel math."</button>
+<button data-opt="c">"I'll figure it out once I start."</button>
+<button data-opt="d">"I'll undercut Silicon Creations on price."</button>
+</div>
+<div class="fb">Specific motion + named channels + funnel numbers = revenue thinking. Effort promises and price wars are what coordinators say; models are what owners say.</div>
+</div>
+
+<div class="pagenav"><button data-go="m8"><span class="dir">← Prev</span>09 · Customer asks</button><button class="next" data-go="m10"><span class="dir">Next →</span>11 · India market strategy</button></div>
+</section>
+
+
+<section class="module" id="m10">
+<div class="eyebrow">SECTION 11 · STRATEGY</div>
+<h1 class="mt">Strategic plan: the Indian market</h1>
+<p class="lede">Facts (Section 04) say what India is. Strategy says where SphereLink should play and how it wins. This is CEO territory — walk in with a view, hold it loosely, and invite Mahesh to sharpen it.</p>
+
+<div class="whybox"><span class="ttl">How to use this module</span>
+Don't recite a strategy deck at him. Carry the <em>thesis sentence</em>, the <em>three segments</em>, and the <em>SWOT headlines</em> in your head. If he asks "how do you see the India opportunity?", you have a structured, opinionated answer — that alone puts you ahead of nearly every candidate.</div>
+
+<h2>Sizing the opportunity — honestly</h2>
+<p>Be precise about what the big numbers mean, because Mahesh will be:</p>
+<ul class="clean">
+<li><strong>India chip consumption:</strong> ~$45–50B now, headed to $100–110B by 2030. That's chips <em>bought</em>, not IP sold — it's the tide, not your pond.</li>
+<li><strong>Your actual pond:</strong> IP licensing spend by India-domiciled decision-makers — the 70+ fabless companies, government labs, and the slices of GCC design budgets influenced locally. Nobody publishes a clean number for it; what matters is that every new funded design start is a new IP buyer, and design starts are compounding (24 DLI design projects, 16 startup tape-outs so far, new fabless companies every quarter).</li>
+<li><strong>The deal economics:</strong> at 60–70% gross margin, even a modest number of licenses is a real business — this is a margin game riding a volume wave.</li>
+</ul>
+
+<div class="callout gold"><span class="ttl">The thesis sentence — memorise this one</span>
+"India's chip <em>manufacturing</em> is mature-node, but India's chip <em>design</em> is at every node — and design is what buys IP. The fabless cohort is small, funded, growing, and largely unclaimed by any analog-IP brand. Whoever becomes 'the analog and power IP people in India' in the next two years owns the category for a decade. That's the race SphereLink is in."</div>
+
+<h2>Where to play: three segments, two priorities</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Segment</th><th>Who</th><th>Character</th><th>Play</th></tr></thead>
+<tbody>
+<tr><td><strong>Tier A — Funded fabless startups</strong> <span class="muted">(lead)</span></td><td>Netrasemi-type edge-AI, IoT, automotive startups; DLI/VC-funded</td><td>Fast cycles (3–6 mo), budget-real but cash-lumpy, node range 40nm→12nm and climbing</td><td>Win as design partner early; stage payments to DLI milestones; land PLL, expand to power</td></tr>
+<tr><td><strong>Tier B — Government &amp; strategic</strong> <span class="muted">(lead)</span></td><td>C-DAC, ISRO, DRDO-adjacent, SCL ecosystem</td><td>Slow cycles (9–18 mo), GeM procurement, sovereign-silicon narrative, extremely sticky once in</td><td>SphereLink is already on GeM and supplying — deepen; trust and continuity are the currency</td></tr>
+<tr><td><strong>Tier C — MNC GCC design centres</strong> <span class="muted">(seed)</span></td><td>Qualcomm, AMD, Marvell, NXP centres in Bengaluru/Hyderabad</td><td>Procurement sits at global HQ; local engineers influence, rarely sign</td><td>Relationship seeding, tech days, long game — don't spend prime hours here in year one</td></tr>
+</tbody>
+</table></div>
+
+<h2>How to win: the differentiation map</h2>
+<div class="two-col">
+<div class="card tight"><h4>vs. Synopsys / Cadence bundles</h4><p class="small" style="margin:0">Focus + service + fit. Bundles are generic; power-constrained and jitter-critical designs need specialist analog. Small Indian teams fear being customer #200 — attentive local support wins ties. Qualify out fast where the bundle genuinely suffices.</p></div>
+<div class="card tight"><h4>vs. Silicon Creations (via Interex)</h4><p class="small" style="margin:0">Their versatile Frac-N vs. your pinless integration + the power architecture nobody else has. Turn clocking conversations into power conversations — that's ground only Analog Bits holds. You know their channel's rhythms; compete cleanly on public facts.</p></div>
+</div>
+
+<h2>SWOT — the headlines to carry</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Strengths</th><th>Weaknesses</th></tr></thead>
+<tbody><tr>
+<td>Two complementary award-winning portfolios (AB analog/power + M31 interface/foundation); inbound channel via IMEC; GeM listing already live; SemiFive backing; leading-edge proof (N2P demos)</td>
+<td>Tiny team — coverage and continuity risk; brand awareness vs giants; no local AE bench yet; pricing perceived premium vs bundles</td>
+</tr></tbody>
+<thead><tr><th>Opportunities</th><th>Threats</th></tr></thead>
+<tbody><tr>
+<td>ISM 2.0 (~₹1.25 lakh cr cleared by EFC) + Budget 2026-27's ₹8,000 cr; DLI cohort compounding; chiplet + AI-power trends play to AB's exact strengths; SEMICON India Sep 17–19 as a launchpad</td>
+<td>EDA bundling squeezing entry sockets; Silicon Creations' established Interex channel; startup funding volatility; ISM 2.0's "sovereign IP" push favouring domestic IP over time</td>
+</tr></tbody>
+</table></div>
+
+<div class="qa"><button class="q">The sharp question hiding in that SWOT: "ISM 2.0 funds sovereign, full-stack Indian IP. Doesn't that make a US IP vendor unwelcome?"</button><div class="a">
+<div class="label">Your answer — and it's a great one to raise yourself</div>
+<p>"I'd frame it as sequencing, not competition. India's product companies need to ship winning chips <em>now</em>; proven third-party analog IP is how they make tape-out windows while domestic IP matures over the decade. Even the sovereign programs use foreign EDA and foundries today — pragmatism runs the roadmap. And there's a partnership angle: silicon-proven analog blocks are exactly what Indian SoC programs de-risk with. If anything, ISM 2.0 grows our market before it ever constrains it — and being locally present, on GeM, supplying government labs, makes us part of the ecosystem rather than outside it."</p>
+</div></div>
+
+<h2>The three-year thesis — one breath each</h2>
+<ul class="clean">
+<li><strong>Year 1 — Beachhead:</strong> convert the inbound, land 2–3 lighthouse wins across Tier A and Tier B, be visible at SEMICON India and VLSID.</li>
+<li><strong>Year 2 — References:</strong> lighthouse customers reference-sell; expand every account from one socket to three; deepen government share via GeM.</li>
+<li><strong>Year 3 — Category ownership:</strong> "the analog &amp; power IP people in India"; a small team hired around a proven motion; Tier C GCC seeds starting to sprout.</li>
+</ul>
+
+<h2>Risks and what you'd do about them</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+<tbody>
+<tr><td>Startup funding winter stalls Tier A deals</td><td>Balance the book with Tier B government continuity; stage payments rather than discount</td></tr>
+<tr><td>One-person coverage bottleneck</td><td>Ruthless tiering; principals' AEs for technical depth; hire against proven pipeline, not hope</td></tr>
+<tr><td>Bundle pricing pressure</td><td>Fight only on differentiated sockets (power, jitter, pinless); walk away fast elsewhere</td></tr>
+</tbody>
+</table></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mahesh asks: "So where should we focus in India?" The strongest shape of answer is:</div>
+<div class="opts">
+<button data-opt="a">"Everywhere — the whole market is growing."</button>
+<button data-opt="b">"Only the biggest companies, since they have the most money."</button>
+<button data-opt="c">"Lead with funded fabless startups and the government channel you already serve; seed the GCCs for later — and here's why each, in one line."</button>
+<button data-opt="d">"Wherever Silicon Creations goes, we follow."</button>
+</div>
+<div class="fb">Prioritisation IS strategy. Two lead segments with reasons, one deliberately deferred — that's a plan a CEO can fund. "Everywhere" is what no-plan sounds like.</div>
+</div>
+
+<div class="pagenav"><button data-go="m9"><span class="dir">← Prev</span>10 · Sales approach</button><button class="next" data-go="m11"><span class="dir">Next →</span>12 · Podcast fluency &amp; key words</button></div>
+</section>
+
+<section class="module" id="m11">
+<div class="eyebrow">SECTION 12 · STRATEGY</div>
+<h1 class="mt">Podcast fluency: speak the ecosystem's language</h1>
+<p class="lede">Your instruction was exact: refer to Indian semicon podcasts and remember the key words. Fluency in the vocabulary of the ecosystem — the words insiders actually use — is what makes ten minutes of conversation feel like ten years of belonging.</p>
+
+<h2>The listening list — in priority order</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Podcast / episode</th><th>Why this one</th><th>Time</th></tr></thead>
+<tbody>
+<tr><td><strong>SemiWiki "Semiconductor Insiders" — EP322 with Mahesh Tirupattur</strong> (Dec 2025)</td><td><strong>Non-negotiable.</strong> Your interviewer, in his own voice: 2025 highlights, the Intelligent Power Architecture, pinless IP, power sensors enabling AI. Hear his phrases, his pace, his enthusiasm — then mirror them naturally</td><td>~30 min</td></tr>
+<tr><td><strong>The Indian Business Podcast — EP51 with Ashwini Vaishnaw</strong>: "Semiconductor is the next OIL" (Jan 2026)</td><td>India's semicon strategy from the minister himself — the exact framing Delhi uses. This is where the policy vocabulary lives</td><td>~1 hr, 1.5× speed</td></tr>
+<tr><td><strong>MSME TALK — India's semiconductor sector</strong> (Logic Fruit CEO)</td><td>Ground-level view: how Indian design MSMEs see DLI, scaling, and vendor opportunities — your customers' worldview</td><td>~30 min</td></tr>
+<tr><td><strong>The Circuit</strong> (Ben Bajarin &amp; Jay Goldberg)</td><td>The business of chips — earnings, chiplet strategy, supply chains. One recent episode = current global fluency</td><td>~50 min</td></tr>
+<tr><td><strong>Transistor Radio</strong> (SemiAnalysis + Asianometry + Fabricated Knowledge + ChinaTalk)</td><td>Geopolitics + market — the China+1 / export-control discourse in its native habitat</td><td>optional</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">Also bookmark <strong>indiasemi.org</strong> — a tracker of every approved Indian fab/OSAT project. Not a podcast, but ten minutes there the morning of the interview gives you the freshest project status in the country.</p>
+
+<h2>The key words — grouped, with one-line meanings</h2>
+<p>Rule: never use a word you can't define in one breath. Each entry below <em>is</em> that breath.</p>
+
+<h3>Policy &amp; programmes</h3>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>ISM 2.0</strong></td><td>Second phase of the India Semiconductor Mission — ~₹1.25 lakh cr cleared by the Finance Ministry's EFC; shifts focus from factories to supply chain depth and <em>sovereign IP</em></td></tr>
+<tr><td class="mono"><strong>DLI</strong></td><td>Design-Linked Incentive — reimburses up to 50% of design cost; 24 design projects in; funds your customers' IP purchases</td></tr>
+<tr><td class="mono"><strong>C2S</strong></td><td>Chips-to-Startup — MeitY programme training tens of thousands of VLSI engineers; the talent pipeline everyone cites</td></tr>
+<tr><td class="mono"><strong>Sovereign / full-stack IP</strong></td><td>ISM 2.0's push for end-to-end Indian-owned chip IP — know the counter-positioning from Section 11</td></tr>
+<tr><td class="mono"><strong>ESDM</strong></td><td>Electronics System Design &amp; Manufacturing — the umbrella acronym for the whole sector in Indian policy speak</td></tr>
+<tr><td class="mono"><strong>GeM</strong></td><td>Government e-Marketplace — how government buys; SphereLink is already on it</td></tr>
+<tr><td class="mono"><strong>Lab-to-fab</strong></td><td>The journey from research to manufacturable silicon — a favourite phrase in Indian policy and industry talks</td></tr>
+</tbody>
+</table></div>
+
+<h3>Manufacturing &amp; the buildout</h3>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Fab / OSAT / ATMP</strong></td><td>Wafer fabrication vs. assembly-test-mark-package; India's operational wins so far are OSAT/ATMP (Micron, CG Semi, Kaynes, Tata Assam)</td></tr>
+<tr><td class="mono"><strong>WSPM</strong></td><td>Wafer starts per month — fab capacity unit; Tata Dholera targets 50,000</td></tr>
+<tr><td class="mono"><strong>Trailing / mature edge</strong></td><td>28nm-and-older nodes — where India's first fab plays; distinct from the leading edge (3nm/2nm) that stays in Taiwan/Korea for now</td></tr>
+<tr><td class="mono"><strong>SCL Mohali</strong></td><td>The government's legacy 180nm fab — where academic DLI chips get fabricated</td></tr>
+<tr><td class="mono"><strong>First silicon</strong></td><td>A fab's first produced wafers — Dholera's is targeted for late 2026; the milestone everyone watches</td></tr>
+</tbody>
+</table></div>
+
+<h3>Design &amp; talent</h3>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>GCC</strong></td><td>Global Capability Centre — the MNC design centres; India hosts ~20% of the world's chip-design workforce</td></tr>
+<tr><td class="mono"><strong>Tape-out / MPW shuttle</strong></td><td>Sending a design to fab / sharing a wafer run among many small designs to cut cost — startup vocabulary</td></tr>
+<tr><td class="mono"><strong>PDK</strong></td><td>Process Design Kit — the foundry's rulebook a design (and its IP) must match; "which PDK version?" is a real customer question</td></tr>
+<tr><td class="mono"><strong>DIR-V / Shakti / Vega</strong></td><td>Digital India RISC-V programme and its indigenous processors (IIT-Madras's Shakti, C-DAC's Vega) — the sovereign-design flagships</td></tr>
+<tr><td class="mono"><strong>Design-led ecosystem</strong></td><td>The standard phrase for India's strength: design talent first, manufacturing following</td></tr>
+</tbody>
+</table></div>
+
+<h3>Global business currents</h3>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>China+1 / friend-shoring</strong></td><td>Supply-chain diversification away from single-country risk — the geopolitical tailwind behind India's moment</td></tr>
+<tr><td class="mono"><strong>Trusted / resilient supply chain</strong></td><td>Literally SEMICON India 2026's theme — "Building Trusted and Resilient Semiconductor Ecosystems"</td></tr>
+<tr><td class="mono"><strong>Chiplets / UCIe</strong></td><td>Many small dies in one package, and the standard interconnect for them — the architecture shift driving interface-IP demand</td></tr>
+</tbody>
+</table></div>
+
+<h3>Mahesh's own vocabulary — recognition builds rapport</h3>
+<div class="card">
+<ul class="small" style="margin:0">
+<li><strong>"Intelligent Power Architecture"</strong> — his company narrative; sensing + delivering power in real time. Use it once, correctly, and watch the conversation change.</li>
+<li><strong>"Pinless" / "core-powered"</strong> — the signature differentiator; integrate an analog macro like a digital gate.</li>
+<li><strong>"First-time-working" / "silicon-proven"</strong> — the trust claim behind 30 years and billions of cores.</li>
+<li><strong>"Chiplet scalability"</strong> — the title of the EE Times session he and Alan Rogers gave on June 24, 2026 — two weeks before your interview. Mentioning you noticed it is effortless diligence.</li>
+<li><strong>"Fail fast and recover quick"</strong> — his stated life advice from his Silicon Grapevine interview; don't quote it at him, but know the mindset it reveals: he rewards action and honesty over polish.</li>
+</ul>
+</div>
+
+<div class="callout warn"><span class="ttl">Usage rules</span>
+One or two key words per answer, placed naturally — "their DLI reimbursement cycle shaped the payment schedule" — never a buzzword parade. If he uses a term, match his usage. If you drop a term and he probes it, your one-breath definition is your safety net. Fluency whispers; jargon shouts.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Which single piece of listening gives the highest return before this specific interview?</div>
+<div class="opts">
+<button data-opt="a">Ten episodes of a global chip-investing podcast.</button>
+<button data-opt="b">SemiWiki EP322 — thirty minutes of Mahesh himself explaining his company's story in his own words.</button>
+<button data-opt="c">A tutorial on transistor physics.</button>
+<button data-opt="d">None — reading is always better than listening.</button>
+</div>
+<div class="fb">Nothing beats hearing your interviewer narrate his own strategy. You'll pick up his phrases, his emphasis, and his energy — and echo them honestly in the room.</div>
+</div>
+
+<div class="pagenav"><button data-go="m10"><span class="dir">← Prev</span>11 · India strategy</button><button class="next" data-go="m12"><span class="dir">Next →</span>13 · Questions for Mahesh</button></div>
+</section>
+
+<section class="module" id="m12">
+<div class="eyebrow">SECTION 13 · CLOSE THE DEAL</div>
+<h1 class="mt">Questions to ask Mahesh</h1>
+<p class="lede">Vinny's most specific tip: when Mahesh opens the floor, ask him about the current tech and business in India. Your questions are not a formality — for a CEO, they're the clearest signal of how you think. Prepare six, ask two or three, follow up on his answers.</p>
+
+<h2>The three to default to — memorise these</h2>
+<div class="card">
+<p><strong>★ 1 · The India-business question (Vinny's brief, fulfilled):</strong><br>
+"How does India fit into Analog Bits' growth plan over the next three years — and twelve months from now, what would make this hire an unambiguous success in your eyes?"</p>
+<p><strong>★ 2 · The technology-pull question (shows you track his moves):</strong><br>
+"You've just demoed real-time power sensing on N2P and presented on chiplet scalability at the EE Times event in June. How quickly do you expect Indian customers to pull leading-edge power IP, versus the mature-node clocking they buy today?"</p>
+<p style="margin-bottom:0"><strong>★ 3 · The strategic-policy question (your boldest, most differentiating move):</strong><br>
+"ISM 2.0 is explicitly funding sovereign, full-stack Indian IP. How do you think about a US IP company's position in that narrative — threat, tailwind, or partnership opportunity?"</p>
+</div>
+
+<h2>The bench — pick by how the conversation flows</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Theme</th><th>Question</th></tr></thead>
+<tbody>
+<tr><td><strong>Revenue mix</strong></td><td>"In India, where do you want revenue to come from in two years — startups, government, or GCC-influenced global deals?"</td></tr>
+<tr><td><strong>Lessons learned</strong></td><td>"What has the Netrasemi engagement taught you about how Indian fabless companies buy?"</td></tr>
+<tr><td><strong>Competition</strong></td><td>"Where in India do you most want to take share from Silicon Creations first — and where would you rather not fight?"</td></tr>
+<tr><td><strong>The M31 pairing</strong></td><td>"How do you see the Analog Bits and M31 portfolios being sold together here — one motion or two?"</td></tr>
+<tr><td><strong>Working cadence</strong></td><td>"How closely would I work with you directly, versus Vinny and the SemiFive India team?"</td></tr>
+<tr><td><strong>Personal (only if warmth invites it)</strong></td><td>"You grew up around your family's factory in Coimbatore and built a career in Silicon Valley — what does India's semiconductor moment mean to you personally?"</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout warn"><span class="ttl">The rules</span>
+Never ask what the website answers. Never ask about salary here — that conversation belongs with Vinny. Ask, then <em>listen</em>: one genuine follow-up on his answer is worth three prepared questions. And if he answers question 2 during the interview naturally, don't ask it again — swap in from the bench.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mahesh gives a two-minute answer about India strategy. Your best next move?</div>
+<div class="opts">
+<button data-opt="a">Immediately ask your next prepared question.</button>
+<button data-opt="b">Say "great answer" and wait.</button>
+<button data-opt="c">Follow up on something specific he said — "you mentioned government demand growing; is that mostly C-DAC-driven or broader?" — then let the thread run.</button>
+<button data-opt="d">Summarise his answer back to him in full.</button>
+</div>
+<div class="fb">Follow-ups prove you listened; prepared lists prove you prepared. A CEO hires the listener. The thread you pull is worth more than the question you wrote.</div>
+</div>
+
+<div class="pagenav"><button data-go="m11"><span class="dir">← Prev</span>12 · Podcast fluency</button><button class="next" data-go="m13"><span class="dir">Next →</span>14 · Video-call day plan</button></div>
+</section>
+
+<section class="module" id="m13">
+<div class="eyebrow">SECTION 14 · CLOSE THE DEAL</div>
+<h1 class="mt">Video-call day plan</h1>
+<p class="lede">It's a remote call with a fast-thinking CEO twelve and a half hours behind you. The logistics are part of the impression — and video gives you one legal advantage: notes just off-camera. Use it.</p>
+
+<h2>Timezone first — check this today</h2>
+<div class="callout warn"><span class="ttl">Sunnyvale ↔ Bengaluru</span>
+Mahesh sits in California (PDT), <strong>12.5 hours behind IST</strong>. His 9:00 a.m. is your 9:30 p.m.; his 5:00 p.m. is your 5:30 a.m. Open the calendar invite <em>now</em> and confirm which timezone the stated time is in — the single most common remote-interview disaster is a timezone mix-up. If anything is ambiguous, ask Vinny today, not on the day.</div>
+
+<h2>Tech &amp; environment — the checklist</h2>
+<div class="two-col">
+<div class="card tight"><h4>Tech</h4>
+<ul class="small" style="margin:0">
+<li>Wired or strong Wi-Fi + phone hotspot standing by as backup</li>
+<li>Meeting app updated; mic/camera tested in it <em>today</em>, not at T-minus-5</li>
+<li>Camera at eye level; you lit from the front, no window behind you</li>
+<li>Headphones with mic — cleaner audio than laptop mics</li>
+<li>Display name set properly: "Ananya G Suragi"</li>
+<li>Join 5 minutes early; phone on silent, notifications off</li>
+</ul></div>
+<div class="card tight"><h4>Within reach</h4>
+<ul class="small" style="margin:0">
+<li>Your resume — printed and on screen</li>
+<li>The glance card below — printed, taped beside the camera</li>
+<li>Analog Bits + M31 product pages open in background tabs</li>
+<li>Water; a pen; a notepad for <em>his</em> answers</li>
+<li>The three ★ questions written large</li>
+</ul></div>
+</div>
+
+<h2>Presence rules for a fast thinker</h2>
+<ul class="clean">
+<li><strong>Look at the lens when you speak</strong> — that's eye contact on video; look at his face when he speaks.</li>
+<li><strong>Pause one beat before answering.</strong> Fast thinkers respect composed speed over instant rambling.</li>
+<li><strong>Headline first, then stop.</strong> Give the one-sentence answer; expand only when he pulls. Silence after your point is confidence, not emptiness.</li>
+<li><strong>"I don't know, but here's how I'd find out"</strong> — say it without flinching when it's true.</li>
+<li><strong>Smile early.</strong> The first ninety seconds set the room; warmth plus crispness is the combination.</li>
+</ul>
+
+<h2>The glance card — print this block</h2>
+<div class="card">
+<h4 style="margin-top:0">FIVE NUMBERS</h4>
+<p class="small" style="margin-bottom:10px">India chips: <strong>$45–50B → $100–110B by 2030</strong> · Global IP market: <strong>~$8.4B, growing</strong> · IP gross margin: <strong>60–70%</strong> · India: <strong>~20% of world's chip-design workforce</strong> · ISM 2.0: <strong>~₹1.25 lakh cr cleared</strong></p>
+<h4>THREE REAL EXAMPLES</h4>
+<p class="small" style="margin-bottom:10px">Qualcomm bought Alphawave (interconnect IP) for <strong>~$2.4B</strong> · Micron Sanand inaugurated <strong>Feb 2026</strong>, Tata Dholera first silicon targeted <strong>late 2026</strong> (ASML deal signed May) · Qualcomm's <strong>2nm tape-out designed entirely in India</strong></p>
+<h4>THE THREE ★ QUESTIONS</h4>
+<p class="small" style="margin-bottom:10px">India in the 3-year plan + what success looks like at 12 months · N2P power sensing &amp; chiplets — when does India pull leading-edge? · Sovereign-IP push: threat, tailwind, or partnership?</p>
+<h4>ONE LINE TO HOLD</h4>
+<p class="small" style="margin-bottom:0">"Interex's confidential information stays confidential — that's exactly how yours will be treated."</p>
+</div>
+
+<h2>The final hour</h2>
+<ul class="clean">
+<li><strong>T-60:</strong> ten minutes on indiasemi.org + Analog Bits homepage for anything new; skim your three customer stories aloud once.</li>
+<li><strong>T-30:</strong> deliver your 60-second intro out loud twice — once for content, once for warmth. Stop rehearsing after that.</li>
+<li><strong>T-10:</strong> tech check, water, glance card up, breathe. You know more about this business, this market, and this man than any candidate he will meet.</li>
+<li><strong>T-0:</strong> lens, smile, headline-first. Go get it.</li>
+</ul>
+
+<h2>Final self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh asks something you genuinely don't know. The strongest response is:</div>
+<div class="opts">
+<button data-opt="a">Talk around it confidently and hope he moves on.</button>
+<button data-opt="b">"I don't know that one. My instinct is X, and here's exactly how I'd find out by Friday." Then stop.</button>
+<button data-opt="c">Apologise at length for the gap in your preparation.</button>
+<button data-opt="d">Change the subject to something you do know.</button>
+</div>
+<div class="fb">His own credo is "fail fast and recover quick." A clean 'I don't know' plus a recovery plan IS the culture fit — bluffing at a fast thinker is the one unrecoverable move.</div>
+</div>
+
+<div class="pagenav"><button data-go="m12"><span class="dir">← Prev</span>13 · Questions for Mahesh</button><button class="next" disabled><span class="dir">Done</span>End of brief — go win it</button></div>
+</section>
+
+</div></main>
+</div>
+
+<script>
+(function(){
+  var order=['m0','m1','m2','m3','m4','m5','m6','m14','m7','m8','m9','m10','m11','m12','m13'];
+  var visited={};
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sidebar=document.getElementById('sidebar'),scrim=document.getElementById('scrim');
+  function show(id){
+    order.forEach(function(m){var s=document.getElementById(m);if(s)s.classList.toggle('active',m===id);});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.dataset.go===id);});
+    visited[id]=true;
+    navLinks.forEach(function(a){if(visited[a.dataset.go])a.classList.add('visited');});
+    var pct=Math.round(Object.keys(visited).length/order.length*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progLabel').textContent=pct+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    sidebar.classList.remove('open');scrim.classList.remove('show');
+  }
+  navLinks.forEach(function(a){a.addEventListener('click',function(){show(a.dataset.go);});});
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(t&&!t.matches('#nav a')){show(t.dataset.go);}});
+  document.getElementById('menuBtn').addEventListener('click',function(){sidebar.classList.toggle('open');scrim.classList.toggle('show');});
+  scrim.addEventListener('click',function(){sidebar.classList.remove('open');scrim.classList.remove('show');});
+  document.querySelectorAll('.qa>button.q').forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
+  document.querySelectorAll('.reveal-btn').forEach(function(b){b.addEventListener('click',function(){var box=b.nextElementSibling;if(box&&box.classList.contains('reveal-box')){box.classList.toggle('show');b.textContent=box.classList.contains('show')?(b.dataset.hide||'Hide'):(b.dataset.show||b.textContent);}});});
+  document.querySelectorAll('.quiz').forEach(function(q){var c=q.dataset.correct,fb=q.querySelector('.fb');
+    q.querySelectorAll('.opts button').forEach(function(btn){btn.addEventListener('click',function(){if(q.dataset.done)return;q.dataset.done='1';var p=btn.dataset.opt;q.querySelectorAll('.opts button').forEach(function(o){o.disabled=true;});if(p===c){btn.classList.add('correct');}else{btn.classList.add('wrong');var r=q.querySelector('.opts button[data-opt="'+c+'"]');if(r)r.classList.add('correct');}if(fb)fb.classList.add('show');});});
+  });
+  show('m0');
+})();
+</script>
+</body>
+</html>
