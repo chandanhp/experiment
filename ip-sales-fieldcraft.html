@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Craft — Deals, Datasheets &amp; The Last Mile</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============ Executive-briefing theme: deep navy + gold on warm ivory ============ */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#fbfaf7;
+  --border:#e3dfd6; --border-soft:#edeae2;
+  --navy:#122a4a; --navy-2:#1d3d68; --gold:#a87b2d; --gold-soft:#f3ead8;
+  --teal:#0e6b5e;
+  --text-main:#1d1d20; --text-muted:#5d5c58; --text-faint:#918f88;
+  --good-bg:#e9f3ea; --good:#2e6b34; --bad-bg:#fbebe8; --bad:#a83226;
+  --warn-bg:#faf3df; --warn:#8a6a10; --tip-bg:#ecf1f8; --tip:#1d3d68;
+  --shadow:0 1px 3px rgba(18,42,74,.07),0 8px 28px rgba(18,42,74,.06);
+  --shadow-soft:0 1px 2px rgba(18,42,74,.05); --radius:12px;
+}
+*{box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text-main);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--navy);line-height:1.22;}
+code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--navy-2);}
+
+/* topbar + progress */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:60;background:var(--navy);display:flex;align-items:center;gap:14px;padding:0 20px;box-shadow:0 2px 12px rgba(18,42,74,.25);}
+.topbar .menu-btn{display:none;font-size:21px;background:none;border:none;cursor:pointer;color:#e8d9b8;line-height:1;}
+.topbar .t1{font-family:'IBM Plex Sans';font-weight:700;font-size:14.5px;color:#fff;letter-spacing:.2px;}
+.topbar .t2{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c9a45c;}
+.topbar .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar .plabel{font-family:'JetBrains Mono';font-size:10.5px;color:#b9c6d8;}
+.ptrack{width:150px;height:6px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;}
+.pfill{height:100%;width:0;background:linear-gradient(90deg,#c9a45c,#e8d9b8);border-radius:99px;transition:width .35s ease;}
+
+/* layout */
+.layout{display:flex;padding-top:56px;min-height:100vh;}
+.sidebar{width:268px;flex:0 0 268px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:56px;bottom:0;left:0;overflow-y:auto;padding:16px 13px 50px;}
+.ngt{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:16px 10px 6px;}
+.sidebar nav a{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Sans';font-size:13.8px;color:var(--text-muted);padding:9px 11px;border-radius:9px;margin-bottom:2px;cursor:pointer;transition:all .12s;}
+.sidebar nav a .code{font-family:'JetBrains Mono';font-size:10.5px;color:var(--gold);flex:0 0 20px;font-weight:600;}
+.sidebar nav a:hover{background:var(--surface-2);color:var(--navy);}
+.sidebar nav a.active{background:var(--gold-soft);color:var(--navy);font-weight:600;}
+.sidebar nav a .tick{margin-left:auto;font-size:12px;color:var(--good);opacity:0;transition:opacity .2s;}
+.sidebar nav a.visited .tick{opacity:1;}
+
+.content{flex:1 1 auto;margin-left:268px;width:calc(100% - 268px);display:flex;justify-content:center;padding:36px 40px 90px;}
+.inner{width:100%;max-width:830px;}
+section.module{display:none;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:38px 44px 34px;animation:fade .25s ease;}
+section.module.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.eyebrow{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+h1.mt{font-size:31px;font-weight:700;margin:0 0 10px;letter-spacing:-.4px;}
+.lede{font-size:18px;color:var(--text-muted);margin:0 0 8px;max-width:70ch;}
+.whybox{background:var(--gold-soft);border:1px solid #e6d2a8;border-radius:10px;padding:13px 17px;margin:20px 0 4px;font-size:15px;}
+.whybox .ttl{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+
+h2{font-size:22px;font-weight:600;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border-soft);letter-spacing:-.2px;}
+h3{font-size:18px;font-weight:600;margin:26px 0 8px;color:var(--navy-2);}
+h4{font-size:14.5px;font-weight:600;margin:16px 0 6px;}
+p{margin:0 0 14px;} ul,ol{margin:0 0 16px;padding-left:22px;} li{margin-bottom:7px;}
+strong{font-weight:600;color:var(--navy);} em{color:var(--text-muted);}
+.small{font-size:14px;} .muted{color:var(--text-muted);}
+
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-soft);margin:18px 0;}
+.card.tight{padding:15px 17px;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;border-left:4px solid var(--tip);background:var(--tip-bg);font-size:15.5px;}
+.callout .ttl{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
+.callout.tip{border-color:var(--tip);background:var(--tip-bg);} .callout.tip .ttl{color:var(--tip);}
+.callout.good{border-color:var(--good);background:var(--good-bg);} .callout.good .ttl{color:var(--good);}
+.callout.bad{border-color:var(--bad);background:var(--bad-bg);} .callout.bad .ttl{color:var(--bad);}
+.callout.warn{border-color:var(--warn);background:var(--warn-bg);} .callout.warn .ttl{color:var(--warn);}
+.callout.gold{border-color:var(--gold);background:var(--gold-soft);} .callout.gold .ttl{color:var(--gold);}
+
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--radius);}
+table{border-collapse:collapse;width:100%;font-size:14.3px;background:var(--surface);}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+th{font-family:'IBM Plex Sans';font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:#e8d9b8;background:var(--navy);}
+tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even) td{background:var(--surface-2);}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.chip{font-family:'JetBrains Mono';font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:999px;}
+.chip.g{background:var(--gold-soft);border-color:#e6d2a8;color:var(--gold);}
+.chip.n{background:var(--tip-bg);border-color:#c8d6e8;color:var(--navy-2);}
+.chip.t{background:#e5f1ef;border-color:#bfdcd6;color:var(--teal);}
+
+.qa{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);}
+.qa>button.q{width:100%;text-align:left;background:var(--surface);border:none;cursor:pointer;padding:15px 50px 15px 20px;font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;color:var(--navy);position:relative;line-height:1.4;}
+.qa>button.q:hover{background:var(--surface-2);}
+.qa>button.q::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);font-weight:400;}
+.qa.open>button.q::after{content:'\2013';}
+.qa .a{display:none;padding:4px 22px 20px;border-top:1px solid var(--border-soft);}
+.qa.open .a{display:block;}
+.qa .a .label{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin:14px 0 4px;}
+
+.reveal-btn{font-family:'IBM Plex Sans';font-size:13.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--navy-2);border:1px solid var(--navy-2);padding:8px 15px;border-radius:8px;margin:8px 8px 8px 0;transition:all .12s;}
+.reveal-btn:hover{background:var(--navy-2);color:#fff;}
+.reveal-box{display:none;margin:8px 0 4px;}
+.reveal-box.show{display:block;}
+
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0;box-shadow:var(--shadow-soft);}
+.quiz .qtext{font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;margin-bottom:12px;color:var(--navy);}
+.quiz .opts{display:flex;flex-direction:column;gap:8px;}
+.quiz .opts button{text-align:left;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);color:var(--text-main);padding:10px 14px;border-radius:8px;transition:all .12s;}
+.quiz .opts button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.quiz .opts button.correct{background:var(--good-bg);border-color:var(--good);}
+.quiz .opts button.wrong{background:var(--bad-bg);border-color:var(--bad);}
+.quiz .opts button:disabled{cursor:default;}
+.quiz .fb{display:none;margin-top:12px;font-size:14.5px;padding:11px 14px;border-radius:8px;background:var(--surface-2);border-left:3px solid var(--navy-2);}
+.quiz .fb.show{display:block;}
+
+.hero{background:linear-gradient(140deg,var(--navy) 0%,var(--navy-2) 55%,#274d7d 100%);color:#fff;border-radius:14px;padding:34px 34px 30px;margin:0 0 24px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;top:0;right:0;bottom:0;width:5px;background:linear-gradient(180deg,#c9a45c,#e8d9b8);}
+.hero .eb{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#c9a45c;margin-bottom:10px;}
+.hero h1{color:#fff;font-size:28px;margin:0 0 8px;letter-spacing:-.4px;}
+.hero p{color:rgba(255,255,255,.88);font-size:16.5px;margin:0;max-width:64ch;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;font-family:'IBM Plex Sans';font-size:12.8px;}
+.hero .meta div{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);}
+.hero .meta b{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:#c9a45c;font-weight:600;font-family:'JetBrains Mono';margin-bottom:2px;}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;margin:18px 0;}
+.tile{display:block;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow-soft);cursor:pointer;transition:all .13s;}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d8c9a5;}
+.tile .num{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.08em;}
+.tile h3{margin:7px 0 6px;color:var(--navy);font-size:16px;}
+.tile p{font-size:13.3px;color:var(--text-muted);margin:0;line-height:1.5;}
+
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:12px;margin:18px 0;}
+.kbox .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft);border-top:2px solid var(--gold);}
+.kbox .k .big{font-family:'IBM Plex Sans';font-weight:700;font-size:21px;color:var(--navy);}
+.kbox .k .lbl{font-size:12.3px;color:var(--text-muted);}
+
+ul.clean{list-style:none;padding-left:0;}
+ul.clean li{padding-left:24px;position:relative;}
+ul.clean li::before{content:'\2192';position:absolute;left:0;color:var(--gold);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+.script{background:var(--surface-2);border-left:3px solid var(--teal);padding:13px 17px;border-radius:0 8px 8px 0;margin:12px 0;font-size:15.5px;}
+.script .who{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);display:block;margin-bottom:4px;}
+
+.pagenav{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:22px;border-top:1px solid var(--border);}
+.pagenav button{font-family:'IBM Plex Sans';font-size:14px;font-weight:500;padding:11px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;color:var(--text-main);transition:all .12s;}
+.pagenav button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.pagenav button:disabled{opacity:.4;cursor:default;}
+.pagenav .dir{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);font-family:'JetBrains Mono';margin-bottom:2px;}
+.pagenav .next{text-align:right;}
+
+@media(max-width:880px){
+  .topbar .menu-btn{display:block;}
+  .sidebar{transform:translateX(-100%);transition:transform .2s ease;z-index:55;box-shadow:4px 0 24px rgba(0,0,0,.15);}
+  .sidebar.open{transform:translateX(0);}
+  .content{margin-left:0;width:100%;padding:20px 13px 80px;}
+  section.module{padding:25px 19px 27px;}
+  h1.mt{font-size:25px;} .lede{font-size:16.5px;}
+  .ptrack{width:90px;} .topbar .t2{display:none;}
+  .scrim{display:none;position:fixed;inset:0;top:56px;background:rgba(18,42,74,.4);z-index:50;}
+  .scrim.show{display:block;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <div>
+    <div class="t1">Field Craft · The Working File</div>
+    <div class="t2">Deals · Datasheets · Confidentiality · The Last Mile</div>
+  </div>
+  <div class="progress-wrap"><span class="plabel" id="progLabel">0%</span><div class="ptrack"><div class="pfill" id="progFill"></div></div></div>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+<nav id="nav">
+  <div class="ngt">Decode Vinny</div>
+  <a data-go="m0"><span class="code">00</span> This file, decoded <span class="tick">✓</span></a>
+  <a data-go="m1"><span class="code">01</span> Vinny's coaching tips <span class="tick">✓</span></a>
+  <div class="ngt">Speak the trade</div>
+  <a data-go="m2"><span class="code">02</span> Business vocabulary <span class="tick">✓</span></a>
+  <a data-go="m3"><span class="code">03</span> The licensing cycle <span class="tick">✓</span></a>
+  <a data-go="m4"><span class="code">04</span> Anatomy of a real quote <span class="tick">✓</span></a>
+  <a data-go="m5"><span class="code">05</span> The IP request form <span class="tick">✓</span></a>
+  <a data-go="m6"><span class="code">06</span> Datasheet fluency <span class="tick">✓</span></a>
+  <div class="ngt">Win the argument</div>
+  <a data-go="m7"><span class="code">07</span> AB one-liners · Cerebras · AI era <span class="tick">✓</span></a>
+  <a data-go="m8"><span class="code">08</span> The confidentiality question <span class="tick">✓</span></a>
+  <a data-go="m9"><span class="code">09</span> Conference lead generation <span class="tick">✓</span></a>
+  <div class="ngt">Close strong</div>
+  <a data-go="m10"><span class="code">10</span> Reading list &amp; licensing law <span class="tick">✓</span></a>
+  <a data-go="m11"><span class="code">11</span> The hunger question <span class="tick">✓</span></a>
+  <a data-go="m12"><span class="code">12</span> Questions bank: support &amp; more <span class="tick">✓</span></a>
+</nav>
+</aside>
+
+<main class="content"><div class="inner" id="inner">
+<section class="module" id="m0">
+<div class="hero">
+<span class="eb">FIELD CRAFT · THE WORKING FILE</span>
+<h1>From interview candidate to working professional</h1>
+<p>Vinny has now handed you the actual tools of the trade: a reading list, live coaching, two real datasheets, a real quotation, and the customer request form. This file turns those artefacts into working fluency — the vocabulary, the deal cycle, the documents, and the arguments — plus the hunger question and an expanded question bank for Mahesh.</p>
+<div class="meta">
+<div><b>Built from</b>Vinny's reading table &amp; coaching · 2 SiCr datasheets · a real quote · the IP request form</div>
+<div><b>Companion to</b>CEO-round brief + Mahesh insight dossier</div>
+<div><b>Handle with care</b>Deal documents are confidential — patterns in the room, never specifics</div>
+</div>
+</div>
+
+<h2>Your inputs, mapped</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>You asked for</th><th>Section</th></tr></thead>
+<tbody>
+<tr><td>Vinny's interview tips + the "mechanical → why this industry?" answer</td><td>01</td></tr>
+<tr><td>"Speak business terms — OTS, proven…"</td><td>02</td></tr>
+<tr><td>The whole licensing cycle</td><td>03</td></tr>
+<tr><td>What I'll deal with — the quote, as history from SiCr</td><td>04</td></tr>
+<tr><td>What I will ask customers — the IP request form</td><td>05</td></tr>
+<tr><td>The datasheets I'll be trained on</td><td>06</td></tr>
+<tr><td>AB IPs one line each · Cerebras · AI era · why not Silicon Creations</td><td>07</td></tr>
+<tr><td>"You worked at the competitor — how do you manage confidentiality?"</td><td>The guaranteed question: the three-bucket framework and graceful trap exits</td><td>08</td></tr>
+<tr><td>"How do I get leads at conferences?" (you attended VLSID 2026, Pune)</td><td>The before/during/after playbook, anchored on your real story</td><td>09</td></tr>
+<tr><td>The links and reading table Vinny shared</td><td>10</td></tr>
+<tr><td>5-year / 10-year goal — HUNGER</td><td>11</td></tr>
+<tr><td>What support do I get + every question idea for Mahesh</td><td>12</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout bad"><span class="ttl">Read this before anything else — the confidentiality covenant</span>
+The quotation and the request form in your possession carry real customer names, real contacts, real prices, and a real tape-out date. They are Silicon Creations / Interex confidential. In this file every customer is anonymised, and that is exactly how they must live in your speech — in the interview, at SphereLink, everywhere, forever. You may describe <em>patterns</em> ("license plus annual M&amp;S, declining reuse pricing, milestone-linked payments"). You may never name the customer, the contact, the price, or the date. This discipline is not a constraint on your prep — it <em>is</em> the prep. Mahesh is hiring the person who keeps secrets like these.</div>
+
+<h2>Jump in</h2>
+<div class="tile-grid">
+<a class="tile" data-go="m1"><span class="num">01</span><h3>Vinny's coaching</h3><p>Measured answers, the "bigger role" line, and the mechanical-engineering question he warned you about.</p></a>
+<a class="tile" data-go="m3"><span class="num">03</span><h3>The licensing cycle</h3><p>Lead to license to tape-out to renewal — the whole machine you'll operate.</p></a>
+<a class="tile" data-go="m4"><span class="num">04</span><h3>A real quote, decoded</h3><p>Reuse pricing, M&amp;S, milestones, deliverables — the commercial anatomy.</p></a>
+<a class="tile" data-go="m6"><span class="num">06</span><h3>Datasheet fluency</h3><p>Walk into "we'll train you on datasheets" already conversant.</p></a>
+<a class="tile" data-go="m7"><span class="num">07</span><h3>Cerebras &amp; the AI era</h3><p>One-liners, the wafer-scale story, and the "why not SiCr" argument.</p></a>
+<a class="tile" data-go="m10"><span class="num">10</span><h3>Questions for Mahesh</h3><p>Support, enablement, and the full idea bank.</p></a>
+</div>
+
+<div class="pagenav"><button disabled><span class="dir">Start</span>You're at the beginning</button><button class="next" data-go="m1"><span class="dir">Next →</span>01 · Vinny's coaching</button></div>
+</section>
+
+<section class="module" id="m1">
+<div class="eyebrow">SECTION 01 · DECODE VINNY</div>
+<h1 class="mt">Vinny's coaching, decoded</h1>
+<p class="lede">His transcript gave you four gifts: a delivery style, a positioning line, a training plan, and — most valuably — advance warning of a hard question. Here is each one, sharpened.</p>
+
+<h2>Gift 1 · The delivery style</h2>
+<div class="card">
+<p><strong>His words:</strong> "Be relaxed, be yourself… don't rush into giving any answers quickly. Process all the questions he's asking, and then give a measured response."</p>
+<p style="margin-bottom:0"><strong>The protocol:</strong> hear the full question → one silent beat → headline sentence → stop or expand on his pull. This matches everything we know about Mahesh: a fast thinker respects composed speed, not instant rambling. Practise the beat out loud — silence feels three times longer on your side of the camera than it does on his.</p>
+</div>
+
+<h2>Gift 2 · The positioning line (his script, polished)</h2>
+<div class="script"><span class="who">When "why this move" comes up</span>"I'm doing Silicon Creations sales today, and it's been a great education. But with Analog Bits I'd be the only person on the ground in India — the whole territory. That's a bigger role with real ownership, and honestly, that's exactly what I'm looking for. It excites me."</div>
+<p class="small muted">Vinny fed you this framing himself — which means it's the framing he has already used with Mahesh. Aligning with it makes the channel's story and the candidate's story identical. That consistency builds trust by itself.</p>
+
+<h2>Gift 3 · The training plan as an answer asset</h2>
+<p>Vinny said it plainly: <strong>he will train you in sales; someone from Analog Bits will train you on the datasheets and technology.</strong> Use this whenever the "how will you ramp?" question appears:</p>
+<div class="script"><span class="who">The ramp answer</span>"There's already a plan: Vinny coaches me on the sales motion, and Analog Bits trains me on the datasheets and technology. I've started early on my own — I've been working through PLL datasheets and jitter specifications from my current role, so the training will land on prepared ground. My first 30 days are about product depth and shadowing every live conversation."</div>
+
+<h2>Gift 4 · The question he warned you about</h2>
+<div class="callout warn"><span class="ttl">"You're coming from a mechanical engineering background — why do you want to do telecoms?"</span>
+Vinny flagged that you don't have this answer yet. (He said "telecoms" loosely — Mahesh may say semiconductors, electronics, or chips; the answer is the same.) This is the single most likely hard personal question of the round. Build it now, rehearse it aloud.</div>
+
+<div class="card">
+<h4 style="margin-top:0">The model answer (~75 seconds)</h4>
+<p>"It looks like a jump on paper, but every step made it smaller. At Mercedes R&amp;D I worked on e-motor stator design — FE models of electromechanical machines — which is where mechanical met electrical for me. At Pegasus I built UAVs, and a drone is electronics wrapped in a mechanical shell: flight controllers, sensors, power systems — I was integrating other people's chips every day. ITC showed me I was good at the commercial side. So when I chose semiconductor IP sales, it wasn't a drift — it was a deliberate decision to combine the two, and I've now spent months at the sharpest end of it, selling clocking IP into Indian design teams."</p>
+<p style="margin-bottom:0">"And here's why mechanical is an asset, not a gap: this industry's biggest problem right now is power — watts, heat, current delivery. That's physics, and mechanical engineers are trained to think in systems and physics. The protocol layers I can learn — I'm already reading PLL datasheets and jitter specs in my own time. What can't be taught is wanting this. I chose semiconductors twice: once when I joined Interex, and again right now."</p>
+</div>
+
+<div class="callout tip"><span class="ttl">If he presses "but why sales, not engineering?"</span>
+"Because the moments I've been best at, in every role, were the ones facing people — mapping what someone needs to what we can build. IP sales is the one job where the technology conversation and the trust conversation are the same conversation. Engineering taught me to understand the product; sales is where I convert that into outcomes."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Mahesh asks the mechanical-engineering question. The strongest shape of answer is:</div>
+<div class="opts">
+<button data-opt="a">"Mechanical had no jobs, so I switched."</button>
+<button data-opt="b">A bridge story (e-motors → UAVs → BD → IP sales), then the reframe: power is physics, mechanical engineers think in systems — plus receipts of self-study, ending with "I chose this twice."</button>
+<button data-opt="c">"Degrees don't matter in sales."</button>
+<button data-opt="d">A ten-minute walk through every job you've had.</button>
+</div>
+<div class="fb">Never apologise for the background — reframe it as an asset with evidence. The bridge story shows intention; the receipts show hunger; the closing line shows conviction. Under 90 seconds, then stop.</div>
+</div>
+
+<div class="pagenav"><button data-go="m0"><span class="dir">← Prev</span>00 · Overview</button><button class="next" data-go="m2"><span class="dir">Next →</span>02 · Business vocabulary</button></div>
+</section>
+
+<section class="module" id="m2">
+<div class="eyebrow">SECTION 02 · SPEAK THE TRADE</div>
+<h1 class="mt">Business vocabulary: speak like you've closed deals</h1>
+<p class="lede">You asked for the business terms — OTS, proven, and the rest. Grouped, one breath each. The rule from your other dossiers holds: never use a word you can't define in one breath. Every entry below is that breath.</p>
+
+<h2>Commercial terms — the money words</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>OTS (off-the-shelf)</strong></td><td>A standard, existing IP product licensed as-is — no custom design work. Faster, cheaper, lower-risk than custom. Vinny's phrase for how Analog Bits sells SerDes: off-the-shelf if it fits, no new investment.</td></tr>
+<tr><td class="mono"><strong>Silicon-proven</strong></td><td>The IP has been fabricated on that exact process and measured working in real silicon — not just simulated. The single most load-bearing claim in IP sales.</td></tr>
+<tr><td class="mono"><strong>First-time-working</strong></td><td>A vendor's track record of IP working on the first tape-out, no re-spin. Analog Bits' 30-year heritage claim.</td></tr>
+<tr><td class="mono"><strong>Design win</strong></td><td>A customer commits your IP into a specific chip design. The unit of victory in this business.</td></tr>
+<tr><td class="mono"><strong>Socket</strong></td><td>A slot in a chip design where an IP block is needed ("the clocking socket"). Each socket is a sale.</td></tr>
+<tr><td class="mono"><strong>License fee</strong></td><td>The upfront payment for the right to use IP in a design. The main revenue event.</td></tr>
+<tr><td class="mono"><strong>1st use / 2nd use / subsequent use</strong></td><td>Pricing tiers per design chip: full price for the first chip, discounted for reuse in later chips. Declining reuse pricing is built-in land-and-expand.</td></tr>
+<tr><td class="mono"><strong>NRE</strong></td><td>Non-Recurring Engineering — a one-time fee for custom work (porting to a new node, spec changes). Distinct from the license fee.</td></tr>
+<tr><td class="mono"><strong>Royalty</strong></td><td>Per-unit payment tied to production volume. Common for processors (Arm's engine); less common for analog blocks, which are usually license-led.</td></tr>
+<tr><td class="mono"><strong>M&amp;S</strong></td><td>Maintenance &amp; Support — an annual fee (typically ~15% of license) for continued support and updates after the included period ends.</td></tr>
+<tr><td class="mono"><strong>Eval license</strong></td><td>Limited license to evaluate IP (models, docs) before committing. A qualification stage, and a trust gesture.</td></tr>
+<tr><td class="mono"><strong>Term sheet</strong></td><td>A non-binding map of a deal's headline terms, agreed before lawyers draft the full license agreement. Finds deal-breakers early.</td></tr>
+<tr><td class="mono"><strong>PO / Effective Date</strong></td><td>The purchase order and the contract start date — deliverable and payment clocks usually start at the later of the two.</td></tr>
+<tr><td class="mono"><strong>Milestone billing</strong></td><td>Payments tied to delivery events (kit delivered → invoice due), not calendar dates. Also how you align deals to a startup's DLI reimbursement cycle.</td></tr>
+<tr><td class="mono"><strong>Quote validity</strong></td><td>Quotes expire (30 days is typical) — gentle, legitimate urgency in every deal.</td></tr>
+<tr><td class="mono"><strong>"Subject to definitive agreement"</strong></td><td>A quote is commercial intent; the legally binding document is the signed IP License Agreement. Two closures: commercial, then legal.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Licensing-legal terms — from the PDF Vinny sent you</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Licensor / Licensee</strong></td><td>Owner granting rights / party receiving them. You'll represent the licensor's side.</td></tr>
+<tr><td class="mono"><strong>Exclusive vs non-exclusive</strong></td><td>Exclusive = licensed to one party only (higher fees, often with milestone minimums to keep exclusivity); non-exclusive = licensed to many (the IP-industry norm).</td></tr>
+<tr><td class="mono"><strong>Field of use / Territory</strong></td><td>Limits on where the license applies — by application domain and by geography.</td></tr>
+<tr><td class="mono"><strong>Grant verbs</strong></td><td>make, have made, import, use, offer for sale, sell… — each verb is a distinct permission, and <em>omission means prohibition</em>. "Have made" is what allows contract manufacturing.</td></tr>
+<tr><td class="mono"><strong>Royalty-bearing / fully paid-up / royalty-free</strong></td><td>Ongoing per-unit payments / one lump sum covers everything / no payments (other consideration given).</td></tr>
+<tr><td class="mono"><strong>Reps &amp; warranties</strong></td><td>Formal promises — chiefly that the licensor owns the IP and (where given) that it doesn't infringe third-party rights. Patent noninfringement is the one licensors hesitate on, since patent infringement requires no awareness.</td></tr>
+<tr><td class="mono"><strong>Duty to defend vs duty to indemnify</strong></td><td>Defend = pay the legal fight from day one, regardless of outcome. Indemnify = pay damages only after liability. A licensee wants both.</td></tr>
+<tr><td class="mono"><strong>Confidentiality's two duties</strong></td><td>(1) Don't disclose the other side's information; (2) don't <em>use</em> it beyond this agreement. The second is the one people forget — and the exact discipline you're demonstrating about SiCr.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Deliverables &amp; technical-package terms</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>FE Design Kit</strong></td><td>Front-end package: LEF footprint (with antenna info), Verilog behavioural model + testbench, Liberty (.lib) timing model, datasheet, application note with integration and production-test guidelines. What the customer's designers integrate against.</td></tr>
+<tr><td class="mono"><strong>BE Design Kit</strong></td><td>Back-end package: everything in FE plus the GDSII layout, Calibre LVS netlist, release notes (including any physical-verification waivers) and the DRC/ANT/LVS/ERC verification logfiles. What goes into the actual chip build.</td></tr>
+<tr><td class="mono"><strong>GDSII</strong></td><td>The final layout database — the IP's physical "artwork" that gets merged into the chip.</td></tr>
+<tr><td class="mono"><strong>PDK / metal stack</strong></td><td>The foundry's design-rule kit, and the specific metal-layer configuration a chip uses (e.g. a 9-metal stack). IP must match both — a real qualification question.</td></tr>
+<tr><td class="mono"><strong>Tape-out</strong></td><td>Releasing the finished design to the foundry. The customer's immovable deadline — and your deal clock.</td></tr>
+<tr><td class="mono"><strong>Corners (TT/SS/FFG), T<sub>J</sub></strong></td><td>Process/voltage/temperature extremes specs are guaranteed across, and junction temperature. Datasheet fine print that FAEs live in.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">A customer asks: "Is this PLL OTS and proven on our node?" What are they actually asking?</div>
+<div class="opts">
+<button data-opt="a">Whether the PLL is cheap.</button>
+<button data-opt="b">Whether they can buy the source schematics.</button>
+<button data-opt="c">Whether a standard, no-custom-work version exists for their exact process — and has been fabricated and measured working in real silicon there — so their schedule and risk are protected.</button>
+<button data-opt="d">Whether the vendor will build a new PLL for them.</button>
+</div>
+<div class="fb">OTS = standard product, no NRE, fast delivery. Silicon-proven = working measured silicon on that node. Together they mean: minimum risk, minimum time — the two things every tape-out-driven customer is really buying.</div>
+</div>
+
+<div class="pagenav"><button data-go="m1"><span class="dir">← Prev</span>01 · Vinny's coaching</button><button class="next" data-go="m3"><span class="dir">Next →</span>03 · The licensing cycle</button></div>
+</section>
+
+
+<section class="module" id="m3">
+<div class="eyebrow">SECTION 03 · SPEAK THE TRADE</div>
+<h1 class="mt">The whole licensing cycle</h1>
+<p class="lede">From first hello to renewal — the machine you'll operate. Learn the stages, who acts at each, and which document changes hands. When you can narrate this end-to-end, you sound like someone who has shipped deals, not studied them.</p>
+
+<h2>The cycle, end to end</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>#</th><th>Stage</th><th>What happens</th><th>Your role · the artefact</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Lead</strong></td><td>Inbound (IMEC referral, trade show, website) or outbound touch</td><td>Respond same-day · first-contact notes</td></tr>
+<tr><td>2</td><td><strong>Qualify</strong></td><td>Real chip? Real budget? Node/foundry? Tape-out date?</td><td>The four qualifying questions — decide if this is worth cycles</td></tr>
+<tr><td>3</td><td><strong>NDA</strong></td><td>Mutual confidentiality signed so specifics can flow both ways</td><td>Shepherd it fast — deals stall here silently</td></tr>
+<tr><td>4</td><td><strong>Requirements capture</strong></td><td>Customer specifies what they actually need</td><td><strong>The IP Request Form</strong> (Section 05) — drive it to completeness</td></tr>
+<tr><td>5</td><td><strong>Feasibility check</strong></td><td>Principal confirms: does this IP exist on that node + metal stack? Port needed?</td><td>You broker the loop; speed here is a trust signal</td></tr>
+<tr><td>6</td><td><strong>Technical evaluation</strong></td><td>Datasheets shared (revision-pinned), spec Q&amp;A, maybe eval license</td><td>FAE handles depth; you keep momentum · <strong>datasheet</strong> (Section 06)</td></tr>
+<tr><td>7</td><td><strong>Quotation</strong></td><td>Formal pricing with milestones and validity window</td><td><strong>The Quote</strong> (Section 04) — walk the customer through it</td></tr>
+<tr><td>8</td><td><strong>Negotiation</strong></td><td>Commercial terms + the legal License Agreement (term-sheet thinking)</td><td>Payment staging vs discounting; loop legal early</td></tr>
+<tr><td>9</td><td><strong>PO / Effective Date</strong></td><td>Purchase order lands; milestone M0 starts the clocks</td><td>Celebrate quietly; the work begins</td></tr>
+<tr><td>10</td><td><strong>Delivery milestones</strong></td><td>FE kit, then BE kit (e.g. M0 + 1 week) — payments trigger on delivery</td><td>Track deliverables; invoice follows the kit</td></tr>
+<tr><td>11</td><td><strong>Integration &amp; review</strong></td><td>Support during integration; pre-tape-out integration review by the vendor</td><td>Push the customer to take the review — skipping it adds risk to <em>their</em> tape-out</td></tr>
+<tr><td>12</td><td><strong>Tape-out → production</strong></td><td>The chip ships; "Use" typically = one design chip, taped out any number of times</td><td>Stay close — production success is your reference story</td></tr>
+<tr><td>13</td><td><strong>Renew &amp; expand</strong></td><td>Annual M&amp;S renewals; 2nd-use license for the next chip; new sockets</td><td>Land-and-expand — the 7th and 8th customers logic, inside one account</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><span class="ttl">Where deals actually stall</span>
+Three places: the NDA queue (nobody owns it), the legal License Agreement (weeks of redlines after commercial agreement — set expectations early), and payment terms for startups (stage to DLI milestones instead of discounting). The channel person who anticipates these three is worth her weight in wafers.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">A customer has verbally agreed to your quote. What still stands between you and revenue?</div>
+<div class="opts">
+<button data-opt="a">Nothing — a verbal yes is a closed deal.</button>
+<button data-opt="b">The signed IP License Agreement (the quote is "subject to a mutually acceptable agreement"), the PO, and then delivery-triggered milestone payments.</button>
+<button data-opt="c">Only the customer's tape-out.</button>
+<button data-opt="d">A press release.</button>
+</div>
+<div class="fb">Commercial closure and legal closure are separate events, and cash follows deliverables. Managing that last mile — agreement, PO, delivery, invoice — is precisely the execution work Vinny described the role as owning.</div>
+</div>
+
+<div class="pagenav"><button data-go="m2"><span class="dir">← Prev</span>02 · Vocabulary</button><button class="next" data-go="m4"><span class="dir">Next →</span>04 · A real quote, decoded</button></div>
+</section>
+
+<section class="module" id="m4">
+<div class="eyebrow">SECTION 04 · SPEAK THE TRADE</div>
+<h1 class="mt">Anatomy of a real quote</h1>
+<p class="lede">You hold a genuine Silicon Creations quotation — issued March 2026 to a Bengaluru fabless company for a Fractional PLL plus a stand-alone clock divider on GlobalFoundries 22FDX. Here is what every line teaches. The numbers stay in this file, forever.</p>
+
+<div class="callout bad"><span class="ttl">The covenant, again</span>
+Customer name, contact, prices, dates: SiCr/Interex confidential. In any conversation — including with Mahesh — you speak only in patterns: <em>"license-led pricing with annual M&amp;S, declining reuse tiers, milestone-linked payments against deliverables."</em> If asked for specifics: "That's confidential to my current employer — exactly as your pricing will be confidential with me."</div>
+
+<h2>The structure, line by line</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Quote element</th><th>What it said (this deal)</th><th>The lesson</th></tr></thead>
+<tbody>
+<tr><td><strong>Products, revision-pinned</strong></td><td>Fractional PLL + 1-to-128 stand-alone clock divider, each tied to a specific datasheet revision</td><td>Quotes pin datasheet revisions — spec and price travel together; even a humble divider is a separate SKU</td></tr>
+<tr><td><strong>Process specification</strong></td><td>GlobalFoundries 22FDX, exact metal-stack string spelled out</td><td>IP is quoted <em>per foundry, per node, per metal stack</em> — and note: SiCr sells beyond TSMC (22FDX is FD-SOI)</td></tr>
+<tr><td><strong>License fees — declining reuse tiers</strong></td><td>PLL: $102,000 first use → $86,700 second use (~85%) → $71,400 each subsequent (~70%)</td><td>The first design pays full; reuse gets cheaper — pricing designed to make the customer's <em>next</em> chip an easier yes. Land-and-expand, encoded in the price list</td></tr>
+<tr><td><strong>Annual M&amp;S</strong></td><td>$15,300/yr on the PLL, $3,750/yr on the divider — each ≈15% of license</td><td>The recurring layer. Base fee already includes design &amp; integration support for two years; M&amp;S extends beyond</td></tr>
+<tr><td><strong>Bundle discount</strong></td><td>Divider: $25,000 alone, <strong>$18,000</strong> when licensed for the same design chip</td><td>Attach pricing — the second block on the same chip is cheaper. Your cross-sell lever, printed on the quote</td></tr>
+<tr><td><strong>Milestones</strong></td><td>M0 = later of Effective Date and PO received; M1 = M0 + 1 week: BE (incl. FE) design kits delivered → <strong>$120,000 due</strong> (= PLL $102k + bundled divider $18k); INT_RVW = customer-requested integration review before tape-out</td><td>Cash follows deliverables, fast — one week from PO to kits to invoice. And the vendor <em>asks</em> to review the integration: refusing it shifts risk to the customer</td></tr>
+<tr><td><strong>"Use" definition</strong></td><td>One Design Chip, taped out any number of times, any number of IP instances; subcontractors may receive the IP for that chip</td><td>The license's atomic unit is the <em>chip design</em>, not the tape-out count or instance count — the definition your customers most often misunderstand</td></tr>
+<tr><td><strong>Terms &amp; validity</strong></td><td>Valid 30 days; payment net-30; 8% p.a. late fee; US$; excludes non-US taxes; "subject to completion of a mutually acceptable IP license agreement"</td><td>A quote is commercial intent with an expiry date — the binding document is the License Agreement (Section 03, stage 8)</td></tr>
+</tbody>
+</table></div>
+
+<h2>The deal math worth internalising</h2>
+<div class="kbox">
+<div class="k"><div class="big">~15%</div><div class="lbl">Annual M&amp;S as a share of license fee — the recurring-revenue rule of thumb</div></div>
+<div class="k"><div class="big">85% / 70%</div><div class="lbl">2nd / subsequent-use pricing — reuse tiers reward loyalty</div></div>
+<div class="k"><div class="big">~28% off</div><div class="lbl">Attach discount for the second block on the same chip</div></div>
+<div class="k"><div class="big">1 week</div><div class="lbl">PO to kit delivery to invoice — how fast proven OTS IP monetises</div></div>
+</div>
+
+<div class="callout gold"><span class="ttl">The interview-safe sentence</span>
+"I've handled real IP quotations end-to-end — license-led pricing with declining reuse tiers, annual M&amp;S around the industry-typical percentage, attach discounts for additional blocks on the same chip, and milestone payments triggered by design-kit delivery. I can't share whose or how much — but I can run that machine from day one."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">A customer says: "We licensed the PLL for chip A. We're now taping out chip A again with two more PLL instances — do we owe you?" Under the "Use" definition, the answer is:</div>
+<div class="opts">
+<button data-opt="a">Yes — every tape-out is a new license.</button>
+<button data-opt="b">Yes — every instance is a new license.</button>
+<button data-opt="c">No — one Use covers one design chip, taped out any number of times with any number of instances. A <em>new chip design</em> would be a 2nd use, at the discounted tier.</button>
+<button data-opt="d">Only if they change foundry.</button>
+</div>
+<div class="fb">The license's unit is the design chip. Knowing this cold prevents both overcharging (which destroys trust) and undercharging (which destroys margin) — and the 2nd-use tier is your natural expansion conversation.</div>
+</div>
+
+<div class="pagenav"><button data-go="m3"><span class="dir">← Prev</span>03 · The cycle</button><button class="next" data-go="m5"><span class="dir">Next →</span>05 · The IP request form</button></div>
+</section>
+
+<section class="module" id="m5">
+<div class="eyebrow">SECTION 05 · SPEAK THE TRADE</div>
+<h1 class="mt">The IP request form: your question script</h1>
+<p class="lede">The form you uploaded is the profession's qualification checklist, written by the vendor itself. Learn its questions and you'll never wonder "what do I ask a customer?" again. Bonus: the filled copy in your hands is a live chiplet deal — an anonymised story ready for the interview.</p>
+
+<h2>The questions, in the order the form asks them</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Block</th><th>What you ask</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td><strong>Project</strong></td><td>Application? Tape-out date? When must GDS be delivered? Chiplet / SiP / MCM? Automotive?</td><td>The tape-out date is the deal clock; automotive triggers safety-grade requirements; chiplet/SiP shapes everything downstream</td></tr>
+<tr><td><strong>Process</strong></td><td>Foundry + node? I/O oxide voltage? Metal stack?</td><td>IP must exist for that exact combination — the first feasibility gate (Section 03, stage 5)</td></tr>
+<tr><td><strong>Clock topology</strong></td><td>Input frequency and its source (crystal? another PLL?)? Output frequencies? Integer multiples of input, or fractional needed? All outputs from one PLL simultaneously — and with what phase relationships?</td><td>Determines <em>which</em> PLL architecture fits — integer vs fractional, one macro vs several</td></tr>
+<tr><td><strong>The load</strong></td><td>What is each clock actually driving (CPU core? SerDes? ADC/DAC? DDR?)</td><td>The vendor's own note: tell us the input, the output, and <em>either</em> the jitter spec <em>or</em> what's being clocked — that's the minimum viable ask</td></tr>
+<tr><td><strong>Jitter</strong></td><td>Period-jitter requirement and how it's defined (RMS? peak-peak? % of period?); long-term-jitter requirement or "not relevant"</td><td>The spec that separates professionals from brochure-readers — see the crash card below</td></tr>
+<tr><td><strong>Constraints</strong></td><td>Area limit? Power limit? Which supplies exist on chip? Lock-time requirement? Duty cycle, spread-spectrum, other specials?</td><td>"Which supplies exist" is the question that will matter enormously at Analog Bits — pinless IP changes this answer's stakes (Section 07)</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><span class="ttl">The vendor's own honesty — steal this posture</span>
+The form admits it plainly: the Fractional PLL is "hugely programmable" but <em>"too elaborate / large / costly for some cases."</em> The vendor itself right-sizes rather than oversells. Carry that into Analog Bits: matching the customer to the smallest sufficient product is what makes the 7th and 8th purchases happen.</div>
+
+<h2>PJ vs LTJ — the crash card</h2>
+<div class="two-col">
+<div class="card tight"><h4>PJ — Period Jitter</h4><p class="small" style="margin:0">How much each clock period varies from the next. Matters for <strong>digital timing closure (STA)</strong> — the shortest period that will ever occur sets your timing margin. Usually specified <strong>peak-to-peak</strong> (or one-sided peak), sometimes as % of period.</p></div>
+<div class="card tight"><h4>LTJ — Long-Term (Phase) Jitter</h4><p class="small" style="margin:0">How far a clock edge drifts from where it <em>should</em> be after many cycles — errors accumulate, because phase is the integral of frequency. Matters for <strong>ADC/DAC sampling, SerDes, RF</strong> — a mistimed sample is a wrong sample. Usually specified <strong>RMS</strong> or as integrated phase noise.</p></div>
+</div>
+<p class="small muted">The subtlety worth quoting: a clock can have small PJ and still large LTJ. And deterministic jitter comes mostly from supply noise — which is why power integrity and clock quality are the same conversation. (That last sentence is an Analog Bits thesis, hiding inside a Silicon Creations form.)</p>
+
+<h2>Your live-deal story — anonymised and interview-ready</h2>
+<div class="script"><span class="who">The chiplet story (~40 seconds)</span>"A live example I can share in pattern: a global automotive IDM's Bengaluru design centre came to us for PLL IP for a <strong>die-to-die interface on a chiplet-based microcontroller program</strong> — mature TSMC node, multi-gigahertz outputs, a tight peak-to-peak period-jitter budget, automotive grade, tape-out inside a year. I drove the requirements capture on the vendor's request form — clock topology, jitter definition, available supplies, metal stack. What it taught me: chiplets aren't a future trend in India — I'm qualifying chiplet D2D clocking requirements <em>today</em>. Which is exactly why your chiplet-scalability and power-architecture story lands here."</div>
+<p class="small muted">Every fact above is safely pattern-level; names, exact frequencies, dates and the customer stay in the vault. Also note the honest texture of the real form: even a Principal Engineer answered "will come back on this" for several fields — requirements capture is a loop you drive, not a form you send.</p>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="a">
+<div class="qtext">A customer emails: "We need a PLL, please quote." Per the vendor's own minimum, your first reply asks for:</div>
+<div class="opts">
+<button data-opt="a">Input clock frequency and its source, output frequency, and either the jitter requirement or what circuits are being clocked — plus foundry/node.</button>
+<button data-opt="b">Their annual revenue.</button>
+<button data-opt="c">A signed PO first.</button>
+<button data-opt="d">Nothing — send the full catalogue and wait.</button>
+</div>
+<div class="fb">That's the minimum-viable ask straight from the request form. Insufficient information means delay or a wrong-sized answer — the form says so itself. Asking exactly these questions on the first call is what "knowing the business" sounds like.</div>
+</div>
+
+<div class="pagenav"><button data-go="m4"><span class="dir">← Prev</span>04 · The quote</button><button class="next" data-go="m6"><span class="dir">Next →</span>06 · Reading a datasheet</button></div>
+</section>
+
+<section class="module" id="m6">
+<div class="eyebrow">SECTION 06 · SPEAK THE TRADE</div>
+<h1 class="mt">Reading a PLL datasheet</h1>
+<p class="lede">Vinny said someone from Analog Bits will train you on datasheets. Imagine their face when you arrive already conversant. You have two real ones — the same product family on TSMC 22nm ULP/ULL and on 16FFC/12FFC — so let's learn the anatomy from the genuine articles.</p>
+
+<h2>First: decode the part number</h2>
+<div class="card tight">
+<p class="mono" style="margin-bottom:6px"><strong>PLL · TS · 22ULP · HV · FRAC · A</strong> — product type · foundry (TSMC) · node (22 ULP/ULL) · variant (high-voltage analog supply) · architecture (fractional) · revision</p>
+<p class="mono" style="margin-bottom:6px"><strong>PLL · TS · 16FFC · FRAC · H2</strong> — same family, FinFET node group (16FFC/12FFC/12FFC+), variant H2</p>
+<p class="mono" style="margin:0"><strong>PLL · GF · 22FDX · FRAC · B</strong> (from the quote) — same product logic, GlobalFoundries 22FDX (FD-SOI)</p>
+</div>
+<p class="small muted">One product family, re-proven per foundry and node — the part number itself teaches you that IP is sold per-process. This naming fluency alone will impress the trainer.</p>
+
+<h2>The standard sections — and what customers ask about each</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Datasheet section</th><th>What it tells you (real values from your two sheets)</th><th>The customer question it answers</th></tr></thead>
+<tbody>
+<tr><td><strong>Overview / Features</strong></td><td>Ultra-wide ranges, best-in-class jitter, ΔΣ fractional with a noise-cancelling DAC so fractional-mode jitter nearly matches integer mode; "a single macro for all clocking applications"</td><td>"What is it and why should I care?" — the consolidation pitch in one paragraph</td></tr>
+<tr><td><strong>Operating conditions</strong></td><td>Supplies and junction temperature. Note carefully: <strong>VDDHV analog supply 1.62–3.63V (1.8/2.5/3.3V)</strong> plus 0.8V core rails — an <em>isolated analog supply</em> for noise rejection</td><td>"What rails must I provide?" — flag this line; it becomes the pinless argument in Section 07</td></tr>
+<tr><td><strong>Current consumption</strong></td><td>Per-rail numbers with scaling laws (e.g. current scales as a power of VCO frequency; power scales as VDD²)</td><td>"What's the power?" — always answered with conditions attached</td></tr>
+<tr><td><strong>Frequency ranges</strong></td><td>22ULP: input 4–1200MHz, output 20–4000MHz, VCO 1–4GHz. 16FFC family: output 18–5400MHz, VCO max 4.8/5.0/5.4GHz by node variant</td><td>"Can it make my 2GHz and 4GHz clocks?" — the first spec you check against a request form</td></tr>
+<tr><td><strong>Divider ranges</strong></td><td>REFDIV 1–63; FBDIV 16–255 (22ULP) vs 16–4095 (16FFC); post-dividers</td><td>"Can I derive all my frequencies?" — and proof that specs shift between node generations</td></tr>
+<tr><td><strong>Lock time</strong></td><td>Counted in PFD cycles; the 16FFC sheet distinguishes <strong>LOCKF</strong> (frequency lock, ~2%) from <strong>LOCKP</strong> (phase lock) — e.g. ~20µs frequency lock at a 25MHz reference</td><td>"How fast after power-up is the clock usable?"</td></tr>
+<tr><td><strong>Jitter</strong></td><td>Three families: random period jitter (ps RMS), integrated jitter over a band (INT vs FRAC mode), deterministic fixed offset — each with scaling formulas</td><td>"Will it meet my 0.1UI budget / my ADC clock spec?" — pair with the PJ/LTJ card in Section 05</td></tr>
+<tr><td><strong>Supply sensitivity</strong></td><td>How much jitter each millivolt of supply noise adds (fs/mV)</td><td>"How clean must my rails be?" — supply noise is where deterministic jitter comes from</td></tr>
+<tr><td><strong>Area / version / reliability</strong></td><td>0.06mm² (22ULP) vs 0.04mm² (16FFC); metal-stack compatibility; EM/aging grades guaranteed 10 years at temperature</td><td>"What does it cost me in silicon, and will it survive automotive life?"</td></tr>
+<tr><td><strong>Pin list</strong></td><td>FREF in, FBDIV/FRAC controls, LOCK out, PD power-down, BYPASS — plus 16FFC extras: DESKEW mode (external feedback), full SCAN test chain</td><td>"How does my SoC actually talk to it?" — the integration contract</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout gold"><span class="ttl">How a salesperson actually uses a datasheet</span>
+Not by memorising it — by <strong>mapping</strong> it. Request form says "2GHz/4GHz outputs, &lt;0.1UI p-p, supplies 0.9V and 1.8V" → you check the frequency-range line, the jitter table, the operating-conditions table. Three lookups, qualified in five minutes, FAE confirms the corner cases. And always quote from the <em>revision pinned in the quote</em> — specs move between revisions, which is exactly why quotes pin them.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="d">
+<div class="qtext">A customer clocking a high-speed ADC asks about "your jitter." Which line do you point the FAE conversation at?</div>
+<div class="opts">
+<button data-opt="a">Duty cycle.</button>
+<button data-opt="b">Lock time.</button>
+<button data-opt="c">Period jitter peak-to-peak only — it's the biggest number.</button>
+<button data-opt="d">Long-term/integrated jitter (RMS) — sampling clocks care about accumulated edge placement, not just period-to-period wobble.</button>
+</div>
+<div class="fb">ADC/DAC and SerDes clocks live on LTJ/integrated jitter; digital timing closure lives on period jitter. Routing the right spec to the right application is datasheet fluency — and it took you one prep file, not a training week.</div>
+</div>
+
+<div class="pagenav"><button data-go="m5"><span class="dir">← Prev</span>05 · Request form</button><button class="next" data-go="m7"><span class="dir">Next →</span>07 · Cerebras &amp; the AI era</button></div>
+</section>
+
+
+<section class="module" id="m7">
+<div class="eyebrow">SECTION 07 · WIN THE ARGUMENT</div>
+<h1 class="mt">Analog Bits in one-liners, Cerebras, and the AI era</h1>
+<p class="lede">Three things you asked for: every Analog Bits IP in one clean line, the Cerebras story told properly, and the honest answer to the sharpest question in your interview — "why can't Silicon Creations be the AI-era company?" Your own uploaded documents supply the killer evidence.</p>
+
+<h2>The portfolio, one breath per product</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Pinless PLL</strong></td><td>A clock generator that cleans its own power from the core supply — no dedicated analog pins, place it anywhere like a digital gate.</td></tr>
+<tr><td class="mono"><strong>Low-jitter PLL</strong></td><td>Precision clocking for jitter-critical paths, without the integration pain of traditional analog.</td></tr>
+<tr><td class="mono"><strong>LC PLL</strong></td><td>The premium tier — inductor-based, ultra-clean clocks for the fastest links; proven on N2P in both microwatt-class and high-performance flavours.</td></tr>
+<tr><td class="mono"><strong>XTAL &amp; RC oscillators</strong></td><td>The chip's reference heartbeat — from an external crystal, or fully on-chip with no crystal at all.</td></tr>
+<tr><td class="mono"><strong>PCIe reference clocks</strong></td><td>Spec-compliant clean clock sources for PCIe links.</td></tr>
+<tr><td class="mono"><strong>PVT sensor (+ pinless remote)</strong></td><td>On-chip thermometer-voltmeter-process monitor; the remote version drops sensing points anywhere on the die.</td></tr>
+<tr><td class="mono"><strong>Droop / spike / glitch detectors</strong></td><td>Trip-wires that catch supply dips and surges the instant they happen, before they crash logic.</td></tr>
+<tr><td class="mono"><strong>Power-integrity monitors (+ bandgaps, ADCs)</strong></td><td>The measurement infrastructure — precision references and converters, integrated or standalone.</td></tr>
+<tr><td class="mono"><strong>LDO</strong></td><td>A local regulator delivering clean voltage right at the point of use — next to the core that needs it.</td></tr>
+<tr><td class="mono"><strong>Regulators</strong></td><td>The broader power-delivery family beyond the LDO.</td></tr>
+<tr><td class="mono"><strong>Multi-rate SerDes</strong></td><td>Off-the-shelf high-speed links, including automotive-grade PCIe on TSMC N5A — sold where it fits, not the investment focus.</td></tr>
+<tr><td class="mono"><strong>Programmable I/O</strong></td><td>Configurable boundary circuitry for signals on and off the chip.</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">The mental model, one line: <em>clocking is the heartbeat, sensing is the senses, power delivery is the bloodstream — interconnect rounds it out.</em></p>
+
+<h2>The Cerebras story — told in 90 seconds</h2>
+<div class="script"><span class="who">The proof story</span>"Cerebras builds the most extreme chip on earth — the Wafer-Scale Engine. Not a chip <em>from</em> a wafer; the wafer <em>is</em> the chip: hundreds of thousands of cores, consuming power like a small data centre, across a surface where you cannot route a clean analog supply to every corner. Distributing stable clocks and managing power across that expanse is the hardest version of the problem that exists. Analog Bits IP is inside it — and the two companies have co-published on exactly this: a joint paper on on-die power management for SoCs and chiplets. That's the reference that ends arguments: if pinless clocking and on-die power management hold a <em>wafer</em> together, your SoC is a gentle afternoon."</div>
+
+<h2>Why Analog Bits matters in the AI era — the five-step argument</h2>
+<ul class="clean">
+<li><strong>1 · Power is the binding constraint.</strong> AI chips draw thousands of amps; energy is the industry's, and Mahesh's, stated problem #1. Performance follows power — not the other way around.</li>
+<li><strong>2 · AI workloads create violent transients.</strong> When a hundred thousand MACs wake at once, the voltage droops. Either you waste margin permanently — or you sense, observe, and rectify in real time. That loop is the Intelligent Power Architecture.</li>
+<li><strong>3 · Dies hit reticle limits and split into chiplets.</strong> Analog must now live <em>everywhere</em> on huge dies and across chiplets — placement freedom becomes decisive, and pinless core-powered macros are placement freedom.</li>
+<li><strong>4 · The proof is current.</strong> Two 2nm chips, ~15 IPs proven, real-time on-chip power sensing and delivery demoed on TSMC N2P this year.</li>
+<li><strong>5 · The gap is real.</strong> EDA giants own CPU, interconnect, libraries — "no one talked about power architecture." That is the uncontested ground.</li>
+</ul>
+
+<h2>"But why can't Silicon Creations be it?" — the honest answer</h2>
+<p>This question — from Mahesh or from a customer — deserves respect, not a cheap shot. Four layers, and your own uploaded documents provide the evidence:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Layer</th><th>The honest case</th></tr></thead>
+<tbody>
+<tr><td><strong>Portfolio</strong></td><td>Silicon Creations sells clocking, SerDes, LVDS, and recently a temperature sensor. There are <strong>no LDOs, no droop/spike detectors, no power-delivery line</strong> — there is simply no power architecture in the catalogue to sell. You cannot lead a category you don't stock.</td></tr>
+<tr><td><strong>Architecture</strong></td><td>Open your own datasheets: the SiCr PLLs require an <strong>isolated analog supply — VDDHV at 1.8/2.5/3.3V</strong> — a deliberate, respectable design choice for noise rejection. But it is the <em>opposite philosophy</em> to core-powered pinless. Their own request form has to ask customers "what supplies are available on chip?" — Analog Bits' answer is "whatever you have; we clean it ourselves."</td></tr>
+<tr><td><strong>Proof</strong></td><td>SiCr's marquee references are Arm prototyping and Microchip FPGAs — superb <em>clocking</em> credentials. Analog Bits' marquee is wafer-scale AI power management with a co-published paper. Different battlefields, different trophies.</td></tr>
+<tr><td><strong>Positioning</strong></td><td>Their whole pitch is consolidation — "one versatile PLL for everything." A great story, but a clocking story. Nobody calls Silicon Creations when the question is voltage droop on an AI core — and in the AI era, that <em>is</em> the question.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout good"><span class="ttl">How to say it in the room (~30 seconds, zero trash talk)</span>
+"Silicon Creations is a genuinely excellent clocking company — I should know, I sell it. But the AI era's defining problem is power integrity, and there's no power architecture in their portfolio to answer it with: no LDOs, no droop detection, and an architecture that still needs a dedicated analog rail — their own datasheets specify it. Could they build toward it? Over years, maybe. But Analog Bits has the patents, two generations of 2nm silicon, the Cerebras-class proof, and a decade's head start on power-first thinking. In this business you don't bet against shipping silicon."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">The single most concrete, evidence-backed difference between the two companies' PLLs is:</div>
+<div class="opts">
+<button data-opt="a">Silicon Creations' PLLs don't work.</button>
+<button data-opt="b">SiCr's PLLs require a dedicated isolated analog supply (1.8–3.3V per their datasheets); Analog Bits' pinless macros run from the core supply and clean it internally — no analog rail, no analog pins, place anywhere.</button>
+<button data-opt="c">Analog Bits' PLLs are cheaper.</button>
+<button data-opt="d">SiCr only works on old nodes.</button>
+</div>
+<div class="fb">It's provable from documents you legitimately hold, it's respectful (isolated supplies are a valid design choice), and it opens directly into the power-architecture story. That's how you win a technical argument as a salesperson: one concrete fact, then the bigger frame.</div>
+</div>
+
+<div class="pagenav"><button data-go="m6"><span class="dir">← Prev</span>06 · Datasheets</button><button class="next" data-go="m8"><span class="dir">Next →</span>08 · The confidentiality question</button></div>
+</section>
+
+<section class="module" id="m8">
+<div class="eyebrow">SECTION 08 · WIN THE ARGUMENT</div>
+<h1 class="mt">"You sold for our competitor. How do you manage confidentiality?"</h1>
+<p class="lede">This question is close to guaranteed — Mahesh is hiring someone straight out of Silicon Creations' India channel. Understand why he asks, answer with a framework instead of a promise, and this becomes the moment you win the interview rather than survive it.</p>
+
+<div class="whybox"><span class="ttl">Why this question decides more than any other</span>
+He isn't checking a legal box. He's running one test: <em>whatever you'd leak about them, you'd leak about me tomorrow.</em> A candidate who spills even one juicy competitor detail to impress him has failed — impressively. A candidate who declines gracefully and still demonstrates market fluency has just shown him exactly how his own pricing, roadmap and customer list will be treated. Your discipline here IS the product demo.</div>
+
+<h2>The three-bucket framework — carry this in your head</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Bucket</th><th>What's in it</th><th>Can you use it?</th></tr></thead>
+<tbody>
+<tr><td><strong>1 · Public domain</strong></td><td>Websites, published datasheet overviews, conference talks, press releases, TSMC OIP awards, anything Google finds</td><td><strong>Freely.</strong> Competing on public facts is fair game everywhere</td></tr>
+<tr><td><strong>2 · Your professional skill</strong></td><td>How to qualify a customer, how Indian buyers negotiate, DLI payment behaviour, how to read a datasheet, how a licensing cycle runs, relationships built on your own conduct</td><td><strong>Yes — it's yours.</strong> Skill and market sense are portable; they're the reason he's hiring you</td></tr>
+<tr><td><strong>3 · Confidential</strong></td><td>Pricing and quotes, customer identities and pipelines, deal terms, unreleased roadmaps, NDA-covered specifics, internal strategy</td><td><strong>Never.</strong> Not in the interview, not after joining, not ever. It stays behind — permanently</td></tr>
+</tbody>
+</table></div>
+
+<h2>The model answer (~60 seconds — rehearse aloud)</h2>
+<div class="script"><span class="who">Your answer</span>"I'm glad you asked, because I've thought carefully about it. I hold myself to a simple three-part rule. Everything public — websites, published specs, conference material — is fair competitive ground, and I'll use it. My skills and market understanding — how to qualify, how Indian customers buy, how deals really move — those are mine and they come with me; that's what you'd be hiring. But everything confidential to Interex and Silicon Creations — pricing, quotes, customer pipelines, roadmaps — stays behind, permanently. I won't bring documents, I won't recite numbers, and if a customer or colleague asks me 'what do they charge', I'll decline there too. I'll serve my notice properly and honour every obligation I signed. And here's the part that matters to you: this exact discipline is what protects Analog Bits from day one. The day I join, your pricing and your pipeline get the same wall. My value isn't their secrets — it's my skill, and relationships I built honestly."</div>
+
+<h2>The traps — and the graceful exits</h2>
+<div class="qa"><button class="q">Trap 1 — the casual probe: "Come on, just roughly — what does a Silicon Creations PLL go for in India?"</button><div class="a">
+<div class="label">Your exit</div>
+<p>"That's confidential to them, so I won't share it — and honestly, that answer is my job interview. What I <em>can</em> tell you is how customers respond to pricing conversations here: startups care about payment timing more than absolute price, and staging against DLI milestones closes deals that discounts can't."</p>
+<div class="label">Why it wins</div>
+<p class="muted small">You decline the secret, then immediately deliver legal, valuable market insight — proving the refusal comes from discipline, not emptiness.</p>
+</div></div>
+
+<div class="qa"><button class="q">Trap 2 — the pipeline probe: "Which of their customers are close to buying? You could bring those conversations with you."</button><div class="a">
+<div class="label">Your exit</div>
+<p>"Their pipeline is their property, so I can't speak to it. What I can do — and will — is rebuild those relationships the right way: people in this ecosystem know me, and when I reach out from a new company with a new portfolio, that's a fresh, clean conversation. Bengaluru's design community is small; reputation compounds faster than any stolen list."</p>
+<div class="label">Why it wins</div>
+<p class="muted small">You refuse the unethical shortcut while showing the legitimate path to the same outcome — and you signal you understand the long game of a small ecosystem.</p>
+</div></div>
+
+<div class="qa"><button class="q">Trap 3 — the flattery probe: "You must know their weaknesses inside out. Where do we hit them?"</button><div class="a">
+<div class="label">Your exit</div>
+<p>"On public ground, gladly: their published portfolio has no power-delivery line — no LDOs, no droop detection — and their own product literature leads with isolated analog supplies, which is exactly the integration cost your pinless architecture removes. That's a fair fight I can win with what's on both companies' websites. Anything beyond that crosses into what I owe them — and won't ever owe less than I'll owe you."</p>
+<div class="label">Why it wins</div>
+<p class="muted small">You prove you can compete hard <em>and</em> clean in one breath — sharp analysis, sourced entirely from Bucket 1.</p>
+</div></div>
+
+<div class="callout warn"><span class="ttl">The practical checklist (do these for real, not just in the answer)</span>
+Return or delete every Interex/SiCr document when you leave — including the quote and request form on your laptop and email. Never forward anything to a personal account. Serve the full notice period professionally. Don't announce the move to customers before you've left. After joining, re-open contacts with a fresh, public-information message. If you signed an NDA or confidentiality clause, honour it without needing to be reminded — obligations to protect confidential information survive resignation.</div>
+
+<div class="callout gold"><span class="ttl">The one-liner, if you get ten seconds instead of sixty</span>
+"Interex's confidential information stays confidential forever — and that is exactly the treatment your pricing and pipeline get from the day I join."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mid-interview, Mahesh casually asks what discount Silicon Creations gave on a recent Bengaluru deal. The winning response is:</div>
+<div class="opts">
+<button data-opt="a">Share it — he'll value the intelligence and it proves you're on his side now.</button>
+<button data-opt="b">Say "I don't know" even though you do.</button>
+<button data-opt="c">Decline cleanly — "that's confidential to them, and that discipline is what you're hiring" — then pivot to a legal insight about how Indian customers negotiate.</button>
+<button data-opt="d">Refuse and change the subject without explanation.</button>
+</div>
+<div class="fb">Sharing fails the real test instantly; lying (b) breaks trust twice if caught; a bare refusal (d) wastes the moment. Decline + explain + deliver legal value is the full marks answer — it turns a trap into your strongest proof of character.</div>
+</div>
+
+<div class="pagenav"><button data-go="m7"><span class="dir">← Prev</span>07 · Cerebras &amp; AI</button><button class="next" data-go="m9"><span class="dir">Next →</span>09 · Conference leads</button></div>
+</section>
+
+<section class="module" id="m9">
+<div class="eyebrow">SECTION 09 · WIN THE ARGUMENT</div>
+<h1 class="mt">Conference lead generation: the trade-show playbook</h1>
+<p class="lede">You attended VLSID 2026 in Pune — and that show is the reason this opportunity exists. That's not a coincidence; it's a repeatable system. Here is how professionals turn a badge into a pipeline, so you can tell Mahesh not just that conferences work, but exactly how you work them.</p>
+
+<div class="callout gold"><span class="ttl">Your proof, already in hand</span>
+"I attended VLSID 2026 in Pune this January — that show is literally how this conversation started. Trade shows demonstrably produce for me; here's the system I'd run at SEMICON India in September." Few candidates can open a lead-generation answer with evidence. You can.</div>
+
+<h2>The playbook: before / during / after</h2>
+
+<h3>Before the show — where the leads are actually won</h3>
+<ul class="clean">
+<li><strong>Get the lists:</strong> exhibitor list, speaker list, agenda. Mark 15–20 target organisations — fabless design leads, startup founders, government-lab engineers, GCC managers.</li>
+<li><strong>Pre-book 5–8 meetings:</strong> two weeks out, short LinkedIn/email notes — "I'll be at SEMICON India; 15 minutes near your booth on day two?" Pre-booked meetings are the difference between hunting and harvesting.</li>
+<li><strong>Set numeric goals:</strong> e.g. 25 qualified conversations, 8 A/B-grade leads, 5 follow-up meetings booked. What gets counted gets done.</li>
+<li><strong>Prep two openers:</strong> a 20-second intro ("I represent Analog Bits and M31 in India — precision clocking, power management and interface IP, silicon-proven at TSMC") and one curiosity question ("what are you building, and on which node?").</li>
+</ul>
+
+<h3>During — badge on, system running</h3>
+<ul class="clean">
+<li><strong>Qualify in three questions:</strong> What are you building? Which node and foundry? When's tape-out (and is it funded)? Grade A/B/C on the spot — an A is a funded chip, a known node, a date.</li>
+<li><strong>Capture immediately:</strong> after every conversation, 30 seconds on your phone — name, company, chip, node, next step. Memory is a liar by 6 p.m.; the notes app is your CRM until the CRM exists.</li>
+<li><strong>Work the sessions, not just the aisles:</strong> ask one sharp question at the mic with your name and company — one question can make fifty prospects come find <em>you</em>.</li>
+<li><strong>Use the demo gravity:</strong> Analog Bits brings working silicon — the 2nm demo board — to shows. "Come see 2nm silicon running live" is the strongest booth line in the building.</li>
+<li><strong>Prime time is chai time:</strong> lunch queues, coffee stands and evening networking produce warmer conversations than booth duty. Never eat alone at a trade show.</li>
+<li><strong>Tag-team with Vinny:</strong> he opens doors with seniority; you capture, qualify and own the follow-up. Divide the floor deliberately.</li>
+</ul>
+
+<h3>After — where 90% of salespeople lose the show</h3>
+<ul class="clean">
+<li><strong>The 48-hour rule:</strong> every A and B lead gets a personalised follow-up within two days, referencing the exact conversation — "you mentioned your 22nm tape-out slips to Q1…". Generic blasts are deleted; memory earns replies.</li>
+<li><strong>LinkedIn the same week,</strong> with a note, not a bare request.</li>
+<li><strong>Convert:</strong> the 5 best into meetings within two weeks; everyone else into a light monthly touch (a relevant article, a datasheet, a congratulations).</li>
+<li><strong>Report the math:</strong> conversations → qualified → meetings → evaluations. A realistic show funnel: 25 conversations → 8 qualified → 3 meetings → 1 serious evaluation. Say numbers like this to Mahesh and you sound like a system, not a hope.</li>
+</ul>
+
+<h2>Your India show calendar</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Event</th><th>When</th><th>Why it matters to you</th></tr></thead>
+<tbody>
+<tr><td><strong>SEMICON India 2026</strong>, Yashobhoomi, New Delhi</td><td>Sep 17–19, 2026</td><td>The big one — lands in your first ~90 days if you start mid-year. 500+ exhibitors, the whole ecosystem in one hall. Plan the pre-booking campaign from week one</td></tr>
+<tr><td><strong>VLSID</strong> (Int'l Conf. on VLSI Design)</td><td>Every January, rotating city (Pune 2026 — you were there)</td><td>The design community's home fixture — where you met this opportunity. Book January now</td></tr>
+<tr><td><strong>IESA Vision Summit</strong></td><td>~February</td><td>Policy + industry leadership crowd — where government and strategy customers circulate</td></tr>
+<tr><td><strong>TSMC OIP / DAC</strong> (global)</td><td>Sep–Oct / June</td><td>Where Analog Bits demos live silicon — source of stories, collateral and ecosystem news you retail to Indian customers</td></tr>
+</tbody>
+</table></div>
+
+<h2>Say it to Mahesh — the assembled answer</h2>
+<div class="script"><span class="who">If he asks "how will you generate pipeline?"</span>"Three engines: convert the inbound faster, deepen named accounts, and work the shows systematically — and I have proof the third works, because VLSID in Pune this January is how I'm on this call. My show system is simple: pre-book meetings before the doors open, qualify everyone in three questions — what are you building, which node, when's tape-out — capture on the spot, and follow up inside 48 hours referencing the exact conversation. At SEMICON India in September I'd walk in with fifteen meetings already booked and walk out with a graded lead list feeding the quarter."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Which single habit most separates professionals from badge-wearers at a trade show?</div>
+<div class="opts">
+<button data-opt="a">Having the biggest booth and the best giveaways.</button>
+<button data-opt="b">Pre-booking meetings before the show and following up within 48 hours after it — the work outside the hall.</button>
+<button data-opt="c">Collecting the maximum number of business cards.</button>
+<button data-opt="d">Attending every keynote from the front row.</button>
+</div>
+<div class="fb">The show floor is the middle of the funnel, not the funnel. Leads are won in the two weeks before (pre-booked meetings) and the 48 hours after (personalised follow-up). Card counts and keynotes convert nothing by themselves.</div>
+</div>
+
+<div class="pagenav"><button data-go="m8"><span class="dir">← Prev</span>08 · Confidentiality</button><button class="next" data-go="m10"><span class="dir">Next →</span>10 · Reading list</button></div>
+</section>
+
+
+<section class="module" id="m10">
+<div class="eyebrow">SECTION 10 · CLOSE STRONG</div>
+<h1 class="mt">Vinny's reading list, decoded</h1>
+<p class="lede">Seven resources, his orders: "start with 1 and 2." Here's what to extract from each — and a crash-notes card for the licensing PDF, since its vocabulary is the very "3rd-party IP licensing workflow" he wants you fluent in.</p>
+
+<h2>The seven, with extraction targets</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>#</th><th>Resource</th><th>Extract exactly this</th><th>Depth</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Technology Licensing for Beginners</strong> (DeWitt LLP PDF)</td><td>The full vocabulary — see crash notes below</td><td>Read fully — done, if you absorb this module</td></tr>
+<tr><td>2</td><td><strong>SemiWiki Semiconductor IP Wiki</strong></td><td>What semiconductor IP is; why companies license reusable blocks; the flow from IP creation → SoC integration → validation</td><td>Read fully (~20 min)</td></tr>
+<tr><td>3</td><td><strong>Imagination: the IP business overview</strong></td><td>How third-party IP fits chip companies' business models; the build-vs-buy economics from the vendor's mouth</td><td>Skim for 3 takeaways</td></tr>
+<tr><td>4</td><td><strong>Arm Holdings IoT case study</strong></td><td>A licensor's strategy at scale: architecture licensing, the royalty engine, the ecosystem moat</td><td>Skim for 3 takeaways</td></tr>
+<tr><td>5</td><td><strong>LESI: What's happening with semiconductor IP deals</strong></td><td>Deal structures in the wild: royalty/payment models, exclusivity, territory, sublicensing</td><td>Skim for 3 takeaways</td></tr>
+<tr><td>6</td><td><strong>Mastering Technical Sales</strong> (book)</td><td>Discovery, stakeholder mapping, objection handling, translating technical value into business impact — the sales-engineer bible</td><td>Post-offer shelf reference; skim the discovery chapter if time</td></tr>
+<tr><td>7</td><td><strong>The Semiconductor IP Handbook</strong> (book)</td><td>Licensing agreements, business models, and real-life pitfalls in IP development and use</td><td>Post-offer shelf reference</td></tr>
+</tbody>
+</table></div>
+
+<h2>Crash notes: the licensing PDF in one card</h2>
+<div class="card">
+<ul class="small" style="margin:0">
+<li><strong>The frame:</strong> licensing = renting IP, not selling it. Licensor grants; licensee receives. Ownership never moves — only specified permissions do.</li>
+<li><strong>Exclusive vs non-exclusive:</strong> exclusive costs more and usually carries milestone minimums so the licensee can't shelve the technology; non-exclusive is the IP-industry norm.</li>
+<li><strong>Grant verbs are the contract:</strong> make, have made, import, use, offer for sale, sell — each is a separate permission, and <em>a missing verb is a prohibition</em>. No "have made" = no contract manufacturing.</li>
+<li><strong>Payment shapes:</strong> royalty-bearing (per unit), fully paid-up (one lump sum), royalty-free (other consideration). Plus field-of-use and territory to slice the rights.</li>
+<li><strong>Reps &amp; warranties:</strong> ownership is standard; patent noninfringement is the one licensors resist — patent infringement requires no awareness, so nobody can promise it absolutely.</li>
+<li><strong>Defend ≠ indemnify:</strong> defend = pay the legal fight from day one regardless of outcome; indemnify = pay damages after liability. A licensee wants both; missing either leaves them exposed.</li>
+<li><strong>Confidentiality has two duties:</strong> don't disclose, and don't <em>use</em> beyond the agreement — the forgotten second duty that can "infect" unrelated projects.</li>
+<li><strong>Term sheet:</strong> the non-binding one-pager that finds deal-breakers before lawyers bill hours. The quote you studied says "subject to a mutually acceptable IP license agreement" — that's this concept, live.</li>
+</ul>
+</div>
+
+<div class="callout tip"><span class="ttl">The line that shows you did the homework</span>
+"Vinny sent me a ramp-up reading table — I've been through the licensing fundamentals and the SemiWiki IP flow, and what struck me is how much of it I'd already lived at Interex without the vocabulary: grant scopes, use definitions, milestone billing. The words now match the work."</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">A customer's lawyer demands both a "duty to defend" and a "duty to indemnify." The difference is:</div>
+<div class="opts">
+<button data-opt="a">They're synonyms — one is redundant.</button>
+<button data-opt="b">Defend covers patents; indemnify covers trade secrets.</button>
+<button data-opt="c">Defend = the licensor funds the legal fight from the start, win or lose; indemnify = the licensor pays damages only if liability is found. The licensee wants both, or they're paying lawyers while the case runs.</button>
+<button data-opt="d">Both apply only after the licensee loses in court.</button>
+</div>
+<div class="fb">Straight from resource #1. Knowing this distinction marks you as someone who can shepherd a license agreement without being babysat — exactly the execution profile this role needs.</div>
+</div>
+
+<div class="pagenav"><button data-go="m9"><span class="dir">← Prev</span>09 · Conference leads</button><button class="next" data-go="m11"><span class="dir">Next →</span>11 · The hunger question</button></div>
+</section>
+
+<section class="module" id="m11">
+<div class="eyebrow">SECTION 11 · CLOSE STRONG</div>
+<h1 class="mt">The hunger question: 5 years, 10 years, and how much you want this</h1>
+<p class="lede">You flagged it yourself: HUNGER. When a founder-CEO asks about your 5- and 10-year goals, he isn't making conversation — he's pricing the risk of the hire. Answer with ambition tied to <em>his</em> company's growth, backed by receipts.</p>
+
+<h2>Why he asks — and what he's scoring</h2>
+<ul class="clean">
+<li><strong>Commitment horizon.</strong> A one-person India operation cannot afford churn. He needs to believe you'll still be here when the 7th and 8th customers arrive — his own economics say the payoff comes late.</li>
+<li><strong>Ambition ceiling.</strong> Does the India build have an <em>owner</em>, or an employee? He grew up dreaming of entrepreneurship; he hires people who build.</li>
+<li><strong>Alignment.</strong> Ambition pointed at his company = asset. Ambition pointed elsewhere ("my own startup in 3 years") = risk. Never say the second thing, even if charming.</li>
+</ul>
+
+<h2>The 5-year answer (~40 seconds)</h2>
+<div class="script"><span class="who">Five years</span>"In five years I want to be the person the Indian design ecosystem thinks of when they think analog and power IP — the way certain names are synonymous with certain products here. Concretely: own the India number, take us from converting inbound to a reference-selling machine — lighthouse wins in year one, their references closing year-two and year-three deals — and have grown the territory to where we're hiring, with me building that small team. I want to be running a business inside your business."</div>
+
+<h2>The 10-year answer (~30 seconds)</h2>
+<div class="script"><span class="who">Ten years</span>"Ten years out, India's design market will have grown into exactly the wave your products lead today — your own model says leading-edge becomes mainstream in three to five years, and India rides the wave after that. I want to have built the channel that rode it: leading the India business end-to-end, thinking in P&amp;L, not just pipeline. You built Analog Bits as your version of your grandfather's factory — I want the India business to be my version of that."</div>
+<p class="small muted">That last sentence is bold — use it only if the conversation has turned personal and warm. Without that warmth, end at "P&amp;L, not just pipeline."</p>
+
+<h2>"How interested are you, really?" — answer with receipts</h2>
+<div class="card">
+<p>Adjectives are free; receipts are rare. Yours, ready to deploy:</p>
+<ul class="small">
+<li>"I chose this industry twice — once joining Interex, and again now, moving toward the harder, bigger role."</li>
+<li>"I've been reading PLL datasheets and jitter specifications in my own time — period jitter versus long-term jitter, lock times, supply sensitivity — because I'll be trained on datasheets and I want the training to land on prepared ground."</li>
+<li>"I've listened to your Semiconductor Insiders episode and worked through your keynotes — I wanted to understand the power-architecture thesis from you, not from a brochure."</li>
+<li>"I've studied the full licensing cycle — quotes, use definitions, design-kit deliverables, milestone billing — from live documents I handle today."</li>
+<li>"I'm walking away from a comfortable seat because a whole-territory role with a revenue number is the job I actually want."</li>
+</ul>
+<p style="margin-bottom:0"><strong>The closer:</strong> "So when you ask how hungry — I'm the candidate who studied your customers' jitter budgets for fun. That hungry."</p>
+</div>
+
+<div class="callout warn"><span class="ttl">Traps</span>
+Don't say "I want to start my own company" (churn risk to him, even though he'd privately respect it). Don't say "I'll go wherever the company needs me" (no ambition = no owner). Don't give a title-ladder answer ("senior manager by year 3") — talk outcomes and building, not designations. And keep each answer under 45 seconds; hunger rambles, conviction lands.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Which 5-year answer makes a founder-CEO lean forward?</div>
+<div class="opts">
+<button data-opt="a">"I'd like steady growth and a good work-life balance."</button>
+<button data-opt="b">"Own the India number, turn lighthouse wins into a reference-selling machine, and be building a small team — running a business inside your business."</button>
+<button data-opt="c">"Hopefully a senior title and my own startup after that."</button>
+<button data-opt="d">"Hard to say — five years is a long time."</button>
+</div>
+<div class="fb">Owner language (numbers, machine, team, business-inside-a-business) pointed at HIS company. It echoes his own dream-big register while making the commitment horizon explicit — precisely what de-risks the hire in his mind.</div>
+</div>
+
+<div class="pagenav"><button data-go="m10"><span class="dir">← Prev</span>10 · Reading list</button><button class="next" data-go="m12"><span class="dir">Next →</span>12 · Questions bank</button></div>
+</section>
+
+<section class="module" id="m12">
+<div class="eyebrow">SECTION 12 · CLOSE STRONG</div>
+<h1 class="mt">Questions for Mahesh: support, enablement &amp; the full bank</h1>
+<p class="lede">You asked: "what kind of support do I get — and give me all the ideas." The CEO-round brief holds your three strategic ★ questions; this is the operational bank. Support questions signal something strategic questions can't: that you're already planning to execute, not just hoping to be hired.</p>
+
+<h2>The full idea bank, by category</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Category</th><th>Questions to choose from</th></tr></thead>
+<tbody>
+<tr><td><strong>Enablement &amp; training</strong></td><td>"Vinny mentioned Analog Bits trains me on the datasheets and technology — what does that look like in practice, and who would be my technical counterpart day-to-day?" · "Do new channel people get time with the Sunnyvale team, or is ramping remote?" · "Is there a product-certification path you'd want me through before customer-facing depth?"</td></tr>
+<tr><td><strong>Deal support</strong></td><td>"When a customer's request lands — node, metal stack, spec deltas — what's the typical turnaround on a feasibility answer from your side?" · "Who joins me on deep technical calls — is there FAE support for India deals?" · "Can I use eval licenses and the 2nm demo board in customer conversations here?" · "Which reference customers am I allowed to name in India?"</td></tr>
+<tr><td><strong>Pricing &amp; approvals</strong></td><td>"How does quoting work between SphereLink and you — who prices, who approves exceptions?" · "For DLI-funded startups, is there flexibility to stage payments against their milestone cycles?"</td></tr>
+<tr><td><strong>Marketing &amp; demand</strong></td><td>"How do IMEC and website leads for India get routed today?" · "Will Analog Bits have presence at SEMICON India in September — and can we plan around it?" · "What collateral exists that I can localise for Indian startups and government labs?"</td></tr>
+<tr><td><strong>Cadence &amp; operations</strong></td><td>"What rhythm do you want with the India channel — pipeline reviews with you directly, or through Vinny?" · "How do you think about support hours for IST-timezone customers — the 2 a.m.-before-tape-out problem?"</td></tr>
+<tr><td><strong>Success definition</strong></td><td>"Twelve months in, what would make you say this India hire was unambiguously right?" (also ★1 in your brief — it doubles as a support question because his answer tells you what he'll resource)</td></tr>
+<tr><td><strong>Craft &amp; rapport</strong></td><td>"You carried the bag yourself for decades — what separates the salespeople who succeed with your products from the ones who don't?" (invites his three-rules story — the best five minutes you can engineer)</td></tr>
+</tbody>
+</table></div>
+
+<h2>How to deploy</h2>
+<ul class="clean">
+<li><strong>Ask 2–3 total:</strong> one strategic ★ from the brief + one or two from this bank. The mix says "I think about the market AND I plan to execute."</li>
+<li><strong>Sequence by his energy:</strong> if the call ran strategic, ask operational; if it ran operational, ask strategic. Complement, don't repeat.</li>
+<li><strong>Never here:</strong> salary, variable split, notice period — all Vinny's table. Asking Mahesh signals you don't understand the channel structure.</li>
+<li><strong>Always:</strong> one genuine follow-up on his answer before your next question. The thread beats the list.</li>
+</ul>
+
+<div class="callout gold"><span class="ttl">The closing move of the whole interview</span>
+When he asks "anything else?", end with commitment, not a question: "Just this — I came into this process excited and I'm leaving it more so. I know the market, I know the portfolio, and I know exactly what my first ninety days look like. I'd like to do this." Founders remember the candidate who closed.</div>
+
+<h2>Final self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Time for questions. The strongest pair to ask is:</div>
+<div class="opts">
+<button data-opt="a">"What's the salary?" and "How many leave days?"</button>
+<button data-opt="b">Five rapid-fire questions from the list to show preparation.</button>
+<button data-opt="c">One strategic (India in the 3-year plan / success at 12 months) + one operational (what does the datasheet training and FAE support actually look like) — with a genuine follow-up on his first answer.</button>
+<button data-opt="d">No questions — respect his time.</button>
+</div>
+<div class="fb">Strategy shows you think; operations shows you'll execute; the follow-up shows you listen. Comp questions belong to Vinny, and "no questions" reads as no ownership. Two good questions, one real thread — then close with commitment.</div>
+</div>
+
+<div class="pagenav"><button data-go="m11"><span class="dir">← Prev</span>11 · Hunger</button><button class="next" disabled><span class="dir">Done</span>End — go run the machine</button></div>
+</section>
+</div></main>
+</div>
+
+<script>
+(function(){
+  var order=['m0','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12'];
+  var visited={};
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sidebar=document.getElementById('sidebar'),scrim=document.getElementById('scrim');
+  function show(id){
+    order.forEach(function(m){var s=document.getElementById(m);if(s)s.classList.toggle('active',m===id);});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.dataset.go===id);});
+    visited[id]=true;
+    navLinks.forEach(function(a){if(visited[a.dataset.go])a.classList.add('visited');});
+    var pct=Math.round(Object.keys(visited).length/order.length*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progLabel').textContent=pct+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    sidebar.classList.remove('open');scrim.classList.remove('show');
+  }
+  navLinks.forEach(function(a){a.addEventListener('click',function(){show(a.dataset.go);});});
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(t&&!t.matches('#nav a')){show(t.dataset.go);}});
+  document.getElementById('menuBtn').addEventListener('click',function(){sidebar.classList.toggle('open');scrim.classList.toggle('show');});
+  scrim.addEventListener('click',function(){sidebar.classList.remove('open');scrim.classList.remove('show');});
+  document.querySelectorAll('.qa>button.q').forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
+  document.querySelectorAll('.reveal-btn').forEach(function(b){b.addEventListener('click',function(){var box=b.nextElementSibling;if(box&&box.classList.contains('reveal-box')){box.classList.toggle('show');b.textContent=box.classList.contains('show')?(b.dataset.hide||'Hide'):(b.dataset.show||b.textContent);}});});
+  document.querySelectorAll('.quiz').forEach(function(q){var c=q.dataset.correct,fb=q.querySelector('.fb');
+    q.querySelectorAll('.opts button').forEach(function(btn){btn.addEventListener('click',function(){if(q.dataset.done)return;q.dataset.done='1';var p=btn.dataset.opt;q.querySelectorAll('.opts button').forEach(function(o){o.disabled=true;});if(p===c){btn.classList.add('correct');}else{btn.classList.add('wrong');var r=q.querySelector('.opts button[data-opt="'+c+'"]');if(r)r.classList.add('correct');}if(fb)fb.classList.add('show');});});
+  });
+  show('m0');
+})();
+</script>
+</body>
+</html>
