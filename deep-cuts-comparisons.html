@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Cuts — PLL Head-to-Head, Menta &amp; Current Intelligence</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============ Executive-briefing theme: deep navy + gold on warm ivory ============ */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#fbfaf7;
+  --border:#e3dfd6; --border-soft:#edeae2;
+  --navy:#122a4a; --navy-2:#1d3d68; --gold:#a87b2d; --gold-soft:#f3ead8;
+  --teal:#0e6b5e;
+  --text-main:#1d1d20; --text-muted:#5d5c58; --text-faint:#918f88;
+  --good-bg:#e9f3ea; --good:#2e6b34; --bad-bg:#fbebe8; --bad:#a83226;
+  --warn-bg:#faf3df; --warn:#8a6a10; --tip-bg:#ecf1f8; --tip:#1d3d68;
+  --shadow:0 1px 3px rgba(18,42,74,.07),0 8px 28px rgba(18,42,74,.06);
+  --shadow-soft:0 1px 2px rgba(18,42,74,.05); --radius:12px;
+}
+*{box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text-main);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,.ui{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--navy);line-height:1.22;}
+code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--navy-2);}
+
+/* topbar + progress */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:60;background:var(--navy);display:flex;align-items:center;gap:14px;padding:0 20px;box-shadow:0 2px 12px rgba(18,42,74,.25);}
+.topbar .menu-btn{display:none;font-size:21px;background:none;border:none;cursor:pointer;color:#e8d9b8;line-height:1;}
+.topbar .t1{font-family:'IBM Plex Sans';font-weight:700;font-size:14.5px;color:#fff;letter-spacing:.2px;}
+.topbar .t2{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c9a45c;}
+.topbar .progress-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar .plabel{font-family:'JetBrains Mono';font-size:10.5px;color:#b9c6d8;}
+.ptrack{width:150px;height:6px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;}
+.pfill{height:100%;width:0;background:linear-gradient(90deg,#c9a45c,#e8d9b8);border-radius:99px;transition:width .35s ease;}
+
+/* layout */
+.layout{display:flex;padding-top:56px;min-height:100vh;}
+.sidebar{width:268px;flex:0 0 268px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:56px;bottom:0;left:0;overflow-y:auto;padding:16px 13px 50px;}
+.ngt{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:16px 10px 6px;}
+.sidebar nav a{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Sans';font-size:13.8px;color:var(--text-muted);padding:9px 11px;border-radius:9px;margin-bottom:2px;cursor:pointer;transition:all .12s;}
+.sidebar nav a .code{font-family:'JetBrains Mono';font-size:10.5px;color:var(--gold);flex:0 0 20px;font-weight:600;}
+.sidebar nav a:hover{background:var(--surface-2);color:var(--navy);}
+.sidebar nav a.active{background:var(--gold-soft);color:var(--navy);font-weight:600;}
+.sidebar nav a .tick{margin-left:auto;font-size:12px;color:var(--good);opacity:0;transition:opacity .2s;}
+.sidebar nav a.visited .tick{opacity:1;}
+
+.content{flex:1 1 auto;margin-left:268px;width:calc(100% - 268px);display:flex;justify-content:center;padding:36px 40px 90px;}
+.inner{width:100%;max-width:830px;}
+section.module{display:none;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:38px 44px 34px;animation:fade .25s ease;}
+section.module.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.eyebrow{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+h1.mt{font-size:31px;font-weight:700;margin:0 0 10px;letter-spacing:-.4px;}
+.lede{font-size:18px;color:var(--text-muted);margin:0 0 8px;max-width:70ch;}
+.whybox{background:var(--gold-soft);border:1px solid #e6d2a8;border-radius:10px;padding:13px 17px;margin:20px 0 4px;font-size:15px;}
+.whybox .ttl{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+
+h2{font-size:22px;font-weight:600;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border-soft);letter-spacing:-.2px;}
+h3{font-size:18px;font-weight:600;margin:26px 0 8px;color:var(--navy-2);}
+h4{font-size:14.5px;font-weight:600;margin:16px 0 6px;}
+p{margin:0 0 14px;} ul,ol{margin:0 0 16px;padding-left:22px;} li{margin-bottom:7px;}
+strong{font-weight:600;color:var(--navy);} em{color:var(--text-muted);}
+.small{font-size:14px;} .muted{color:var(--text-muted);}
+
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-soft);margin:18px 0;}
+.card.tight{padding:15px 17px;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;border-left:4px solid var(--tip);background:var(--tip-bg);font-size:15.5px;}
+.callout .ttl{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
+.callout.tip{border-color:var(--tip);background:var(--tip-bg);} .callout.tip .ttl{color:var(--tip);}
+.callout.good{border-color:var(--good);background:var(--good-bg);} .callout.good .ttl{color:var(--good);}
+.callout.bad{border-color:var(--bad);background:var(--bad-bg);} .callout.bad .ttl{color:var(--bad);}
+.callout.warn{border-color:var(--warn);background:var(--warn-bg);} .callout.warn .ttl{color:var(--warn);}
+.callout.gold{border-color:var(--gold);background:var(--gold-soft);} .callout.gold .ttl{color:var(--gold);}
+
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--radius);}
+table{border-collapse:collapse;width:100%;font-size:14.3px;background:var(--surface);}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+th{font-family:'IBM Plex Sans';font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:#e8d9b8;background:var(--navy);}
+tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even) td{background:var(--surface-2);}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.chip{font-family:'JetBrains Mono';font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:999px;}
+.chip.g{background:var(--gold-soft);border-color:#e6d2a8;color:var(--gold);}
+.chip.n{background:var(--tip-bg);border-color:#c8d6e8;color:var(--navy-2);}
+.chip.t{background:#e5f1ef;border-color:#bfdcd6;color:var(--teal);}
+
+.qa{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);}
+.qa>button.q{width:100%;text-align:left;background:var(--surface);border:none;cursor:pointer;padding:15px 50px 15px 20px;font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;color:var(--navy);position:relative;line-height:1.4;}
+.qa>button.q:hover{background:var(--surface-2);}
+.qa>button.q::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);font-weight:400;}
+.qa.open>button.q::after{content:'\2013';}
+.qa .a{display:none;padding:4px 22px 20px;border-top:1px solid var(--border-soft);}
+.qa.open .a{display:block;}
+.qa .a .label{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin:14px 0 4px;}
+
+.reveal-btn{font-family:'IBM Plex Sans';font-size:13.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--navy-2);border:1px solid var(--navy-2);padding:8px 15px;border-radius:8px;margin:8px 8px 8px 0;transition:all .12s;}
+.reveal-btn:hover{background:var(--navy-2);color:#fff;}
+.reveal-box{display:none;margin:8px 0 4px;}
+.reveal-box.show{display:block;}
+
+.quiz{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0;box-shadow:var(--shadow-soft);}
+.quiz .qtext{font-family:'IBM Plex Sans';font-weight:600;font-size:15.3px;margin-bottom:12px;color:var(--navy);}
+.quiz .opts{display:flex;flex-direction:column;gap:8px;}
+.quiz .opts button{text-align:left;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;background:var(--surface-2);border:1px solid var(--border);color:var(--text-main);padding:10px 14px;border-radius:8px;transition:all .12s;}
+.quiz .opts button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.quiz .opts button.correct{background:var(--good-bg);border-color:var(--good);}
+.quiz .opts button.wrong{background:var(--bad-bg);border-color:var(--bad);}
+.quiz .opts button:disabled{cursor:default;}
+.quiz .fb{display:none;margin-top:12px;font-size:14.5px;padding:11px 14px;border-radius:8px;background:var(--surface-2);border-left:3px solid var(--navy-2);}
+.quiz .fb.show{display:block;}
+
+.hero{background:linear-gradient(140deg,var(--navy) 0%,var(--navy-2) 55%,#274d7d 100%);color:#fff;border-radius:14px;padding:34px 34px 30px;margin:0 0 24px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;top:0;right:0;bottom:0;width:5px;background:linear-gradient(180deg,#c9a45c,#e8d9b8);}
+.hero .eb{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#c9a45c;margin-bottom:10px;}
+.hero h1{color:#fff;font-size:28px;margin:0 0 8px;letter-spacing:-.4px;}
+.hero p{color:rgba(255,255,255,.88);font-size:16.5px;margin:0;max-width:64ch;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;font-family:'IBM Plex Sans';font-size:12.8px;}
+.hero .meta div{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);}
+.hero .meta b{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:#c9a45c;font-weight:600;font-family:'JetBrains Mono';margin-bottom:2px;}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;margin:18px 0;}
+.tile{display:block;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow-soft);cursor:pointer;transition:all .13s;}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d8c9a5;}
+.tile .num{font-family:'JetBrains Mono';font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.08em;}
+.tile h3{margin:7px 0 6px;color:var(--navy);font-size:16px;}
+.tile p{font-size:13.3px;color:var(--text-muted);margin:0;line-height:1.5;}
+
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:12px;margin:18px 0;}
+.kbox .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft);border-top:2px solid var(--gold);}
+.kbox .k .big{font-family:'IBM Plex Sans';font-weight:700;font-size:21px;color:var(--navy);}
+.kbox .k .lbl{font-size:12.3px;color:var(--text-muted);}
+
+ul.clean{list-style:none;padding-left:0;}
+ul.clean li{padding-left:24px;position:relative;}
+ul.clean li::before{content:'\2192';position:absolute;left:0;color:var(--gold);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+.script{background:var(--surface-2);border-left:3px solid var(--teal);padding:13px 17px;border-radius:0 8px 8px 0;margin:12px 0;font-size:15.5px;}
+.script .who{font-family:'JetBrains Mono';font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);display:block;margin-bottom:4px;}
+
+.pagenav{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:22px;border-top:1px solid var(--border);}
+.pagenav button{font-family:'IBM Plex Sans';font-size:14px;font-weight:500;padding:11px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;color:var(--text-main);transition:all .12s;}
+.pagenav button:hover:not(:disabled){border-color:var(--navy-2);background:var(--tip-bg);}
+.pagenav button:disabled{opacity:.4;cursor:default;}
+.pagenav .dir{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);font-family:'JetBrains Mono';margin-bottom:2px;}
+.pagenav .next{text-align:right;}
+
+@media(max-width:880px){
+  .topbar .menu-btn{display:block;}
+  .sidebar{transform:translateX(-100%);transition:transform .2s ease;z-index:55;box-shadow:4px 0 24px rgba(0,0,0,.15);}
+  .sidebar.open{transform:translateX(0);}
+  .content{margin-left:0;width:100%;padding:20px 13px 80px;}
+  section.module{padding:25px 19px 27px;}
+  h1.mt{font-size:25px;} .lede{font-size:16.5px;}
+  .ptrack{width:90px;} .topbar .t2{display:none;}
+  .scrim{display:none;position:fixed;inset:0;top:56px;background:rgba(18,42,74,.4);z-index:50;}
+  .scrim.show{display:block;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <div>
+    <div class="t1">Deep Cuts · Head-to-Head &amp; Intelligence</div>
+    <div class="t2">PLL Comparison · Menta eFPGA · India Questions · Fresh News</div>
+  </div>
+  <div class="progress-wrap"><span class="plabel" id="progLabel">0%</span><div class="ptrack"><div class="pfill" id="progFill"></div></div></div>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+<nav id="nav">
+  <div class="ngt">Orient</div>
+  <a data-go="m0"><span class="code">00</span> This file &amp; fact updates <span class="tick">✓</span></a>
+  <div class="ngt">The comparison</div>
+  <a data-go="m1"><span class="code">01</span> PLL head-to-head: SiCr vs AB <span class="tick">✓</span></a>
+  <a data-go="m2"><span class="code">02</span> Menta eFPGA, properly <span class="tick">✓</span></a>
+  <div class="ngt">Sharpen</div>
+  <a data-go="m3"><span class="code">03</span> Brainy India questions <span class="tick">✓</span></a>
+  <a data-go="m4"><span class="code">04</span> Everything else to know <span class="tick">✓</span></a>
+  <div class="ngt">Stay current</div>
+  <a data-go="m5"><span class="code">05</span> Recent news, both houses <span class="tick">✓</span></a>
+</nav>
+</aside>
+
+<main class="content"><div class="inner" id="inner">
+<section class="module" id="m0">
+<div class="hero">
+<span class="eb">DEEP CUTS · FILE FIVE</span>
+<h1>The head-to-head, the wildcard, and the fresh intelligence</h1>
+<p>Four things this file does: settles the PLL comparison in real depth, gives Menta eFPGA the proper treatment it never got, arms you with genuinely brainy India business questions for Mahesh, and refreshes both companies' news to this week — including facts that update earlier files.</p>
+<div class="meta">
+<div><b>Centerpiece</b>Silicon Creations vs Analog Bits — the PLL battle, socket by socket</div>
+<div><b>Freshness</b>Researched this week: April–June 2026 announcements from both houses + Menta</div>
+<div><b>Companion to</b>Files 1–4 (course · CEO brief · Mahesh dossier · field craft)</div>
+</div>
+</div>
+
+<h2>Fact updates — newer research corrects earlier notes</h2>
+<div class="callout warn"><span class="ttl">Update these in your head before the interview</span>
+<strong>1.</strong> Silicon Creations won TSMC OIP Partner of the Year (Mixed-Signal IP) again in <strong>2025 — their ninth consecutive year</strong> (earlier files cited the 2024 win as the latest). <strong>2.</strong> They also became the <strong>first-ever recipient of GlobalFoundries' 2025 Analog Mixed-Signal IP Partner of the Year</strong> award. <strong>3.</strong> They just marked <strong>20 years</strong> (April 2026), have grown to <strong>170+ employees</strong> from two founders, and their CEO is <strong>Randy Caplan</strong>. <strong>4.</strong> They announced their <strong>1,000th production FinFET tape-out at TSMC</strong> and a full IP suite available on <strong>N2P today</strong>, with next-gen clocking <em>and sensing</em> in development on <strong>A14</strong>. <strong>5.</strong> Meaning: <em>both</em> companies are now silicon-proven at 2nm-class nodes — so "we're at the leading edge" is table stakes, not a differentiator. Section 01 shows where the durable difference actually lives.</div>
+
+<h2>Jump in</h2>
+<div class="tile-grid">
+<a class="tile" data-go="m1"><span class="num">01</span><h3>PLL head-to-head</h3><p>Portfolio mirror, supply-architecture deep dive, proof points, socket battle card, objection flips.</p></a>
+<a class="tile" data-go="m2"><span class="num">02</span><h3>Menta eFPGA, properly</h3><p>What eFPGA is, why defence loves it, the Renesas win, and how it strengthens your story.</p></a>
+<a class="tile" data-go="m3"><span class="num">03</span><h3>Brainy India questions</h3><p>Twelve business-and-sales questions that actually matter in the India market.</p></a>
+<a class="tile" data-go="m4"><span class="num">04</span><h3>Everything else</h3><p>The remaining products, categories and concepts across all three portfolios.</p></a>
+<a class="tile" data-go="m5"><span class="num">05</span><h3>Recent news</h3><p>Both houses plus Menta — dated, sourced, with "how to use it" per item.</p></a>
+</div>
+
+<div class="pagenav"><button disabled><span class="dir">Start</span>You're at the beginning</button><button class="next" data-go="m1"><span class="dir">Next →</span>01 · PLL head-to-head</button></div>
+</section>
+
+<section class="module" id="m1">
+<div class="eyebrow">SECTION 01 · THE COMPARISON</div>
+<h1 class="mt">The PLL head-to-head: Silicon Creations vs Analog Bits</h1>
+<p class="lede">You sell one today and want to sell the other tomorrow — nobody in India is better placed to make this comparison honestly. Here it is in full depth: company, portfolio, architecture, proof, and the socket-by-socket battle card.</p>
+
+<h2>The two houses, side by side (2026 state)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Silicon Creations</th><th>Analog Bits</th></tr></thead>
+<tbody>
+<tr><td><strong>Founded / scale</strong></td><td>2006 (just marked 20 years) · self-funded, never took investment · 170+ people · Atlanta + Kraków · CEO Randy Caplan</td><td>1995 (30 years; IP pivot 2003) · bootstrapped, acquired by SemiFive 2022, operates independently · ~60 people · Sunnyvale · CEO Mahesh Tirupattur</td></tr>
+<tr><td><strong>2025 awards</strong></td><td>TSMC OIP Mixed-Signal IP Partner of the Year — <strong>9th consecutive year</strong> — plus first-ever GlobalFoundries AMS IP Partner of the Year</td><td>TSMC OIP <strong>Analog IP</strong> Partner of the Year 2025</td></tr>
+<tr><td><strong>Node range</strong></td><td>Production 2nm–180nm; 1,000th FinFET tape-out; full N2P suite shipping; A14 clocking + sensing in development</td><td>Silicon-proven 0.35µm–2nm; two 2nm test chips (second carries ~15 IPs); N2P real-time power demos; N5A automotive; Intel 18A/RibbonFET engagement</td></tr>
+<tr><td><strong>Identity in one line</strong></td><td>"One versatile PLL for almost any clocking application" — programmability and volume</td><td>"Intelligent power architecture" — pinless integration, and clocking as part of a power system</td></tr>
+</tbody>
+</table></div>
+
+<h2>Portfolio mirror — where they overlap and where they don't</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Category</th><th>Silicon Creations</th><th>Analog Bits</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td><strong>Ring PLLs</strong></td><td>Flagship ΔΣ Fractional-N: 24-bit fractional accuracy, noise-cancelling DAC (frac jitter ≈ integer jitter), huge ranges, deskew mode, SCAN/DFT, 1,000+ production licenses</td><td>Wide-range and low-jitter PLL families, pinless/core-powered, silicon-proven to 2nm</td><td>Both strong. SiCr wins on single-macro programmability; AB wins on integration model</td></tr>
+<tr><td><strong>LC PLLs</strong></td><td>Ultra-low-jitter LC PLLs for SerDes-grade clocking</td><td>LC PLLs including microwatt-class and high-performance variants proven on N2P, plus embedded-clock LC PLLs (N3P/N2P)</td><td>Both present; AB's N2P LC variants are the freshest public silicon</td></tr>
+<tr><td><strong>Oscillators</strong></td><td>Crystal oscillators + free-running oscillators</td><td>XTAL and RC oscillators, clock buffers, PCIe reference clocks</td><td>Near-mirror</td></tr>
+<tr><td><strong>Sensing</strong></td><td>VT / temperature sensors (portfolio category; A14 sensing in development)</td><td>High-accuracy PVT sensors, <strong>pinless remote</strong> PVT sensors, new small-form-factor N5A sensors that cut test cost</td><td>Both sense — but only one side closes the loop (next row)</td></tr>
+<tr><td><strong>Power delivery &amp; response</strong></td><td class="muted">— no LDO, regulator, droop/spike/glitch-detector line —</td><td>Integrated LDOs (now with "glitch catcher"), regulators, droop and spike detectors — the sense→observe→rectify loop</td><td><strong>The structural gap.</strong> This is AB-only territory</td></tr>
+<tr><td><strong>SerDes &amp; interfaces</strong></td><td>SerDes PMA ~100Mbps–33Gbps (key block in Microchip PolarFire, incl. space-grade RT) + LVDS and CML buffers</td><td>Multi-rate SerDes off-the-shelf, N5A automotive PCIe SerDes, programmable I/O — deliberately not the spearhead</td><td>SiCr's line is deeper; AB routes serious interface needs to M31</td></tr>
+<tr><td><strong>Misc analog</strong></td><td>"Analog glue" — small support blocks around the SoC</td><td>Bandgaps and ADCs, integrated or standalone with sensors</td><td>Comparable supporting cast</td></tr>
+</tbody>
+</table></div>
+
+<h2>The architecture deep dive — where the durable difference lives</h2>
+<div class="two-col">
+<div class="card tight"><h4>Silicon Creations: the isolated analog rail</h4><p class="small" style="margin:0">Their PLLs are architected around <strong>isolated analog supplies</strong> — a dedicated higher-voltage analog rail (their own materials present this as a virtue: excellent supply rejection in noisy SoCs, and it genuinely is well-engineered). The cost: the chip must route and decouple that extra analog rail to every PLL instance, budget the pins or an on-chip supply to feed it, and respect placement constraints. On a small die that's routine; on a reticle-sized AI die or across chiplets it compounds into real floorplan work.</p></div>
+<div class="card tight"><h4>Analog Bits: pinless / core-powered</h4><p class="small" style="margin:0">The patented alternative: the macro <strong>cleans and regulates the ordinary core supply internally</strong> — no dedicated analog rail, no analog pins. Consequence: place a PLL (or a remote PVT sensor) anywhere on the die like a digital gate. On giant AI dies and chiplet assemblies, placement freedom isn't a convenience — it's the difference between drop-in and redesign. This is the architectural moat, and it extends across the whole macro family.</p></div>
+</div>
+<div class="callout gold"><span class="ttl">Say it in one breath</span>
+"Both houses are excellent at clocking and both are at 2nm now — that's table stakes. The durable differences are two: Analog Bits' pinless architecture removes the analog rail that every competitor macro still needs, and Analog Bits closes the power loop — sense with PVT and droop detectors, respond with LDOs — which Silicon Creations simply doesn't have a product line for. One company sells you a superb clock; the other sells you a stable, observable power-and-clock system."</div>
+
+<h2>Proof points — different kinds of credibility</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Silicon Creations proves by volume</th><th>Analog Bits proves by extremity</th></tr></thead>
+<tbody><tr>
+<td>1,000+ production licenses of the Frac-N · 1,000th FinFET tape-out at TSMC · Arm clocking prototype chips for 10+ years · SERDES PMA inside Microchip PolarFire (VP-level public endorsement), including space-qualified RT parts · 9 straight TSMC awards</td>
+<td>Billions of cores over 30 years · <strong>Cerebras wafer-scale AI engine</strong> runs on AB clocking and power IP (joint paper: "On-Die Power Management for SoCs and Chiplets") · Socionext co-paper on pinless PLL + sensors + spike detectors · working 2nm silicon, twice, with live demo boards · first-in-FinFET a decade before the mainstream</td>
+</tr></tbody>
+</table></div>
+
+<h2>The socket battle card</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Scenario</th><th>Default winner</th><th>Your play (as AB's rep)</th></tr></thead>
+<tbody>
+<tr><td>General SoC clocking, mature node, cost-driven</td><td>Toss-up — SiCr's Frac-N consolidation story is strong here</td><td>Integration cost: count the analog rails. Then open the roadmap: "your next chip will care about power observability — start the relationship now"</td></tr>
+<tr><td>Edge-AI SoC, power-constrained (the Indian startup heartland)</td><td><strong>Analog Bits</strong></td><td>Lead pinless PLL + PVT sensors as one motion; the power story is native here, and DLI-funded teams love schedule insurance</td></tr>
+<tr><td>Large AI/HPC die or chiplet program</td><td><strong>Analog Bits, decisively</strong></td><td>Placement freedom + droop response + Cerebras proof. Nobody else in the conversation has wafer-scale evidence</td></tr>
+<tr><td>Automotive</td><td>Contested — SiCr has mature ISO 26262 documentation; AB has N5A silicon (PCIe SerDes, new high-accuracy sensors) and ASIL certifications</td><td>Qualify the exact standard and node first; sell AB's automotive-grade N5A freshness where it fits</td></tr>
+<tr><td>SerDes-grade clocking tied to a SerDes buy</td><td>SiCr if they're also selling the PMA</td><td>Split the decision: "buy your SerDes wherever you like — clock and power it with the specialist." Or route the interface need to M31 and keep the account</td></tr>
+</tbody>
+</table></div>
+
+<h2>Objection flips — rehearse these two</h2>
+<div class="qa"><button class="q">"Silicon Creations says one Frac-N covers every clocking need — why complicate it?"</button><div class="a">
+<div class="label">Your flip</div>
+<p>"It's a genuinely versatile macro — I sold it, I know. But 'one PLL everywhere' also means one analog rail everywhere you place it, routed, decoupled, and floorplanned. Pinless removes that tax completely: drop the clock where the design needs it, powered from the core rail, done. And when your chip grows into power problems — droop under AI load steps, thermal gradients — the versatile clock has no answer, because clocking is where their portfolio ends and where ours begins."</p>
+</div></div>
+<div class="qa"><button class="q">"They've won the TSMC award nine years running — aren't they the safer choice?"</button><div class="a">
+<div class="label">Your flip</div>
+<p>"They're excellent — nine straight awards is real, and I'll never tell you otherwise. Analog Bits won TSMC's 2025 award too, in Analog IP, on thirty years and billions of cores. So safety is a draw. The choice isn't who's safe; it's what you're buying: the most programmable clock, or a clock that integrates like a digital gate and comes with the power architecture your next design will need. Cerebras made that choice at wafer scale."</p>
+</div></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Now that both companies ship 2nm-class silicon, the single most durable Analog Bits differentiator is:</div>
+<div class="opts">
+<button data-opt="a">Lower prices at every node.</button>
+<button data-opt="b">A wider SerDes portfolio.</button>
+<button data-opt="c">The pinless/core-powered architecture plus the power-delivery loop (LDOs, droop/glitch response) — a product category the competitor doesn't have.</button>
+<button data-opt="d">More TSMC awards in total.</button>
+</div>
+<div class="fb">Node parity made "leading edge" table stakes, and SiCr's SerDes line is actually deeper. What can't be matched quickly: a patented supply architecture baked in over decades, and an entire sense-and-respond power product family with wafer-scale proof.</div>
+</div>
+
+<div class="pagenav"><button data-go="m0"><span class="dir">← Prev</span>00 · Orientation</button><button class="next" data-go="m2"><span class="dir">Next →</span>02 · Menta eFPGA</button></div>
+</section>
+
+<section class="module" id="m2">
+<div class="eyebrow">SECTION 02 · THE COMPARISON</div>
+<h1 class="mt">Menta eFPGA, properly</h1>
+<p class="lede">The second name in your current book, and the one you've never had a full brief on. Ten minutes here and you can explain eFPGA to anyone — which quietly proves you can master any IP category, exactly what a CEO hiring a one-person territory wants to see.</p>
+
+<h2>What an eFPGA actually is</h2>
+<p>An <strong>embedded FPGA</strong> is a patch of reprogrammable logic — look-up tables (LUTs), routing, optionally DSP and memory blocks — delivered as IP and built <em>into</em> a customer's ASIC or SoC. The rest of the chip is fixed forever at tape-out; the eFPGA region can be rewired in the field, any time, by loading a new bitstream.</p>
+<div class="callout tip"><span class="ttl">The analogy that lands</span>
+"A chip is fired ceramic — its logic is baked and unchangeable. An eFPGA is a patch of soft clay left in the ceramic: after the chip ships, you can still reshape that patch. You pay for the clay in area and speed, so you place it exactly where change is likely — a crypto engine, an evolving protocol, an accelerator you'll tune later."</div>
+
+<h2>Why customers buy it</h2>
+<ul class="clean">
+<li><strong>Post-silicon adaptability:</strong> fix bugs, track evolving standards, and extend product life without a multi-million-dollar respin.</li>
+<li><strong>Crypto agility:</strong> update cryptographic functions after deployment — the reason defence and security buyers love it, and each device's unique bitstream adds security by obfuscation.</li>
+<li><strong>One chip, many SKUs:</strong> the same silicon configured differently per customer or per market.</li>
+<li><strong>The honest cost:</strong> programmable logic is far larger, slower and hungrier per function than hard logic — so it's used surgically, never for the whole chip.</li>
+</ul>
+
+<h2>Menta, the company — the facts to carry</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Who</strong></td><td>French deep-tech pioneer, Sophia-Antipolis; founded 2007, 15+ years in eFPGA; CEO Vincent Markus; US arm (Menta eFPGA Inc.) serving American defence</td></tr>
+<tr><td class="mono"><strong>The differentiator</strong></td><td><strong>100% standard-cell <em>soft</em> IP</strong> — delivered as RTL, portable to <em>any</em> foundry and node (rivals sell hard, node-locked macros). Soft RTL can ship in as little as two weeks; hard IP available on request</td></tr>
+<tr><td class="mono"><strong>Toolchain</strong></td><td>Origami — full RTL-to-bitstream flow (synthesis from Verilog/SV/VHDL, place &amp; route), standalone or integrated into the customer's flow</td></tr>
+<tr><td class="mono"><strong>Proof</strong></td><td>20+ tape-outs across GlobalFoundries, TSMC, Intel and others; successfully radiation-hardened; DSP hard-macro options patented</td></tr>
+<tr><td class="mono"><strong>Markets</strong></td><td>Defence, aerospace, industrial, automotive — and high-frequency trading (adaptable low-latency logic)</td></tr>
+<tr><td class="mono"><strong>Marquee 2025 win</strong></td><td><strong>Renesas licensed Menta's eFPGA</strong> for its ForgeFPGA low-density programmable product line (July 2025) — an IDM building products on Menta fabric. Also: Japan's Secafy for chiplet-based secure silicon (May 2025), and the "Launch Pad" defence test-chip programme (up to 90% off, 100–10,000 LUTs)</td></tr>
+</tbody>
+</table></div>
+
+<h2>The India angle — why this experience is worth mentioning</h2>
+<ul class="clean">
+<li><strong>Defence-electronics sovereignty:</strong> DRDO-adjacent and strategic programmes want field-reprogrammable, crypto-agile silicon — eFPGA is precisely that technology, and you already speak it.</li>
+<li><strong>Soft IP intuition:</strong> Menta taught you the soft-vs-hard IP distinction from the selling side — RTL deliverables, portability, synthesis flows — vocabulary most analog-IP salespeople never acquire.</li>
+<li><strong>Chiplet echo:</strong> Menta positions eFPGA into chiplet-based designs (the Secafy win) — the same architecture wave Mahesh presents on.</li>
+</ul>
+
+<div class="callout gold"><span class="ttl">How to use Menta in the Mahesh interview</span>
+One sentence, as breadth evidence, never as a pitch: "Besides Silicon Creations I also carry Menta's eFPGA — so I've sold hard analog macros and soft reprogrammable RTL in the same territory, which taught me to qualify very different technical buyers." It answers the unasked question — <em>can she learn our catalogue?</em> — with proof she's already learned two.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">Menta's core differentiator versus other eFPGA vendors is:</div>
+<div class="opts">
+<button data-opt="a">It manufactures its own FPGA chips.</button>
+<button data-opt="b">100% standard-cell soft IP delivered as RTL — portable to any foundry and any node, unlike hard, node-locked eFPGA macros.</button>
+<button data-opt="c">It's the cheapest option at every node.</button>
+<button data-opt="d">Its fabric needs no toolchain.</button>
+</div>
+<div class="fb">Pure-play, standard-cell, synthesis-friendly soft IP is the moat — any foundry, any node, RTL in weeks — with Origami handling RTL-to-bitstream. (And no, they don't build chips: they license IP into other people's chips.)</div>
+</div>
+
+<div class="pagenav"><button data-go="m1"><span class="dir">← Prev</span>01 · PLL head-to-head</button><button class="next" data-go="m3"><span class="dir">Next →</span>03 · Brainy India questions</button></div>
+</section>
+
+
+<section class="module" id="m3">
+<div class="eyebrow">SECTION 03 · SHARPEN</div>
+<h1 class="mt">Brainy questions for Mahesh — the India business set</h1>
+<p class="lede">Not "what's the culture like." These twelve questions are built from real deal mechanics — tax friction, channel design, attach rates, reference rights — the things that actually decide whether India revenue happens. Each comes with why it's smart, so you can improvise variants.</p>
+
+<div class="whybox"><span class="ttl">How to deploy</span>
+Pick <strong>two or three</strong>, pairing one operational (deal machinery) with one strategic (market design). These complement — don't replace — the three starred questions in the CEO brief. Every question below passes the CEO test: it can't be answered from the website, and his answer changes how you'd work.</div>
+
+<h2>The twelve</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>#</th><th>The question</th><th>Why it's smart</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>"When an Indian startup compares us to IP bundled nearly free with their EDA seats at 28 or 22nm — what's the win story you want me telling, and where do you want me to qualify out and walk away?"</td><td>Shows you think in win-rates and time allocation, not heroics. CEOs love reps who know when to walk</td></tr>
+<tr><td>2</td><td>"My current enquiries already include die-to-die interface clocking for chiplet-based MCU programs. How fast is chiplet demand pulling clocking-plus-power in your global pipeline — and when does that wave hit Indian design starts?"</td><td>Anchored in your real (anonymised) pipeline; connects his chiplet thesis to Indian ground truth</td></tr>
+<tr><td>3</td><td>"US-dollar licensing plus Indian withholding tax adds real friction for startups. Do we have a standard playbook — treaty guidance, invoicing through the local channel, payment milestones staged against DLI reimbursements?"</td><td>CFO-level fluency. Almost no sales candidate asks about tax mechanics — the ones who do sound like operators</td></tr>
+<tr><td>4</td><td>"Netrasemi is public as an India engagement. Can I use them as a named reference in front of prospects — and what did that deal teach you about Indian cycle times and decision styles?"</td><td>Reference rights are a rep's most valuable asset; asking permission first shows discipline</td></tr>
+<tr><td>5</td><td>"Inbound comes through IMEC as the aggregator today. As I scale direct outbound, where do you want the line drawn so we never create channel conflict with the VCA relationship?"</td><td>Channel design awareness — protecting an existing partner while growing is exactly the judgment a solo territory needs</td></tr>
+<tr><td>6</td><td>"Government programmes — C-DAC-type labs via GeM — are slower but extremely sticky. In year one, what mix do you want between quick startup wins and the longer sovereign-programme cycle?"</td><td>Portfolio thinking about time itself; invites him to shape your calendar</td></tr>
+<tr><td>7</td><td>"Globally, which customer profile adopted the power-architecture products fastest — the PVT-plus-droop-plus-LDO motion? Does that profile predict Indian edge-AI startups, or should I land with clocking and expand?"</td><td>Uses his own adoption data to sequence your India playbook — strategy grounded in his evidence</td></tr>
+<tr><td>8</td><td>"What attach rate do you see between a first PLL license and the second product in an account? That tells me what land-and-expand math I should be promising you for India."</td><td>You're asking for the coefficient of your own revenue model — unmistakably a numbers person</td></tr>
+<tr><td>9</td><td>"For accounts that need both interface IP and analog — do we co-quote Analog Bits and M31 as one solution with SphereLink holding the commercial thread, or run two motions?"</td><td>The two-principal mechanics nobody else will have thought about before day one</td></tr>
+<tr><td>10</td><td>"SemiFive has an India presence and integrates your IP into its SoC platforms. Are there platform engagements here where Analog Bits content rides along — and how should I plug into that motion?"</td><td>Shows you understand the ownership structure as a demand channel, not trivia</td></tr>
+<tr><td>11</td><td>"If ISM 2.0's sovereign-IP incentives spawn domestic analog-IP startups in three to five years, what's your instinct — out-execute them, partner with them, or eventually build Indian design capability of your own?"</td><td>The long-game question; invites him to think aloud about a future only a strategic hire would raise</td></tr>
+<tr><td>12</td><td>"What would the India numbers need to show in 24 months for you to fund a second head here — and would you want that person building under me?"</td><td>Ambition with a business case attached: you're already planning the team you'll lead</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout gold"><span class="ttl">The power move</span>
+Question 8 followed by silence. Then, whatever number he gives: "Good — then here's roughly what 25 named accounts should compound into by year two." You've just co-built a revenue model with the CEO inside the interview. Nobody else he meets will do that.</div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">What makes question 3 (withholding tax / DLI staging) so effective in a CEO interview?</div>
+<div class="opts">
+<button data-opt="a">It shows you studied international tax law.</button>
+<button data-opt="b">It's impossible for him to answer.</button>
+<button data-opt="c">It proves you've internalised how India deals actually stall — cash mechanics, not product interest — which is operator-level fluency almost no candidate has.</button>
+<button data-opt="d">It signals you'll handle accounting for the company.</button>
+</div>
+<div class="fb">Deals in India rarely die on technology; they stall on payment friction. A candidate who asks about the playbook for that friction has clearly lived inside real transactions — exactly the experience this role is buying.</div>
+</div>
+
+<div class="pagenav"><button data-go="m2"><span class="dir">← Prev</span>02 · Menta eFPGA</button><button class="next" data-go="m4"><span class="dir">Next →</span>04 · Everything else</button></div>
+</section>
+
+<section class="module" id="m4">
+<div class="eyebrow">SECTION 04 · SHARPEN</div>
+<h1 class="mt">Everything else to know — the remaining catalogue</h1>
+<p class="lede">The corners of all three portfolios that haven't had their own section yet, plus the concepts that stitch them together. This closes the gaps.</p>
+
+<h2>Analog Bits — the rest of the shelf</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>XTAL &amp; RC oscillators</strong></td><td>The chip's reference heartbeat — crystal-driven when precision matters, RC when a crystal is absent or cost rules</td></tr>
+<tr><td class="mono"><strong>Clock buffers</strong></td><td>Distribute clocks cleanly across the die (part of their proven N3E lineup)</td></tr>
+<tr><td class="mono"><strong>PCIe reference clocks</strong></td><td>Drop-in compliant reference clocking for PCIe subsystems</td></tr>
+<tr><td class="mono"><strong>Bandgaps &amp; ADCs</strong></td><td>Precision voltage references and converters — integrated with sensors or standalone</td></tr>
+<tr><td class="mono"><strong>Glitch-catcher LDO</strong> <span class="muted">(new, Apr 2026)</span></td><td>Their newest N2P demo: integrated on-die LDO with glitch catching and droop detection — regulation and fault response fused into one macro</td></tr>
+<tr><td class="mono"><strong>N5A compact sensors</strong> <span class="muted">(new)</span></td><td>Working silicon of high-accuracy, smaller-form-factor automotive sensors — pitched as reducing test cost and enabling denser sensor deployment</td></tr>
+<tr><td class="mono"><strong>Automotive &amp; space posture</strong></td><td>ASIL/ISO certifications earned in recent years; designed into many automotive chips; genuine enthusiasm for space applications (PolarFire-class rad territory is SiCr's, but Mahesh publicly loves the space market)</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">Taxonomy worth having crisp: a <strong>droop</strong> is a sag under sudden load; a <strong>spike</strong> is an overshoot; a <strong>glitch</strong> is a fast transient blip. Detect all three, respond with regulation — that's the loop.</p>
+
+<h2>Silicon Creations — the rest of theirs</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Free-running &amp; crystal oscillators</strong></td><td>Their reference-generation line, now shipping in the N2P suite</td></tr>
+<tr><td class="mono"><strong>CML buffers</strong></td><td>Current-mode-logic high-speed clock/signal buffers (companion to LVDS)</td></tr>
+<tr><td class="mono"><strong>VT sensors</strong></td><td>Voltage/temperature sensing category — remember: they sense, they don't deliver power</td></tr>
+<tr><td class="mono"><strong>"Analog glue"</strong></td><td>Their own label for the small support blocks around an SoC — references, misc analog</td></tr>
+<tr><td class="mono"><strong>Automotive</strong></td><td>Dedicated portfolio category with ISO 26262 functional-safety documentation — their maturity edge in auto deals</td></tr>
+<tr><td class="mono"><strong>Multi-foundry depth</strong></td><td>The first-ever GlobalFoundries AMS award (2025) plus the GF 22FDX business you've personally quoted — they are genuinely strong beyond TSMC</td></tr>
+</tbody>
+</table></div>
+
+<h2>M31 — one screen, since the combined pitch matters</h2>
+<p><strong>Interface PHYs</strong> (the flagship): USB up to USB4 40Gbps · PCIe 5.0 (PCI-SIG certified) · MIPI C/D-PHY combo to 5nm · LPDDR · UFS · DisplayPort · ONFI/eMMC — remember the PHY <em>contains</em> the SerDes. <strong>Foundation IP:</strong> standard-cell libraries (6.5T/7T/9T tracks), SRAM/ROM memory compilers, GPIO/ESD. <strong>Analog IP:</strong> a small line (PLL, LDO, PVT) — where genuine AB overlap exists, position AB as the premium analog choice. <strong>Services:</strong> processor-core hardening. Six consecutive TSMC OIP specialty-IP awards; Hsinchu HQ; listed (6643.TW); Bangalore office in Marathahalli; eUSB2 on 2nm-class silicon with an N2P tape-out planned.</p>
+
+<h2>Concepts that stitch it together</h2>
+<div class="tbl-wrap"><table>
+<tbody>
+<tr><td class="mono"><strong>Ring vs LC PLL</strong></td><td>Ring oscillator: compact, flexible, more jitter — the everyday clock. LC: an inductor-capacitor tank, ultra-low jitter, bigger — the SerDes-grade clock. Both houses build both</td></tr>
+<tr><td class="mono"><strong>Deskew / ZDB</strong></td><td>External-feedback PLL mode that phase-aligns an output to a far-away clock — "zero-delay buffer" behaviour (a SiCr 16FFC-family feature you can now explain)</td></tr>
+<tr><td class="mono"><strong>LVDS vs CML</strong></td><td>Two differential signalling styles: LVDS = low-power workhorse; CML = faster, hungrier — both are "how fast signals travel on two wires"</td></tr>
+<tr><td class="mono"><strong>Soft vs hard IP</strong></td><td>Soft = RTL, synthesised into any node (Menta's world; M31 controllers). Hard = fixed layout per node/foundry (AB and SiCr's world — hence "which node?" is always question one). You now sell across both — say so</td></tr>
+<tr><td class="mono"><strong>Embedded-clock LC PLL</strong></td><td>AB's N3P/N2P line item: LC-quality clocking built to live inside the block it serves — leading-edge vocabulary worth recognising</td></tr>
+</tbody>
+</table></div>
+
+<h2>Self-check</h2>
+<div class="quiz" data-correct="b">
+<div class="qtext">A customer needs SerDes-grade, ultra-low-jitter clocking. Which product class does that point to, from either vendor?</div>
+<div class="opts">
+<button data-opt="a">An RC oscillator.</button>
+<button data-opt="b">An LC PLL — the inductor-capacitor tank architecture built for brutal jitter budgets.</button>
+<button data-opt="c">A clock buffer.</button>
+<button data-opt="d">A deskew PLL.</button>
+</div>
+<div class="fb">LC PLLs are the low-jitter aristocracy — larger and pricier than ring PLLs, and exactly what multi-gigabit lanes demand. Both houses make them; AB's newest are proven on N2P.</div>
+</div>
+
+<div class="pagenav"><button data-go="m3"><span class="dir">← Prev</span>03 · India questions</button><button class="next" data-go="m5"><span class="dir">Next →</span>05 · Recent news</button></div>
+</section>
+
+<section class="module" id="m5">
+<div class="eyebrow">SECTION 05 · STAY CURRENT</div>
+<h1 class="mt">Recent news, both houses (+ Menta)</h1>
+<p class="lede">Dated, sourced this week, with a "how to use it" for every item. Skim this the morning of the interview; nothing signals a professional like casually accurate recency.</p>
+
+<h2>Analog Bits — the current reel</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>When</th><th>What</th><th>How to use it</th></tr></thead>
+<tbody>
+<tr><td><strong>Jun 24, 2026</strong></td><td>EE Times virtual event "The Road to Chiplet Scalability" — Mahesh (CEO) and Alan Rogers (President/CTO) both presented</td><td>Your freshest hook: "your chiplet session three weeks ago" — effortless diligence, and it feeds question 2 in Section 03</td></tr>
+<tr><td><strong>Apr 2026</strong></td><td>TSMC 2026 Technology Symposium: real-time on-chip power sensing <em>and delivery</em> demos on N2P — integrated LDOs with glitch catcher + droop detection, pinless remote PVT sensors, low-power PLLs. Framing: "megawatt AI systems, multi-kilowatt SoCs"; "Moore's law is no longer power friendly"</td><td>The Intelligent Power Architecture is demo-able silicon, not slides — your proof line against any "it's just positioning" pushback</td></tr>
+<tr><td><strong>2025–26</strong></td><td>SemiWiki CEO interview (2025 highlights, 2026 outlook) + Mahesh's podcast appearance (EP322)</td><td>Listen to EP322 before the call — his voice, his phrases (still the single highest-return prep item)</td></tr>
+<tr><td><strong>Oct 2025</strong></td><td>TSMC OIP 2025: <strong>Analog IP Partner of the Year</strong>; announced LDOs, droop detectors, and embedded-clock LC PLLs on N3P and N2P; separately, working N5A silicon of compact high-accuracy sensors (cuts test cost)</td><td>Award parity with SiCr + the power line's node proof; N5A sensors are your automotive freshness card</td></tr>
+<tr><td><strong>Jun 2025</strong></td><td>DAC 2025: multiple working analog IPs demonstrated at 2nm and 3nm (SemiWiki coverage)</td><td>Pattern evidence: they show working silicon at every major venue</td></tr>
+<tr><td><strong>Context</strong></td><td>~60 employees (third-party estimate); two 2nm test chips, the second carrying ~15 silicon-proven IPs; ongoing Intel Foundry engagement (18A/RibbonFET era, earlier 3nm SerDes collaboration)</td><td>Small elite team + extreme proof — "sixty people whose IP runs a wafer-scale AI engine" is a story that sells itself</td></tr>
+</tbody>
+</table></div>
+
+<h2>Silicon Creations — know your rival's headlines</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>When</th><th>What</th><th>How to use it</th></tr></thead>
+<tbody>
+<tr><td><strong>Apr 22, 2026</strong></td><td>20th-anniversary announcement at TSMC Symposium: grown from 2 engineers to <strong>170+ employees</strong>, self-funded throughout; showcasing silicon-proven PLL, IO and TSENSE IP in 2nm; announced next-gen clocking <strong>and sensing</strong> development on <strong>TSMC A14</strong>; CEO Randy Caplan</td><td>Respect it openly — accurate praise of a competitor is a credibility multiplier. Note they're pushing sensing too: expect the sensing gap to narrow, the <em>delivery</em> gap to remain</td></tr>
+<tr><td><strong>2025–26</strong></td><td><strong>1,000th production FinFET tape-out at TSMC</strong> + immediate availability of a full N2P library (PLLs, free-running + crystal oscillators, low-jitter LVDS/CML buffers, temperature sensors)</td><td>Their volume proof at the leading edge — the reason "we're at 2nm" alone wins nothing for either side</td></tr>
+<tr><td><strong>Late 2025</strong></td><td>TSMC OIP 2025 <strong>Mixed-Signal IP Partner of the Year — 9th consecutive year</strong>; plus first-ever <strong>GlobalFoundries 2025 AMS IP Partner of the Year</strong></td><td>Update your mental notes (earlier files said "2024"). If Mahesh tests your competitor knowledge, citing "nine straight, plus the new GF award" proves you track them in real time</td></tr>
+<tr><td><strong>Ongoing</strong></td><td>TSMC 2026 Symposium circuit (booth #501 Santa Clara, Taiwan et al.); Microchip VP-level public endorsement of their SerDes PMA in PolarFire</td><td>Their references are excellent — never disparage; reposition to power architecture instead</td></tr>
+</tbody>
+</table></div>
+
+<h2>Menta — the wildcard's headlines</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>When</th><th>What</th><th>How to use it</th></tr></thead>
+<tbody>
+<tr><td><strong>Jul 2025</strong></td><td><strong>Renesas licensed Menta's soft eFPGA</strong> (plus the Origami toolchain) for its ForgeFPGA product line</td><td>An IDM building products on your vendor's fabric — one-line proof that your second portfolio is real, if Menta comes up</td></tr>
+<tr><td><strong>2025</strong></td><td>Secafy (Japan) licensed eFPGA for chiplet-based secure silicon; "Launch Pad" defence programme (test chips 100–10,000 LUTs at up to 90% off); Embedded World presence into 2026</td><td>Chiplets + security + defence — the same currents as your main story, from an unexpected angle</td></tr>
+</tbody>
+</table></div>
+
+<h2>The morning-of routine (10 minutes)</h2>
+<ul class="clean">
+<li>analogbits.com news page — anything newer than the Jun 24 chiplet event?</li>
+<li>siliconcr.com newsroom — anything newer than the 20-year release?</li>
+<li>indiasemi.org — any Indian project milestone announced this week?</li>
+<li>Mahesh's LinkedIn — his latest post is your warmest possible opener.</li>
+</ul>
+
+<h2>Final self-check</h2>
+<div class="quiz" data-correct="c">
+<div class="qtext">Mahesh asks: "So what's Silicon Creations been up to lately?" The answer that wins:</div>
+<div class="opts">
+<button data-opt="a">"Not much — they've gone quiet lately."</button>
+<button data-opt="b">"I can't discuss them at all — confidentiality."</button>
+<button data-opt="c">"Publicly? A big spring: 20th anniversary, ninth straight TSMC mixed-signal award plus a first-ever GF award, their thousandth FinFET tape-out, a full N2P suite, and A14 clocking-and-sensing announced. They're excellent at clocking — which is exactly why I'd fight on power architecture, where their portfolio ends."</button>
+<button data-opt="d">"They're struggling to keep up with you."</button>
+</div>
+<div class="fb">Accurate, current, respectful — then pivoted to the winnable ground. Confidentiality covers their secrets, not their press releases; knowing the public record cold is the competence he's testing.</div>
+</div>
+
+<div class="pagenav"><button data-go="m4"><span class="dir">← Prev</span>04 · Everything else</button><button class="next" disabled><span class="dir">Done</span>End of file five — go win it</button></div>
+</section>
+
+</div></main>
+</div>
+
+<script>
+(function(){
+  var order=['m0','m1','m2','m3','m4','m5'];
+  var visited={};
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sidebar=document.getElementById('sidebar'),scrim=document.getElementById('scrim');
+  function show(id){
+    order.forEach(function(m){var s=document.getElementById(m);if(s)s.classList.toggle('active',m===id);});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.dataset.go===id);});
+    visited[id]=true;
+    navLinks.forEach(function(a){if(visited[a.dataset.go])a.classList.add('visited');});
+    var pct=Math.round(Object.keys(visited).length/order.length*100);
+    document.getElementById('progFill').style.width=pct+'%';
+    document.getElementById('progLabel').textContent=pct+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    sidebar.classList.remove('open');scrim.classList.remove('show');
+  }
+  navLinks.forEach(function(a){a.addEventListener('click',function(){show(a.dataset.go);});});
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(t&&!t.matches('#nav a')){show(t.dataset.go);}});
+  document.getElementById('menuBtn').addEventListener('click',function(){sidebar.classList.toggle('open');scrim.classList.toggle('show');});
+  scrim.addEventListener('click',function(){sidebar.classList.remove('open');scrim.classList.remove('show');});
+  document.querySelectorAll('.qa>button.q').forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
+  document.querySelectorAll('.reveal-btn').forEach(function(b){b.addEventListener('click',function(){var box=b.nextElementSibling;if(box&&box.classList.contains('reveal-box')){box.classList.toggle('show');b.textContent=box.classList.contains('show')?(b.dataset.hide||'Hide'):(b.dataset.show||b.textContent);}});});
+  document.querySelectorAll('.quiz').forEach(function(q){var c=q.dataset.correct,fb=q.querySelector('.fb');
+    q.querySelectorAll('.opts button').forEach(function(btn){btn.addEventListener('click',function(){if(q.dataset.done)return;q.dataset.done='1';var p=btn.dataset.opt;q.querySelectorAll('.opts button').forEach(function(o){o.disabled=true;});if(p===c){btn.classList.add('correct');}else{btn.classList.add('wrong');var r=q.querySelector('.opts button[data-opt="'+c+'"]');if(r)r.classList.add('correct');}if(fb)fb.classList.add('show');});});
+  });
+  show('m0');
+})();
+</script>
+</body>
+</html>
